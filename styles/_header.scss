@@ -64,7 +64,7 @@ header {
           cursor: pointer;
           border-width: 1px;
           border-style: solid;
-          border-color: $border-color;
+          border-color: $bg-color;
           border-image: initial;
           border-radius: 6px;
           outline: 0;
@@ -261,6 +261,9 @@ header {
         border-radius: 6px;
         overflow: hidden;
         .search_icon {
+          display: flex;
+          justify-content: center;
+          align-items: center;
           cursor: pointer;
           padding: 0 15px;
           svg {
@@ -280,7 +283,7 @@ header {
           border-style: initial;
           border-color: initial;
           border-image: initial;
-          padding: 0 20px;
+          padding-right: 20px;
           outline: none;
         }
       }
@@ -305,6 +308,9 @@ header {
       margin-right: 20px;
       text-decoration: none;
       transition: all 0.15s ease-in-out 0s;
+      &:hover {
+        color: $primary-color;
+      }
     }
   }
   .join_btn {

@@ -1,6 +1,6 @@
 $base-font: 'Lato', sans-serif;
 $head-font: 'Poppins', sans-serif;
-$primary-color: #009E7F;
+$primary-color: #f5363e;
 $bg-color: #f7f7f7;
 $border-color: rgb(241, 241, 241);
 $primary-color-hover: #741294;
@@ -54,4 +54,7 @@ a {
     object-fit: cover;
     -o-object-fit: cover;
   }
+}
+.btn:focus {
+  box-shadow: 0 0 0 0.2rem rgba(245, 54, 62, 0.25);
 }
