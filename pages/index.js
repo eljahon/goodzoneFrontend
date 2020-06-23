@@ -4,6 +4,7 @@ import HomeSplash from "../components/home-splash";
 import ProductList from "../components/product-list";
 import CartPopup from "../components/cart-popup";
 import { useEffect, useState } from "react";
+import Footer from "../components/footer";
 
 export default function Home() {
     const [data, setData] = useState([])
@@ -21,6 +22,7 @@ export default function Home() {
         <HomeSplash />
         <ProductList data={data} />
         <CartPopup data={data} />
+        <Footer />
     </>
   )
 }

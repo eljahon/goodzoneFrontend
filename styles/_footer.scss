@@ -1,0 +1,57 @@
+footer {
+  position: relative;
+  width: 100%;
+  padding: 42px 0;
+  color: $border-color;
+  background-color: $link-color;
+  h3 {
+    color: #fff;
+    margin-bottom: 20px;
+    font-size: 18px;
+    font-weight: 500;
+  }
+  a {
+    display: block;
+    font-size: 14px;
+    color: #fff;
+    opacity: 0.4;
+    margin-bottom: 10px;
+    &:hover {
+      color: #bababa;
+      opacity: 1;
+      text-decoration: none;
+    }
+  }
+  a.phone_number {
+    display: flex;
+    align-items: center;
+    font-size: 25px;
+    font-weight: 400;
+    color: #fff;
+    opacity: 1;
+    svg {
+      margin-right: 5px;
+    }
+  }
+  .social_media {
+    a {
+      display: inline-block;
+      width: 16px;
+      height: 30px;
+      line-height: 30px;
+      margin-right: 10px;
+      color: #bababa;
+      opacity: 1;
+      svg {
+        font-size: 16px;
+      }
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+  .copyright {
+    margin-top: 30px;
+    color: #bababa;
+  }
+}

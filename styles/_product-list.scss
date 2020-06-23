@@ -3,7 +3,7 @@ main {
   display: flex;
   flex-wrap: wrap;
   background-color: $bg-color;
-  padding-right: 0px;
+  padding-right: 0;
   transition: padding-right 0.35s ease-in-out 0s;
   .content {
     width: calc(100% - 280px);
@@ -67,7 +67,7 @@ main {
           width: 100%;
           text-overflow: ellipsis;
           white-space: nowrap;
-          margin: 0px 0px 7px;
+          margin: 0 0 7px;
           overflow: hidden;
         }
         .product_desc {
@@ -120,7 +120,8 @@ main {
               }
             }
             .btn_text {
-              padding: 0px 0px 0px 6px;
+              padding: 0 0 0 6px;
+              white-space: nowrap;
             }
           }
           .counter {
