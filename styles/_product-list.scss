@@ -1,0 +1,168 @@
+main {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  background-color: $bg-color;
+  padding-right: 0px;
+  transition: padding-right 0.35s ease-in-out 0s;
+  .content {
+    width: calc(100% - 280px);
+    height: auto;
+    min-height: 100vh;
+    padding: 30px 30px 50px;
+  }
+}
+.sidebar {
+  background-color: rgb(255, 255, 255);
+  width: 280px;
+  .category_wrapper {
+    position: relative;
+    width: 100%;
+    .sidebar_wrapper {
+      padding: 45px 0;
+      .inner_wrapper {
+        position: relative;
+        transform: translate3d(0px, 0px, 0px);
+        overflow: hidden;
+        width: 100%;
+        height: auto;
+        min-height: 0;
+        max-height: 688px;
+      }
+    }
+  }
+}
+.products_row {
+  background-color: rgb(247, 247, 247);
+  position: relative;
+  z-index: 1;
+  .products_col {
+    margin-bottom: 30px;
+    .product_card {
+      height: 100%;
+      width: 100%;
+      background-color: rgb(255, 255, 255);
+      position: relative;
+      font-family: $base-font;
+      cursor: pointer;
+      border-radius: 6px;
+      .product_image {
+        height: 240px;
+        position: relative;
+        text-align: center;
+        display: flex;
+        -webkit-box-align: center;
+        align-items: center;
+        -webkit-box-pack: center;
+        justify-content: center;
+        padding: 5px;
+      }
+      .product_info {
+        padding: 20px 25px 30px;
+        h3 {
+          font-family: $base-font;
+          font-size: 15px;
+          font-weight: 700;
+          color: $link-color;
+          width: 100%;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          margin: 0px 0px 7px;
+          overflow: hidden;
+        }
+        .product_desc {
+          font-family: $base-font;
+          font-size: 13px;
+          font-weight: 400;
+          color: rgb(119, 121, 140);
+        }
+        .product_price {
+          position: relative;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          font-size: 15px;
+          font-weight: 700;
+          color: $primary-color;
+        }
+        .product_meta {
+          margin-top: 30px;
+          display: flex;
+          -webkit-box-align: center;
+          align-items: center;
+          -webkit-box-pack: justify;
+          justify-content: space-between;
+          .product_btn {
+            height: 36px;
+            padding: 0 17px;
+            font-size: 13px;
+            font-weight: 700;
+            border-width: 2px;
+            border-style: solid;
+            border-color: $bg-color;
+            border-image: initial;
+            border-radius: 18px;
+            cursor: pointer;
+            display: inline-flex;
+            -webkit-box-align: center;
+            align-items: center;
+            -webkit-box-pack: center;
+            justify-content: center;
+            width: auto;
+            color: $primary-color;
+            background-color: transparent;
+            .btn_icon {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              svg {
+                font-size: 14px;
+              }
+            }
+            .btn_text {
+              padding: 0px 0px 0px 6px;
+            }
+          }
+          .counter {
+            display: flex;
+            background-color: $primary-color;
+            color: rgb(255, 255, 255);
+            font-size: 15px;
+            font-weight: 700;
+            -webkit-box-pack: justify;
+            justify-content: space-between;
+            -webkit-box-align: center;
+            align-items: center;
+            flex-shrink: 0;
+            width: 104px;
+            height: 36px;
+            border-radius: 200px;
+            overflow: hidden;
+            .counter_btn {
+              background-color: transparent;
+              color: rgb(255, 255, 255);
+              display: flex;
+              -webkit-box-align: center;
+              align-items: center;
+              -webkit-box-pack: center;
+              justify-content: center;
+              height: 100%;
+              cursor: pointer;
+              border-width: initial;
+              border-style: none;
+              border-color: initial;
+              border-image: initial;
+              padding: 10px;
+              svg {
+                font-size: 12px;
+              }
+              .counter_value {
+                pointer-events: none;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

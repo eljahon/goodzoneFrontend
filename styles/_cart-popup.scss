@@ -1,0 +1,345 @@
+.btn.cart_button {
+  height: auto;
+  width: auto;
+  display: flex;
+  flex-direction: column;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  background-color: $primary-color;
+  box-shadow: rgba(0, 0, 0, 0.16) 0 21px 36px;
+  cursor: pointer;
+  position: fixed;
+  right: 0;
+  top: 50%;
+  margin-top: -46px;
+  z-index: 99;
+  padding: 0;
+  border-radius: 6px 0 0 6px;
+  border-width: 0;
+  border-style: initial;
+  border-color: initial;
+  border-image: initial;
+  outline: 0;
+  .total_items {
+    font-family: $base-font;
+    font-size: 13px;
+    font-weight: 700;
+    color: rgb(255, 255, 255);
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    padding: 15px 10px;
+    span {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      svg {
+        font-size: 15px;
+        margin-right: 10px;
+      }
+    }
+  }
+  .price {
+    width: auto;
+    height: 35px;
+    min-width: 80px;
+    display: inline-flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    background-color: rgb(255, 255, 255);
+    font-size: 13px;
+    font-weight: 700;
+    color: $primary-color;
+    overflow: hidden;
+    border-radius: 6px;
+    margin: 0 10px 10px;
+    padding: 10px;
+  }
+}
+.cart_popup {
+  width: 520px;
+  height: 100vh;
+  background-color: rgb(255, 255, 255);
+  position: fixed;
+  bottom: 0;
+  right: -550px;
+  z-index: 1010;
+  box-shadow: rgba(0, 0, 0, 0.16) 0 21px 36px;
+  transition: all 0.35s ease-in-out 0s;
+  &.show {
+    right: 0;
+  }
+  .cart_popup-body {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(255, 255, 255);
+    box-sizing: content-box;
+    border-radius: 6px;
+    .cart_popup-header {
+      background-color: rgb(255, 255, 255);
+      display: flex;
+      -webkit-box-align: center;
+      align-items: center;
+      -webkit-box-pack: justify;
+      justify-content: space-between;
+      padding: 15px 25px;
+      border-bottom: 1px solid $border-color;
+      .item_count {
+        display: inline-flex;
+        -webkit-box-align: center;
+        align-items: center;
+        color: $primary-color;
+        svg {
+          font-size: 22px;
+        }
+        span {
+          font-family: $base-font;
+          font-size: 15px;
+          font-weight: 700;
+          color: $primary-color;
+          padding-left: 10px;
+        }
+      }
+      .close_button {
+        width: 14px;
+        height: 14px;
+        display: inline-flex;
+        -webkit-box-align: center;
+        align-items: center;
+        -webkit-box-pack: center;
+        justify-content: center;
+        flex-shrink: 0;
+        cursor: pointer;
+        color: rgba(0, 0, 0, 0.25);
+        background-color: transparent;
+        padding: 0;
+        border-width: 0;
+        border-style: initial;
+        border-color: initial;
+        border-image: initial;
+        outline: 0;
+        transition: all 0.4s ease 0s;
+        svg {
+          font-size: 16px;
+        }
+      }
+    }
+    .cart_popup-items {
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      height: auto;
+      min-height: 0;
+      max-height: 100vh;
+      .cart_items-wrapper {
+        position: relative;
+        overflow: scroll;
+        margin-right: -17px;
+        margin-bottom: -17px;
+        min-height: 17px;
+        max-height: calc(100vh + 17px);
+        margin-left: 0;
+        .items_wrapper {
+          width: 100%;
+          height: auto;
+          max-height: calc(100vh - 145px);
+          background-color: rgb(255, 255, 255);
+          .item_box {
+            font-size: 15px;
+            font-weight: 700;
+            display: flex;
+            -webkit-box-align: center;
+            align-items: center;
+            padding: 15px 25px;
+            border-bottom: 1px solid rgb(247, 247, 247);
+            .counter_box {
+              display: flex;
+              font-size: 15px;
+              font-weight: 700;
+              -webkit-box-pack: justify;
+              justify-content: space-between;
+              -webkit-box-align: center;
+              align-items: center;
+              flex-shrink: 0;
+              width: 30px;
+              height: 90px;
+              flex-direction: column-reverse;
+              background-color: rgb(247, 247, 247);
+              color: $link-color;
+              border-radius: 200px;
+              overflow: hidden;
+              .counter_btn {
+                background-color: transparent;
+                display: flex;
+                -webkit-box-align: center;
+                align-items: center;
+                -webkit-box-pack: center;
+                justify-content: center;
+                height: 100%;
+                cursor: pointer;
+                color: rgb(119, 121, 140);
+                border-width: initial;
+                border-style: none;
+                border-color: initial;
+                border-image: initial;
+                padding: 10px;
+                svg {
+                  font-size: 14px;
+                }
+              }
+              .counter_value {
+                pointer-events: none;
+              }
+            }
+            img {
+              width: 60px;
+              height: 60px;
+              object-fit: cover;
+              margin: 0 15px;
+            }
+            .cart_info {
+              display: flex;
+              flex-direction: column;
+              margin-left: 15px;
+              .item_name {
+                font-weight: 400;
+                color: $link-color;
+                margin-bottom: 0;
+                line-height: 1.5;
+              }
+              .item_price {
+                color: $primary-color;
+                margin-top: 10px;
+              }
+            }
+            .item_total {
+              color: $link-color;
+              margin-left: auto;
+              white-space: nowrap;
+            }
+            .remove_btn {
+              margin-left: 15px;
+              cursor: pointer;
+              color: rgba(0, 0, 0, 0.25);
+              background-color: transparent;
+              padding: 5px;
+              border-width: 0;
+              border-style: initial;
+              border-color: initial;
+              border-image: initial;
+              outline: 0;
+              transition: all 0.4s ease 0s;
+              svg {
+                font-size: 14px;
+              }
+            }
+          }
+        }
+      }
+      .right_box {
+        position: absolute;
+        width: 6px;
+        transition: opacity 200ms ease 0s;
+        opacity: 0;
+        right: 2px;
+        bottom: 2px;
+        top: 2px;
+        border-radius: 3px;
+        .inner_box {
+          position: relative;
+          display: block;
+          width: 100%;
+          cursor: pointer;
+          border-radius: inherit;
+          background-color: rgba(0, 0, 0, 0.2);
+          height: 490px;
+          transform: translateY(0);
+        }
+      }
+      .bottom_box {
+        position: absolute;
+        height: 6px;
+        transition: opacity 200ms ease 0s;
+        opacity: 0;
+        right: 2px;
+        bottom: 2px;
+        left: 2px;
+        border-radius: 3px;
+        .inner_box {
+          position: relative;
+          display: block;
+          height: 100%;
+          cursor: pointer;
+          border-radius: inherit;
+          background-color: rgba(0, 0, 0, 0.2);
+          width: 0;
+        }
+      }
+    }
+    .checkout_button-wrapper {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      margin-top: auto;
+      button.checkout_button {
+        height: 48px;
+        width: calc(100% - 30px);
+        display: flex;
+        -webkit-box-align: center;
+        align-items: center;
+        -webkit-box-pack: justify;
+        justify-content: space-between;
+        background-color: $primary-color;
+        box-shadow: rgba(0, 0, 0, 0.16) 0 3px 6px;
+        cursor: pointer;
+        margin-bottom: 15px;
+        margin-left: 15px;
+        padding: 0;
+        border-radius: 48px;
+        border-width: 0;
+        border-style: initial;
+        border-color: initial;
+        border-image: initial;
+        outline: 0;
+        .btn_text {
+          width: 100%;
+          display: flex;
+          -webkit-box-align: center;
+          align-items: center;
+          -webkit-box-pack: justify;
+          justify-content: space-between;
+          padding-left: 30px;
+          font-size: 15px;
+          font-weight: 700;
+          color: rgb(255, 255, 255);
+          padding-right: 10px;
+        }
+        .price_box {
+          width: 100%;
+          height: 44px;
+          display: inline-flex;
+          -webkit-box-align: center;
+          align-items: center;
+          -webkit-box-pack: center;
+          justify-content: center;
+          background-color: rgb(255, 255, 255);
+          font-size: 15px;
+          font-weight: 700;
+          color: $primary-color;
+          margin-right: 2px;
+          padding: 0 30px;
+          overflow: hidden;
+          border-radius: 28px;
+        }
+      }
+    }
+  }
+}

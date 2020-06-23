@@ -1,0 +1,57 @@
+$base-font: 'Lato', sans-serif;
+$head-font: 'Poppins', sans-serif;
+$primary-color: #009E7F;
+$bg-color: #f7f7f7;
+$border-color: rgb(241, 241, 241);
+$primary-color-hover: #741294;
+$link-color: rgb(13, 17, 54);
+
+$screen-sh: 360px;
+$screen-sm: 576px;
+$screen-md: 768px;
+$screen-lg: 992px;
+$screen-xl: 1200px;
+
+@mixin sh {
+  @media (max-width: #{$screen-sh}) {
+    @content;
+  }
+}
+@mixin sm {
+  @media (max-width: #{$screen-sm}) {
+    @content;
+  }
+}
+@mixin xl {
+  @media (min-width: #{$screen-xl}) {
+    @content;
+  }
+}
+
+body {
+  box-sizing: border-box;
+  font-family: $base-font;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: $head-font;
+}
+.container {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 0 10px;
+  @include sm {
+    max-width: 347px;
+  }
+}
+a {
+  text-decoration: none;
+  color: #000000;
+}
+.home_splash {
+  img {
+    width: 100%;
+    height: 373px;
+    object-fit: cover;
+    -o-object-fit: cover;
+  }
+}
