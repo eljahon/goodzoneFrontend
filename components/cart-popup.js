@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import { FaShoppingBag, FaTimes, FaMinus, FaPlus } from 'react-icons/fa'
+import Link from 'next/link'
 
 export default function CartPopup({ data }) {
     const [cart, setCart] = useState(false)
@@ -45,10 +46,12 @@ export default function CartPopup({ data }) {
                         </div>
                     </div>
                     <div className="checkout_button-wrapper">
-                        <button className="btn checkout_button">
-                            <span className="btn_text">Оформить заказ</span>
-                            <span className="price_box">3 700 000 сум</span>
-                        </button>
+                        <Link href="/checkout">
+                            <a className="btn checkout_button">
+                                <span className="btn_text">Оформить заказ</span>
+                                <span className="price_box">3 700 000 сум</span>
+                            </a>
+                        </Link>
                     </div>
                 </div>
             </div>

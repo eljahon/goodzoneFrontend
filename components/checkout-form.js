@@ -1,9 +1,15 @@
 import React from 'react'
 import { FaCreditCard, FaRegCreditCard, FaWallet, FaBoxOpen, FaTruck } from 'react-icons/fa'
+import { useRouter } from 'next/router'
 
 export default function CheckoutForm() {
+    const router = useRouter();
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        router.push('/order-received');
+    }
     return (
-        <form className="checkout_form">
+        <form className="checkout_form" onSubmit={handleSubmit}>
             <div className="checkout_form-box">
                 <h3 className="form_heading">Ф.И.О</h3>
                 <div className="field_wrapper">
@@ -26,7 +32,7 @@ export default function CheckoutForm() {
                 <h3 className="form_heading">Выберите способ оплаты</h3>
                 <div className="radio_wrapper">
                     <div className="radio_card">
-                        <input type="radio" name="payment" id="cash" />
+                        <input type="radio" name="payment" id="cash" defaultChecked />
                         <label htmlFor="cash">
                             <span className="card_title">Наличные</span>
                             <span className="card_content">
@@ -76,7 +82,7 @@ export default function CheckoutForm() {
                 <h3 className="form_heading">Выберите способ доставки</h3>
                 <div className="radio_wrapper">
                     <div className="radio_card">
-                        <input type="radio" name="delivery_method" id="pickup" />
+                        <input type="radio" name="delivery_method" id="pickup" defaultChecked />
                         <label htmlFor="pickup">
                             <span className="card_title">Самовывоз</span>
                             <span className="card_content">
