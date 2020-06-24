@@ -46,7 +46,7 @@ export default function CartPopup({ data }) {
                     </div>
                     <div className="checkout_button-wrapper">
                         <button className="btn checkout_button">
-                            <span className="btn_text">Перейти в корзину</span>
+                            <span className="btn_text">Оформить заказ</span>
                             <span className="price_box">3 700 000 сум</span>
                         </button>
                     </div>

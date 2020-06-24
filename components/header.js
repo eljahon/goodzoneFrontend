@@ -9,9 +9,9 @@ export default function Header() {
         <>
             <header>
                 <div className="left_menu">
-                    <div className="logo">
-                        <img src="logo.png" alt="Goodzone"/>
-                    </div>
+                    <Link href="/">
+                        <a className="logo"><img src="logo.png" alt="Goodzone"/></a>
+                    </Link>
                     <div className="menu">
                         <div className="popover">
                             <div className="popover_handler">
