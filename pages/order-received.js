@@ -6,7 +6,7 @@ import Link from 'next/link'
 export default function OrderReceived() {
     return (
         <>
-            <SEO title="Invoice | Интернет магазин GOODZONE" />
+            <SEO title="Заявка принята | Интернет магазин GOODZONE" />
             <Header />
 
             <div className="order_received-wrapper">

@@ -29,6 +29,9 @@ $screen-xl: 1200px;
   }
 }
 
+html {
+  scroll-behavior: smooth;
+}
 body {
   box-sizing: border-box;
   font-family: $base-font;

@@ -328,14 +328,15 @@
             .product_card-wrapper {
                 height: 100%;
                 .product_card {
+                    display: block;
                     height: 100%;
                     width: 100%;
                     background-color: rgb(255, 255, 255);
                     position: relative;
                     font-family: $base-font;
-                    cursor: pointer;
                     padding: 30px;
                     border-radius: 0;
+                    text-decoration: none;
                     &:nth-child(4n+1) {
                         border-radius: 6px 0px 0px 6px;
                     }

@@ -1,17 +1,21 @@
 import {FaMinus, FaPlus, FaShoppingBasket} from "react-icons/fa";
 import {Col} from "react-bootstrap";
+import Link from 'next/link'
 
 export default function ProductListItem({ item }) {
     return (
         <Col lg={3} className="products_col">
             <div className="product_card">
-                <div className="product_image">
-                    <img src={item.image} alt={item.name} className="img-fluid" />
-                </div>
+                <Link href={`/product/${item.name.toLowerCase().replace(/\s+/g, '-')}`}>
+                    <a className="product_image"><img src={item.image} alt={item.name} className="img-fluid" /></a>
+                </Link>
                 <div className="product_info">
-                    <h3 className="product_title">{item.name}</h3>
-                    {/*<span className="product_desc">12 pc(s)</span>*/}
-                    <span className="product_price">{`${item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")} сум`}</span>
+                    <Link href={`/product/${item.name.toLowerCase().replace(/\s+/g, '-')}`}>
+                        <a>
+                            <h3 className="product_title">{item.name}</h3>
+                            <span className="product_price">{`${item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")} сум`}</span>
+                        </a>
+                    </Link>
                     <div className="product_meta">
                         {item.price ?
                             <button className="btn product_btn">
