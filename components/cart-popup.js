@@ -63,17 +63,6 @@ export default function CartPopup({ data, dynamic }) {
                                         : `${totalQuantity} Предметы`}
                                 </span>
                             </div>
-                        </div>
-                        <button
-                            className="btn close_button"
-                            onClick={() => setCart(!cart)}
-                        >
-                            <FaTimes />
-                        </button>
-                    </div>
-                    <div className="cart_popup-items">
-                        <div className="cart_items-wrapper">
-                            <div className="items_wrapper"></div>
                             <button
                                 className="btn close_button"
                                 onClick={() => setCart(!cart)}
@@ -81,6 +70,7 @@ export default function CartPopup({ data, dynamic }) {
                                 <FaTimes />
                             </button>
                         </div>
+
                         <div className="cart_popup-items">
                             <div className="cart_items-wrapper">
                                 <div className="items_wrapper">
