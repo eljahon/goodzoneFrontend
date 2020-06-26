@@ -2,10 +2,11 @@ import React, { useState } from 'react'
 import SEO from "../../components/seo";
 import Header from "../../components/header";
 import Footer from "../../components/footer";
-import { FaArrowLeft, FaShoppingBag, FaPlus, FaMinus, FaCircle } from 'react-icons/fa'
+import { FaArrowLeft, FaShoppingBag, FaPlus, FaMinus, FaCircle, FaBoxOpen, FaStore } from 'react-icons/fa'
 import { Row, Col, Tabs, Tab } from "react-bootstrap";
 import Router from 'next/router'
 import Link from 'next/link'
+import CartPopup from '../../components/cart-popup';
 
 export default function Product({ data, products }) {
     const [addToCart, setAddToCart] = useState(false);
@@ -50,7 +51,7 @@ export default function Product({ data, products }) {
                     </div>
                     <div className="details_container" id="details">
                         <Tabs defaultActiveKey="about">
-                            <Tab eventKey="about" title="О товаре">
+                            <Tab eventKey="about" title={<span><FaBoxOpen /> О товаре</span>}>
                                 <div className="details_wrapper">
                                     <h3>Full HD</h3>
                                     <p>Откройте для себя выдающиеся изображения высокой четкости с точным разрешением Full HD 1366х768 и улучшенными цветами для более синего неба, зеленой травы и более реалистичными оттенками кожи, которые оживляют исключительную яркость и энергоэффективность светодиодов.</p>
@@ -81,7 +82,7 @@ export default function Product({ data, products }) {
                                     </ul>
                                 </div>
                             </Tab>
-                            <Tab eventKey="store" title="Наличие в магазинах">
+                            <Tab eventKey="store" title={<span><FaStore /> Наличие в магазинах</span>}>
                                 <div className="details_wrapper">
                                     <table>
                                         <thead>
@@ -152,7 +153,8 @@ export default function Product({ data, products }) {
                     </div>
                 </div>
             </div>
-
+            
+            <CartPopup data={products} dynamic />
             <Footer />
         </>
     )

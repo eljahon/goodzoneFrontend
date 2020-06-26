@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import { FaShoppingBag, FaTimes, FaMinus, FaPlus } from 'react-icons/fa'
 import Link from 'next/link'
 
-export default function CartPopup({ data }) {
+export default function CartPopup({ data, dynamic }) {
     const [cart, setCart] = useState(false)
     return (
         <>
@@ -27,7 +27,7 @@ export default function CartPopup({ data }) {
                                             <span className="counter_value">1</span>
                                             <button className="btn counter_btn"><FaPlus /></button>
                                         </div>
-                                        <img src={item.image} alt={item.name} />
+                                        <img src={dynamic ? `../${item.image}` : item.image} alt={item.name} />
                                         <div className="cart_info">
                                             <span className="item_name">{item.name}</span>
                                             <span className="item_price">{`${item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")} сум`}</span>

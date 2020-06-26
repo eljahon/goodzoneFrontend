@@ -8,12 +8,12 @@
 }
 
 .product_details-wrapper {
-    background-color: rgb(255, 255, 255);
     position: relative;
     display: flex;
     flex-wrap: wrap;
     -webkit-box-align: stretch;
     align-items: stretch;
+    padding: 40px;
     .product_preview {
         width: 50%;
         display: flex;
@@ -22,7 +22,10 @@
         -webkit-box-pack: center;
         justify-content: center;
         position: relative;
-        padding: 60px;
+        background-color: white;
+        // box-shadow: rgba(0, 0, 0, 0.08) 0 2px 16px 0;
+        padding: 30px;
+        border-radius: 6px 0 0 6px;
         .product_image {
             display: block;
             max-width: 100%;
@@ -30,8 +33,8 @@
         }
         .back_btn {
             position: absolute;
-            top: 60px;
-            left: 60px;
+            top: 30px;
+            left: 30px;
             z-index: 888;
             .btn {
                 display: inline-flex;
@@ -69,14 +72,15 @@
     .product_info {
         width: 50%;
         border-left: 1px solid $border-color;
-        padding: 55px 60px;
+        background-color: white;
+        padding: 30px 40px;
+        border-radius: 0 6px 6px 0;
         h1 {
             font-family: $head-font;
             font-size: 21px;
             font-weight: 700;
             color: $link-color;
             line-height: 1.2;
-            // margin-bottom: 15px;
         }
         .product_desc-wrapper {
             display: flex;
@@ -189,35 +193,52 @@
 }
 
 .details_container {
-    padding: 0 70px;
+    padding: 0 40px;
+    margin-top: 40px;
     .nav-tabs { 
-        border-bottom: 1px solid $border-color;
+        border-bottom: none;
         .nav-link {
             font-family: $head-font;
             font-size: 18px;
             font-weight: 700;
             color: $link-color;
             line-height: 1.2;
-            padding: 15px 30px;
+            padding: 15px 0;
+            margin: 0 25px;
+            border: none;
+            border-bottom: 2px solid transparent;
+            background-color: transparent;
+            transition: all 0.3s ease-in-out;
+            &:first-child {
+                margin-left: 15px;
+            }
             &.active {
-                background-color: $primary-color;
-                color: #ffffff;
-                border-color: $border-color;
+                color: $primary-color;
+                border-color: $primary-color;
             }
             &:focus {
                 outline: none;
                 border-color: $primary-color;
             }
+            span {
+                display: flex;
+                align-items: center;
+                svg {
+                    margin-right: 7px;
+                }
+            }
         }
     }
 }
 .details_wrapper {
-    background-color: rgb(247, 247, 247);
+    background-color: #ffffff;
     position: relative;
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
-    padding-top: 60px;
+    padding: 30px;
+    margin-top: 30px;
+    border-radius: 6px;
     h2 {
         font-family: $head-font;
         font-size: 21px;
@@ -304,8 +325,8 @@
 
 .related_items {
     margin-top: 70px;
-    margin-left: 55px;
-    margin-right: 55px;
+    margin-left: 40px;
+    margin-right: 40px;
     h2 {
         font-family: $head-font;
         font-size: 21px;
@@ -325,6 +346,12 @@
             padding-right: 1px;
             margin: 0;
             margin-bottom: 30px;
+            &:nth-child(1) .product_card-wrapper .product_card {
+                border-radius: 6px 0 0 6px;
+            }
+            &:nth-child(4) .product_card-wrapper .product_card {
+                border-radius: 0 6px 6px 0;
+            }
             .product_card-wrapper {
                 height: 100%;
                 .product_card {
@@ -337,9 +364,6 @@
                     padding: 30px;
                     border-radius: 0;
                     text-decoration: none;
-                    &:nth-child(4n+1) {
-                        border-radius: 6px 0px 0px 6px;
-                    }
                     .image_wrapper {
                         height: 275px;
                         position: relative;
