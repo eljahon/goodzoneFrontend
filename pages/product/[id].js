@@ -17,7 +17,6 @@ import {
     FaBoxOpen,
     FaStore,
 } from "react-icons/fa";
-import { Row, Col, Tabs, Tab } from "react-bootstrap";
 import CartPopup from "../../components/cart-popup";
 
 export default function Product({ data, products }) {
