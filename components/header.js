@@ -3,15 +3,15 @@ import {FaBars, FaSortDown, FaSearch, FaSignInAlt } from 'react-icons/fa'
 import Link from "next/link";
 import DepartmentsMenu from "./departments-menu";
 
-export default function Header() {
+export default function Header({ logo }) {
     const [menu, setMenu] = useState(false)
     return (
         <>
             <header>
                 <div className="left_menu">
-                    <div className="logo">
-                        <img src="logo.png" alt="Goodzone"/>
-                    </div>
+                    <Link href="/">
+                        <a className="logo"><img src={logo ? '../logo.png' : 'logo.png'} alt="Goodzone"/></a>
+                    </Link>
                     <div className="menu">
                         <div className="popover">
                             <div className="popover_handler">

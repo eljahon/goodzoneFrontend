@@ -1,64 +1,186 @@
-import React, {useState} from 'react'
-import { FaShoppingBag, FaTimes, FaMinus, FaPlus } from 'react-icons/fa'
+import React, { useState, useEffect } from "react";
+import { FaShoppingBag, FaTimes, FaMinus, FaPlus } from "react-icons/fa";
+import Link from "next/link";
+import { shallowEqual, useSelector, useDispatch } from "react-redux";
+import {
+    cartTotalPriceSelector,
+    cartItemsTotalQuantitySelector,
+} from "../redux/selectors/cartSelectors";
+import {
+    asyncRemoveFromCartAction,
+    asyncAddToCartAction,
+    asyncReduceCartItemQuantityAction,
+} from "../redux/actions/cartActions/cartActions";
+import { numberToPrice } from "../libs/numberToPrice";
 
 export default function CartPopup({ data }) {
-    const [cart, setCart] = useState(false)
+    const [cart, setCart] = useState(false);
+
+    const dispatch = useDispatch();
+
+    const cartItems = useSelector(
+        (state) => state.cart.cartItems,
+        shallowEqual
+    );
+    const totalPrice = useSelector(
+        (state) => cartTotalPriceSelector(state),
+        shallowEqual
+    );
+    const totalQuantity = useSelector(
+        (state) => cartItemsTotalQuantitySelector(state),
+        shallowEqual
+    );
+
+    const reduceCartItemQuantityHandler = (cartItem) => {
+        if (cartItem.quantity === 1)
+            dispatch(asyncRemoveFromCartAction(cartItem));
+        else dispatch(asyncReduceCartItemQuantityAction(cartItem));
+    };
+    const removeFromCartHandler = (cartItem) => {
+        dispatch(asyncRemoveFromCartAction(cartItem));
+    };
+    const addToCartHandler = (cartItem) => {
+        dispatch(asyncAddToCartAction(cartItem));
+    };
+
+    useEffect(() => {
+        if (!totalQuantity) {
+            setCart(false);
+        }
+    }, [totalQuantity]);
+
     return (
-        <>
-            <div className={`cart_popup ${cart ? 'show' : ''}`}>
-                <div className="cart_popup-body">
-                    <div className="cart_popup-header">
-                        <div className="item_count">
-                            <FaShoppingBag />
-                            <span>3&nbsp;Предметы</span>
+        totalQuantity && (
+            <>
+                <div className={`cart_popup ${cart ? "show" : ""}`}>
+                    <div className="cart_popup-body">
+                        <div className="cart_popup-header">
+                            <div className="item_count">
+                                <FaShoppingBag />
+                                <span>
+                                    {totalQuantity === 1
+                                        ? `${totalQuantity} Предмет`
+                                        : `${totalQuantity} Предметы`}
+                                </span>
+                            </div>
+                            <button
+                                className="btn close_button"
+                                onClick={() => setCart(!cart)}
+                            >
+                                <FaTimes />
+                            </button>
                         </div>
-                        <button className="btn close_button" onClick={() => setCart(!cart)}>
-                            <FaTimes />
-                        </button>
-                    </div>
-                    <div className="cart_popup-items">
-                        <div className="cart_items-wrapper">
-                            <div className="items_wrapper">
-                                {data.map(item => (
-                                    <div key={item.id} className="item_box">
-                                        <div className="counter_box">
-                                            <button className="btn counter_btn"><FaMinus /></button>
-                                            <span className="counter_value">1</span>
-                                            <button className="btn counter_btn"><FaPlus /></button>
-                                        </div>
-                                        <img src={item.image} alt={item.name} />
-                                        <div className="cart_info">
-                                            <span className="item_name">{item.name}</span>
-                                            <span className="item_price">{`${item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")} сум`}</span>
-                                        </div>
-                                        <span className="item_total">{`${item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")} сум`}</span>
-                                        <button className="btn remove_btn"><FaTimes /></button>
-                                    </div>
-                                ))}
+                        <div className="cart_popup-items">
+                            <div className="cart_items-wrapper">
+                                <div className="items_wrapper">
+                                    {cartItems.length ? (
+                                        cartItems.map((cartItem) => {
+                                            const totalProductPrice =
+                                                cartItem.quantity *
+                                                cartItem.price;
+                                            return (
+                                                <div
+                                                    key={cartItem.id}
+                                                    className="item_box"
+                                                >
+                                                    <div className="counter_box">
+                                                        <button
+                                                            onClick={() =>
+                                                                reduceCartItemQuantityHandler(
+                                                                    cartItem
+                                                                )
+                                                            }
+                                                            className="btn counter_btn"
+                                                        >
+                                                            <FaMinus />
+                                                        </button>
+                                                        <span className="counter_value">
+                                                            {cartItem.quantity}
+                                                        </span>
+                                                        <button
+                                                            onClick={() =>
+                                                                addToCartHandler(
+                                                                    cartItem
+                                                                )
+                                                            }
+                                                            className="btn counter_btn"
+                                                        >
+                                                            <FaPlus />
+                                                        </button>
+                                                    </div>
+                                                    <img
+                                                        src={cartItem.image}
+                                                        alt={cartItem.name}
+                                                    />
+                                                    <div className="cart_info">
+                                                        <span className="item_name">
+                                                            {cartItem.name}
+                                                        </span>
+                                                        <span className="item_price">
+                                                            {numberToPrice(
+                                                                cartItem.price
+                                                            )}
+                                                        </span>
+                                                    </div>
+                                                    <span className="item_total">
+                                                        {numberToPrice(
+                                                            totalProductPrice
+                                                        )}
+                                                    </span>
+                                                    <button
+                                                        onClick={() =>
+                                                            removeFromCartHandler(
+                                                                cartItem
+                                                            )
+                                                        }
+                                                        className="btn remove_btn"
+                                                    >
+                                                        <FaTimes />
+                                                    </button>
+                                                </div>
+                                            );
+                                        })
+                                    ) : (
+                                        <p>No items in the cart</p>
+                                    )}
+                                </div>
+                            </div>
+                            <div className="bottom_box">
+                                <div className="inner_box" />
+                            </div>
+                            <div className="right_box">
+                                <div className="inner_box" />
                             </div>
                         </div>
-                        <div className="bottom_box">
-                            <div className="inner_box" />
+                        <div className="checkout_button-wrapper">
+                            <Link href="/checkout">
+                                <a className="btn checkout_button">
+                                    <span className="btn_text">
+                                        Оформить заказ
+                                    </span>
+                                    <span className="price_box">
+                                        {numberToPrice(totalPrice)}
+                                    </span>
+                                </a>
+                            </Link>
                         </div>
-                        <div className="right_box">
-                            <div className="inner_box" />
-                        </div>
-                    </div>
-                    <div className="checkout_button-wrapper">
-                        <button className="btn checkout_button">
-                            <span className="btn_text">Перейти в корзину</span>
-                            <span className="price_box">3 700 000 сум</span>
-                        </button>
                     </div>
                 </div>
-            </div>
-            <button className="btn cart_button" onClick={() => setCart(!cart)}>
-                <span className="total_items">
-                    <span><FaShoppingBag /></span>
-                    3 Предметы
-                </span>
-                <span className="price">3 200 000 сум</span>
-            </button>
-        </>
-    )
+                <button
+                    className="btn cart_button"
+                    onClick={() => setCart(!cart)}
+                >
+                    <span className="total_items">
+                        <span>
+                            <FaShoppingBag />
+                        </span>
+                        {totalQuantity === 1
+                            ? `${totalQuantity} Предмет`
+                            : `${totalQuantity} Предметы`}
+                    </span>
+                    <span className="price">{numberToPrice(totalPrice)}</span>
+                </button>
+            </>
+        )
+    );
 }
