@@ -17,10 +17,10 @@ export default function CheckoutItems({ data }) {
     const handleScroll = () => {
         if (
             (document.body.scrollTop > 60 &&
-                document.body.scrollTop < document.body.clientHeight - 900) ||
+                document.body.scrollTop < document.body.clientHeight - 940) ||
             (document.documentElement.scrollTop > 60 &&
                 document.documentElement.scrollTop <
-                    document.body.clientHeight - 900)
+                    document.body.clientHeight - 940)
         ) {
             document.getElementById("checkout_items").classList.add("sticky");
         } else {

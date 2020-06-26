@@ -2,13 +2,23 @@ import React, { useState } from "react";
 import SEO from "../../components/seo";
 import Header from "../../components/header";
 import Footer from "../../components/footer";
-import { FaArrowLeft, FaShoppingBag, FaCircle } from "react-icons/fa";
 import { Row, Col, Tabs, Tab } from "react-bootstrap";
 import Router from "next/router";
 import Link from "next/link";
 import { useDispatch } from "react-redux";
 import { asyncAddToCartAction } from "../../redux/actions/cartActions/cartActions";
 import { numberToPrice } from "../../libs/numberToPrice";
+import {
+    FaArrowLeft,
+    FaShoppingBag,
+    FaPlus,
+    FaMinus,
+    FaCircle,
+    FaBoxOpen,
+    FaStore,
+} from "react-icons/fa";
+import { Row, Col, Tabs, Tab } from "react-bootstrap";
+import CartPopup from "../../components/cart-popup";
 
 export default function Product({ data, products }) {
     const dispatch = useDispatch();
@@ -77,7 +87,14 @@ export default function Product({ data, products }) {
                     </div>
                     <div className="details_container" id="details">
                         <Tabs defaultActiveKey="about">
-                            <Tab eventKey="about" title="О товаре">
+                            <Tab
+                                eventKey="about"
+                                title={
+                                    <span>
+                                        <FaBoxOpen /> О товаре
+                                    </span>
+                                }
+                            >
                                 <div className="details_wrapper">
                                     <h3>Full HD</h3>
                                     <p>
@@ -137,7 +154,14 @@ export default function Product({ data, products }) {
                                     </ul>
                                 </div>
                             </Tab>
-                            <Tab eventKey="store" title="Наличие в магазинах">
+                            <Tab
+                                eventKey="store"
+                                title={
+                                    <span>
+                                        <FaStore /> Наличие в магазинах
+                                    </span>
+                                }
+                            >
                                 <div className="details_wrapper">
                                     <table>
                                         <thead>
@@ -274,6 +298,7 @@ export default function Product({ data, products }) {
                 </div>
             </div>
 
+            <CartPopup data={products} dynamic />
             <Footer />
         </>
     );

@@ -13,7 +13,7 @@ import {
 } from "../redux/actions/cartActions/cartActions";
 import { numberToPrice } from "../libs/numberToPrice";
 
-export default function CartPopup({ data }) {
+export default function CartPopup({ data, dynamic }) {
     const [cart, setCart] = useState(false);
 
     const dispatch = useDispatch();
@@ -63,6 +63,17 @@ export default function CartPopup({ data }) {
                                         : `${totalQuantity} Предметы`}
                                 </span>
                             </div>
+                        </div>
+                        <button
+                            className="btn close_button"
+                            onClick={() => setCart(!cart)}
+                        >
+                            <FaTimes />
+                        </button>
+                    </div>
+                    <div className="cart_popup-items">
+                        <div className="cart_items-wrapper">
+                            <div className="items_wrapper"></div>
                             <button
                                 className="btn close_button"
                                 onClick={() => setCart(!cart)}
@@ -109,7 +120,11 @@ export default function CartPopup({ data }) {
                                                         </button>
                                                     </div>
                                                     <img
-                                                        src={cartItem.image}
+                                                        src={
+                                                            dynamic
+                                                                ? `../${cartItem.image}`
+                                                                : cartItem.image
+                                                        }
                                                         alt={cartItem.name}
                                                     />
                                                     <div className="cart_info">
