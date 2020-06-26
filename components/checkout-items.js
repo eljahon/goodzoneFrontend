@@ -3,7 +3,8 @@ import { useSelector, shallowEqual } from "react-redux";
 import { cartTotalPriceSelector } from "../redux/selectors/cartSelectors";
 import { numberToPrice } from "../libs/numberToPrice";
 
-export default function CheckoutItems({ data }) {
+// export default function CheckoutItems({ data }) {
+export default function CheckoutItems() {
     const cartItems = useSelector(
         (state) => state.cart.cartItems,
         shallowEqual

@@ -11,8 +11,6 @@ import { numberToPrice } from "../../libs/numberToPrice";
 import {
     FaArrowLeft,
     FaShoppingBag,
-    FaPlus,
-    FaMinus,
     FaCircle,
     FaBoxOpen,
     FaStore,
@@ -303,19 +301,19 @@ export default function Product({ data, products }) {
     );
 }
 
-export async function getStaticPaths() {
-    const res = await fetch(process.env.API_URL);
-    const products = await res.json();
-    const paths = products.map((item) => ({
-        params: { id: item.name.toLowerCase().replace(/\s+/g, "-") },
-    }));
-    return {
-        paths,
-        fallback: false,
-    };
-}
+// export async function getStaticPaths() {
+//     const res = await fetch(process.env.API_URL);
+//     const products = await res.json();
+//     const paths = products.map((item) => ({
+//         params: { id: item.name.toLowerCase().replace(/\s+/g, "-") },
+//     }));
+//     return {
+//         paths,
+//         fallback: false,
+//     };
+// }
 
-export async function getStaticProps({ params }) {
+export async function getServerSideProps({ params }) {
     const res = await fetch(process.env.API_URL);
     const products = await res.json();
     const data = products.find(

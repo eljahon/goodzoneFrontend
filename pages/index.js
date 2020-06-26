@@ -7,6 +7,7 @@ import Footer from "../components/footer";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductsFromAPI } from "../redux/actions/productsActions/productsActions";
 import { useEffect } from "react";
+import isoFetch from "isomorphic-fetch";
 
 export default function Home({ products }) {
     const store = useSelector((state) => state);
@@ -30,8 +31,8 @@ export default function Home({ products }) {
     );
 }
 
-export async function getStaticProps() {
-    const res = await fetch(process.env.API_URL);
+export async function getServerSideProps() {
+    const res = await isoFetch(process.env.API_URL);
     const products = await res.json();
 
     return {
