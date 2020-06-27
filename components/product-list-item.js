@@ -1,36 +1,39 @@
-import { FaMinus, FaPlus, FaShoppingBasket } from "react-icons/fa";
+import { FaShoppingBasket } from "react-icons/fa";
 import { Col } from "react-bootstrap";
 import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import { asyncAddToCartAction } from "../redux/actions/cartActions/cartActions";
 import { numberToPrice } from "../libs/numberToPrice";
+import Skeleton from "react-loading-skeleton";
 
-const ProductListItem = ({ item }) => {
+const ProductListItem = ({ product }) => {
     // console.log("item", item);
     const dispatch = useDispatch();
 
     const addToCart = () => {
-        dispatch(asyncAddToCartAction(item));
+        dispatch(asyncAddToCartAction(product));
     };
 
     return (
         <Col lg={3} className="products_col">
             <div className="product_card">
-                <Link href="/product/[id]" as={`/product/${item.id}`}>
+                <Link href="/product/[id]" as={`/product/${product.id}`}>
                     <a className="product_image">
-                        <img
-                            src={item.image}
-                            alt={item.name}
-                            className="img-fluid"
-                        />
+                        {(
+                            <img
+                                src={product.image}
+                                alt={product.name}
+                                className="img-fluid"
+                            />
+                        ) || <Skeleton />}
                     </a>
                 </Link>
                 <div className="product_info">
-                    <Link href="/product/[id]" as={`/product/${item.id}`}>
+                    <Link href="/product/[id]" as={`/product/${product.id}`}>
                         <a>
-                            <h3 className="product_title">{item.name}</h3>
+                            <h3 className="product_title">{product.name}</h3>
                             <span className="product_price">
-                                {numberToPrice(item.price.price)}
+                                {numberToPrice(product.price.price)}
                             </span>
                         </a>
                     </Link>

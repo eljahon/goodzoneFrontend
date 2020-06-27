@@ -1,8 +1,9 @@
 import { Row } from "react-bootstrap";
 import ProductListItem from "./product-list-item";
+// import loadableVisibility from "react-loadable-visibility/loadable-components";
+// import SkeletonCard from "./skeleton-card";
 
-export default function ProductList({ data }) {
-    // console.log("data", data);
+export default function ProductList({ products }) {
     return (
         <main>
             <aside className="sidebar">
@@ -109,9 +110,16 @@ export default function ProductList({ data }) {
             <div className="content">
                 <div>
                     <Row className="products_row">
-                        {data.map((item) => {
+                        {products.map((product) => {
+                            // const ProductListItem = loadableVisibility(
+                            //     () => import("./product-list-item"),
+                            //     { fallback: <SkeletonCard /> }
+                            // );
                             return (
-                                <ProductListItem key={item.id} item={item} />
+                                <ProductListItem
+                                    key={product.id}
+                                    product={product}
+                                />
                             );
                         })}
                     </Row>

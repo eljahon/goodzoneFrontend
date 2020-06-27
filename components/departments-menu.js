@@ -1,46 +1,69 @@
 import Link from "next/link";
-import {FaArrowRight, FaTv, FaMobileAlt} from "react-icons/fa";
+import { FaArrowRight, FaTv, FaMobileAlt } from "react-icons/fa";
+import { useSelector, shallowEqual } from "react-redux";
 
 export default function DepartmentsMenu() {
+    const categories = useSelector(
+        (state) => state.categories.categoryItems,
+        shallowEqual
+    );
+
     return (
         <div className="popover_content">
             <ul className="inner_wrap">
-                <li className="menu_item">
-                    <Link href="/">
-                        <a>
-                            <span className="menu_icon"><FaTv /></span>
-                            <span className="label">Телевизоры, Hi-Fi, аудио</span>
-                            <span className="menu_icon"><FaArrowRight /></span>
-                        </a>
-                    </Link>
-                    <ul className="dropdown_menu">
-                        <li>
-                            <div className="content">
-                                <Link href="/">
-                                    <a>Телевизоры</a>
-                                </Link>
-                                <Link href="/">
-                                    <a>Цифровое ТВ</a>
-                                </Link>
-                                <Link href="/">
-                                    <a>DVD-плеееры</a>
-                                </Link>
-                                <Link href="/">
-                                    <a>Домашний кинотеатр и Hi-Fi техника</a>
-                                </Link>
-                                <Link href="/">
-                                    <a>Аксессуары</a>
-                                </Link>
-                            </div>
+                {categories.map((category) => {
+                    return (
+                        <li key={category.id} className="menu_item">
+                            <Link href="/">
+                                <a>
+                                    <span className="menu_icon">
+                                        <FaTv />
+                                    </span>
+                                    <span className="label">
+                                        {category.name}
+                                    </span>
+                                    <span className="menu_icon">
+                                        <FaArrowRight />
+                                    </span>
+                                </a>
+                            </Link>
+                            {category.children ? (
+                                <ul className="dropdown_menu">
+                                    <li>
+                                        <div className="content">
+                                            {category.children.map(
+                                                (subCategory) => {
+                                                    return (
+                                                        <Link
+                                                            key={subCategory.id}
+                                                            href="/"
+                                                        >
+                                                            <a>
+                                                                {
+                                                                    subCategory.name
+                                                                }
+                                                            </a>
+                                                        </Link>
+                                                    );
+                                                }
+                                            )}
+                                        </div>
+                                    </li>
+                                </ul>
+                            ) : null}
                         </li>
-                    </ul>
-                </li>
-                <li className="menu_item">
+                    );
+                })}
+                {/* <li className="menu_item">
                     <Link href="/">
                         <a>
-                            <span className="menu_icon"><FaMobileAlt /></span>
+                            <span className="menu_icon">
+                                <FaMobileAlt />
+                            </span>
                             <span className="label">Смартфоны и гаджеты</span>
-                            <span className="menu_icon"><FaArrowRight /></span>
+                            <span className="menu_icon">
+                                <FaArrowRight />
+                            </span>
                         </a>
                     </Link>
                     <ul className="dropdown_menu">
@@ -64,8 +87,8 @@ export default function DepartmentsMenu() {
                             </div>
                         </li>
                     </ul>
-                </li>
+                </li> */}
             </ul>
         </div>
-    )
+    );
 }

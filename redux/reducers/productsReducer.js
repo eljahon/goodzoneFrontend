@@ -1,10 +1,10 @@
 import { productActionTypes } from "../actions/productsActions/productsActionTypes";
 
-const initialCartState = {
+const initialState = {
     productItems: [],
 };
 
-const productsReducer = (state = initialCartState, action) => {
+const productsReducer = (state = initialState, action) => {
     const { payload } = action;
     switch (action.type) {
         case productActionTypes.GET_PRODUCTS_FROM_API:

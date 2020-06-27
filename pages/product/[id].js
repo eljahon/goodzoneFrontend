@@ -298,7 +298,7 @@ export default function Product({ data, products }) {
                 </div>
             </div>
 
-            <CartPopup data={products} dynamic />
+            <CartPopup data={products} />
             <Footer />
         </>
     );

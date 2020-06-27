@@ -13,7 +13,7 @@ import {
 } from "../redux/actions/cartActions/cartActions";
 import { numberToPrice } from "../libs/numberToPrice";
 
-export default function CartPopup({ dynamic }) {
+export default function CartPopup() {
     const [cart, setCart] = useState(false);
 
     const dispatch = useDispatch();
@@ -49,145 +49,137 @@ export default function CartPopup({ dynamic }) {
         }
     }, [totalQuantity]);
 
-    return (
-        totalQuantity && (
-            <>
-                <div className={`cart_popup ${cart ? "show" : ""}`}>
-                    <div className="cart_popup-body">
-                        <div className="cart_popup-header">
-                            <div className="item_count">
-                                <FaShoppingBag />
-                                <span>
-                                    {totalQuantity === 1
-                                        ? `${totalQuantity} Предмет`
-                                        : `${totalQuantity} Предметы`}
-                                </span>
-                            </div>
-                            <button
-                                className="btn close_button"
-                                onClick={() => setCart(!cart)}
-                            >
-                                <FaTimes />
-                            </button>
+    return totalQuantity ? (
+        <>
+            <div className={`cart_popup ${cart ? "show" : ""}`}>
+                <div className="cart_popup-body">
+                    <div className="cart_popup-header">
+                        <div className="item_count">
+                            <FaShoppingBag />
+                            <span>
+                                {totalQuantity === 1
+                                    ? `${totalQuantity} Предмет`
+                                    : `${totalQuantity} Предметы`}
+                            </span>
                         </div>
+                        <button
+                            className="btn close_button"
+                            onClick={() => setCart(!cart)}
+                        >
+                            <FaTimes />
+                        </button>
+                    </div>
 
-                        <div className="cart_popup-items">
-                            <div className="cart_items-wrapper">
-                                <div className="items_wrapper">
-                                    {cartItems.length ? (
-                                        cartItems.map((cartItem) => {
-                                            const totalProductPrice =
-                                                cartItem.quantity *
-                                                cartItem.price.price;
-                                            return (
-                                                <div
-                                                    key={cartItem.id}
-                                                    className="item_box"
-                                                >
-                                                    <div className="counter_box">
-                                                        <button
-                                                            onClick={() =>
-                                                                reduceCartItemQuantityHandler(
-                                                                    cartItem
-                                                                )
-                                                            }
-                                                            className="btn counter_btn"
-                                                        >
-                                                            <FaMinus />
-                                                        </button>
-                                                        <span className="counter_value">
-                                                            {cartItem.quantity}
-                                                        </span>
-                                                        <button
-                                                            onClick={() =>
-                                                                addToCartHandler(
-                                                                    cartItem
-                                                                )
-                                                            }
-                                                            className="btn counter_btn"
-                                                        >
-                                                            <FaPlus />
-                                                        </button>
-                                                    </div>
-                                                    <img
-                                                        src={cartItem.image}
-                                                        // src={
-                                                        //     dynamic
-                                                        //         ? `../${cartItem.image}`
-                                                        //         : cartItem.image
-                                                        // }
-                                                        alt={cartItem.name}
-                                                    />
-                                                    <div className="cart_info">
-                                                        <span className="item_name">
-                                                            {cartItem.name}
-                                                        </span>
-                                                        <span className="item_price">
-                                                            {numberToPrice(
-                                                                cartItem.price
-                                                                    .price
-                                                            )}
-                                                        </span>
-                                                    </div>
-                                                    <span className="item_total">
-                                                        {numberToPrice(
-                                                            totalProductPrice
-                                                        )}
-                                                    </span>
+                    <div className="cart_popup-items">
+                        <div className="cart_items-wrapper">
+                            <div className="items_wrapper">
+                                {cartItems.length ? (
+                                    cartItems.map((cartItem) => {
+                                        const totalProductPrice =
+                                            cartItem.quantity *
+                                            cartItem.price.price;
+                                        return (
+                                            <div
+                                                key={cartItem.id}
+                                                className="item_box"
+                                            >
+                                                <div className="counter_box">
                                                     <button
                                                         onClick={() =>
-                                                            removeFromCartHandler(
+                                                            reduceCartItemQuantityHandler(
                                                                 cartItem
                                                             )
                                                         }
-                                                        className="btn remove_btn"
+                                                        className="btn counter_btn"
                                                     >
-                                                        <FaTimes />
+                                                        <FaMinus />
+                                                    </button>
+                                                    <span className="counter_value">
+                                                        {cartItem.quantity}
+                                                    </span>
+                                                    <button
+                                                        onClick={() =>
+                                                            addToCartHandler(
+                                                                cartItem
+                                                            )
+                                                        }
+                                                        className="btn counter_btn"
+                                                    >
+                                                        <FaPlus />
                                                     </button>
                                                 </div>
-                                            );
-                                        })
-                                    ) : (
-                                        <p>No items in the cart</p>
-                                    )}
-                                </div>
-                            </div>
-                            <div className="bottom_box">
-                                <div className="inner_box" />
-                            </div>
-                            <div className="right_box">
-                                <div className="inner_box" />
+                                                <img
+                                                    src={cartItem.image}
+                                                    // src={
+                                                    //     dynamic
+                                                    //         ? `../${cartItem.image}`
+                                                    //         : cartItem.image
+                                                    // }
+                                                    alt={cartItem.name}
+                                                />
+                                                <div className="cart_info">
+                                                    <span className="item_name">
+                                                        {cartItem.name}
+                                                    </span>
+                                                    <span className="item_price">
+                                                        {numberToPrice(
+                                                            cartItem.price.price
+                                                        )}
+                                                    </span>
+                                                </div>
+                                                <span className="item_total">
+                                                    {numberToPrice(
+                                                        totalProductPrice
+                                                    )}
+                                                </span>
+                                                <button
+                                                    onClick={() =>
+                                                        removeFromCartHandler(
+                                                            cartItem
+                                                        )
+                                                    }
+                                                    className="btn remove_btn"
+                                                >
+                                                    <FaTimes />
+                                                </button>
+                                            </div>
+                                        );
+                                    })
+                                ) : (
+                                    <p>No items in the cart</p>
+                                )}
                             </div>
                         </div>
-                        <div className="checkout_button-wrapper">
-                            <Link href="/checkout">
-                                <a className="btn checkout_button">
-                                    <span className="btn_text">
-                                        Оформить заказ
-                                    </span>
-                                    <span className="price_box">
-                                        {numberToPrice(totalPrice)}
-                                    </span>
-                                </a>
-                            </Link>
+                        <div className="bottom_box">
+                            <div className="inner_box" />
+                        </div>
+                        <div className="right_box">
+                            <div className="inner_box" />
                         </div>
                     </div>
+                    <div className="checkout_button-wrapper">
+                        <Link href="/checkout">
+                            <a className="btn checkout_button">
+                                <span className="btn_text">Оформить заказ</span>
+                                <span className="price_box">
+                                    {numberToPrice(totalPrice)}
+                                </span>
+                            </a>
+                        </Link>
+                    </div>
                 </div>
-                <button
-                    className="btn cart_button"
-                    onClick={() => setCart(!cart)}
-                >
-                    <span className="total_items">
-                        <span>
-                            <FaShoppingBag />
-                        </span>
-                        {totalQuantity === 1
-                            ? `${totalQuantity} Предмет`
-                            : `${totalQuantity} Предметы`}
+            </div>
+            <button className="btn cart_button" onClick={() => setCart(!cart)}>
+                <span className="total_items">
+                    <span>
+                        <FaShoppingBag />
                     </span>
-                    <span className="price">{numberToPrice(totalPrice)}</span>
-                </button>
-            </>
-        )
-    );
+                    {totalQuantity === 1
+                        ? `${totalQuantity} Предмет`
+                        : `${totalQuantity} Предметы`}
+                </span>
+                <span className="price">{numberToPrice(totalPrice)}</span>
+            </button>
+        </>
+    ) : null;
 }
