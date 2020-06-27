@@ -1,10 +1,16 @@
-import { useState } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import {FaBars, FaSortDown, FaSearch, FaSignInAlt } from 'react-icons/fa'
 import Link from "next/link";
 import DepartmentsMenu from "./departments-menu";
 
 export default function Header({ logo }) {
-    const [menu, setMenu] = useState(false)
+    const [menu, setMenu] = useState(false);
+    const [categories, getCategories] = useState([]);
+    useEffect(() => {
+        fetch(process.env.CATEGORY_API_URL)
+            .then(res => res.json())
+            .then(categories => getCategories(categories))
+    })
     return (
         <>
             <header>
@@ -23,7 +29,7 @@ export default function Header({ logo }) {
                                     <span className="menu_arrow"><FaSortDown/></span>
                                 </button>
                             </div>
-                            {menu ? <DepartmentsMenu /> : ''}
+                            {menu ? <DepartmentsMenu data={categories} /> : ''}
                         </div>
                     </div>
                 </div>

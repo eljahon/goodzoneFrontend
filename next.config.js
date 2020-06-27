@@ -1,5 +1,6 @@
 module.exports = {
     env: {
-      API_URL: 'https://nextjs-blog.oripovd1.vercel.app/api/products',
+      PRODUCT_API_URL: 'http://139.59.38.238:1235/v1/product',
+      CATEGORY_API_URL: 'http://139.59.38.238:1235/v1/category',
     },
 }
