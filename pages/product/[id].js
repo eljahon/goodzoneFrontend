@@ -20,8 +20,6 @@ import { asyncAddToCartAction } from "../../redux/actions/cartActions/cartAction
 import { numberToPrice } from "../../libs/numberToPrice";
 
 export default function Product({ data, products }) {
-    console.log("data", data);
-    console.log("products", products);
     const dispatch = useDispatch();
 
     const addToCartHandler = (cartItem) =>
@@ -277,7 +275,6 @@ export default function Product({ data, products }) {
                                             <a className="product_card">
                                                 <div className="image_wrapper">
                                                     <img
-                                                        // src={`../${item.image}`}
                                                         src={item.image}
                                                         alt={item.name}
                                                         className="img-fluid"
@@ -303,18 +300,6 @@ export default function Product({ data, products }) {
         </>
     );
 }
-
-// export async function getStaticPaths() {
-//     const res = await fetch(process.env.API_URL);
-//     const products = await res.json();
-//     const paths = products.map((item) => ({
-//         params: { id: item.name.toLowerCase().replace(/\s+/g, "-") },
-//     }));
-//     return {
-//         paths,
-//         fallback: false,
-//     };
-// }
 
 export async function getServerSideProps({ params }) {
     const res = await ifetch("http://139.59.38.238:1235/v1/product");

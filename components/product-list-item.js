@@ -1,13 +1,12 @@
 import { FaShoppingBasket } from "react-icons/fa";
 import { Col } from "react-bootstrap";
 import Link from "next/link";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { asyncAddToCartAction } from "../redux/actions/cartActions/cartActions";
 import { numberToPrice } from "../libs/numberToPrice";
 import Skeleton from "react-loading-skeleton";
 
 const ProductListItem = ({ product }) => {
-    // console.log("item", item);
     const dispatch = useDispatch();
 
     const addToCart = () => {

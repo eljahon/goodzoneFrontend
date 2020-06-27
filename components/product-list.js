@@ -1,7 +1,5 @@
 import { Row } from "react-bootstrap";
 import ProductListItem from "./product-list-item";
-// import loadableVisibility from "react-loadable-visibility/loadable-components";
-// import SkeletonCard from "./skeleton-card";
 
 export default function ProductList({ products }) {
     return (
@@ -111,10 +109,6 @@ export default function ProductList({ products }) {
                 <div>
                     <Row className="products_row">
                         {products.map((product) => {
-                            // const ProductListItem = loadableVisibility(
-                            //     () => import("./product-list-item"),
-                            //     { fallback: <SkeletonCard /> }
-                            // );
                             return (
                                 <ProductListItem
                                     key={product.id}
