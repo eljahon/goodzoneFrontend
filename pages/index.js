@@ -26,7 +26,7 @@ export default function Home({ products, categories }) {
     return (
         <>
             <SEO title="Интернет магазин GOODZONE" />
-            <Header />
+            <Header categories={categories} />
             <HomeSplash />
             <ProductList products={products} />
             <CartPopup />

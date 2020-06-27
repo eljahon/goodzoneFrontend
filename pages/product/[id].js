@@ -18,16 +18,18 @@ import Footer from "../../components/footer";
 import CartPopup from "../../components/cart-popup";
 import { asyncAddToCartAction } from "../../redux/actions/cartActions/cartActions";
 import { numberToPrice } from "../../libs/numberToPrice";
+import ReactImageMagnify from "react-image-magnify";
 
-export default function Product({ data, products }) {
+export default function Product({ data, products, categories }) {
     const dispatch = useDispatch();
 
     const addToCartHandler = (cartItem) =>
         dispatch(asyncAddToCartAction(cartItem));
+
     return (
         <>
             <SEO title="Интернет магазин GOODZONE" />
-            <Header logo />
+            <Header logo categories={categories} />
 
             <div className="product_wrapper">
                 <div className="product_container">
@@ -44,11 +46,39 @@ export default function Product({ data, products }) {
                                     <span className="btn_text">Назад</span>
                                 </button>
                             </div>
-                            <img
+                            {/* <img
                                 src={`${data.image}`}
                                 alt={data.name}
                                 className="product_image"
-                            />
+                            /> */}
+                            <div className="product_image">
+                                <ReactImageMagnify
+                                    {...{
+                                        smallImage: {
+                                            alt: data.name,
+                                            isFluidWidth: true,
+                                            src: `${data.image}`,
+                                        },
+                                        largeImage: {
+                                            src: data.image,
+                                            width: 1200,
+                                            height: 1200,
+                                        },
+                                        enlargedImageContainerStyle: {
+                                            top: "-27.5%",
+                                            left: "156.5%",
+                                            marginLeft: "0",
+                                            border:
+                                                "1px solid rgb(241, 241, 241)",
+                                            backgroundColor: "#fff",
+                                        },
+                                        enlargedImageContainerDimensions: {
+                                            width: "212%",
+                                            height: "155%",
+                                        },
+                                    }}
+                                />
+                            </div>
                         </div>
                         <div className="product_info">
                             <h1>{data.name}</h1>
@@ -302,13 +332,16 @@ export default function Product({ data, products }) {
 }
 
 export async function getServerSideProps({ params }) {
-    const res = await ifetch("http://139.59.38.238:1235/v1/product");
+    const res = await ifetch(process.env.PRODUCT_API_URL);
     const { products } = await res.json();
     console.log("products", products);
     console.log("params", params);
 
+    const response = await ifetch(process.env.CATEGORY_API_URL);
+    const { categories } = await response.json();
+
     const data = products.find((product) => product.id === params.id);
     return {
-        props: { data, products },
+        props: { data, products, categories },
     };
 }

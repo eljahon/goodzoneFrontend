@@ -3,7 +3,7 @@ import { FaBars, FaSortDown, FaSearch, FaSignInAlt } from "react-icons/fa";
 import Link from "next/link";
 import DepartmentsMenu from "./departments-menu";
 
-export default function Header({ logo }) {
+export default function Header({ logo, categories }) {
     const [menu, setMenu] = useState(false);
     return (
         <>
@@ -35,7 +35,11 @@ export default function Header({ logo }) {
                                     </span>
                                 </button>
                             </div>
-                            {menu ? <DepartmentsMenu /> : ""}
+                            {menu ? (
+                                <DepartmentsMenu categories={categories} />
+                            ) : (
+                                ""
+                            )}
                         </div>
                     </div>
                 </div>

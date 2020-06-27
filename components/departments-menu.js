@@ -1,93 +1,53 @@
 import Link from "next/link";
-import { FaArrowRight, FaTv, FaMobileAlt } from "react-icons/fa";
-import { useSelector, shallowEqual } from "react-redux";
+import { FaArrowRight } from "react-icons/fa";
 
-export default function DepartmentsMenu() {
-    const categories = useSelector(
-        (state) => state.categories.categoryItems,
-        shallowEqual
-    );
-
+export default function DepartmentsMenu({ categories }) {
     return (
         <div className="popover_content">
             <ul className="inner_wrap">
-                {categories.map((category) => {
-                    return (
-                        <li key={category.id} className="menu_item">
-                            <Link href="/">
-                                <a>
-                                    <span className="menu_icon">
-                                        <FaTv />
-                                    </span>
-                                    <span className="label">
-                                        {category.name}
-                                    </span>
-                                    <span className="menu_icon">
-                                        <FaArrowRight />
-                                    </span>
-                                </a>
-                            </Link>
-                            {category.children ? (
-                                <ul className="dropdown_menu">
-                                    <li>
-                                        <div className="content">
-                                            {category.children.map(
-                                                (subCategory) => {
-                                                    return (
-                                                        <Link
-                                                            key={subCategory.id}
-                                                            href="/"
-                                                        >
-                                                            <a>
-                                                                {
-                                                                    subCategory.name
-                                                                }
-                                                            </a>
-                                                        </Link>
-                                                    );
-                                                }
-                                            )}
-                                        </div>
-                                    </li>
-                                </ul>
-                            ) : null}
-                        </li>
-                    );
-                })}
-                {/* <li className="menu_item">
-                    <Link href="/">
-                        <a>
-                            <span className="menu_icon">
-                                <FaMobileAlt />
-                            </span>
-                            <span className="label">Смартфоны и гаджеты</span>
-                            <span className="menu_icon">
-                                <FaArrowRight />
-                            </span>
-                        </a>
-                    </Link>
-                    <ul className="dropdown_menu">
-                        <li>
-                            <div className="content">
-                                <Link href="/">
-                                    <a>Смартфоны</a>
-                                </Link>
-                                <Link href="/">
-                                    <a>Телефоны</a>
-                                </Link>
-                                <Link href="/">
-                                    <a>Планшеты</a>
-                                </Link>
-                                <Link href="/">
-                                    <a>Гаджеты</a>
-                                </Link>
-                                <Link href="/">
-                                    <a>Аксессуары для смартфонов</a>
-                                </Link>
-                            </div>
-                        </li>
-                    </ul>
-                </li> */}
+                {categories.map((item) => (
+                    <li key={item.id} className="menu_item">
+                        <Link
+                            href="/category/[id]"
+                            as={`/category/${item.slug}`}
+                        >
+                            <a>
+                                <span className="label">
+                                    {/* <span className="menu_icon">
+                                        <img src={item.image} alt={item.name} className="img-fluid" />
+                                    </span> */}
+                                    {item.name}
+                                </span>
+                                <span className="menu_icon">
+                                    <FaArrowRight />
+                                </span>
+                            </a>
+                        </Link>
+                        <ul className="dropdown_menu">
+                            <li>
+                                <div className="content">
+                                    <Link href="/">
+                                        <a>Телевизоры</a>
+                                    </Link>
+                                    <Link href="/">
+                                        <a>Цифровое ТВ</a>
+                                    </Link>
+                                    <Link href="/">
+                                        <a>DVD-плеееры</a>
+                                    </Link>
+                                    <Link href="/">
+                                        <a>
+                                            Домашний кинотеатр и Hi-Fi техника
+                                        </a>
+                                    </Link>
+                                    <Link href="/">
+                                        <a>Аксессуары</a>
+                                    </Link>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                ))}
             </ul>
         </div>
     );
