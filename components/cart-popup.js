@@ -13,7 +13,7 @@ import {
 } from "../redux/actions/cartActions/cartActions";
 import { numberToPrice } from "../libs/numberToPrice";
 
-export default function CartPopup({ dynamic }) {
+export default function CartPopup() {
     const [cart, setCart] = useState(false);
 
     const dispatch = useDispatch();

@@ -26,7 +26,7 @@ export default function Home({ products }) {
             <Header />
             <HomeSplash />
             <ProductList data={products} />
-            <CartPopup dynamic />
+            <CartPopup />
             <Footer />
         </>
     );

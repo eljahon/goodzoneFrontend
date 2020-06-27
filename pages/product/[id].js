@@ -18,6 +18,7 @@ import Footer from "../../components/footer";
 import CartPopup from "../../components/cart-popup";
 import { asyncAddToCartAction } from "../../redux/actions/cartActions/cartActions";
 import { numberToPrice } from "../../libs/numberToPrice";
+import ReactImageMagnify from 'react-image-magnify'
 
 export default function Product({ data, products }) {
     console.log("data", data);
@@ -26,6 +27,7 @@ export default function Product({ data, products }) {
 
     const addToCartHandler = (cartItem) =>
         dispatch(asyncAddToCartAction(cartItem));
+
     return (
         <>
             <SEO title="Интернет магазин GOODZONE" />
@@ -46,11 +48,36 @@ export default function Product({ data, products }) {
                                     <span className="btn_text">Назад</span>
                                 </button>
                             </div>
-                            <img
+                            {/* <img
                                 src={`${data.image}`}
                                 alt={data.name}
                                 className="product_image"
-                            />
+                            /> */}
+                            <div className="product_image">
+                                <ReactImageMagnify {...{
+                                    smallImage: {
+                                        alt: data.name,
+                                        isFluidWidth: true,
+                                        src: `${data.image}`
+                                    },
+                                    largeImage: {
+                                        src: data.image,
+                                        width: 1200,
+                                        height: 1200
+                                    },
+                                    enlargedImageContainerStyle: {
+                                        top: '-27.5%',
+                                        left: '156.5%',
+                                        marginLeft: '0',
+                                        border: '1px solid rgb(241, 241, 241)',
+                                        backgroundColor: '#fff',
+                                    },
+                                    enlargedImageContainerDimensions: {
+                                        width: '212%',
+                                        height: '155%'
+                                    }
+                                }} />
+                            </div>
                         </div>
                         <div className="product_info">
                             <h1>{data.name}</h1>
