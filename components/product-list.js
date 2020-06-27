@@ -2,6 +2,7 @@ import { Row } from "react-bootstrap";
 import ProductListItem from "./product-list-item";
 
 export default function ProductList({ data }) {
+    // console.log("data", data);
     return (
         <main>
             <aside className="sidebar">

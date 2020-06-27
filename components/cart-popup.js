@@ -13,7 +13,7 @@ import {
 } from "../redux/actions/cartActions/cartActions";
 import { numberToPrice } from "../libs/numberToPrice";
 
-export default function CartPopup({ data, dynamic }) {
+export default function CartPopup({ dynamic }) {
     const [cart, setCart] = useState(false);
 
     const dispatch = useDispatch();
@@ -78,7 +78,7 @@ export default function CartPopup({ data, dynamic }) {
                                         cartItems.map((cartItem) => {
                                             const totalProductPrice =
                                                 cartItem.quantity *
-                                                cartItem.price;
+                                                cartItem.price.price;
                                             return (
                                                 <div
                                                     key={cartItem.id}
@@ -110,11 +110,12 @@ export default function CartPopup({ data, dynamic }) {
                                                         </button>
                                                     </div>
                                                     <img
-                                                        src={
-                                                            dynamic
-                                                                ? `../${cartItem.image}`
-                                                                : cartItem.image
-                                                        }
+                                                        src={cartItem.image}
+                                                        // src={
+                                                        //     dynamic
+                                                        //         ? `../${cartItem.image}`
+                                                        //         : cartItem.image
+                                                        // }
                                                         alt={cartItem.name}
                                                     />
                                                     <div className="cart_info">
@@ -124,6 +125,7 @@ export default function CartPopup({ data, dynamic }) {
                                                         <span className="item_price">
                                                             {numberToPrice(
                                                                 cartItem.price
+                                                                    .price
                                                             )}
                                                         </span>
                                                     </div>

@@ -56,7 +56,9 @@ export default function CheckoutItems() {
                                                 {cartItem.name}
                                             </span>
                                             <span className="price">
-                                                {numberToPrice(cartItem.price)}
+                                                {numberToPrice(
+                                                    cartItem.price.price
+                                                )}
                                             </span>
                                         </div>
                                     ))}

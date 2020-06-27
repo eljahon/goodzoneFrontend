@@ -1,6 +1,7 @@
 export const cartTotalPriceSelector = (state) => {
     return state.cart.cartItems.reduce(
-        (total, cartItem) => (total += cartItem.price * cartItem.quantity),
+        (total, cartItem) =>
+            (total += cartItem.price.price * cartItem.quantity),
         0
     );
 };

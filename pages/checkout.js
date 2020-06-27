@@ -12,9 +12,9 @@ export default function Home({ products }) {
             <div className="checkout_wrapper">
                 <div className="checkout_container">
                     {/* <CheckoutForm data={products} />
-            <CheckoutItems data={products} /> */}
+                    <CheckoutItems data={products} /> */}
                     <CheckoutForm />
-                    <CheckoutItems d />
+                    <CheckoutItems />
                 </div>
             </div>
             <Footer />
@@ -23,11 +23,11 @@ export default function Home({ products }) {
 }
 
 // export async function getStaticProps() {
-//   const res = await fetch(process.env.API_URL)
-//   const products = await res.json()
-//   return {
-//     props: {
-//       products,
-//     },
-//   }
+//     const res = await fetch(process.env.API_URL);
+//     const products = await res.json();
+//     return {
+//         props: {
+//             products,
+//         },
+//     };
 // }

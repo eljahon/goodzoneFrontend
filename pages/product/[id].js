@@ -1,13 +1,9 @@
-import React, { useState } from "react";
-import SEO from "../../components/seo";
-import Header from "../../components/header";
-import Footer from "../../components/footer";
+import React from "react";
 import { Row, Col, Tabs, Tab } from "react-bootstrap";
 import Router from "next/router";
 import Link from "next/link";
 import { useDispatch } from "react-redux";
-import { asyncAddToCartAction } from "../../redux/actions/cartActions/cartActions";
-import { numberToPrice } from "../../libs/numberToPrice";
+
 import {
     FaArrowLeft,
     FaShoppingBag,
@@ -15,9 +11,17 @@ import {
     FaBoxOpen,
     FaStore,
 } from "react-icons/fa";
+import ifetch from "isomorphic-fetch";
+import SEO from "../../components/seo";
+import Header from "../../components/header";
+import Footer from "../../components/footer";
 import CartPopup from "../../components/cart-popup";
+import { asyncAddToCartAction } from "../../redux/actions/cartActions/cartActions";
+import { numberToPrice } from "../../libs/numberToPrice";
 
 export default function Product({ data, products }) {
+    console.log("data", data);
+    console.log("products", products);
     const dispatch = useDispatch();
 
     const addToCartHandler = (cartItem) =>
@@ -43,7 +47,7 @@ export default function Product({ data, products }) {
                                 </button>
                             </div>
                             <img
-                                src={`../${data.image}`}
+                                src={`${data.image}`}
                                 alt={data.name}
                                 className="product_image"
                             />
@@ -64,7 +68,7 @@ export default function Product({ data, products }) {
                             </div>
                             <div className="product_cart-wrapper">
                                 <div className="product_price">
-                                    {numberToPrice(data.price)}
+                                    {numberToPrice(data.price.price)}
                                 </div>
                                 <div className="product_cart-btn">
                                     <button
@@ -267,15 +271,14 @@ export default function Product({ data, products }) {
                                 >
                                     <div className="product_card-wrapper">
                                         <Link
-                                            href="/product/id"
-                                            as={`/product/${item.name
-                                                .toLowerCase()
-                                                .replace(/\s+/g, "-")}`}
+                                            href="/product/[id]"
+                                            as={`/product/${item.id}`}
                                         >
                                             <a className="product_card">
                                                 <div className="image_wrapper">
                                                     <img
-                                                        src={`../${item.image}`}
+                                                        // src={`../${item.image}`}
+                                                        src={item.image}
                                                         alt={item.name}
                                                         className="img-fluid"
                                                     />
@@ -314,11 +317,12 @@ export default function Product({ data, products }) {
 // }
 
 export async function getServerSideProps({ params }) {
-    const res = await fetch(process.env.API_URL);
-    const products = await res.json();
-    const data = products.find(
-        (x) => x.name.toLowerCase().replace(/\s+/g, "-") === params.id
-    );
+    const res = await ifetch("http://139.59.38.238:1235/v1/product");
+    const { products } = await res.json();
+    console.log("products", products);
+    console.log("params", params);
+
+    const data = products.find((product) => product.id === params.id);
     return {
         props: { data, products },
     };
