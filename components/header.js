@@ -1,16 +1,10 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState } from 'react'
 import {FaBars, FaSortDown, FaSearch, FaSignInAlt } from 'react-icons/fa'
 import Link from "next/link";
 import DepartmentsMenu from "./departments-menu";
 
-export default function Header({ logo }) {
+export default function Header({ logo, categories }) {
     const [menu, setMenu] = useState(false);
-    const [categories, getCategories] = useState([]);
-    useEffect(() => {
-        fetch(process.env.CATEGORY_API_URL)
-            .then(res => res.json())
-            .then(categories => getCategories(categories))
-    })
     return (
         <>
             <header>

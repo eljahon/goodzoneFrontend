@@ -9,7 +9,7 @@ import { getProductsFromAPI } from "../redux/actions/productsActions/productsAct
 import { useEffect } from "react";
 import ifetch from "isomorphic-fetch";
 
-export default function Home({ products }) {
+export default function Home({ products, categories }) {
     const store = useSelector((state) => state);
     console.log("store", store);
     // console.log("products", products);
@@ -23,7 +23,7 @@ export default function Home({ products }) {
     return (
         <>
             <SEO title="Интернет магазин GOODZONE" />
-            <Header />
+            <Header categories={categories} />
             <HomeSplash />
             <ProductList data={products} />
             <CartPopup />
@@ -36,9 +36,13 @@ export async function getServerSideProps() {
     const res = await ifetch(process.env.PRODUCT_API_URL);
     const { products, count } = await res.json();
 
+    const response = await ifetch(process.env.CATEGORY_API_URL);
+    const categories = await response.json();
+
     return {
         props: {
             products,
+            categories
         },
     };
 }

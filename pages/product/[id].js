@@ -20,7 +20,7 @@ import { asyncAddToCartAction } from "../../redux/actions/cartActions/cartAction
 import { numberToPrice } from "../../libs/numberToPrice";
 import ReactImageMagnify from 'react-image-magnify'
 
-export default function Product({ data, products }) {
+export default function Product({ data, products, categories }) {
     console.log("data", data);
     console.log("products", products);
     const dispatch = useDispatch();
@@ -31,7 +31,7 @@ export default function Product({ data, products }) {
     return (
         <>
             <SEO title="Интернет магазин GOODZONE" />
-            <Header logo />
+            <Header logo categories={categories} />
 
             <div className="product_wrapper">
                 <div className="product_container">
@@ -344,13 +344,16 @@ export default function Product({ data, products }) {
 // }
 
 export async function getServerSideProps({ params }) {
-    const res = await ifetch("http://139.59.38.238:1235/v1/product");
+    const res = await ifetch(process.env.PRODUCT_API_URL);
     const { products } = await res.json();
     console.log("products", products);
     console.log("params", params);
 
+    const response = await ifetch(process.env.CATEGORY_API_URL);
+    const categories = await response.json();
+
     const data = products.find((product) => product.id === params.id);
     return {
-        props: { data, products },
+        props: { data, products, categories },
     };
 }
