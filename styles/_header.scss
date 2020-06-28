@@ -175,7 +175,7 @@ header {
               &:hover {
                 color: $primary-color;
                 & + .dropdown_menu {
-                  display: none;
+                  display: block;
                 }
               }
               &.current_page {

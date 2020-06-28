@@ -26,23 +26,14 @@ export default function DepartmentsMenu({ categories }) {
                         <ul className="dropdown_menu">
                             <li>
                                 <div className="content">
-                                    <Link href="/">
-                                        <a>Телевизоры</a>
-                                    </Link>
-                                    <Link href="/">
-                                        <a>Цифровое ТВ</a>
-                                    </Link>
-                                    <Link href="/">
-                                        <a>DVD-плеееры</a>
-                                    </Link>
-                                    <Link href="/">
-                                        <a>
-                                            Домашний кинотеатр и Hi-Fi техника
-                                        </a>
-                                    </Link>
-                                    <Link href="/">
-                                        <a>Аксессуары</a>
-                                    </Link>
+                                    {item.children ? 
+                                    item.children.map(child => (
+                                        <Link key={child.id} href="/category/[id]" as={`/category/${child.slug}`}>
+                                            <a>{child.name}</a>
+                                        </Link>
+                                    )) : ''
+                                }
+                                    
                                 </div>
                             </li>
                         </ul>
