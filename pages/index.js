@@ -1,7 +1,6 @@
 import SEO from "../components/seo";
 import Header from "../components/header";
 import HomeSplash from "../components/home-splash";
-import ProductList from "../components/product-list";
 import CartPopup from "../components/cart-popup";
 import Footer from "../components/footer";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,6 +8,8 @@ import { getProductsFromAPI } from "../redux/actions/productsActions/productsAct
 import { useEffect } from "react";
 import ifetch from "isomorphic-fetch";
 import { getCategoriesFromAPI } from "../redux/actions/categoryActions/categoryActions";
+import Products from "../components/products";
+import Banner from "../components/banner";
 
 export default function Home({ products, categories }) {
     const store = useSelector((state) => state);
@@ -28,7 +29,11 @@ export default function Home({ products, categories }) {
             <SEO title="Интернет магазин GOODZONE" />
             <Header categories={categories} />
             <HomeSplash />
-            <ProductList products={products} />
+            <Products title="Новые поступления" data={products} />
+            <Banner double />
+            <Products title="Популярные товары" data={products} />
+            <Banner />
+            <Products title="Лучшая подборка для вас" data={products} />
             <CartPopup />
             <Footer />
         </>

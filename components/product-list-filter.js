@@ -6,9 +6,9 @@ export default function ProductListFilter() {
     const [value, setValue] = useState({min: 2461000, max: 7995000});
     const handleScroll = () => {
         if (
-            (document.body.scrollTop > 395 &&
+            (document.body.scrollTop > 25 &&
                 document.body.scrollTop < document.body.clientHeight - 900) ||
-            (document.documentElement.scrollTop > 395 &&
+            (document.documentElement.scrollTop > 25 &&
                 document.documentElement.scrollTop <
                 document.body.clientHeight - 900)
         ) {
