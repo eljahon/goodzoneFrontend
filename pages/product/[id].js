@@ -21,6 +21,7 @@ import { numberToPrice } from "../../libs/numberToPrice";
 import ReactImageMagnify from "react-image-magnify";
 
 export default function Product({ data, products, categories }) {
+    console.log(data, products, categories);
     const dispatch = useDispatch();
 
     const addToCartHandler = (cartItem) =>
@@ -332,6 +333,7 @@ export default function Product({ data, products, categories }) {
 }
 
 export async function getServerSideProps({ params }) {
+    console.log("params", params);
     const res = await ifetch(process.env.PRODUCT_API_URL);
     const { products } = await res.json();
     console.log("products", products);
@@ -340,7 +342,7 @@ export async function getServerSideProps({ params }) {
     const response = await ifetch(process.env.CATEGORY_API_URL);
     const { categories } = await response.json();
 
-    const data = products.find((product) => product.id === params.id);
+    const data = products.find((product) => product.slug === params.id);
     return {
         props: { data, products, categories },
     };

@@ -13,21 +13,19 @@ const ProductListItem = ({ product, view }) => {
     };
 
     return (
-        <Col lg={view === 'row' ? '12' : '3'} className="products_col">
-            <div className={`product_card ${view === 'row' ? 'view_row' : ''}`}>
-                <Link href="/product/[id]" as={`/product/${product.id}`}>
+        <Col lg={view === "row" ? "12" : "3"} className="products_col">
+            <div className={`product_card ${view === "row" ? "view_row" : ""}`}>
+                <Link href="/product/[id]" as={`/product/${product.slug}`}>
                     <a className="product_image">
-                        {(
-                            <img
-                                src={product.image}
-                                alt={product.name}
-                                className="img-fluid"
-                            />
-                        ) || <Skeleton />}
+                        <img
+                            src={product.image}
+                            alt={product.name}
+                            className="img-fluid"
+                        />
                     </a>
                 </Link>
                 <div className="product_info">
-                    <Link href="/product/[id]" as={`/product/${product.id}`}>
+                    <Link href="/product/[id]" as={`/product/${product.slug}`}>
                         <a>
                             <h3 className="product_title">{product.name}</h3>
                             <span className="product_price">

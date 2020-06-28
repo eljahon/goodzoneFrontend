@@ -3,7 +3,7 @@ import Header from "../components/header";
 import HomeSplash from "../components/home-splash";
 import CartPopup from "../components/cart-popup";
 import Footer from "../components/footer";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { getProductsFromAPI } from "../redux/actions/productsActions/productsActions";
 import { useEffect } from "react";
 import ifetch from "isomorphic-fetch";
@@ -12,11 +12,6 @@ import Products from "../components/products";
 import Banner from "../components/banner";
 
 export default function Home({ products, categories }) {
-    const store = useSelector((state) => state);
-    console.log("store", store);
-    // console.log("products", products);
-    // console.log("categories", categories);
-
     const dispatch = useDispatch();
 
     useEffect(() => {
