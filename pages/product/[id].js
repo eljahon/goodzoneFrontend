@@ -301,7 +301,7 @@ export default function Product({ data, products, categories }) {
                                     <div className="product_card-wrapper">
                                         <Link
                                             href="/product/[id]"
-                                            as={`/product/${item.id}`}
+                                            as={`/product/${item.slug}`}
                                         >
                                             <a className="product_card">
                                                 <div className="image_wrapper">
