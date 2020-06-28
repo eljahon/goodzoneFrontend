@@ -18,7 +18,7 @@ export default function Category({ products, categories }) {
     useEffect(() => {
         dispatch(getProductsFromAPI(products));
     }, []);
-    
+
     return (
         <>
             <SEO title="Интернет магазин GOODZONE" />
