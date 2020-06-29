@@ -59,9 +59,9 @@ export default function Category({
 
 export async function getServerSideProps({ query }) {
     const urls = [
-        `${process.env.PRODUCT_API_URL}`,
+        process.env.PRODUCT_API_URL,
         process.env.CATEGORY_API_URL,
-        "http://139.59.38.238:1235/v1/brand",
+        process.env.BRAND_API_URL,
     ];
 
     const [{ products }, { categories }, { brands }] = await fetchMultipleUrls(

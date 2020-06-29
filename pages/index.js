@@ -40,11 +40,7 @@ export default function Home({ products, categories }) {
 export async function getServerSideProps() {
     // Please write to me if you have some problems with understanding this fetchMultipleUrls function
     // I wrote it for not repeating code and making us easier
-    const urls = [
-        process.env.PRODUCT_API_URL,
-        process.env.CATEGORY_API_URL,
-        "http://139.59.38.238:1235/v1/brand",
-    ];
+    const urls = [process.env.PRODUCT_API_URL, process.env.CATEGORY_API_URL];
     const [{ products }, { categories }] = await fetchMultipleUrls(urls);
 
     return {
