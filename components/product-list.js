@@ -6,7 +6,7 @@ import { FaTh, FaBars } from "react-icons/fa";
 
 export default function ProductList({ products, brands }) {
     const [view, setView] = useState("col");
-    console.log("brands", brands);
+    // console.log("products", products);
     return (
         <main>
             <ProductListFilter brands={brands} />
@@ -46,15 +46,17 @@ export default function ProductList({ products, brands }) {
                     </div>
                 </div>
                 <Row className="products_row">
-                    {products.map((product) => {
-                        return (
-                            <ProductListItem
-                                key={product.id}
-                                product={product}
-                                view={view}
-                            />
-                        );
-                    })}
+                    {products
+                        ? products.map((product) => {
+                              return (
+                                  <ProductListItem
+                                      key={product.id}
+                                      product={product}
+                                      view={view}
+                                  />
+                              );
+                          })
+                        : "No products"}
                 </Row>
             </div>
         </main>

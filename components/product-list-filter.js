@@ -1,8 +1,13 @@
 import React, { useEffect, useState } from "react";
 import InputRange from "react-input-range";
 import { numberToPrice } from "../libs/numberToPrice";
+import { useDispatch, useSelector, shallowEqual } from "react-redux";
+import { toggleBrand } from "../redux/actions/brandActions/brandActions";
 
 export default function ProductListFilter({ brands }) {
+    const filterBrands = useSelector((state) => state.brands, shallowEqual);
+
+    const dispatch = useDispatch();
     const [value, setValue] = useState({ min: 2461000, max: 7995000 });
     const handleScroll = () => {
         if (
@@ -21,6 +26,11 @@ export default function ProductListFilter({ brands }) {
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
     });
+
+    const handleToggle = (id) => {
+        dispatch(toggleBrand(id));
+    };
+
     return (
         <aside className="sidebar" id="sidebar">
             <div className="category_wrapper">
@@ -51,9 +61,15 @@ export default function ProductListFilter({ brands }) {
                                                   className="check_box"
                                               >
                                                   <input
+                                                      onChange={() =>
+                                                          handleToggle(brand.id)
+                                                      }
                                                       type="checkbox"
                                                       name={brand.name}
                                                       id={brand.name}
+                                                      checked={filterBrands.includes(
+                                                          brand.id
+                                                      )}
                                                   />
                                                   <label htmlFor={brand.name}>
                                                       {brand.name}

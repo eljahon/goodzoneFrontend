@@ -11,7 +11,6 @@ import {
     FaBoxOpen,
     FaStore,
 } from "react-icons/fa";
-import ifetch from "isomorphic-fetch";
 import SEO from "../../components/seo";
 import Header from "../../components/header";
 import Footer from "../../components/footer";
@@ -19,9 +18,9 @@ import CartPopup from "../../components/cart-popup";
 import { asyncAddToCartAction } from "../../redux/actions/cartActions/cartActions";
 import { numberToPrice } from "../../libs/numberToPrice";
 import ReactImageMagnify from "react-image-magnify";
+import { fetchMultipleUrls } from "../../libs/fetchMultipleUrls";
 
 export default function Product({ data, products, categories }) {
-    console.log(data, products, categories);
     const dispatch = useDispatch();
 
     const addToCartHandler = (cartItem) =>
@@ -47,11 +46,6 @@ export default function Product({ data, products, categories }) {
                                     <span className="btn_text">Назад</span>
                                 </button>
                             </div>
-                            {/* <img
-                                src={`${data.image}`}
-                                alt={data.name}
-                                className="product_image"
-                            /> */}
                             <div className="product_image">
                                 <ReactImageMagnify
                                     {...{
@@ -333,14 +327,9 @@ export default function Product({ data, products, categories }) {
 }
 
 export async function getServerSideProps({ params }) {
-    console.log("params", params);
-    const res = await ifetch(process.env.PRODUCT_API_URL);
-    const { products } = await res.json();
-    console.log("products", products);
-    console.log("params", params);
+    const urls = [process.env.PRODUCT_API_URL, process.env.CATEGORY_API_URL];
 
-    const response = await ifetch(process.env.CATEGORY_API_URL);
-    const { categories } = await response.json();
+    const [{ products }, { categories }] = await fetchMultipleUrls(urls);
 
     const data = products.find((product) => product.slug === params.id);
     return {

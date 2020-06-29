@@ -1,4 +1,3 @@
-import { productActionTypes } from "../actions/productsActions/productsActionTypes";
 import { categoryActionTypes } from "../actions/categoryActions/categoryActionTypes";
 
 const initialState = {
@@ -7,7 +6,6 @@ const initialState = {
 
 const categoriesReducer = (state = initialState, action) => {
     const { payload } = action;
-    console.log("payload", payload);
     switch (action.type) {
         case categoryActionTypes.GET_CATEGORIES_FROM_API:
             return {
