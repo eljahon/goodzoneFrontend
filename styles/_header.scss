@@ -14,11 +14,19 @@ header {
   box-shadow: rgba(0, 0, 0, 0.06) 0 1px 2px;
   padding: 20px 30px;
   transition: all 0.3s ease 0s;
+  @include sm {
+    width: 100vw;
+    padding: 15px 10px;
+    transition: all 0.25s ease-in-out 0s;
+  }
 }
 .base_header {
   display: block;
   width: 100%;
   height: 88px;
+  @include sm {
+    height: 68px;
+  }
 }
 .left_menu {
   display: flex;
@@ -27,8 +35,39 @@ header {
   -webkit-box-pack: justify;
   justify-content: space-between;
   flex-shrink: 0;
+  @include sm {
+    flex-grow: 1;
+  }
+  .btn.hamburger_icon {
+    display: none;
+    @include sm {
+      display: block;
+      width: 26px;
+      height: 32px;
+      padding: 0;
+      position: relative;
+      span {
+        display: block;
+        background-color: $link-color;
+        height: 2px;
+        margin-bottom: 6px;
+        border-radius: 6px;
+        transition: all 0.2s ease-in-out 0s;
+        &:nth-child(1) {
+          width: 26px;
+        }
+        &:nth-child(2) {
+          width: 12px;
+        }
+        &:nth-child(3) {
+          width: 22px;
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
   .logo {
-    color: rgb(13, 17, 54);
+    color: $link-color;
     font-size: 26px;
     font-weight: bold;
     margin-right: 30px;
@@ -43,17 +82,39 @@ header {
       backface-visibility: hidden;
       max-width: 150px;
     }
+    @include sm {
+      margin-right: auto;
+      margin-left: auto;
+    }
   }
   .menu {
     display: flex;
     -webkit-box-align: center;
     align-items: center;
     margin-right: 30px;
+    @include sm {
+      visibility: hidden;
+      font-size: 0;
+      width: 0;
+      height: 0;
+    }
     .popover {
       position: relative;
+      @include sm {
+        visibility: hidden;
+        font-size: 0;
+        width: 0;
+        height: 0;
+      }  
       cursor: pointer;
       .popover_handler {
         display: inline-block;
+        @include sm {
+          visibility: hidden;
+          font-size: 0;
+          width: 0;
+          height: 0;
+        }    
         cursor: pointer;
         .selected_item {
           width: auto;
@@ -133,6 +194,23 @@ header {
         z-index: 99;
         padding: 20px 0;
         border-radius: 6px;
+        transition: all 0.35s ease-in-out 0s;
+        @include sm {
+          position: fixed;
+          bottom: 0;
+          left: -550px;
+          top: unset;
+          right: unset;
+          width: 100vw;
+          height: 100vh;
+          padding: 0;
+          visibility: visible;
+          overflow-y: scroll;
+          overflow-x: hidden;
+          &.show {
+            left: 0;
+          }
+        }
         &::before {
           content: "";
           position: absolute;
@@ -146,6 +224,26 @@ header {
           border-style: solid;
           border-width: 0 8px 9px;
           border-color: transparent transparent rgb(255, 255, 255);
+          @include sm {
+            display: none;
+          }
+        }
+        .drawer_header {
+          display: none;
+          @include sm {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: $bg-color;
+            a {
+              display: block;
+              img {
+                width: 100%;
+                max-width: 150px;
+              }
+            }
+          }
         }
         .inner_wrap {
           position: relative;
@@ -153,6 +251,9 @@ header {
           margin: 0;
           padding: 0;
           list-style-type: none;
+          @include sm {
+            padding: 20px 0;
+          }
           .menu_item {
             font-family: $base-font;
             a {
@@ -172,10 +273,18 @@ header {
               background-color: #fff;
               text-decoration: none;
               transition: all 0.15s ease-in-out 0s;
-              &:hover {
+              &:hover, &:active, &:focus {
                 color: $primary-color;
                 & + .dropdown_menu {
                   display: block;
+                }
+                @include sm {
+                  svg {
+                    transform: rotate(90deg);
+                  }
+                  & + .dropdown_menu {
+                    display: block;
+                  }
                 }
               }
               &.current_page {
@@ -189,6 +298,9 @@ header {
                 align-items: center;
                 -webkit-box-pack: center;
                 justify-content: center;
+                svg {
+                  transition: transform .2s ease-in-out;
+                }
               }
               .label {
                 .menu_icon {
@@ -211,6 +323,13 @@ header {
               padding: 20px 0;
               border-radius: 6px;
               list-style-type: none;
+              @include sm {
+                display: none;
+                position: static;
+                width: 100%;
+                box-shadow: none;
+                padding: 0;
+              }
               &:hover {
                 display: block;
               }
@@ -219,6 +338,9 @@ header {
                 .content {
                   a {
                     width: 100%;
+                    @include sm {
+                      padding-left: 40px;
+                    }
                   }
                 }
               }
@@ -234,6 +356,9 @@ header {
   width: 100%;
   margin: 0 30px;
   position: relative;
+  @include sm {
+    display: none;
+  }
   .search_box-wrapper {
     width: 100%;
     opacity: 1;
@@ -302,6 +427,9 @@ header {
   align-items: center;
   flex-shrink: 0;
   .menu_item {
+    @include sm {
+      display: none;
+    }
     a {
       font-family: $base-font;
       font-size: 15px;
@@ -340,6 +468,12 @@ header {
     border-image: initial;
     transition: all 0.3s ease 0s;
     border-radius: 6px;
+    @include sm {
+      margin-right: 10px;
+      background-color: #fff;
+      color: $primary-color;
+      border: 1px solid $border-color;
+    }
     .join_icon {
       display: flex;
       justify-content: center;
@@ -349,6 +483,33 @@ header {
       padding-left: 4px;
       padding-right: 4px;
       white-space: nowrap;
+    }
+  }
+  .btn.search_btn {
+    display: none;
+    @include sm {
+      display: block;
+      background-color: #fff;
+      width: auto;
+      padding: 5px;
+      color: $link-color;
+      height: 38px;
+      font-size: 15px;
+      text-decoration: none;
+      border-width: 0;
+      border-style: initial;
+      border-color: initial;
+      border-image: initial;
+      transition: all 0.3s ease 0s;
+      border-radius: 6px;
+    .search_icon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      svg {
+        font-size: 17px;
+      }
+    }
     }
   }
 }

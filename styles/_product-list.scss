@@ -10,6 +10,10 @@ main {
     height: auto;
     min-height: 100vh;
     padding: 30px 30px 50px;
+    @include sm {
+      width: 100%;
+      padding: 30px 7.5px;
+    }
     .control_bar {
       display: flex;
       justify-content: space-between;
@@ -18,6 +22,10 @@ main {
       margin-bottom: 30px;
       border-radius: 6px;
       background-color: #fff;
+      @include sm {
+        display: block;
+        padding: 15px;
+      }
       h3 {
         font-family: $head-font;
         font-size: 21px;
@@ -25,10 +33,58 @@ main {
         color: $link-color;
         line-height: 1;
         margin-bottom: 0;
+        @include sm {
+          margin-bottom: 15px;
+          text-align: center;
+        }
       }
       .controls {
         display: flex;
         align-items: center;
+        @include sm {
+          justify-content: space-between;
+          flex-wrap: wrap;
+        }
+        .btn.btn_filter {
+          display: none;
+          @include sm {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f5363e;
+            width: auto;
+            padding: 0 15px;
+            color: #fff;
+            font-weight: 700;
+            height: 38px;
+            font-size: 15px;
+            text-decoration: none;
+            border-width: 0;
+            border-style: none;
+            border-style: initial;
+            border-color: currentColor;
+            border-color: initial;
+            -o-border-image: none;
+            border-image: none;
+            -o-border-image: initial;
+            border-image: initial;
+            transition: all 0.3s ease 0s;
+            border-radius: 6px;
+            .btn_text {
+              padding-left: 4px;
+              padding-right: 4px;
+              white-space: nowrap;
+            }
+            .filter_icon {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              svg {
+                font-size: 15px;
+              }
+            }
+          }
+        }
         .controls_icon {
           display: inline-flex;
           justify-content: center;
@@ -59,6 +115,13 @@ main {
         .sort_by {
           display: inline-block;
           margin-right: 30px;
+          @include sm {
+            display: block;
+            width: 100%;
+            flex: 0 0 100%;
+            order: 1;
+            margin-top: 10px;
+          }
           select {
             display: inline-block;
             width: 100%;
@@ -76,7 +139,10 @@ main {
             background-repeat: no-repeat;
             background-position-x: 97.5%;
             background-position-y: 50%;
+            @include sm {
+              height: 45px;
             }
+          }
         }
       }
     }
@@ -85,6 +151,9 @@ main {
 .sidebar {
   background-color: rgb(255, 255, 255);
   width: 280px;
+  @include sm {
+    display: none;
+  }
   .category_wrapper {
     position: relative;
     width: 100%;
@@ -184,8 +253,24 @@ main {
   background-color: rgb(247, 247, 247);
   position: relative;
   z-index: 1;
+  @include sm {
+    margin-left: -7.5px;
+    margin-right: -7.5px;
+    margin-top: 15px;
+  }
   .products_col {
     margin-bottom: 30px;
+    @include sm {
+      margin-bottom: 15px;
+      &.mobile {
+        flex: 0 0 50%;
+        max-width: 50%;
+        padding-left: 7.5px;
+        padding-right: 7.5px;
+        margin-bottom: 15px;
+        overflow: hidden;
+      }
+    }
     .product_card {
       display: block;
       height: 100%;
@@ -205,9 +290,16 @@ main {
         justify-content: center;
         padding: 5px;
         text-decoration: none;
+        @include sm {
+          height: 145px;
+        }
       }
       .product_info {
         padding: 20px 25px 30px;
+        @include sm {
+          min-height: 123px;
+          padding: 15px 20px;
+        }
         a {
           text-decoration: none;
           h3 {
@@ -220,12 +312,19 @@ main {
             white-space: nowrap;
             margin: 0 0 7px;
             overflow: hidden;
+            @include sm {
+              font-size: 14px;
+              margin: 0 0 5px;
+            }
           }
           .product_desc {
             font-family: $base-font;
             font-size: 13px;
             font-weight: 400;
             color: rgb(119, 121, 140);
+            @include sm {
+              font-size: 12px;
+            }
           }
           .product_price {
             position: relative;
@@ -235,6 +334,9 @@ main {
             font-size: 15px;
             font-weight: 700;
             color: $primary-color;
+            @include sm {
+              font-size: 14px;
+            }
           }
         }
         .product_meta {
@@ -244,6 +346,9 @@ main {
           align-items: center;
           -webkit-box-pack: justify;
           justify-content: center;
+          @include sm {
+            min-height: 32px;
+          }
           .product_btn {
             height: 36px;
             padding: 0 17px;
@@ -263,10 +368,18 @@ main {
             width: auto;
             color: $primary-color;
             background-color: transparent;
+            @include sm {
+              height: 32px;
+            }
             &:hover {
               color: #fff;
               background-color: $primary-color;
               border-color: $primary-color;
+              @include sm {
+                .btn_text::after {
+                  color: #fff;
+                }
+              }
             }
             .btn_icon {
               display: flex;
@@ -279,6 +392,17 @@ main {
             .btn_text {
               padding: 0 0 0 6px;
               white-space: nowrap;
+              @include sm {
+                text-indent: -9999px;
+                line-height: 0;
+                &::after {
+                  display: block;
+                  content: 'Добавить';
+                  color: $primary-color;
+                  text-indent: 0;
+                  line-height: initial;
+                }
+              }
             }
           }
           .counter {
@@ -329,6 +453,9 @@ main {
           height: 140px;
           padding: 15px 0;
           overflow: hidden;
+          @include sm {
+            width: 50%;
+          }
           img {
             display: block;
             max-height: 100%;
@@ -339,11 +466,24 @@ main {
         .product_info {
           display: flex;
           flex-grow: 1;
+          @include sm {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 50%;
+            flex-grow: 0;
+          }
           a {
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             width: 50%;
+            @include sm {
+              width: 100%;
+              h3 {
+                white-space: unset;
+              }
+            }
             .product_price {
               margin-top: auto;
             }
@@ -352,6 +492,9 @@ main {
             align-items: flex-end;
             width: 50%;
             margin-top: 0;
+            @include sm {
+              width: 100%;
+            }
           }
         }
       }

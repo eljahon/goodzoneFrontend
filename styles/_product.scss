@@ -14,6 +14,9 @@
     -webkit-box-align: stretch;
     align-items: stretch;
     padding: 40px;
+    @include sm {
+        padding: 0;
+    }
     .product_preview {
         width: 50%;
         display: flex;
@@ -26,17 +29,28 @@
         // box-shadow: rgba(0, 0, 0, 0.08) 0 2px 16px 0;
         padding: 30px;
         border-radius: 6px 0 0 6px;
+        @include sm {
+            max-width: 100%;
+            flex: 0 0 100%;
+            padding: 30px 25px;
+        }
         .product_image {
             display: block;
             width: 70%;
             padding: 9%;
-            
+            @include sm {
+                width: 100%;
+            }
         }
         .back_btn {
             position: absolute;
             top: 30px;
             left: 30px;
             z-index: 888;
+            @include sm {
+                top: 20px;
+                left: 25px;
+            }
             .btn {
                 display: inline-flex;
                 -webkit-box-align: center;
@@ -76,6 +90,15 @@
         background-color: white;
         padding: 30px 40px;
         border-radius: 0 6px 6px 0;
+        @include sm {
+            max-width: 100%;
+            flex: 0 0 100%;
+            padding: 30px 25px;
+            border-width: 0px;
+            border-style: initial;
+            border-color: initial;
+            border-image: initial;
+        }
         h1 {
             font-family: $head-font;
             font-size: 21px;
@@ -196,6 +219,9 @@
 .details_container {
     padding: 0 40px;
     margin-top: 40px;
+    @include sm {
+        padding: 0 15px;
+    }
     .nav-tabs { 
         display: inline-flex;
         padding: 10px;
@@ -203,6 +229,10 @@
         // box-shadow: rgba(0, 0, 0, 0.08) 0 2px 16px 0;
         border-bottom: none;
         border-radius: 6px;
+        @include sm {
+            display: flex;
+            justify-content: space-between;
+        }
         .nav-link {
             position: relative;
             font-family: $head-font;
@@ -225,6 +255,16 @@
                     width: 1px;
                     height: calc(100% + 20px);
                     background-color: $border-color;
+                    @include sm {
+                        right: -20px;
+                    }
+                }
+            }
+            @include sm {
+                margin: 0;
+                font-size: 16px;
+                &:first-child {
+                    margin-left: 0;
                 }
             }
             &.active {
@@ -254,6 +294,9 @@
     padding: 30px;
     margin-top: 30px;
     border-radius: 6px;
+    @include sm {
+        padding: 20px 15px;
+    }
     h2 {
         font-family: $head-font;
         font-size: 21px;
@@ -342,6 +385,11 @@
     margin-top: 70px;
     margin-left: 40px;
     margin-right: 40px;
+    @include sm {
+        margin-top: 50px;
+        margin-left: 15px;
+        margin-right: 15px;
+    }
     h2 {
         font-family: $head-font;
         font-size: 21px;
@@ -350,6 +398,10 @@
         line-height: 1.2;
         margin-left: 15px;
         margin-bottom: 30px;
+        @include sm {
+            margin-left: 0px;
+            margin-bottom: 25px;
+        }
     }
     .products_row {
         position: relative;
@@ -367,6 +419,11 @@
             &:nth-child(4) .product_card-wrapper .product_card {
                 border-radius: 0 6px 6px 0;
             }
+            @include sm {
+                &:nth-child(2n) .product_card-wrapper .product_card {
+                    border-radius: 0 6px 6px 0;
+                }
+            }
             .product_card-wrapper {
                 height: 100%;
                 .product_card {
@@ -379,6 +436,9 @@
                     padding: 30px;
                     border-radius: 0;
                     text-decoration: none;
+                    @include sm {
+                        padding: 15px;
+                    }
                     .image_wrapper {
                         height: 275px;
                         position: relative;
@@ -390,6 +450,9 @@
                         justify-content: center;
                         margin-bottom: 15px;
                         padding: 0;
+                        @include sm {
+                            height: 215px;
+                        }
                     }
                     .info {
                         width: 100%;
@@ -398,6 +461,7 @@
                         -webkit-box-align: center;
                         align-items: center;
                         padding: 0;
+
                         span.name {
                             font-family: $base-font;
                             font-size: 15px;
@@ -408,6 +472,10 @@
                             text-align: center;
                             display: block;
                             margin: 0 0 7px;
+                            @include sm {
+                                font-size: 14px;
+                                margin: 0px 0px 5px;
+                            }
                         }
                     }
                 }

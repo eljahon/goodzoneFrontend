@@ -9,6 +9,9 @@ export default function Header({ logo, categories }) {
         <>
             <header>
                 <div className="left_menu">
+                    <button className="btn hamburger_icon" onClick={() => setMenu(true)}>
+                        <span /><span /><span />
+                    </button>
                     <Link href="/">
                         <a className="logo">
                             <img
@@ -36,7 +39,7 @@ export default function Header({ logo, categories }) {
                                 </button>
                             </div>
                             {menu ? (
-                                <DepartmentsMenu categories={categories} />
+                                <DepartmentsMenu logo categories={categories} closeMenu={() => setMenu(false)} />
                             ) : (
                                 ""
                             )}
@@ -80,6 +83,11 @@ export default function Header({ logo, categories }) {
                             <FaSignInAlt />
                         </span>
                         <span className="btn-text">Войти</span>
+                    </button>
+                    <button className="btn search_btn">
+                        <span className="search_icon">
+                            <FaSearch />
+                        </span>
                     </button>
                 </div>
             </header>

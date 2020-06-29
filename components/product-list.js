@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Row } from "react-bootstrap";
 import ProductListItem from "./product-list-item";
 import ProductListFilter from "./product-list-filter";
-import { FaTh, FaBars } from "react-icons/fa";
+import { FaTh, FaBars, FaFilter } from "react-icons/fa";
 
 export default function ProductList({ products, brands }) {
     const [view, setView] = useState("col");
@@ -27,22 +27,28 @@ export default function ProductList({ products, brands }) {
                                 </option>
                             </select>
                         </span>
-                        <button
-                            className={`controls_icon ${
-                                view === "col" ? "active" : ""
-                            }`}
-                            onClick={() => setView("col")}
-                        >
-                            <FaTh />
+                        <button className="btn btn_filter">
+                            <span className="filter_icon"><FaFilter /></span>
+                            <span className="btn_text">Фильтр</span>
                         </button>
-                        <button
-                            className={`controls_icon ${
-                                view === "row" ? "active" : ""
-                            }`}
-                            onClick={() => setView("row")}
-                        >
-                            <FaBars />
-                        </button>
+                        <div>
+                            <button
+                                className={`controls_icon ${
+                                    view === "col" ? "active" : ""
+                                    }`}
+                                onClick={() => setView("col")}
+                            >
+                                <FaTh />
+                            </button>
+                            <button
+                                className={`controls_icon ${
+                                    view === "row" ? "active" : ""
+                                    }`}
+                                onClick={() => setView("row")}
+                            >
+                                <FaBars />
+                            </button>
+                        </div>
                     </div>
                 </div>
                 <Row className="products_row">
