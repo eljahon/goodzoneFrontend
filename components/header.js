@@ -2,9 +2,11 @@ import { useState } from "react";
 import { FaBars, FaSortDown, FaSearch, FaSignInAlt } from "react-icons/fa";
 import Link from "next/link";
 import DepartmentsMenu from "./departments-menu";
+import SearchModal from "./search-modal";
 
 export default function Header({ logo, categories }) {
     const [menu, setMenu] = useState(false);
+    const [searchPopup, setSearchPopup] = useState(false);
     return (
         <>
             <header>
@@ -41,8 +43,8 @@ export default function Header({ logo, categories }) {
                             {menu ? (
                                 <DepartmentsMenu logo categories={categories} closeMenu={() => setMenu(false)} />
                             ) : (
-                                ""
-                            )}
+                                    ""
+                                )}
                         </div>
                     </div>
                 </div>
@@ -84,7 +86,7 @@ export default function Header({ logo, categories }) {
                         </span>
                         <span className="btn-text">Войти</span>
                     </button>
-                    <button className="btn search_btn">
+                    <button className="btn search_btn mobile" onClick={() => setSearchPopup(true)}>
                         <span className="search_icon">
                             <FaSearch />
                         </span>
@@ -92,6 +94,7 @@ export default function Header({ logo, categories }) {
                 </div>
             </header>
             <div className="base_header" />
+            {searchPopup ? <SearchModal closeModal={() => setSearchPopup(false)} /> : ''}
         </>
     );
 }

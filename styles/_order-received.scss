@@ -6,7 +6,8 @@
     .order_received-container {
         background-color: rgb(255, 255, 255);
         position: relative;
-        width: 870px;
+        width: calc(100% - 30px);
+        max-width: 870px;
         margin-left: auto;
         margin-right: auto;
         border-width: 1px;
@@ -16,6 +17,9 @@
         padding: 60px;
         border-radius: 6px;
         overflow: hidden;
+        @include sm {
+            padding: 50px 25px;
+        }
         .home_btn {
             display: inline-flex;
             -webkit-box-align: center;
@@ -42,9 +46,17 @@
                 color: rgb(255, 255, 255);
                 border-color: $primary-color;
             }
+            @include sm {
+                font-size: 13px;
+                height: 34px;
+                padding: 5px 12px;
+            }
         }
         .order_info {
             margin-bottom: 60px;
+            @include sm {
+                margin-bottom: 30px;
+            }
             h2 {
                 font-family: $head-font;
                 font-size: 21px;
@@ -52,6 +64,10 @@
                 color: $link-color;
                 line-height: 1;
                 margin-bottom: 32px;
+                @include sm {
+                    font-size: 16px;
+                    margin-bottom: 25px;
+                }
             }
             p {
                 font-family: $base-font;
@@ -69,14 +85,31 @@
                 -webkit-box-pack: justify;
                 justify-content: space-between;
                 margin-top: 30px;
+                @include sm {
+                    flex-wrap: wrap;
+                }
                 .info_block {
                     -webkit-box-flex: 1;
                     flex-grow: 1;
                     padding: 0 15px;
                     border-left: 1px solid $border-color;
+                    @include sm {
+                        max-width: 100%;
+                        margin-bottom: 20px;
+                        flex: 0 0 100%;
+                        padding: 0;
+                        border-width: 0;
+                        border-style: initial;
+                        border-color: initial;
+                        border-image: initial;
+                    }
                     &:first-child {
                         padding-left: 0;
                         border-left: 0;
+                        @include sm {
+                            padding-left: 0;
+                            border-left: 0;
+                        }
                     }
                     p {
                         font-size: 15px;
@@ -103,6 +136,10 @@
                     max-width: 210px;
                     flex-shrink: 0;
                     position: relative;
+                    @include sm {
+                        flex-basis: 139px;
+                        max-width: 139px;
+                    }
                     &::after {
                         content: ":";
                         position: absolute;
@@ -117,6 +154,9 @@
                 }
                 .list_desc {
                     padding-left: 90px;
+                    @include sm {
+                        padding-left: 20px;
+                    }
                     p {
                         color: $span-color;
                     }

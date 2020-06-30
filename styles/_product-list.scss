@@ -152,7 +152,18 @@ main {
   background-color: rgb(255, 255, 255);
   width: 280px;
   @include sm {
-    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9999;
+    background-color: #fff;
+    transform: scale(0);
+    transition: all 0.35s ease-in-out 0s;
+    &.show {
+      transform: scale(1);
+    }
   }
   .category_wrapper {
     position: relative;
@@ -167,9 +178,28 @@ main {
         height: auto;
         min-height: 0;
         max-height: 688px;
+        @include sm {
+          overflow: visible;
+        }
         .inner_wrapper {
           padding-left: 40px;
           padding-right: 20px;
+          @include sm {
+            padding: 0 20px;
+          }
+          .btn.close_filter {
+            display: none;
+            @include sm {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              position: absolute;
+              top: -30px;
+              right: 10px;
+              width: 40px;
+              height: 40px;
+            }
+          }
           form {
             h3 {
               font-family: $head-font;

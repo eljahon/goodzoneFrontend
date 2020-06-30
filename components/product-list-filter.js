@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from "react";
 import InputRange from "react-input-range";
 import { numberToPrice } from "../libs/numberToPrice";
+import { FaTimes } from "react-icons/fa";
 
-export default function ProductListFilter({ brands }) {
+export default function ProductListFilter({ brands, isOpenPopup, closePopup }) {
     const [value, setValue] = useState({ min: 2461000, max: 7995000 });
     const handleScroll = () => {
         if (
             (document.body.scrollTop > 25 &&
-                document.body.scrollTop < document.body.clientHeight - 900) ||
+                document.body.scrollTop < document.body.clientHeight - 800) ||
             (document.documentElement.scrollTop > 25 &&
                 document.documentElement.scrollTop <
-                    document.body.clientHeight - 900)
+                    document.body.clientHeight - 800)
         ) {
             document.getElementById("sidebar").classList.add("sticky");
         } else {
@@ -22,11 +23,14 @@ export default function ProductListFilter({ brands }) {
         return () => window.removeEventListener("scroll", handleScroll);
     });
     return (
-        <aside className="sidebar" id="sidebar">
+        <aside className={`sidebar ${isOpenPopup ? 'show' : ''}`} id="sidebar">
             <div className="category_wrapper">
                 <div className="sidebar_wrapper">
                     <div className="outer_wrapper">
                         <div className="inner_wrapper">
+                            <button className="btn close_filter" onClick={closePopup}>
+                                <FaTimes />
+                            </button>
                             <form>
                                 <h3>Фильтр</h3>
                                 <div className="filter_group">

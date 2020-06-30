@@ -6,10 +6,11 @@ import { FaTh, FaBars, FaFilter } from "react-icons/fa";
 
 export default function ProductList({ products, brands }) {
     const [view, setView] = useState("col");
+    const [filterPopup, setFilterPopup] = useState(false);
     console.log("brands", brands);
     return (
         <main>
-            <ProductListFilter brands={brands} />
+            <ProductListFilter brands={brands} isOpenPopup={filterPopup} closePopup={() => setFilterPopup(false)} />
             <div className="content">
                 <div className="control_bar">
                     <h3>Магазин</h3>
@@ -27,7 +28,7 @@ export default function ProductList({ products, brands }) {
                                 </option>
                             </select>
                         </span>
-                        <button className="btn btn_filter">
+                        <button className="btn btn_filter" onClick={() => setFilterPopup(true)}>
                             <span className="filter_icon"><FaFilter /></span>
                             <span className="btn_text">Фильтр</span>
                         </button>

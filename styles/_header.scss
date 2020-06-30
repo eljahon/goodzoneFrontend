@@ -513,3 +513,120 @@ header {
     }
   }
 }
+
+.search_modal-wrapper {
+  display: none;
+  @include sm {
+    display: flex;
+    overflow: hidden;
+    box-sizing: border-box;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    background-color: rgba(0,0,0,.7);
+    .search_modal-holder {
+      display: flex;
+      transform: none !important;
+      max-width: none !important;
+      max-height: none !important;
+      top: 0 !important;
+      left: 0 !important;
+      background: transparent !important;
+      border-radius: 0 !important;
+      z-index: 9999;
+      padding: 0px;
+      overflow: auto;
+      border-width: 0px;
+      border-style: initial;
+      border-color: initial;
+      border-image: initial;
+
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      opacity: 1;
+      .inner_block {
+        width: 100%;
+        height: 100%;
+        .search_modal {
+          padding-top: 15px;
+          padding-bottom: 15px;
+          background-color: rgb(255, 255, 255);
+          display: flex;
+          width: 100%;
+          .btn.close_btn {
+            color: $link-color;
+            display: flex;
+            -webkit-box-align: center;
+            align-items: center;
+            -webkit-box-pack: center;
+            justify-content: center;
+            cursor: pointer;
+            border-width: 0;
+            border-style: initial;
+            border-color: initial;
+            border-image: initial;
+            background: transparent;
+            padding: 0 15px;
+            svg {
+              display: block;
+              width: 20px;
+              height: auto;
+            }
+          }
+          form.search_form {
+            display: flex;
+            -webkit-box-align: center;
+            align-items: center;
+            width: calc(100% - 60px);
+            color: rgb(119, 121, 140);
+            background-color: rgb(255, 255, 255);
+            border-radius: 6px;
+            overflow: hidden;
+            input {
+              -webkit-box-flex: 1;
+              flex-grow: 1;
+              width: 150px;
+              height: 48px;
+              padding-left: 5px;
+              padding-right: 5px;
+              font-size: 15px;
+              color: rgb(13, 17, 54);
+              border: none;
+              outline: none;
+            }
+            .btn_search {
+              font-size: 15px;
+              font-weight: 700;
+              display: flex;
+              height: 48px;
+              -webkit-box-align: center;
+              align-items: center;
+              cursor: pointer;
+              flex-shrink: 0;
+              border-width: 0;
+              border-style: initial;
+              border-color: initial;
+              border-image: initial;
+              outline: 0;
+              color: $link-color;
+              padding-left: 15px;
+              padding-right: 15px;
+              background: transparent;
+              &:focus {
+                box-shadow: none;
+              }
+              svg {
+                margin-right: 10px;
+                margin-left: 10px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
