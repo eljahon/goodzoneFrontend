@@ -8,6 +8,7 @@ export default function ProductList({ products, brands }) {
     const [view, setView] = useState("col");
     const [filterPopup, setFilterPopup] = useState(false);
     console.log("brands", brands);
+    // console.log("products", products);
     return (
         <main>
             <ProductListFilter brands={brands} isOpenPopup={filterPopup} closePopup={() => setFilterPopup(false)} />
@@ -53,15 +54,17 @@ export default function ProductList({ products, brands }) {
                     </div>
                 </div>
                 <Row className="products_row">
-                    {products.map((product) => {
-                        return (
-                            <ProductListItem
-                                key={product.id}
-                                product={product}
-                                view={view}
-                            />
-                        );
-                    })}
+                    {products
+                        ? products.map((product) => {
+                              return (
+                                  <ProductListItem
+                                      key={product.id}
+                                      product={product}
+                                      view={view}
+                                  />
+                              );
+                          })
+                        : "No products"}
                 </Row>
             </div>
         </main>

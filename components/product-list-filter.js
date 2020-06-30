@@ -2,8 +2,12 @@ import React, { useEffect, useState } from "react";
 import InputRange from "react-input-range";
 import { numberToPrice } from "../libs/numberToPrice";
 import { FaTimes } from "react-icons/fa";
+import { useDispatch, useSelector, shallowEqual } from "react-redux";
+import { toggleBrand } from "../redux/actions/brandActions/brandActions";
 
 export default function ProductListFilter({ brands, isOpenPopup, closePopup }) {
+    const filterBrands = useSelector((state) => state.brands, shallowEqual);
+    const dispatch = useDispatch();
     const [value, setValue] = useState({ min: 2461000, max: 7995000 });
     const handleScroll = () => {
         if (
@@ -11,7 +15,7 @@ export default function ProductListFilter({ brands, isOpenPopup, closePopup }) {
                 document.body.scrollTop < document.body.clientHeight - 800) ||
             (document.documentElement.scrollTop > 25 &&
                 document.documentElement.scrollTop <
-                    document.body.clientHeight - 800)
+                document.body.clientHeight - 800)
         ) {
             document.getElementById("sidebar").classList.add("sticky");
         } else {
@@ -22,6 +26,11 @@ export default function ProductListFilter({ brands, isOpenPopup, closePopup }) {
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
     });
+
+    const handleToggle = (id) => {
+        dispatch(toggleBrand(id));
+    };
+
     return (
         <aside className={`sidebar ${isOpenPopup ? 'show' : ''}`} id="sidebar">
             <div className="category_wrapper">
@@ -50,20 +59,26 @@ export default function ProductListFilter({ brands, isOpenPopup, closePopup }) {
                                     <h5>Бренды</h5>
                                     {brands
                                         ? brands.map((brand) => (
-                                              <div
-                                                  key={brand.id}
-                                                  className="check_box"
-                                              >
-                                                  <input
-                                                      type="checkbox"
-                                                      name={brand.name}
-                                                      id={brand.name}
-                                                  />
-                                                  <label htmlFor={brand.name}>
-                                                      {brand.name}
-                                                  </label>
-                                              </div>
-                                          ))
+                                            <div
+                                                key={brand.id}
+                                                className="check_box"
+                                            >
+                                                <input
+                                                    onChange={() =>
+                                                        handleToggle(brand.id)
+                                                    }
+                                                    type="checkbox"
+                                                    name={brand.name}
+                                                    id={brand.name}
+                                                    checked={filterBrands.includes(
+                                                        brand.id
+                                                    )}
+                                                />
+                                                <label htmlFor={brand.name}>
+                                                    {brand.name}
+                                                </label>
+                                            </div>
+                                        ))
                                         : null}
                                 </div>
                             </form>
