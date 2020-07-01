@@ -1,13 +1,17 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
-import { toggleBrand } from "../redux/actions/brandActions/brandActions";
+import { toggleBrand } from "../redux/actions/filterActions/filterActions";
 import RangeSlider from "./react-slider";
 import { FaTimes } from "react-icons/fa";
 
 export default function ProductListFilter({ brands, isOpenPopup, closePopup }) {
     const dispatch = useDispatch();
 
-    const filterBrands = useSelector((state) => state.brands, shallowEqual);
+    const filterBrands = useSelector(
+        (state) => state.filters.brands,
+        shallowEqual
+    );
+    console.log("filterBrands", filterBrands);
 
     const handleScroll = () => {
         if (

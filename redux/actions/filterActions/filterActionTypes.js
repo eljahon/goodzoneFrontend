@@ -1,0 +1,6 @@
+export const filterActionTypes = {
+    ADD_BRAND_FOR_FILTER: "ADD_BRAND_FOR_FILTER",
+    CLEAR_FILTERS: "CLEAR_FILTERS",
+    GET_PRICES: "GET_PRICES",
+    PRICE_CHANGE: "PRICE_CHANGE",
+};

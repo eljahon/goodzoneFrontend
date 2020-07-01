@@ -2,13 +2,13 @@ import { combineReducers } from "redux";
 import cartReducer from "./cartReducer";
 import categoriesReducer from "./categoriesReducer";
 import productsReducer from "./productsReducer";
-import brandsReducer from "./brandReducer";
+import filterReducer from "./filterReducer";
 
 const rootReducer = combineReducers({
     cart: cartReducer,
     products: productsReducer,
     categories: categoriesReducer,
-    brands: brandsReducer,
+    filters: filterReducer,
 });
 
 export default rootReducer;

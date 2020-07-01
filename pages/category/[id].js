@@ -4,16 +4,15 @@ import ProductList from "../../components/product-list";
 import CartPopup from "../../components/cart-popup";
 import Footer from "../../components/footer";
 import { useDispatch, shallowEqual, useSelector } from "react-redux";
-import {
-    getProductsFromAPI,
-    getPrices,
-} from "../../redux/actions/productsActions/productsActions";
+import { getProductsFromAPI } from "../../redux/actions/productsActions/productsActions";
 import { useEffect, useState } from "react";
 import { getCategoriesFromAPI } from "../../redux/actions/categoryActions/categoryActions";
 import axios from "axios";
 import { fetchMultipleUrls } from "../../libs/fetchMultipleUrls";
-import { clearFilters } from "../../redux/actions/brandActions/brandActions";
-import { clearPriceFilters } from "../../redux/actions/productsActions/productsActions";
+import {
+    clearFilters,
+    getPrices,
+} from "../../redux/actions/filterActions/filterActions";
 
 export default function Category({
     categoryProducts,
@@ -23,6 +22,16 @@ export default function Category({
     query,
 }) {
     const dispatch = useDispatch();
+
+    const [filteredProducts, setFilteredProducts] = useState([]);
+
+    const filterPriceRange = useSelector(
+        (state) => state.filters.filterPriceRange
+    ); // after filtering
+    const filterBrands = useSelector(
+        (state) => state.filters.brands,
+        shallowEqual
+    );
 
     useEffect(() => {
         const sortedProductsByPrice = categoryProducts.sort(
@@ -43,30 +52,16 @@ export default function Category({
 
     useEffect(() => {
         dispatch(clearFilters());
-        dispatch(clearPriceFilters());
     }, [query]);
 
-    const filterBrands = useSelector((state) => state.brands, shallowEqual);
-    const [filteredProducts, setFilteredProducts] = useState([]);
-
-    const filterPriceRange = useSelector((state) => state.products.filterPrice); // after filtering
-    const priceRange = useSelector((state) => state.products.priceRange); // min and max price of products
-
     useEffect(() => {
-        console.log("filterPriceRange", filterPriceRange);
         axios
             .get(
                 `${process.env.PRODUCT_API_URL}?brand=${filterBrands.join(
                     ","
                 )}&category=${categoryId}&price_from=${
-                    filterPriceRange.length
-                        ? filterPriceRange[0]
-                        : priceRange[0]
-                }&price_till=${
-                    filterPriceRange.length
-                        ? filterPriceRange[1]
-                        : priceRange[1]
-                }`
+                    filterPriceRange.length && filterPriceRange[0]
+                }&price_till=${filterPriceRange.length && filterPriceRange[1]}`
             )
             .then((data) => {
                 const { products } = data.data;

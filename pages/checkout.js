@@ -3,7 +3,7 @@ import Header from "../components/header";
 import Footer from "../components/footer";
 import CheckoutForm from "../components/checkout-form";
 import CheckoutItems from "../components/checkout-items";
-import ifetch from "isomorphic-fetch";
+import { fetchMultipleUrls } from "../libs/fetchMultipleUrls";
 
 export default function Home({ categories }) {
     return (
@@ -22,8 +22,8 @@ export default function Home({ categories }) {
 }
 
 export async function getServerSideProps() {
-    const response = await ifetch(process.env.CATEGORY_API_URL);
-    const categories = await response.json();
+    const urls = [process.env.CATEGORY_API_URL];
+    const [{ categories }] = await fetchMultipleUrls(urls);
 
     return {
         props: {
