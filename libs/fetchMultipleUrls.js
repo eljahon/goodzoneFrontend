@@ -16,10 +16,8 @@ export const fetchMultipleUrls = async (urls) => {
                 return response.json();
             })
         );
-        console.log("data", data);
     } catch (error) {
         console.error(error);
     }
-    console.log("data", data);
     return data;
 };

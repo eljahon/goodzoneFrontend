@@ -24,6 +24,11 @@ const productsReducer = (state = initialState, action) => {
                 ...state,
                 filterPrice: [...payload],
             };
+        case productActionTypes.CLEAR_PRICE_FILTER:
+            return {
+                ...state,
+                filterPrice: [],
+            };
         default:
             return state;
     }

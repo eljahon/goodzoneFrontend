@@ -13,6 +13,7 @@ import { getCategoriesFromAPI } from "../../redux/actions/categoryActions/catego
 import axios from "axios";
 import { fetchMultipleUrls } from "../../libs/fetchMultipleUrls";
 import { clearFilters } from "../../redux/actions/brandActions/brandActions";
+import { clearPriceFilters } from "../../redux/actions/productsActions/productsActions";
 
 export default function Category({
     categoryProducts,
@@ -42,6 +43,7 @@ export default function Category({
 
     useEffect(() => {
         dispatch(clearFilters());
+        dispatch(clearPriceFilters());
     }, [query]);
 
     const filterBrands = useSelector((state) => state.brands, shallowEqual);
@@ -51,7 +53,6 @@ export default function Category({
     const priceRange = useSelector((state) => state.products.priceRange); // min and max price of products
 
     useEffect(() => {
-        console.log("FETCHING");
         console.log("filterPriceRange", filterPriceRange);
         axios
             .get(

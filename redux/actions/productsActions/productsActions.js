@@ -27,3 +27,8 @@ export const priceChange = (prices) => {
         payload: prices,
     };
 };
+export const clearPriceFilters = () => {
+    return {
+        type: productActionTypes.CLEAR_PRICE_FILTER,
+    };
+};

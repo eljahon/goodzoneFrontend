@@ -7,8 +7,6 @@ import { FaTh, FaBars, FaFilter } from "react-icons/fa";
 export default function ProductList({ products, brands }) {
     const [view, setView] = useState("col");
     const [filterPopup, setFilterPopup] = useState(false);
-    console.log("brands", brands);
-    // console.log("products", products);
     return (
         <main>
             <ProductListFilter
