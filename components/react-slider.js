@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Slider from "@material-ui/core/Slider";
-import { priceChange } from "../redux/actions/productsActions/productsActions";
+import { priceChange } from "../redux/actions/filterActions/filterActions";
 import { useSelector, useDispatch, shallowEqual } from "react-redux";
 import { numberToPrice } from "../libs/numberToPrice";
 
@@ -8,7 +8,7 @@ export default function RangeSlider() {
     const dispatch = useDispatch();
 
     const priceRange = useSelector(
-        (state) => state.products.priceRange,
+        (state) => state.filters.priceRange,
         shallowEqual
     );
 

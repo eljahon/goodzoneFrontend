@@ -4,16 +4,15 @@ import ProductList from "../../components/product-list";
 import CartPopup from "../../components/cart-popup";
 import Footer from "../../components/footer";
 import { useDispatch, shallowEqual, useSelector } from "react-redux";
-import {
-    getProductsFromAPI,
-    getPrices,
-} from "../../redux/actions/productsActions/productsActions";
+import { getProductsFromAPI } from "../../redux/actions/productsActions/productsActions";
 import { useEffect, useState } from "react";
 import { getCategoriesFromAPI } from "../../redux/actions/categoryActions/categoryActions";
 import axios from "axios";
 import { fetchMultipleUrls } from "../../libs/fetchMultipleUrls";
-import { clearFilters } from "../../redux/actions/brandActions/brandActions";
-import { clearPriceFilters } from "../../redux/actions/productsActions/productsActions";
+import {
+    clearFilters,
+    getPrices,
+} from "../../redux/actions/filterActions/filterActions";
 
 export default function Category({
     categoryProducts,
@@ -23,6 +22,20 @@ export default function Category({
     query,
 }) {
     const dispatch = useDispatch();
+
+    const [filteredProducts, setFilteredProducts] = useState([]);
+
+    const filterPriceRange = useSelector(
+        (state) => state.filters.filterPriceRange
+    ); // after filtering
+    const filterBrands = useSelector(
+        (state) => state.filters.brands,
+        shallowEqual
+    );
+    const selectDropdownFilter = useSelector(
+        (state) => state.filters.selectDropdownFilter,
+        shallowEqual
+    );
 
     useEffect(() => {
         const sortedProductsByPrice = categoryProducts.sort(
@@ -43,38 +56,36 @@ export default function Category({
 
     useEffect(() => {
         dispatch(clearFilters());
-        dispatch(clearPriceFilters());
     }, [query]);
 
-    const filterBrands = useSelector((state) => state.brands, shallowEqual);
-    const [filteredProducts, setFilteredProducts] = useState([]);
-
-    const filterPriceRange = useSelector((state) => state.products.filterPrice); // after filtering
-    const priceRange = useSelector((state) => state.products.priceRange); // min and max price of products
-
     useEffect(() => {
-        console.log("filterPriceRange", filterPriceRange);
+        console.log(
+            `${process.env.PRODUCT_API_URL}?brand=${filterBrands.join(
+                ","
+            )}&category=${categoryId}${
+                filterPriceRange.length
+                    ? `&price_from=${filterPriceRange[0]}&price_till=${filterPriceRange[1]}`
+                    : ""
+            }&sort=price|${selectDropdownFilter}`
+        );
         axios
             .get(
                 `${process.env.PRODUCT_API_URL}?brand=${filterBrands.join(
                     ","
-                )}&category=${categoryId}&price_from=${
+                )}&category=${categoryId}${
                     filterPriceRange.length
-                        ? filterPriceRange[0]
-                        : priceRange[0]
-                }&price_till=${
-                    filterPriceRange.length
-                        ? filterPriceRange[1]
-                        : priceRange[1]
-                }`
+                        ? `&price_from=${filterPriceRange[0]}&price_till=${filterPriceRange[1]}`
+                        : ""
+                }&sort=price|${selectDropdownFilter}`
             )
             .then((data) => {
                 const { products } = data.data;
                 setFilteredProducts(products);
                 console.log("products", products);
             })
-            .catch((error) => console.log("error", error));
-    }, [filterBrands, categoryId, filterPriceRange]);
+            .catch((error) => console.error("error", error));
+        console.log("selectDropdownFilter", selectDropdownFilter);
+    }, [filterBrands, categoryId, filterPriceRange, selectDropdownFilter]);
 
     return (
         <>
