@@ -515,8 +515,6 @@ header {
 }
 
 .search_modal-wrapper {
-  display: none;
-  @include sm {
     display: flex;
     overflow: hidden;
     box-sizing: border-box;
@@ -622,6 +620,220 @@ header {
               svg {
                 margin-right: 10px;
                 margin-left: 10px;
+              }
+            }
+          }
+        }
+      }
+    }
+}
+
+.login_modal-wrapper {
+  display: flex;
+  overflow: hidden;
+  box-sizing: border-box;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  background-color: rgba(0, 0, 0, 0.5);
+  .btn.close_btn {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    padding: 0 9px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    outline: 0;
+    border: 0;
+    cursor: pointer;
+    z-index: 9999999;
+    box-shadow: rgba(0, 0, 0, 0.4) 0 2px 8px;
+    background-color: rgb(255, 255, 255);
+    color: rgb(34, 34, 34);
+    border-radius: 15px;
+    svg {
+      font-size: 32px;
+    }
+  }
+  .login_modal-holder {
+    display: flex;
+    max-height: 740px;
+    width: 458px;
+    height: auto;
+    position: absolute;
+    left: 491px;
+    top: 120px;
+    opacity: 1;
+    transform: scale3d(0, 0, 0);
+    z-index: 99999;
+    padding: 0;
+    overflow: auto;
+    border-radius: 3px 3px 0 0;
+    border-width: 0;
+    border-style: initial;
+    border-color: initial;
+    border-image: initial;
+    transition: all 0.35s ease-in-out 0s;
+    @include sm {
+      max-width: 335px;
+      max-height: 752px;
+      width: 458px;
+      height: auto;
+      position: absolute;
+      left: 20px;
+      top: 126px;
+    }
+    &.show {
+      transform: scale3d(1, 1, 1);
+    }
+    .inner_block {
+      width: 100%;
+      height: 100%;
+      .auth_form {
+        text-align: center;
+        background-color: rgb(255, 255, 255);
+        .auth_form-container {
+          padding: 40px 60px 0;
+          @include sm {
+            padding: 40px 30px 0;
+          }
+          h3 {
+            color: $primary-color;
+            margin-bottom: 10px;
+            font-family: $head-font;
+            font-size: 21px;
+            font-weight: 700;
+          }
+          .sub_heading {
+            margin-bottom: 30px;
+            font-size: 15px;
+            font-weight: 400;
+            color: rgb(119, 121, 140);
+            display: block;
+          }
+          form {
+            input {
+              width: 100%;
+              height: 48px;
+              background-color: $bg-color;
+              font-family: $base-font;
+              font-size: 15px;
+              font-weight: 400;
+              color: $link-color;
+              line-height: 19px;
+              box-sizing: border-box;
+              margin-bottom: 10px;
+              border-radius: 6px;
+              border-width: 1px;
+              border-style: solid;
+              border-color: $border-color;
+              border-image: initial;
+              padding: 0 18px;
+              transition: border-color 0.25s ease 0s;
+              &:focus {
+                outline: none;
+                border-color: $primary-color;
+              }
+            }
+            .btn_submit {
+              width: 100%;
+              padding-top: 0px;
+              padding-bottom: 0px;
+              font-size: 15px;
+              cursor: pointer;
+              -webkit-appearance: none;
+              display: flex;
+              -webkit-box-align: center;
+              align-items: center;
+              -webkit-box-pack: center;
+              justify-content: center;
+              flex-shrink: 0;
+              text-align: center;
+              font-family: inherit;
+              font-weight: 700;
+              box-sizing: border-box;
+              color: rgb(255, 255, 255);
+              background-color: $primary-color;
+              height: 48px;
+              padding-left: 30px;
+              padding-right: 30px;
+              text-decoration: none;
+              border-width: 0;
+              border-style: initial;
+              border-color: initial;
+              border-image: initial;
+              border-radius: 6px;
+              transition: all 0.35s ease 0s;
+            }
+          }
+          .auth_form-offer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px 0;
+            font-size: 15px;
+            font-weight: 400;
+            margin: 0;
+            .btn {
+              margin-left: 5px;
+              background-color: transparent;
+              box-shadow: none;
+              font-size: 14px;
+              font-weight: 700;
+              color: $primary-color;
+              cursor: pointer;
+              border-width: 0;
+              border-style: initial;
+              border-color: initial;
+              border-image: initial;
+              outline: 0;
+              padding: 0;
+              text-decoration: underline;
+              &:hover {
+                text-decoration: none;
+              }
+            }
+          }
+        }
+        .auth_form-offer-section {
+          background-color: $bg-color;
+          color: $primary-color;
+          display: flex;
+          -webkit-box-pack: center;
+          justify-content: center;
+          -webkit-box-align: center;
+          align-items: center;
+          padding: 20px;
+          .auth_form-offer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 15px;
+            font-weight: 400;
+            margin: 0;
+            .btn {
+              margin-left: 5px;
+              background-color: transparent;
+              box-shadow: none;
+              font-size: 14px;
+              font-weight: 700;
+              color: $primary-color;
+              cursor: pointer;
+              border-width: 0;
+              border-style: initial;
+              border-color: initial;
+              border-image: initial;
+              outline: 0;
+              padding: 0;
+              text-decoration: underline;
+              &:hover {
+                text-decoration: none;
               }
             }
           }

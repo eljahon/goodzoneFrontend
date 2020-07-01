@@ -3,10 +3,18 @@ import { FaBars, FaSortDown, FaSearch, FaSignInAlt } from "react-icons/fa";
 import Link from "next/link";
 import DepartmentsMenu from "./departments-menu";
 import SearchModal from "./search-modal";
+import LoginModal from "./login-modal";
+import RegisterModal from "./register-modal";
 
 export default function Header({ logo, categories }) {
     const [menu, setMenu] = useState(false);
     const [searchPopup, setSearchPopup] = useState(false);
+    const [loginPopup, setLoginPopup] = useState(false);
+    const [registerPopup, setRegisterPopup] = useState(false);
+    const switchPopup = () => {
+        setLoginPopup(!loginPopup);
+        setRegisterPopup(!registerPopup);
+    }
     return (
         <>
             <header>
@@ -80,7 +88,7 @@ export default function Header({ logo, categories }) {
                             <a>Доставка</a>
                         </Link>
                     </div>
-                    <button className="btn join_btn">
+                    <button className="btn join_btn" onClick={() => setLoginPopup(true)}>
                         <span className="join_icon">
                             <FaSignInAlt />
                         </span>
@@ -95,6 +103,8 @@ export default function Header({ logo, categories }) {
             </header>
             <div className="base_header" />
             {searchPopup ? <SearchModal closeModal={() => setSearchPopup(false)} /> : ''}
+            {loginPopup ? <LoginModal closeModal={() => setLoginPopup(false)} register={() => switchPopup()} /> : ''}
+            {registerPopup ? <RegisterModal closeModal={() => setRegisterPopup(false)} login={() => switchPopup()} /> : ''}
         </>
     );
 }
