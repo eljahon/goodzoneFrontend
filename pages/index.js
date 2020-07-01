@@ -19,7 +19,7 @@ export default function Home({ products, categories }) {
     useEffect(() => {
         dispatch(getProductsFromAPI(products));
         dispatch(getCategoriesFromAPI(categories));
-    }, [products, categories]);
+    }, []);
 
     return (
         <>

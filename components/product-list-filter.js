@@ -1,14 +1,13 @@
-import React, { useEffect, useState } from "react";
-import InputRange from "react-input-range";
-import { numberToPrice } from "../libs/numberToPrice";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import { toggleBrand } from "../redux/actions/brandActions/brandActions";
+import RangeSlider from "./react-slider";
 
 export default function ProductListFilter({ brands }) {
+    const dispatch = useDispatch();
+
     const filterBrands = useSelector((state) => state.brands, shallowEqual);
 
-    const dispatch = useDispatch();
-    const [value, setValue] = useState({ min: 2461000, max: 7995000 });
     const handleScroll = () => {
         if (
             (document.body.scrollTop > 25 &&
@@ -41,16 +40,7 @@ export default function ProductListFilter({ brands }) {
                                 <h3>Фильтр</h3>
                                 <div className="filter_group">
                                     <h5>Фильтрация по цене</h5>
-                                    <p className="filter_price">
-                                        {numberToPrice(value.min)} &ndash;{" "}
-                                        {numberToPrice(value.max)}
-                                    </p>
-                                    <InputRange
-                                        minValue={2461000}
-                                        maxValue={7995000}
-                                        value={value}
-                                        onChange={(value) => setValue(value)}
-                                    />
+                                    <RangeSlider />
                                 </div>
                                 <div className="filter_group">
                                     <h5>Бренды</h5>

@@ -6,7 +6,6 @@ import { FaTh, FaBars } from "react-icons/fa";
 
 export default function ProductList({ products, brands }) {
     const [view, setView] = useState("col");
-    // console.log("products", products);
     return (
         <main>
             <ProductListFilter brands={brands} />

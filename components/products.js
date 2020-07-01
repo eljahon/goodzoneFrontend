@@ -1,6 +1,6 @@
-import React from 'react'
-import { Container, Row } from 'react-bootstrap'
-import ProductListItem from './product-list-item'
+import React from "react";
+import { Container, Row } from "react-bootstrap";
+import ProductListItem from "./product-list-item";
 
 export default function Products({ title, data }) {
     return (
@@ -19,5 +19,5 @@ export default function Products({ title, data }) {
                 </Row>
             </Container>
         </section>
-    )
+    );
 }

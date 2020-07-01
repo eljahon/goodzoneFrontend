@@ -13,3 +13,17 @@ export const getProductsFromAPI = (products) => (dispatch) => {
     }
     dispatch(getProductsFromAPIAction(products));
 };
+
+export const getPrices = (prices) => {
+    return {
+        type: productActionTypes.GET_PRICES,
+        payload: prices,
+    };
+};
+
+export const priceChange = (prices) => {
+    return {
+        type: productActionTypes.PRICE_CHANGE,
+        payload: prices,
+    };
+};

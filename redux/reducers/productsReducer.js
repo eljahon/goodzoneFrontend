@@ -2,6 +2,8 @@ import { productActionTypes } from "../actions/productsActions/productsActionTyp
 
 const initialState = {
     productItems: [],
+    priceRange: [1, 100],
+    filterPrice: [],
 };
 
 const productsReducer = (state = initialState, action) => {
@@ -11,6 +13,16 @@ const productsReducer = (state = initialState, action) => {
             return {
                 ...state,
                 productItems: [...state.productItems, ...payload],
+            };
+        case productActionTypes.GET_PRICES:
+            return {
+                ...state,
+                priceRange: [...payload],
+            };
+        case productActionTypes.PRICE_CHANGE:
+            return {
+                ...state,
+                filterPrice: [...payload],
             };
         default:
             return state;
