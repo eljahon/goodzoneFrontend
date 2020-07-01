@@ -13,9 +13,9 @@ import { fetchMultipleUrls } from "../libs/fetchMultipleUrls";
 
 export default function Home({ products, categories }) {
     const dispatch = useDispatch();
-    console.log("categories", categories);
+    // console.log("categories", categories);
 
-    console.log("products", products);
+    // console.log("products", products);
 
     useEffect(() => {
         dispatch(getProductsFromAPI(products));

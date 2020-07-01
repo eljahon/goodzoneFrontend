@@ -4,6 +4,7 @@ const inititalState = {
     priceRange: [1, 100],
     filterPriceRange: [],
     brands: [],
+    selectDropdownFilter: "",
 };
 
 const filterReducer = (state = inititalState, action) => {
@@ -30,14 +31,23 @@ const filterReducer = (state = inititalState, action) => {
                 ...state,
                 filterPriceRange: payload,
             };
+        case filterActionTypes.SELECT_DROPDOWN_CHANGE:
+            if (payload === "newness") {
+                return {
+                    ...state,
+                    selectDropdownFilter: "",
+                };
+            }
+            return {
+                ...state,
+                selectDropdownFilter: payload,
+            };
         default:
             return state;
     }
 };
 
 function toggleBrandCheckbox(brands, id) {
-    console.log("brands", brands);
-    console.log("id", id);
     if (brands.includes(id)) return brands.filter((brandId) => brandId !== id);
     return [...brands, id];
 }

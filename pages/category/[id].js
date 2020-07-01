@@ -32,6 +32,10 @@ export default function Category({
         (state) => state.filters.brands,
         shallowEqual
     );
+    const selectDropdownFilter = useSelector(
+        (state) => state.filters.selectDropdownFilter,
+        shallowEqual
+    );
 
     useEffect(() => {
         const sortedProductsByPrice = categoryProducts.sort(
@@ -55,21 +59,33 @@ export default function Category({
     }, [query]);
 
     useEffect(() => {
+        console.log(
+            `${process.env.PRODUCT_API_URL}?brand=${filterBrands.join(
+                ","
+            )}&category=${categoryId}${
+                filterPriceRange.length
+                    ? `&price_from=${filterPriceRange[0]}&price_till=${filterPriceRange[1]}`
+                    : ""
+            }&sort=price|${selectDropdownFilter}`
+        );
         axios
             .get(
                 `${process.env.PRODUCT_API_URL}?brand=${filterBrands.join(
                     ","
-                )}&category=${categoryId}&price_from=${
-                    filterPriceRange.length && filterPriceRange[0]
-                }&price_till=${filterPriceRange.length && filterPriceRange[1]}`
+                )}&category=${categoryId}${
+                    filterPriceRange.length
+                        ? `&price_from=${filterPriceRange[0]}&price_till=${filterPriceRange[1]}`
+                        : ""
+                }&sort=price|${selectDropdownFilter}`
             )
             .then((data) => {
                 const { products } = data.data;
                 setFilteredProducts(products);
                 console.log("products", products);
             })
-            .catch((error) => console.log("error", error));
-    }, [filterBrands, categoryId, filterPriceRange]);
+            .catch((error) => console.error("error", error));
+        console.log("selectDropdownFilter", selectDropdownFilter);
+    }, [filterBrands, categoryId, filterPriceRange, selectDropdownFilter]);
 
     return (
         <>

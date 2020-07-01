@@ -19,4 +19,11 @@ export const priceChange = (prices) => {
     };
 };
 
+export const selectDropdownChange = (value) => {
+    return {
+        type: filterActionTypes.SELECT_DROPDOWN_CHANGE,
+        payload: value,
+    };
+};
+
 export const clearFilters = () => ({ type: filterActionTypes.CLEAR_FILTERS });
