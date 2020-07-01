@@ -286,8 +286,9 @@ export default function Product({ data, products, categories }) {
                     <div className="related_items">
                         <h2>Сопутствующие товары</h2>
                         <Row className="products_row">
-                            {products.map((item) => (
+                            {products.slice(0, 5).map((item) => (
                                 <Col
+                                    xs={6}
                                     lg={3}
                                     key={item.id}
                                     className="products_col"

@@ -126,6 +126,12 @@ export default function CartPopup() {
                                                             cartItem.price.price
                                                         )}
                                                     </span>
+                                                    <span className="item_total mobile">
+                                                        <span>Сумма: </span>
+                                                        {numberToPrice(
+                                                            totalProductPrice
+                                                        )}
+                                                    </span>
                                                 </div>
                                                 <span className="item_total">
                                                     {numberToPrice(

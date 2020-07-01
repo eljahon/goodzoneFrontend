@@ -2,13 +2,18 @@ import { useState } from "react";
 import { FaBars, FaSortDown, FaSearch, FaSignInAlt } from "react-icons/fa";
 import Link from "next/link";
 import DepartmentsMenu from "./departments-menu";
+import SearchModal from "./search-modal";
 
 export default function Header({ logo, categories }) {
     const [menu, setMenu] = useState(false);
+    const [searchPopup, setSearchPopup] = useState(false);
     return (
         <>
             <header>
                 <div className="left_menu">
+                    <button className="btn hamburger_icon" onClick={() => setMenu(true)}>
+                        <span /><span /><span />
+                    </button>
                     <Link href="/">
                         <a className="logo">
                             <img
@@ -36,10 +41,10 @@ export default function Header({ logo, categories }) {
                                 </button>
                             </div>
                             {menu ? (
-                                <DepartmentsMenu categories={categories} />
+                                <DepartmentsMenu logo categories={categories} closeMenu={() => setMenu(false)} />
                             ) : (
-                                ""
-                            )}
+                                    ""
+                                )}
                         </div>
                     </div>
                 </div>
@@ -81,9 +86,15 @@ export default function Header({ logo, categories }) {
                         </span>
                         <span className="btn-text">Войти</span>
                     </button>
+                    <button className="btn search_btn mobile" onClick={() => setSearchPopup(true)}>
+                        <span className="search_icon">
+                            <FaSearch />
+                        </span>
+                    </button>
                 </div>
             </header>
             <div className="base_header" />
+            {searchPopup ? <SearchModal closeModal={() => setSearchPopup(false)} /> : ''}
         </>
     );
 }

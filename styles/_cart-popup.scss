@@ -22,6 +22,17 @@
   border-color: initial;
   border-image: initial;
   outline: 0;
+  @include sm {
+    flex-direction: row;
+    justify-content: space-between;
+    width: calc(100% - 60px);
+    height: 45px;
+    top: unset;
+    bottom: 30px;
+    right: 30px;
+    padding: 2px 2px 2px 30px;
+    border-radius: 60px;
+  }
   .total_items {
     font-family: $base-font;
     font-size: 13px;
@@ -33,6 +44,10 @@
     -webkit-box-pack: center;
     justify-content: center;
     padding: 15px 10px;
+    @include sm {
+      padding: 0;
+      font-size: 12px;
+    }
     span {
       display: flex;
       justify-content: center;
@@ -60,6 +75,14 @@
     border-radius: 6px;
     margin: 0 10px 10px;
     padding: 10px;
+    @include sm {
+      height: 41px;
+      max-width: 60%;
+      margin: 0;
+      padding: 0 30px;
+      border-radius: 28px;
+      font-size: 12px;
+    }
   }
 }
 .cart_popup {
@@ -74,6 +97,16 @@
   transition: all 0.35s ease-in-out 0s;
   &.show {
     right: 0;
+  }
+  @include sm {
+    width: 100%;
+    right: unset;
+    transform-origin: center bottom;
+    transform: scale3d(0, 0, 0);
+    &.show {
+      bottom: 0;
+      transform: scale3d(1, 1, 1);
+    }
   }
   .cart_popup-body {
     display: flex;
@@ -194,6 +227,10 @@
                 svg {
                   font-size: 14px;
                 }
+                &:focus {
+                  outline: none;
+                  box-shadow: none;
+                }
               }
               .counter_value {
                 pointer-events: none;
@@ -209,6 +246,9 @@
               display: flex;
               flex-direction: column;
               margin-left: 15px;
+              @include sm {
+                flex-grow: 1;
+              }
               .item_name {
                 font-weight: 400;
                 color: $link-color;
@@ -218,12 +258,26 @@
               .item_price {
                 color: $primary-color;
                 margin-top: 10px;
+                @include sm {
+                  margin-top: 0;
+                }
               }
             }
             .item_total {
               color: $link-color;
               margin-left: auto;
               white-space: nowrap;
+              &.mobile {
+                display: none;
+              }
+              @include sm {
+                display: none;
+                &.mobile {
+                  display: block;
+                  margin-top: 10px;
+                  margin-left: 0;
+                }
+              }
             }
             .remove_btn {
               margin-left: 15px;

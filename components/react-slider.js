@@ -1,19 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import Slider from "@material-ui/core/Slider";
 import { priceChange } from "../redux/actions/productsActions/productsActions";
 import { useSelector, useDispatch, shallowEqual } from "react-redux";
 import { numberToPrice } from "../libs/numberToPrice";
 
-const useStyles = makeStyles({
-    root: {
-        width: "90%",
-        margin: "0 auto",
-    },
-});
-
 export default function RangeSlider() {
-    const classes = useStyles();
     const dispatch = useDispatch();
 
     const priceRange = useSelector(
@@ -33,7 +24,7 @@ export default function RangeSlider() {
     };
 
     return (
-        <div className={classes.root}>
+        <>
             <p className="filter_price">
                 {numberToPrice(inputRangeValue[0])} &ndash;{" "}
                 {numberToPrice(inputRangeValue[1])}
@@ -47,6 +38,6 @@ export default function RangeSlider() {
                 aria-labelledby="range-slider"
                 track={false}
             />
-        </div>
+        </>
     );
 }
