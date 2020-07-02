@@ -48,6 +48,7 @@ export default function CartPopup() {
             setCart(false);
             document.body.classList.remove('overflow');
         }
+        return () => document.body.classList.remove('overflow');
         
     }, [totalQuantity]);
 

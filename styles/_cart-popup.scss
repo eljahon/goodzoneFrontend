@@ -103,6 +103,8 @@
     right: unset;
     transform-origin: center bottom;
     transform: scale3d(0, 0, 0);
+    overflow-x: hidden;
+    overflow-y: scroll;
     &.show {
       bottom: 0;
       transform: scale3d(1, 1, 1);
