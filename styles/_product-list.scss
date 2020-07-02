@@ -10,9 +10,39 @@ main {
     height: auto;
     min-height: 100vh;
     padding: 30px 30px 50px;
+    .breadcrumb {
+      margin-bottom: 30px;
+      border-radius: 6px;
+      background-color: #fff;
+      .breadcrumb-item {
+        line-height: 1.2em;
+        font-size: 15px;
+        a {
+          font-family: $base-font;
+          font-size: 15px;
+          font-weight: 500;
+          color: $link-color;
+          line-height: 1.2em;
+          text-decoration: none;
+          transition: all 0.15s ease-in-out 0s;
+          &:hover {
+            color: $primary-color;
+          }
+        }
+      }
+      .breadcrumb-item + .breadcrumb-item::before {
+        display: inline-block;
+        padding-right: 0.5rem;
+        color: $link-color;
+        content: "›";
+    }
+    }
     @include sm {
       width: 100%;
       padding: 30px 7.5px;
+      .breadcrumb {
+        display: none;
+      }
     }
     .control_bar {
       display: flex;

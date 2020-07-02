@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Row } from "react-bootstrap";
+import { Row, Breadcrumb } from "react-bootstrap";
 import ProductListItem from "./product-list-item";
 import ProductListFilter from "./product-list-filter";
 import { FaTh, FaBars, FaFilter } from "react-icons/fa";
@@ -38,6 +38,11 @@ export default function ProductList({ products, brands }) {
                 closePopup={() => setFilterPopup(false)}
             />
             <div className="content">
+                <Breadcrumb>
+                    <Breadcrumb.Item href="/">Главная</Breadcrumb.Item>
+                    <Breadcrumb.Item href="/">Телевизоры, Hi-Fi, аудио</Breadcrumb.Item>
+                    <Breadcrumb.Item active>Телевизоры</Breadcrumb.Item>
+                </Breadcrumb>
                 <div className="control_bar">
                     <h3>Магазин</h3>
                     <div className="controls">

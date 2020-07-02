@@ -1,5 +1,5 @@
 import React from "react";
-import { Row, Col, Tabs, Tab } from "react-bootstrap";
+import { Row, Col, Tabs, Tab, Breadcrumb } from "react-bootstrap";
 import Router from "next/router";
 import Link from "next/link";
 import { useDispatch } from "react-redux";
@@ -33,6 +33,12 @@ export default function Product({ data, products, categories }) {
 
             <div className="product_wrapper">
                 <div className="product_container">
+                    <Breadcrumb>
+                        <Breadcrumb.Item href="/">Главная</Breadcrumb.Item>
+                        <Breadcrumb.Item href="/">Телевизоры, Hi-Fi, аудио</Breadcrumb.Item>
+                        <Breadcrumb.Item href="/">Телевизоры</Breadcrumb.Item>
+                        <Breadcrumb.Item active>Телевизор Philips 32lj570</Breadcrumb.Item>
+                    </Breadcrumb>
                     <div className="product_details-wrapper">
                         <div className="product_preview">
                             <div className="back_btn">
