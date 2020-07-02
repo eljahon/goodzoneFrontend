@@ -5,7 +5,7 @@ import axios from "axios";
 import { setLocalStorage } from "../libs/localStorage";
 import swal from "sweetalert";
 
-export default function LoginModal({ closeModal, goRegister }) {
+export default function LoginModal({ closeModal, goRegister, authorized }) {
     // changed register to goRegister because I used register from useForm (react-hook-form)
     // to avoid duplicate variables
 
@@ -36,6 +36,7 @@ export default function LoginModal({ closeModal, goRegister }) {
             setLocalStorage("access_token", access_token);
 
             if (response.status === 200) {
+                authorized();
                 closeModal();
                 swal("Successfully logged in!");
             }
