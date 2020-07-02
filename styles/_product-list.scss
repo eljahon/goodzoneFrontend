@@ -86,11 +86,10 @@ main {
           }
         }
         .controls_icon {
-          display: inline-flex;
-          justify-content: center;
-          align-items: center;
+          display: inline-block;
           width: 36px;
           height: 36px;
+          padding: 0;
           margin-right: 10px;
           border: none;
           border-radius: 6px;
@@ -99,16 +98,25 @@ main {
           &:last-child {
             margin-right: 0;
           }
-          svg {
-            display: inline-block;
-            font-size: 15px;
-            fill: $link-color;
+          .btn_icon {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            svg {
+              display: inline-block;
+              font-size: 15px;
+              fill: $link-color;
+            }
           }
           &:hover, &:focus, &.active {
             background-color: $primary-color;
             outline: none;
-            svg {
-              fill: #fff;
+            .btn_icon {
+              svg {
+                fill: #fff;
+              }
             }
           }
         }
@@ -274,6 +282,10 @@ main {
           transform: translate3d(0px, 110px, 0px);
           top: 0px;
           width: 280px;
+          @include sm {
+            width: 100%;
+            transform: translate3d(0px, 45px, 0px);
+          }
         }
       }
     }  

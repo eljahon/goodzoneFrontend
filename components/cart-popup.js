@@ -46,10 +46,23 @@ export default function CartPopup() {
     useEffect(() => {
         if (!totalQuantity) {
             setCart(false);
+            document.body.classList.remove('overflow');
         }
-        const vw = window.innerWidth;
         
     }, [totalQuantity]);
+
+    const openPopup = () => {
+        const vw = window.innerWidth;
+        setCart(true);
+        if(vw < 900)
+            document.body.classList.add('overflow');
+    }
+    const closePopup = () => {
+        const vw = window.innerWidth;
+        setCart(false);
+        if(vw < 900)
+            document.body.classList.remove('overflow');
+    }
 
     return totalQuantity ? (
         <>
@@ -66,7 +79,7 @@ export default function CartPopup() {
                         </div>
                         <button
                             className="btn close_button"
-                            onClick={() => setCart(!cart)}
+                            onClick={() => closePopup()}
                         >
                             <FaTimes />
                         </button>
@@ -177,7 +190,7 @@ export default function CartPopup() {
                     </div>
                 </div>
             </div>
-            <button className="btn cart_button" onClick={() => setCart(!cart)}>
+            <button className="btn cart_button" onClick={() => openPopup()}>
                 <span className="total_items">
                     <span>
                         <FaShoppingBag />

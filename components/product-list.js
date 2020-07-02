@@ -75,7 +75,7 @@ export default function ProductList({ products, brands }) {
                                 }`}
                                 onClick={() => setView("col")}
                             >
-                                <FaTh />
+                                <span className="btn_icon"><FaTh /></span>
                             </button>
                             <button
                                 className={`controls_icon ${
@@ -83,7 +83,7 @@ export default function ProductList({ products, brands }) {
                                 }`}
                                 onClick={() => setView("row")}
                             >
-                                <FaBars />
+                                <span className="btn_icon"><FaBars /></span>
                             </button>
                         </div>
                     </div>
