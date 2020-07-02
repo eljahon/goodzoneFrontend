@@ -5,7 +5,7 @@ import ProfileNav from '../components/profile-nav'
 import { fetchMultipleUrls } from "../libs/fetchMultipleUrls";
 import OrderDetails from '../components/order-details';
 import OrderList from '../components/order-list';
-
+import OrderListMobile from '../components/order-list-mobile';
 
 export default function Order({ categories }) {
     return (
@@ -16,6 +16,7 @@ export default function Order({ categories }) {
                 <ProfileNav activeTab="order" />
                 <div className="order_box">
                     <OrderList />
+                    <OrderListMobile />
                     <OrderDetails />
                 </div>
             </div>

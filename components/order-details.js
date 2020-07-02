@@ -3,7 +3,7 @@
 export default function OrderDetails() {
     return (
         <div className="order_details">
-            <h3>Информация для заказа</h3>
+            <h3 className="title">Информация для заказа</h3>
             <div className="delivery_info">
                 <div className="delivery_address">
                     <h3>Адресс доставки</h3>

@@ -8,14 +8,20 @@
     padding: 40px 70px;
     @include sm {
         flex-direction: column;
-        padding: 40px 0;
+        padding: 20px 0;
     }
     .sidebar {
         width: 300px;
         flex-shrink: 0;
         margin-right: 30px;
         @include sm {
-            display: none;
+            display: block;
+            position: relative;
+            width: 100%;
+            height: auto;
+            padding: 10px 20px;
+            transform: scale(1);
+            z-index: 1;
         }
         .sidebar_wrapper {
             width: 100%;
@@ -23,13 +29,20 @@
             display: flex;
             flex-direction: column;
             flex-shrink: 0;
-            background-color: rgb(255, 255, 255);
+            background-color: $bg-color;
             box-shadow: rgba(0, 0, 0, 0.16) 0 0 6px;
+            @include sm {
+                margin-bottom: 30px;
+            }
             .sidebar_top, .sidebar_bottom {
                 display: flex;
                 flex-direction: column;
                 width: 100%;
                 padding: 40px 0;
+                @include sm {
+                    padding: 0;
+                    padding-top: 10px;
+                }
                 .sidebar_menu {
                     display: flex;
                     a {
@@ -60,6 +73,10 @@
                 width: 100%;
                 background-color: $bg-color;
                 padding: 40px 0;
+                @include sm {
+                    padding: 0;
+                    padding-bottom: 10px;
+                }
             }
         }
     }
@@ -140,11 +157,19 @@
                         border-image: initial;
                         border-radius: 6px;
                         transition: all 0.35s ease 0s;
+                        @include sm {
+                            width: 50%;
+                        }
                     }
                 }
                 .input_wrapper {
                     width: 48%;
                     margin: 0 1% 30px;
+                    @include sm {
+                        width: 100%;
+                        margin: 0;
+                        margin-bottom: 15px;
+                    }
                     label {
                         font-family: $base-font;
                         font-size: 15px;

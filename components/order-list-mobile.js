@@ -1,15 +1,17 @@
+import React from 'react'
+import { Accordion, Card } from 'react-bootstrap'
+import OrderDetails from './order-details';
 
-
-export default function OrderList() {
+export default function OrderListMobile() {
     const array = [1, 2, 3, 4, 5];
     return (
-        <div className="order_list-wrapper">
+        <div className="mobile_view">
             <h3>Мои заказы</h3>
-            <div className="order_content-wrapper">
-                <div className="order_content">
-                    <div className="order_list">
-                        {array.map(i => (
-                            <button key={i} className="order_card">
+            <Accordion defaultActiveKey="0">
+                {array.map(i => (
+                    <div key={i}>
+                        <Accordion.Toggle eventKey={i}>
+                            <div className="order_card">
                                 <div className="card_header">
                                     <span>Заказ #{i}</span>
                                 </div>
@@ -27,11 +29,14 @@ export default function OrderList() {
                                         <span>7 918 000 сум</span>
                                     </div>
                                 </div>
-                            </button>
-                        ))}
+                            </div>
+                        </Accordion.Toggle>
+                        <Accordion.Collapse eventKey={i}>
+                            <OrderDetails />
+                        </Accordion.Collapse>
                     </div>
-                </div>
-            </div>
+                ))}
+            </Accordion>
         </div>
     )
 }
