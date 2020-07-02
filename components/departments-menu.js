@@ -6,7 +6,9 @@ export default function DepartmentsMenu({ categories, closeMenu, logo }) {
     const [loaded, setLoaded] = useState(false);
     useEffect(() => {
         setLoaded(true);
-        document.body.classList.add("overflow");
+        const vw = window.innerWidth;
+        if(vw < 900) 
+            document.body.classList.add("overflow");
         return () => document.body.classList.remove("overflow");
     });
     return (
