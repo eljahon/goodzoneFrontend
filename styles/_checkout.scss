@@ -136,7 +136,12 @@ form.checkout_form {
             display: flex;
             flex-direction: column;
             margin-bottom: 15px;
+            input[type=text], input[type=tel] {
+                -webkit-appearance: none;
+            }
             input, textarea {
+                -webkit-appearance: none;
+                box-shadow: none !important;
                 width: 100%;
                 height: 54px;
                 font-family: $base-font;
@@ -155,6 +160,9 @@ form.checkout_form {
                 outline: 0;
                 &:focus {
                     border-color: $primary-color;
+                }
+                @include sm {
+                    height: 48px;
                 }
             }
             textarea {
@@ -254,10 +262,7 @@ form.checkout_form {
     @include sm {
         order: 0;
         width: 100%;
-        padding-left: 15px;
-        padding-right: 15px;
-        padding-top: 40px;
-        padding-bottom: 30px;
+        padding: 40px 20px 30px;
         position: relative !important;
     }
     .sticky_outer-wrapper {
@@ -272,8 +277,9 @@ form.checkout_form {
                 background-color: white;
                 padding: 30px 30px 20px;
                 @include sm {
-                    padding: 0;
-                    background-color: transparent;
+                    padding: 20px 5px;
+                    background-color: white;
+                    box-shadow: rgba(0, 0, 0, 0.08) 0 2px 16px 0;
                 }
                 h3 {
                     font-family: $base-font;
@@ -395,9 +401,6 @@ form.checkout_form {
                 }
                 .order_info {
                     box-shadow: rgba(0, 0, 0, 0.08) 0 2px 16px 0;
-                    @include sm {
-                        box-shadow: none;
-                    }
                 }
             }
         }

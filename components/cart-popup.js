@@ -47,6 +47,8 @@ export default function CartPopup() {
         if (!totalQuantity) {
             setCart(false);
         }
+        const vw = window.innerWidth;
+        
     }, [totalQuantity]);
 
     return totalQuantity ? (
