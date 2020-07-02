@@ -17,6 +17,7 @@
         "react": "16.13.1",
         "react-bootstrap": "^1.0.1",
         "react-dom": "16.13.1",
+        "react-hook-form": "^6.0.0",
         "react-icons": "^3.10.0",
         "react-image-magnify": "^2.7.4",
         "react-input-range": "^1.3.0",
@@ -26,6 +27,7 @@
         "redux-devtools-extension": "^2.13.8",
         "redux-thunk": "^2.3.0",
         "sass": "^1.26.8",
+        "sweetalert": "^2.1.2",
         "swr": "^0.2.3",
         "typeface-lato": "0.0.75",
         "typeface-poppins": "0.0.72"

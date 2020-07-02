@@ -14,13 +14,21 @@ export default function Header({ logo, categories }) {
     const switchPopup = () => {
         setLoginPopup(!loginPopup);
         setRegisterPopup(!registerPopup);
-    }
+    };
+
+    console.log("loginPopup", loginPopup);
+    console.log("registerPopup", registerPopup);
     return (
         <>
             <header>
                 <div className="left_menu">
-                    <button className="btn hamburger_icon" onClick={() => setMenu(true)}>
-                        <span /><span /><span />
+                    <button
+                        className="btn hamburger_icon"
+                        onClick={() => setMenu(true)}
+                    >
+                        <span />
+                        <span />
+                        <span />
                     </button>
                     <Link href="/">
                         <a className="logo">
@@ -49,10 +57,14 @@ export default function Header({ logo, categories }) {
                                 </button>
                             </div>
                             {menu ? (
-                                <DepartmentsMenu logo categories={categories} closeMenu={() => setMenu(false)} />
+                                <DepartmentsMenu
+                                    logo
+                                    categories={categories}
+                                    closeMenu={() => setMenu(false)}
+                                />
                             ) : (
-                                    ""
-                                )}
+                                ""
+                            )}
                         </div>
                     </div>
                 </div>
@@ -88,13 +100,19 @@ export default function Header({ logo, categories }) {
                             <a>Доставка</a>
                         </Link>
                     </div>
-                    <button className="btn join_btn" onClick={() => setLoginPopup(true)}>
+                    <button
+                        className="btn join_btn"
+                        onClick={() => setLoginPopup(true)}
+                    >
                         <span className="join_icon">
                             <FaSignInAlt />
                         </span>
                         <span className="btn-text">Войти</span>
                     </button>
-                    <button className="btn search_btn mobile" onClick={() => setSearchPopup(true)}>
+                    <button
+                        className="btn search_btn mobile"
+                        onClick={() => setSearchPopup(true)}
+                    >
                         <span className="search_icon">
                             <FaSearch />
                         </span>
@@ -102,9 +120,27 @@ export default function Header({ logo, categories }) {
                 </div>
             </header>
             <div className="base_header" />
-            {searchPopup ? <SearchModal closeModal={() => setSearchPopup(false)} /> : ''}
-            {loginPopup ? <LoginModal closeModal={() => setLoginPopup(false)} register={() => switchPopup()} /> : ''}
-            {registerPopup ? <RegisterModal closeModal={() => setRegisterPopup(false)} login={() => switchPopup()} /> : ''}
+            {searchPopup ? (
+                <SearchModal closeModal={() => setSearchPopup(false)} />
+            ) : (
+                ""
+            )}
+            {loginPopup ? (
+                <LoginModal
+                    closeModal={() => setLoginPopup(false)}
+                    goRegister={() => switchPopup()}
+                />
+            ) : (
+                ""
+            )}
+            {registerPopup ? (
+                <RegisterModal
+                    closeModal={() => setRegisterPopup(false)}
+                    login={() => switchPopup()}
+                />
+            ) : (
+                ""
+            )}
         </>
     );
 }
