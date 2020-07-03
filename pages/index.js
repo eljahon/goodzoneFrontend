@@ -19,6 +19,15 @@ export default function Home({ products, categories }) {
         dispatch(getCategoriesFromAPI(categories));
     }, []);
 
+    useEffect(() => {
+        if (getLocalStorage("access_token")) {
+            axiosAuth
+                .get()
+                .then(({ data: { customer: user } }) => dispatch(setUser(user)))
+                .catch((error) => console.error(error));
+        }
+    }, []);
+
     return (
         <>
             <SEO title="Интернет магазин GOODZONE" />
