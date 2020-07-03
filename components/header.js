@@ -97,7 +97,7 @@ export default function Header({ logo, categories }) {
                         </Link>
                     </div>
                     <div className="menu_item">
-                        <Link href="/">
+                        <Link href="/delivery">
                             <a>Доставка</a>
                         </Link>
                     </div>

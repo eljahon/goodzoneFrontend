@@ -19,6 +19,7 @@ import { asyncAddToCartAction } from "../../redux/actions/cartActions/cartAction
 import { numberToPrice } from "../../libs/numberToPrice";
 import ReactImageMagnify from "react-image-magnify";
 import { fetchMultipleUrls } from "../../libs/fetchMultipleUrls";
+import RelatedProducts from "../../components/related-products";
 
 export default function Product({ data, products, categories }) {
     const dispatch = useDispatch();
@@ -289,41 +290,7 @@ export default function Product({ data, products, categories }) {
                             </Tab>
                         </Tabs>
                     </div>
-                    <div className="related_items">
-                        <h2>Сопутствующие товары</h2>
-                        <Row className="products_row">
-                            {products.slice(0, 5).map((item) => (
-                                <Col
-                                    xs={6}
-                                    lg={3}
-                                    key={item.id}
-                                    className="products_col"
-                                >
-                                    <div className="product_card-wrapper">
-                                        <Link
-                                            href="/product/[id]"
-                                            as={`/product/${item.slug}`}
-                                        >
-                                            <a className="product_card">
-                                                <div className="image_wrapper">
-                                                    <img
-                                                        src={item.image}
-                                                        alt={item.name}
-                                                        className="img-fluid"
-                                                    />
-                                                </div>
-                                                <div className="info">
-                                                    <span className="name">
-                                                        {item.name}
-                                                    </span>
-                                                </div>
-                                            </a>
-                                        </Link>
-                                    </div>
-                                </Col>
-                            ))}
-                        </Row>
-                    </div>
+                    <RelatedProducts products={products} />
                 </div>
             </div>
 

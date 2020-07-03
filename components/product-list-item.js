@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { asyncAddToCartAction } from "../redux/actions/cartActions/cartActions";
 import { numberToPrice } from "../libs/numberToPrice";
 
-const ProductListItem = ({ product, view }) => {
+const ProductListItem = ({ product, view, carousel }) => {
     const dispatch = useDispatch();
 
     const addToCart = () => {
@@ -13,7 +13,7 @@ const ProductListItem = ({ product, view }) => {
     };
 
     return (
-        <Col sm={6} lg={view === "row" ? "12" : "3"} className={`products_col ${view === "col" ? "mobile" : ""}`}>
+        <Col sm={6} lg={view === "row" ? "12" : "3"} className={`products_col ${view === "col" ? "mobile" : ""} ${carousel ? 'carousel_col' : ''}`}>
             <div className={`product_card ${view === "row" ? "view_row" : ""}`}>
                 <Link href="/product/[id]" as={`/product/${product.slug}`}>
                     <a className="product_image">
