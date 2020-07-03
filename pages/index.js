@@ -10,16 +10,25 @@ import { getCategoriesFromAPI } from "../redux/actions/categoryActions/categoryA
 import Products from "../components/products";
 import Banner from "../components/banner";
 import { fetchMultipleUrls } from "../libs/fetchMultipleUrls";
+import { getLocalStorage } from "../libs/localStorage";
+import { axiosAuth } from "../libs/axios/axios-instances";
+import { setUser } from "../redux/actions/authActions/authActions";
 
 export default function Home({ products, categories }) {
     const dispatch = useDispatch();
-    // console.log("categories", categories);
-
-    // console.log("products", products);
 
     useEffect(() => {
         dispatch(getProductsFromAPI(products));
         dispatch(getCategoriesFromAPI(categories));
+    }, []);
+
+    useEffect(() => {
+        if (getLocalStorage("access_token")) {
+            axiosAuth
+                .get()
+                .then(({ data: { customer: user } }) => dispatch(setUser(user)))
+                .catch((error) => console.error(error));
+        }
     }, []);
 
     return (

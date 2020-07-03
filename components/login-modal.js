@@ -4,8 +4,11 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { setLocalStorage } from "../libs/localStorage";
 import swal from "sweetalert";
+import { setUser } from "../redux/actions/authActions/authActions";
+import { useDispatch } from "react-redux";
 
-export default function LoginModal({ closeModal, goRegister, authorized }) {
+export default function LoginModal({ closeModal, goRegister }) {
+    const dispatch = useDispatch();
     // changed register to goRegister because I used register from useForm (react-hook-form)
     // to avoid duplicate variables
 
@@ -32,11 +35,10 @@ export default function LoginModal({ closeModal, goRegister, authorized }) {
             const {
                 data: { access_token },
             } = response;
-            console.log("response", response);
-            setLocalStorage("access_token", access_token);
 
             if (response.status === 200) {
-                authorized();
+                setLocalStorage("access_token", access_token);
+                dispatch(setUser(data));
                 closeModal();
                 swal("Successfully logged in!");
             }

@@ -11,7 +11,6 @@ export default function ProductListFilter({ brands, isOpenPopup, closePopup }) {
         (state) => state.filters.brands,
         shallowEqual
     );
-    console.log("filterBrands", filterBrands);
 
     const handleScroll = () => {
         if (

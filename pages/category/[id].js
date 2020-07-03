@@ -59,15 +59,6 @@ export default function Category({
     }, [query]);
 
     useEffect(() => {
-        console.log(
-            `${process.env.PRODUCT_API_URL}?brand=${filterBrands.join(
-                ","
-            )}&category=${categoryId}${
-                filterPriceRange.length
-                    ? `&price_from=${filterPriceRange[0]}&price_till=${filterPriceRange[1]}`
-                    : ""
-            }&sort=price|${selectDropdownFilter}`
-        );
         axios
             .get(
                 `${process.env.PRODUCT_API_URL}?brand=${filterBrands.join(

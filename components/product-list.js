@@ -5,8 +5,11 @@ import ProductListFilter from "./product-list-filter";
 import { FaTh, FaBars, FaFilter } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { selectDropdownChange } from "../redux/actions/filterActions/filterActions";
+import { useRouter } from "next/router";
 
 export default function ProductList({ products, brands }) {
+    const router = useRouter();
+
     const dispatch = useDispatch();
     const [view, setView] = useState("col");
     const [filterPopup, setFilterPopup] = useState(false);
@@ -39,9 +42,15 @@ export default function ProductList({ products, brands }) {
             />
             <div className="content">
                 <Breadcrumb>
-                    <Breadcrumb.Item href="/">Главная</Breadcrumb.Item>
-                    <Breadcrumb.Item href="/">Телевизоры, Hi-Fi, аудио</Breadcrumb.Item>
-                    <Breadcrumb.Item active>Телевизоры</Breadcrumb.Item>
+                    <Breadcrumb.Item onClick={() => router.push("/")}>
+                        Главная
+                    </Breadcrumb.Item>
+                    <Breadcrumb.Item onClick={() => router.push("/")}>
+                        Телевизоры, Hi-Fi, аудио
+                    </Breadcrumb.Item>
+                    <Breadcrumb.Item active>
+                        {products?.length ? products[0].category.name : null}
+                    </Breadcrumb.Item>
                 </Breadcrumb>
                 <div className="control_bar">
                     <h3>Магазин</h3>
@@ -80,7 +89,9 @@ export default function ProductList({ products, brands }) {
                                 }`}
                                 onClick={() => setView("col")}
                             >
-                                <span className="btn_icon"><FaTh /></span>
+                                <span className="btn_icon">
+                                    <FaTh />
+                                </span>
                             </button>
                             <button
                                 className={`controls_icon ${
@@ -88,7 +99,9 @@ export default function ProductList({ products, brands }) {
                                 }`}
                                 onClick={() => setView("row")}
                             >
-                                <span className="btn_icon"><FaBars /></span>
+                                <span className="btn_icon">
+                                    <FaBars />
+                                </span>
                             </button>
                         </div>
                     </div>

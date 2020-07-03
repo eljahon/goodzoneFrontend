@@ -4,8 +4,13 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { setLocalStorage } from "../libs/localStorage";
 import swal from "sweetalert";
+import { setUser } from "../redux/actions/authActions/authActions";
+import { useDispatch } from "react-redux";
+import { useRouter } from "next/router";
 
 export default function RegisterModal({ closeModal, login }) {
+    const router = useRouter();
+    const dispatch = useDispatch();
     const [load, setLoad] = useState(false);
     useEffect(() => {
         setLoad(true);
@@ -36,17 +41,16 @@ export default function RegisterModal({ closeModal, login }) {
                 data: { access_token },
             } = response;
 
-            console.log("response", response);
-
-            setLocalStorage("access_token", access_token);
-
             if (response.status === 200) {
+                setLocalStorage("access_token", access_token);
+                dispatch(setUser(data));
                 closeModal();
-                swal("Successfully registered!");
+                swal("Successfully logged in!");
+                router.push("/profile");
             }
         } catch (error) {
             swal("Register failed :(");
-            console.error(error);
+            console.error(error.response);
         }
     };
 

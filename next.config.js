@@ -5,6 +5,7 @@ module.exports = {
         BRAND_API_URL: "https://dev.goodzone.uz/v1/brand",
         REGISTER_API_URL: "https://dev.goodzone.uz/v1/customer/register",
         LOGIN_API_URL: "https://dev.goodzone.uz/v1/customer/login",
+        AUTHORIZE_API_URL: "https://dev.goodzone.uz/v1/customer/profile",
     },
 };
 // http://139.59.38.238:1235/v1/product?price_from=1230000&price_till=4560000
