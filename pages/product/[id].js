@@ -1,6 +1,6 @@
 import React from "react";
 import { Row, Col, Tabs, Tab, Breadcrumb } from "react-bootstrap";
-import Router from "next/router";
+import { useRouter } from "next/router";
 import Link from "next/link";
 import { useDispatch } from "react-redux";
 
@@ -21,6 +21,9 @@ import ReactImageMagnify from "react-image-magnify";
 import { fetchMultipleUrls } from "../../libs/fetchMultipleUrls";
 
 export default function Product({ data, products, categories }) {
+    const router = useRouter();
+    console.log("data", data);
+    console.log("categories", categories);
     const dispatch = useDispatch();
 
     const addToCartHandler = (cartItem) =>
@@ -34,10 +37,23 @@ export default function Product({ data, products, categories }) {
             <div className="product_wrapper">
                 <div className="product_container">
                     <Breadcrumb>
-                        <Breadcrumb.Item href="/">Главная</Breadcrumb.Item>
-                        <Breadcrumb.Item href="/">Телевизоры, Hi-Fi, аудио</Breadcrumb.Item>
-                        <Breadcrumb.Item href="/">Телевизоры</Breadcrumb.Item>
-                        <Breadcrumb.Item active>Телевизор Philips 32lj570</Breadcrumb.Item>
+                        <Breadcrumb.Item onClick={() => router.push("/")}>
+                            Главная
+                        </Breadcrumb.Item>
+                        <Breadcrumb.Item onClick={() => router.push("/")}>
+                            Телевизоры, Hi-Fi, аудио
+                        </Breadcrumb.Item>
+                        <Breadcrumb.Item
+                            onClick={() =>
+                                router.push(
+                                    `/category/[id]`,
+                                    `/category/${data.category.slug}`
+                                )
+                            }
+                        >
+                            {data.category.name}
+                        </Breadcrumb.Item>
+                        <Breadcrumb.Item active>{data.name}</Breadcrumb.Item>
                     </Breadcrumb>
                     <div className="product_details-wrapper">
                         <div className="product_preview">
