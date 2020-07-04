@@ -1,0 +1,55 @@
+.promo_container {
+    padding: 60px 4% 0;
+    background-color: $bg-color;
+    .promo_content {
+        h1 {
+            font-family: $head-font;
+            font-size: 26px;
+            font-weight: 700;
+            color: $link-color;
+            line-height: 1.2;
+            margin-bottom: 30px;
+        }
+        .product_card {
+            .product_image {
+                height: 180px !important;
+                padding: 0 !important;
+                img {
+                    width: 100% !important;
+                    height: 100% !important;
+                    object-fit: cover;
+                    -o-object-fit: cover;
+                }
+            }
+            .product_info {
+                a {
+                    h3 {
+                        text-align: center;
+                        white-space: normal;
+                    }
+                }
+                .product_offer {
+                    font-size: 15px;
+                    color: $link-color;
+                    .offer_period {
+                        display: flex;
+                        align-items: center;
+                        .period_icon {
+                            display: flex;
+                            justify-content: center; 
+                            align-items: center;
+                            margin-right: 10px;
+                            svg {
+                                display: inline-block;
+                            }
+                        }
+                        .start_date {
+                            display: inline-block;
+                            margin-right: 15px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

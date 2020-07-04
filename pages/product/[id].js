@@ -1,11 +1,10 @@
 import React from "react";
-import { Row, Col, Tabs, Tab, Breadcrumb } from "react-bootstrap";
+import { Tabs, Tab, Breadcrumb } from "react-bootstrap";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { useDispatch } from "react-redux";
 
 import {
-    FaArrowLeft,
     FaShoppingBag,
     FaCircle,
     FaBoxOpen,
@@ -17,9 +16,9 @@ import Footer from "../../components/footer";
 import CartPopup from "../../components/cart-popup";
 import { asyncAddToCartAction } from "../../redux/actions/cartActions/cartActions";
 import { numberToPrice } from "../../libs/numberToPrice";
-import ReactImageMagnify from "react-image-magnify";
 import { fetchMultipleUrls } from "../../libs/fetchMultipleUrls";
 import RelatedProducts from "../../components/related-products";
+import ProductImageGallery from "../../components/product-image-gallery";
 
 export default function Product({ data, products, categories }) {
     const router = useRouter();
@@ -57,47 +56,7 @@ export default function Product({ data, products, categories }) {
                         <Breadcrumb.Item active>{data.name}</Breadcrumb.Item>
                     </Breadcrumb>
                     <div className="product_details-wrapper">
-                        <div className="product_preview">
-                            <div className="back_btn">
-                                <button
-                                    className="btn"
-                                    onClick={() => Router.back()}
-                                >
-                                    <span className="btn_icon">
-                                        <FaArrowLeft />
-                                    </span>
-                                    <span className="btn_text">Назад</span>
-                                </button>
-                            </div>
-                            <div className="product_image">
-                                <ReactImageMagnify
-                                    {...{
-                                        smallImage: {
-                                            alt: data.name,
-                                            isFluidWidth: true,
-                                            src: `${data.image}`,
-                                        },
-                                        largeImage: {
-                                            src: data.image,
-                                            width: 1200,
-                                            height: 1200,
-                                        },
-                                        enlargedImageContainerStyle: {
-                                            top: "-27.5%",
-                                            left: "156.5%",
-                                            marginLeft: "0",
-                                            border:
-                                                "1px solid rgb(241, 241, 241)",
-                                            backgroundColor: "#fff",
-                                        },
-                                        enlargedImageContainerDimensions: {
-                                            width: "212%",
-                                            height: "155%",
-                                        },
-                                    }}
-                                />
-                            </div>
-                        </div>
+                        <ProductImageGallery data={data} />
                         <div className="product_info">
                             <h1>{data.name}</h1>
                             <div className="product_desc-wrapper">
@@ -306,7 +265,7 @@ export default function Product({ data, products, categories }) {
                             </Tab>
                         </Tabs>
                     </div>
-                    <RelatedProducts products={products} />
+                    <RelatedProducts products={products} addToCart={() => addToCartHandler(data)} />
                 </div>
             </div>
 

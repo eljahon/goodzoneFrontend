@@ -56,6 +56,7 @@
     .product_preview {
         width: 50%;
         display: flex;
+        flex-direction: column;
         -webkit-box-align: center;
         align-items: center;
         -webkit-box-pack: center;
@@ -69,6 +70,53 @@
             max-width: 100%;
             flex: 0 0 100%;
             padding: 30px 25px;
+        }
+        .product_gallery {
+            position: relative;
+            width: 80%;
+            .no-overflow {
+                position: static;
+                padding: 10px 0;
+                .product_item {
+                    display: flex;
+                    justify-content: center;
+                    align-self: center;
+                    width: 100%;
+                    .image_btn {
+                        display: block;
+                        width: 100px;
+                        padding: 0;
+                        &:focus {
+                            outline: none;
+                            box-shadow: none;
+                            border: 1px solid $link-color;
+                            // border-radius: 6px;
+                        }
+                        img {
+                            width: 100%;
+                            height: 100%;
+                            object-fit: cover;
+                            -o-object-fit: cover;
+                        }
+                    }
+                }
+                .react-multiple-carousel__arrow--right, .react-multiple-carousel__arrow--left {
+                    z-index: 99;
+                    background-color: transparent;
+                    &:focus {
+                        outline: none;
+                    }
+                }
+                .react-multiple-carousel__arrow--right {
+                    right: -10%;
+                }
+                .react-multiple-carousel__arrow--left {
+                    left: -10%;
+                }
+                .react-multiple-carousel__arrow::before {
+                    color: $link-color;
+                }
+            }
         }
         .product_image {
             display: block;
