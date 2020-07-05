@@ -4,12 +4,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import { useDispatch } from "react-redux";
 
-import {
-    FaShoppingBag,
-    FaCircle,
-    FaBoxOpen,
-    FaStore,
-} from "react-icons/fa";
+import { FaShoppingBag, FaCircle, FaBoxOpen, FaStore } from "react-icons/fa";
 import SEO from "../../components/seo";
 import Header from "../../components/header";
 import Footer from "../../components/footer";
@@ -22,8 +17,6 @@ import ProductImageGallery from "../../components/product-image-gallery";
 
 export default function Product({ data, products, categories }) {
     const router = useRouter();
-    console.log("data", data);
-    console.log("categories", categories);
     const dispatch = useDispatch();
 
     const addToCartHandler = (cartItem) =>
@@ -265,7 +258,10 @@ export default function Product({ data, products, categories }) {
                             </Tab>
                         </Tabs>
                     </div>
-                    <RelatedProducts products={products} addToCart={() => addToCartHandler(data)} />
+                    <RelatedProducts
+                        products={products}
+                        addToCart={() => addToCartHandler(data)}
+                    />
                 </div>
             </div>
 

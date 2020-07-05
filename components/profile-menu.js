@@ -1,11 +1,11 @@
-import React from 'react'
-import Link from 'next/link'
+import React from "react";
+import Link from "next/link";
 
 export default function ProfileMenu({ logout }) {
-    const handleLogin = (e) => {
+    const handleLogout = (e) => {
         e.preventDefault();
         logout();
-    }
+    };
     return (
         <div className="popover_content">
             <ul className="inner_wrap">
@@ -21,12 +21,12 @@ export default function ProfileMenu({ logout }) {
                         </a>
                     </Link>
                     <Link href="/logout">
-                        <a onClick={(e) => handleLogin(e)}>
+                        <a onClick={(e) => handleLogout(e)}>
                             <span className="label">Выйти</span>
                         </a>
                     </Link>
                 </li>
             </ul>
         </div>
-    )
+    );
 }
