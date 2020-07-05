@@ -22,10 +22,27 @@
                 }
             }
             .product_info {
+                .product_meta {
+                    margin-top: 20px;
+                    @include sm {
+                        .product_btn {
+                            .btn_text {
+                                text-indent: 0;
+                                line-height: 1.5;
+                                &::after {
+                                    display: none;
+                                }
+                            }
+                        }
+                    }
+                }
                 a {
                     h3 {
+                        height: 36px;
+                        margin-bottom: 15px;
                         text-align: center;
-                        white-space: normal;
+                        white-space: pre-wrap;
+                        text-overflow: ellipsis;
                     }
                 }
                 .product_offer {
@@ -33,7 +50,10 @@
                     color: $link-color;
                     .offer_period {
                         display: flex;
+                        justify-content: center;
                         align-items: center;
+                        font-size: 14px;
+                        color: $link-color;
                         .period_icon {
                             display: flex;
                             justify-content: center; 
@@ -46,6 +66,38 @@
                         .start_date {
                             display: inline-block;
                             margin-right: 15px;
+                        }
+                    }
+                    .offer_timer {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        width: 100%;
+                        margin-bottom: 10px;
+                        .item {
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: center;
+                            align-items: center;
+                            .date {
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                width: 50px;
+                                height: 50px;
+                                margin-bottom: 5px;
+                                border-radius: 6px;
+                                background-color: $bg-color;
+                                font-size: 18px;
+                                color: $link-color;
+                                font-weight: 900;
+                            }
+                            .title {
+                                display: inline-block;
+                                font-size: 12px;
+                                color: $span-color;
+                                font-weight: 500;
+                            }
                         }
                     }
                 }
