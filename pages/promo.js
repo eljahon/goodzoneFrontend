@@ -55,7 +55,6 @@ export default function Promo({ categories }) {
                                         <Link href="/promo/template">
                                             <a>
                                                 <h3 className="product_title">{promo.title}</h3>
-                                                <span className="product_price"></span>
                                             </a>
                                         </Link>
                                         <div className="product_offer">
