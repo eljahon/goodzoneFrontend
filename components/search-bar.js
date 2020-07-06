@@ -3,6 +3,9 @@ import { FaSearch } from "react-icons/fa";
 import { useEffect } from "react";
 import useDebounce from "../libs/hooks/useDebounce";
 import axios from "axios";
+import Link from "next/link";
+import { numberToPrice } from "../libs/numberToPrice";
+import { Spinner } from 'react-bootstrap'
 
 const SearchBar = () => {
     const [searchTerm, setSearchTerm] = useState("");
@@ -55,30 +58,48 @@ const SearchBar = () => {
             {products?.length ? (
                 <div className="search_results">
                     {isFetching ? (
-                        <p>Loading...</p>
+                        <div className="spinner">
+                            <Spinner animation="border" role="status">
+                                <span className="sr-only">Loading...</span>
+                            </Spinner>
+                        </div>
                     ) : (
-                        <>
-                            <h4>ТОВАРЫ</h4>
-                            <ul className="results_list">
-                                {products.map((product) => {
-                                    return (
-                                        <li
-                                            className="search_result"
-                                            key={product.id}
-                                        >
-                                            {product.name}
-                                        </li>
-                                    );
-                                })}
-                            </ul>
-                        </>
-                    )}
+                            <>
+                                <ul className="results_list">
+                                    {products.map((product) => {
+                                        return (
+                                            <li
+                                                className="search_result"
+                                                key={product.id}
+                                            >
+                                                <Link href="/product/[id]" as={`/product/${product.slug}`}>
+                                                    <a className="product_card">
+                                                        <div className="product_image">
+                                                            <img src={product.image} alt={product.name} />
+                                                        </div>
+                                                        <div className="product_info">
+                                                            <h3>{product.name}</h3>
+                                                            <span className="price">{numberToPrice(product.price.price)}</span>
+                                                        </div>
+                                                    </a>
+                                                </Link>
+                                            </li>
+                                        );
+                                    })}
+                                </ul>
+                                <div className="product_meta">
+                                    <Link href="/">
+                                        <a>Посмотреть все товары</a>
+                                    </Link>
+                                </div>
+                            </>
+                        )}
                 </div>
             ) : null}
             {searchTerm.length && !products ? (
                 <div className="search_results">
-                    <h4>ТОВАРЫ</h4>
-                    <p>No Prodcuts</p>
+                    {/* <h4>ТОВАРЫ</h4> */}
+                    <div className="msg">Товары не найдены</div>
                 </div>
             ) : null}
         </div>

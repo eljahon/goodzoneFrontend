@@ -9,12 +9,16 @@ export default function About({ categories }) {
             <SEO title="Goodzone" />
             <Header categories={categories} />
             <div className="delivery_splash">
-                <img src="images/about_splash.jpg" alt="Goodzone О компании"/>
+                <div className="about_splash">
+                    <img src="images/about_splash.jpg" alt="Goodzone О компании"/>
+                </div>
+                <div className="about_content">
+                    <h2 className="title">Goodzone <br/> интернет магазин</h2>
+                </div>
             </div>
             <section className="section_container">
                 <article className="delivery_content">
                     <h1>О компании</h1>
-                    <p className="subtitle">Goodzone интернет магазин</p>
                     <div className="content_block">
                         <p>Розничная сеть «GOODZONE» осуществляет свою деятельность с 2018 года. Основным видом деятельности компании является организация розничной торговли бытовой техники и электроники. На сегодняшний день сеть насчитывает 5 магазинов по всей Республике Узбекистан</p>
                         <p>Ритейлер предлагает своим покупателям несколько тысяч наименований аудио/видео и цифровой техники, мелкой и крупной бытовой техники, медиатоваров, а также аксессуаров. Магазины «GOODZONE» имеют единую специальную концепцию дизайна.</p>

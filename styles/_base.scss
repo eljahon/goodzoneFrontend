@@ -57,3 +57,6 @@ a {
 .btn:focus {
   box-shadow: 0 0 0 0.2rem rgba(245, 54, 62, 0.25);
 }
+#nprogress .spinner {
+  display: none !important;
+}
