@@ -7,7 +7,7 @@ import { axiosAuth } from "../libs/axios/axios-instances";
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 
-export default function Profile({ categories }) {
+export default function Profile() {
     const [changePasswordStatus, setChangePasswordStatus] = useState(false);
     const { register, handleSubmit, errors } = useForm();
     const [userData, setUserData] = useState(null);
@@ -40,7 +40,6 @@ export default function Profile({ categories }) {
         userData && (
             <>
                 <SEO title="Goodzone" />
-                <Header categories={categories} />
                 <div className="profile_wrapper">
                     <ProfileNav activeTab="profile" />
                     <div className="profile_content">
@@ -142,15 +141,15 @@ export default function Profile({ categories }) {
     );
 }
 
-export async function getServerSideProps() {
-    // Please write to me if you have some problems with understanding this fetchMultipleUrls function
-    // I wrote it for not repeating code and making us easier
-    const urls = [process.env.CATEGORY_API_URL];
-    const [{ categories }] = await fetchMultipleUrls(urls);
+// export async function getServerSideProps() {
+//     // Please write to me if you have some problems with understanding this fetchMultipleUrls function
+//     // I wrote it for not repeating code and making us easier
+//     const urls = [process.env.CATEGORY_API_URL];
+//     const [{ categories }] = await fetchMultipleUrls(urls);
 
-    return {
-        props: {
-            categories,
-        },
-    };
-}
+//     return {
+//         props: {
+//             categories,
+//         },
+//     };
+// }

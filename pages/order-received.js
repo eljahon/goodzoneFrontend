@@ -1,14 +1,13 @@
 import SEO from "../components/seo";
 import Header from "../components/header";
 import Footer from "../components/footer";
-import Link from 'next/link'
+import Link from "next/link";
 import ifetch from "isomorphic-fetch";
 
-export default function OrderReceived({ categories }) {
+export default function OrderReceived() {
     return (
         <>
             <SEO title="Заявка принята | Интернет магазин GOODZONE" />
-            <Header categories={categories} />
 
             <div className="order_received-wrapper">
                 <div className="order_received-container">
@@ -77,16 +76,16 @@ export default function OrderReceived({ categories }) {
 
             <Footer />
         </>
-    )
+    );
 }
 
-export async function getServerSideProps() {
-    const response = await ifetch(process.env.CATEGORY_API_URL);
-    const categories = await response.json();
+// export async function getServerSideProps() {
+//     const response = await ifetch(process.env.CATEGORY_API_URL);
+//     const categories = await response.json();
 
-    return {
-        props: {
-            categories
-        },
-    };
-}
+//     return {
+//         props: {
+//             categories
+//         },
+//     };
+// }

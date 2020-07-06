@@ -1,15 +1,14 @@
-import SEO from '../components/seo'
-import Header from '../components/header'
-import Footer from '../components/footer';
-import ProfileNav from '../components/profile-nav'
+import SEO from "../components/seo";
+import Header from "../components/header";
+import Footer from "../components/footer";
+import ProfileNav from "../components/profile-nav";
 import { fetchMultipleUrls } from "../libs/fetchMultipleUrls";
-import Link from 'next/link'
+import Link from "next/link";
 
-export default function Account({ categories }) {
+export default function Account() {
     return (
         <>
             <SEO title="Goodzone" />
-            <Header categories={categories} />
             <div className="profile_wrapper">
                 <ProfileNav activeTab="dashboard" />
                 <div className="profile_content">
@@ -25,25 +24,30 @@ export default function Account({ categories }) {
                                      <a> Выйти</a>
                                 </Link>)
                             </p> */}
-                            <p>С панели управления вашей учетной записи вы можете просмотреть Недавние заказы, управлять своимадреса доставки и выставления счетов и измените свой пароль и данные учетной записи.</p>
+                            <p>
+                                С панели управления вашей учетной записи вы
+                                можете просмотреть Недавние заказы, управлять
+                                своимадреса доставки и выставления счетов и
+                                измените свой пароль и данные учетной записи.
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
             <Footer />
         </>
-    )
+    );
 }
 
-export async function getServerSideProps() {
-    // Please write to me if you have some problems with understanding this fetchMultipleUrls function
-    // I wrote it for not repeating code and making us easier
-    const urls = [process.env.CATEGORY_API_URL];
-    const [{ categories }] = await fetchMultipleUrls(urls);
+// export async function getServerSideProps() {
+//     // Please write to me if you have some problems with understanding this fetchMultipleUrls function
+//     // I wrote it for not repeating code and making us easier
+//     const urls = [process.env.CATEGORY_API_URL];
+//     const [{ categories }] = await fetchMultipleUrls(urls);
 
-    return {
-        props: {
-            categories,
-        },
-    };
-}
+//     return {
+//         props: {
+//             categories,
+//         },
+//     };
+// }

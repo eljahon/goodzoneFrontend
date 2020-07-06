@@ -1,11 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
     FaBars,
     FaSortDown,
     FaSearch,
     FaSignInAlt,
     FaUser,
-    FaSort,
 } from "react-icons/fa";
 import Link from "next/link";
 import DepartmentsMenu from "./departments-menu";
@@ -13,15 +12,10 @@ import SearchModal from "./search-modal";
 import LoginModal from "./login-modal";
 import RegisterModal from "./register-modal";
 import ProfileMenu from "./profile-menu";
-import { useSelector, shallowEqual, useDispatch } from "react-redux";
-import { removeLocalStorage, getLocalStorage } from "../libs/localStorage";
-import { logout, setUser } from "../redux/actions/authActions/authActions";
-import { axiosAuth } from "../libs/axios/axios-instances";
+import { useSelector, shallowEqual } from "react-redux";
 import SearchBar from "./search-bar";
 
 export default function Header({ logo, categories }) {
-    const dispatch = useDispatch();
-
     const [menu, setMenu] = useState(false);
     const [searchPopup, setSearchPopup] = useState(false);
     const [loginPopup, setLoginPopup] = useState(false);
@@ -34,11 +28,6 @@ export default function Header({ logo, categories }) {
 
     const user = useSelector((state) => state.auth.user, shallowEqual);
     console.log("user", user);
-
-    const logoutHandler = () => {
-        removeLocalStorage("access_token");
-        dispatch(logout());
-    };
 
     return (
         <>
@@ -134,11 +123,7 @@ export default function Header({ logo, categories }) {
                                     </a>
                                 </Link>
                             </div>
-                            {profilePopup ? (
-                                <ProfileMenu logout={logoutHandler} />
-                            ) : (
-                                ""
-                            )}
+                            {profilePopup ? <ProfileMenu /> : ""}
                         </div>
                     ) : (
                         <button

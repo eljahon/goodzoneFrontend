@@ -14,12 +14,12 @@ import { getLocalStorage } from "../libs/localStorage";
 import { axiosAuth } from "../libs/axios/axios-instances";
 import { setUser } from "../redux/actions/authActions/authActions";
 
-export default function Home({ products, categories }) {
+export default function Home({ products }) {
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(getProductsFromAPI(products));
-        dispatch(getCategoriesFromAPI(categories));
+        // dispatch(getCategoriesFromAPI(categories));
     }, []);
 
     useEffect(() => {
@@ -34,7 +34,6 @@ export default function Home({ products, categories }) {
     return (
         <>
             <SEO title="Интернет магазин GOODZONE" />
-            <Header categories={categories} />
             <HomeSplash />
             <Products title="Новые поступления" data={products} />
             <Banner double />
@@ -50,13 +49,25 @@ export default function Home({ products, categories }) {
 export async function getServerSideProps() {
     // Please write to me if you have some problems with understanding this fetchMultipleUrls function
     // I wrote it for not repeating code and making us easier
-    const urls = [process.env.PRODUCT_API_URL, process.env.CATEGORY_API_URL];
-    const [{ products }, { categories }] = await fetchMultipleUrls(urls);
+    const urls = [process.env.PRODUCT_API_URL];
+    const [{ products }] = await fetchMultipleUrls(urls);
 
     return {
         props: {
             products,
-            categories,
         },
     };
 }
+// export async function getServerSideProps() {
+//     // Please write to me if you have some problems with understanding this fetchMultipleUrls function
+//     // I wrote it for not repeating code and making us easier
+//     const urls = [process.env.PRODUCT_API_URL, process.env.CATEGORY_API_URL];
+//     const [{ products }, { categories }] = await fetchMultipleUrls(urls);
+
+//     return {
+//         props: {
+//             products,
+//             categories,
+//         },
+//     };
+// }
