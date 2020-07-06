@@ -15,11 +15,11 @@
 
 # production
 /build
-/pages/faq
-/pages/news
-/pages/payment-plan
-/pages/exchange-return-repair
-/pages/how-to-order
+/pages/faq.js
+/pages/news.js
+/pages/payment-plan.js
+/pages/exchange-return-repair.js
+/pages/how-to-order.js
 
 # misc
 .DS_Store
