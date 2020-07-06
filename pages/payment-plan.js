@@ -1,14 +1,11 @@
 import SEO from "../components/seo";
-import Header from "../components/header";
 import Footer from "../components/footer"
-import { fetchMultipleUrls } from "../libs/fetchMultipleUrls";
 import Link from 'next/link'
 
-export default function PaymentPlan({ categories }) {
+export default function PaymentPlan() {
     return (
         <>
             <SEO title="Goodzone" />
-            <Header categories={categories} />
             <div className="delivery_splash">
                 <img src="images/payment-plan_1.jpg" alt="Goodzone Questions" />
             </div>
@@ -29,15 +26,4 @@ export default function PaymentPlan({ categories }) {
             <Footer />
         </>
     )
-}
-
-export async function getServerSideProps() {
-    const urls = [process.env.CATEGORY_API_URL];
-    const [{ categories }] = await fetchMultipleUrls(urls);
-
-    return {
-        props: {
-            categories,
-        },
-    };
 }

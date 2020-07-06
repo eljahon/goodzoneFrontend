@@ -1,14 +1,10 @@
 import SEO from "../components/seo";
-import Header from "../components/header";
 import Footer from "../components/footer"
-import { fetchMultipleUrls } from "../libs/fetchMultipleUrls";
-import Link from 'next/link'
 
-export default function ExchangeReturnRepair({ categories }) {
+export default function ExchangeReturnRepair() {
     return (
         <>
             <SEO title="Goodzone" />
-            <Header categories={categories} />
             <div className="delivery_splash">
                 <img src="images/exchange.jpg" alt="Goodzone Questions" />
             </div>
@@ -52,15 +48,4 @@ export default function ExchangeReturnRepair({ categories }) {
             <Footer />
         </>
     )
-}
-
-export async function getServerSideProps() {
-    const urls = [process.env.CATEGORY_API_URL];
-    const [{ categories }] = await fetchMultipleUrls(urls);
-
-    return {
-        props: {
-            categories,
-        },
-    };
 }
