@@ -7,7 +7,6 @@ export default function ProductImageGallery({ data }) {
     const [image, setImage] = useState(data.image);
 
     useEffect(() => {
-        console.log("data.image CAHNGEEE", data.image);
         setImage(data.image);
     }, [data.image]);
 
