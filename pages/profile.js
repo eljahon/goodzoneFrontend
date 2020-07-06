@@ -8,6 +8,7 @@ import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 
 export default function Profile({ categories }) {
+    const [changePasswordStatus, setChangePasswordStatus] = useState(false);
     const { register, handleSubmit, errors } = useForm();
     const [userData, setUserData] = useState(null);
     useEffect(() => {
@@ -23,8 +24,18 @@ export default function Profile({ categories }) {
     }, []);
 
     const onSubmit = (data) => {
+        const { password, confirmPassword } = data;
+
+        if (password && confirmPassword) {
+            if (password !== confirmPassword) {
+                alert("Passwords don't match");
+                return;
+            }
+        }
+
         console.log("data", data);
     };
+
     return (
         userData && (
             <>
@@ -40,61 +51,79 @@ export default function Profile({ categories }) {
                                 </div>
                                 <form onSubmit={handleSubmit(onSubmit)}>
                                     <div className="input_wrapper">
-                                        <label htmlFor="first_name">Имя</label>
+                                        <label htmlFor="firstName">Имя</label>
                                         <input
                                             ref={register}
                                             defaultValue={userData.name}
                                             type="text"
-                                            name="first_name"
-                                            id="first_name"
+                                            name="firstName"
+                                            id="firstName"
                                             required
                                         />
                                     </div>
                                     <div className="input_wrapper">
-                                        <label htmlFor="last_name">
+                                        <label htmlFor="lastName">
                                             Фамилия
                                         </label>
                                         <input
                                             ref={register}
                                             defaultValue={userData.lastname}
                                             type="text"
-                                            name="last_name"
-                                            id="last_name"
+                                            name="lastName"
+                                            id="lastName"
                                             required
                                         />
                                     </div>
                                     <div className="input_wrapper">
-                                        <label htmlFor="email">Email</label>
+                                        <label htmlFor="phone">Телефон</label>
                                         <input
                                             ref={register}
-                                            type="email"
-                                            name="email"
-                                            id="email"
+                                            defaultValue={userData.phone}
+                                            type="tel"
+                                            name="phone"
+                                            id="phone"
                                             required
                                         />
                                     </div>
-                                    <div className="input_wrapper">
-                                        <label htmlFor="password">Пароль</label>
-                                        <input
-                                            ref={register}
-                                            type="password"
-                                            name="password"
-                                            id="password"
-                                            required
-                                        />
+                                    <div className="btn_wrapper">
+                                        <button
+                                            type="button"
+                                            className="btn btn_submit"
+                                            onClick={() =>
+                                                setChangePasswordStatus(
+                                                    !changePasswordStatus
+                                                )
+                                            }
+                                        >
+                                            Change password
+                                        </button>
                                     </div>
-                                    <div className="input_wrapper">
-                                        <label htmlFor="password_confirm">
-                                            Подтверждение пароля
-                                        </label>
-                                        <input
-                                            ref={register}
-                                            type="password"
-                                            name="password_confirm"
-                                            id="password_confirm"
-                                            required
-                                        />
-                                    </div>
+                                    {changePasswordStatus ? (
+                                        <>
+                                            <div className="input_wrapper">
+                                                <label htmlFor="password">
+                                                    Пароль
+                                                </label>
+                                                <input
+                                                    ref={register}
+                                                    type="password"
+                                                    name="password"
+                                                    id="password"
+                                                />
+                                            </div>
+                                            <div className="input_wrapper">
+                                                <label htmlFor="passwordConfirm">
+                                                    Подтверждение пароля
+                                                </label>
+                                                <input
+                                                    ref={register}
+                                                    type="password"
+                                                    name="passwordConfirm"
+                                                    id="passwordConfirm"
+                                                />
+                                            </div>
+                                        </>
+                                    ) : null}
                                     <div className="btn_wrapper">
                                         <input
                                             type="submit"

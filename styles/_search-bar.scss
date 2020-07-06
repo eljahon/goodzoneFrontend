@@ -1,0 +1,18 @@
+.search_results {
+    background-color: #fff;
+    padding: 0.5rem 1rem;
+    width: 100%;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    box-shadow: 2px 2px 8px #000;
+}
+
+.results_list {
+    padding: 0;
+}
+
+.search_result {
+    list-style-type: none;
+}

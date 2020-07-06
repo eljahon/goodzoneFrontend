@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 import { FaSearch, FaArrowLeft } from "react-icons/fa";
 
 export default function SearchModal({ closeModal }) {
@@ -11,7 +11,12 @@ export default function SearchModal({ closeModal }) {
                             <FaArrowLeft />
                         </button>
                         <form className="search_form">
-                            <input type="text" name="search" id="search" placeholder="Поиск по товарам" />
+                            <input
+                                type="text"
+                                name="search"
+                                id="search"
+                                placeholder="Поиск по товарам"
+                            />
                             <button type="submit" className="btn btn_search">
                                 <FaSearch />
                             </button>
@@ -20,5 +25,5 @@ export default function SearchModal({ closeModal }) {
                 </div>
             </div>
         </div>
-    )
+    );
 }
