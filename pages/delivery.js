@@ -1,7 +1,5 @@
 import SEO from "../components/seo";
-import Header from "../components/header";
 import Footer from "../components/footer";
-import { fetchMultipleUrls } from "../libs/fetchMultipleUrls";
 
 export default function Delivery() {
     return (
@@ -133,14 +131,3 @@ export default function Delivery() {
         </>
     );
 }
-
-// export async function getServerSideProps() {
-//     const urls = [process.env.CATEGORY_API_URL];
-//     const [{ categories }] = await fetchMultipleUrls(urls);
-
-//     return {
-//         props: {
-//             categories,
-//         },
-//     };
-// }

@@ -1,10 +1,8 @@
 import SEO from "../components/seo";
-import Header from "../components/header";
 import Footer from "../components/footer";
-import { fetchMultipleUrls } from "../libs/fetchMultipleUrls";
 import Link from "next/link";
 
-export default function HowToOrder({ categories }) {
+export default function HowToOrder() {
     return (
         <>
             <SEO title="Goodzone" />
@@ -67,14 +65,3 @@ export default function HowToOrder({ categories }) {
         </>
     );
 }
-
-// export async function getServerSideProps() {
-//     const urls = [process.env.CATEGORY_API_URL];
-//     const [{ categories }] = await fetchMultipleUrls(urls);
-
-//     return {
-//         props: {
-//             categories,
-//         },
-//     };
-// }

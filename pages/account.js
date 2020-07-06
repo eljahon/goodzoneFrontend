@@ -1,9 +1,6 @@
 import SEO from "../components/seo";
-import Header from "../components/header";
 import Footer from "../components/footer";
 import ProfileNav from "../components/profile-nav";
-import { fetchMultipleUrls } from "../libs/fetchMultipleUrls";
-import Link from "next/link";
 
 export default function Account() {
     return (
@@ -38,16 +35,3 @@ export default function Account() {
         </>
     );
 }
-
-// export async function getServerSideProps() {
-//     // Please write to me if you have some problems with understanding this fetchMultipleUrls function
-//     // I wrote it for not repeating code and making us easier
-//     const urls = [process.env.CATEGORY_API_URL];
-//     const [{ categories }] = await fetchMultipleUrls(urls);
-
-//     return {
-//         props: {
-//             categories,
-//         },
-//     };
-// }

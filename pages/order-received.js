@@ -1,8 +1,6 @@
 import SEO from "../components/seo";
-import Header from "../components/header";
 import Footer from "../components/footer";
 import Link from "next/link";
-import ifetch from "isomorphic-fetch";
 
 export default function OrderReceived() {
     return (
@@ -78,14 +76,3 @@ export default function OrderReceived() {
         </>
     );
 }
-
-// export async function getServerSideProps() {
-//     const response = await ifetch(process.env.CATEGORY_API_URL);
-//     const categories = await response.json();
-
-//     return {
-//         props: {
-//             categories
-//         },
-//     };
-// }

@@ -1,12 +1,10 @@
 import SEO from "../components/seo";
-import Header from "../components/header";
 import HomeSplash from "../components/home-splash";
 import CartPopup from "../components/cart-popup";
 import Footer from "../components/footer";
 import { useDispatch } from "react-redux";
 import { getProductsFromAPI } from "../redux/actions/productsActions/productsActions";
 import { useEffect } from "react";
-import { getCategoriesFromAPI } from "../redux/actions/categoryActions/categoryActions";
 import Products from "../components/products";
 import Banner from "../components/banner";
 import { fetchMultipleUrls } from "../libs/fetchMultipleUrls";
@@ -47,8 +45,6 @@ export default function Home({ products }) {
 }
 
 export async function getServerSideProps() {
-    // Please write to me if you have some problems with understanding this fetchMultipleUrls function
-    // I wrote it for not repeating code and making us easier
     const urls = [process.env.PRODUCT_API_URL];
     const [{ products }] = await fetchMultipleUrls(urls);
 
@@ -58,16 +54,3 @@ export async function getServerSideProps() {
         },
     };
 }
-// export async function getServerSideProps() {
-//     // Please write to me if you have some problems with understanding this fetchMultipleUrls function
-//     // I wrote it for not repeating code and making us easier
-//     const urls = [process.env.PRODUCT_API_URL, process.env.CATEGORY_API_URL];
-//     const [{ products }, { categories }] = await fetchMultipleUrls(urls);
-
-//     return {
-//         props: {
-//             products,
-//             categories,
-//         },
-//     };
-// }

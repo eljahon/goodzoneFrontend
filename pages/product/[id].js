@@ -6,7 +6,6 @@ import { useDispatch } from "react-redux";
 
 import { FaShoppingBag, FaCircle, FaBoxOpen, FaStore } from "react-icons/fa";
 import SEO from "../../components/seo";
-import Header from "../../components/header";
 import Footer from "../../components/footer";
 import CartPopup from "../../components/cart-popup";
 import { asyncAddToCartAction } from "../../redux/actions/cartActions/cartActions";
@@ -277,14 +276,3 @@ export async function getServerSideProps({ params }) {
         props: { data, products },
     };
 }
-
-// export async function getServerSideProps({ params }) {
-//     const urls = [process.env.PRODUCT_API_URL, process.env.CATEGORY_API_URL];
-
-//     const [{ products }, { categories }] = await fetchMultipleUrls(urls);
-
-//     const data = products.find((product) => product.slug === params.id);
-//     return {
-//         props: { data, products, categories },
-//     };
-// }
