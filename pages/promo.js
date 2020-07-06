@@ -55,19 +55,32 @@ export default function Promo({ categories }) {
                                         <Link href="/promo/template">
                                             <a>
                                                 <h3 className="product_title">{promo.title}</h3>
-                                                <span className="product_price"></span>
                                             </a>
                                         </Link>
                                         <div className="product_offer">
+                                            <div className="offer_timer">
+                                                <div className="item">
+                                                    <span className="date">00</span>
+                                                    <span className="title">Дней</span>
+                                                </div>
+                                                <div className="item">
+                                                    <span className="date">00</span>
+                                                    <span className="title">Часов</span>
+                                                </div>
+                                                <div className="item">
+                                                    <span className="date">00</span>
+                                                    <span className="title">Минут</span>
+                                                </div>
+                                            </div>
                                             <div className="offer_period">
                                                 <span className="period_icon"><FaRegCalendarAlt /></span>        
-                                                <span className="start_date">с 2020-06-19</span>
-                                                <span className="end_date">по 2020-06-30</span>
+                                                <span className="start_date">с <b>2020-06-19</b></span>
+                                                <span className="end_date">по <b>2020-06-30</b></span>
                                             </div>
                                         </div>
                                         <div className="product_meta">
                                             <button className="btn product_btn">
-                                                <span className="btn_text">Подробнее</span>
+                                                <span className="btn_text">Узнать подробнее</span>
                                             </button>
                                         </div>
                                     </div>
