@@ -1,0 +1,21 @@
+.about_splash {
+    position: relative;
+    width: 100%;
+    img {
+        filter: brightness(50%);
+        -webkit-filter: brightness(50%);
+    }
+}
+.about_content {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    z-index: 2;
+    padding: 0 4%;
+    transform: translateY(-50%);
+    .title {
+        font-size: 42px;
+        font-weight: 700;
+        color: #ffffff;
+    }
+} 

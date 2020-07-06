@@ -335,7 +335,7 @@
             position: relative;
             font-family: $head-font;
             font-size: 18px;
-            font-weight: 700;
+            font-weight: 500;
             color: $link-color;
             line-height: 1.2;
             padding: 15px 0;
@@ -403,9 +403,10 @@
         color: $link-color;
         line-height: 1.2;
         margin-bottom: 20px;
+        margin-top: 30px;
     }
     h3 {
-        font-family: $base-font;
+        font-family: $head-font;
         font-size: 16px;
         font-weight: 700;
         color: $link-color;
@@ -413,10 +414,10 @@
         margin-bottom: 15px;
     }
     p {
-        font-size: 15px;
+        font-size: 16px;
         font-weight: 400;
         color: rgb(66, 69, 97);
-        line-height: 2;
+        line-height: 26px;
         margin-bottom: 20px;
     }
     ul {
@@ -424,10 +425,10 @@
         margin-bottom: 20px;
         list-style-type: none;
         li {
-            font-size: 15px;
+            font-size: 16px;
             font-weight: 400;
             color: rgb(66, 69, 97);
-            line-height: 1.5;
+            line-height: 26px;
         }
     }
     table {

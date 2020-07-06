@@ -124,8 +124,6 @@ export default function Product({ data, products, categories }) {
                                         можно воспользоваться апортом LAN или
                                         беспроводным модулем Wi-Fi.
                                     </p>
-                                </div>
-                                <div className="details_wrapper">
                                     <h2>Характеристики:</h2>
                                     <h3>Экран</h3>
                                     <ul>
