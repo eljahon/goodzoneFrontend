@@ -50,8 +50,7 @@ export default function RegisterModal({ closeModal, login }) {
                 router.push("/profile");
             }
         } catch (error) {
-            swal("Register failed :(");
-            console.error(error.response);
+            swal(error.response.data.Error);
         }
     };
 

@@ -43,8 +43,7 @@ export default function LoginModal({ closeModal, goRegister }) {
                 swal("Successfully logged in!");
             }
         } catch (error) {
-            swal(`Login or password is not correct`);
-            console.error(error);
+            swal(error.response.data.Error.Message);
         }
     };
 

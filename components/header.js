@@ -17,6 +17,7 @@ import { useSelector, shallowEqual, useDispatch } from "react-redux";
 import { removeLocalStorage, getLocalStorage } from "../libs/localStorage";
 import { logout, setUser } from "../redux/actions/authActions/authActions";
 import { axiosAuth } from "../libs/axios/axios-instances";
+import SearchBar from "./search-bar";
 
 export default function Header({ logo, categories }) {
     const dispatch = useDispatch();
@@ -33,16 +34,6 @@ export default function Header({ logo, categories }) {
 
     const user = useSelector((state) => state.auth.user, shallowEqual);
     console.log("user", user);
-
-    // useEffect(() => {
-    //     if (getLocalStorage("access_token")) {
-    //         console.log("HEADER FETCH");
-    //         axiosAuth
-    //             .get()
-    //             .then(({ data: { customer: user } }) => dispatch(setUser(user)))
-    //             .catch((error) => console.error(error));
-    //     }
-    // }, []);
 
     const logoutHandler = () => {
         removeLocalStorage("access_token");
@@ -99,22 +90,7 @@ export default function Header({ logo, categories }) {
                         </div>
                     </div>
                 </div>
-                <div className="search_box">
-                    <div className="search_box-wrapper">
-                        <div className="search_input-wrapper">
-                            <form>
-                                <span className="search_icon">
-                                    <FaSearch />
-                                </span>
-                                <input
-                                    type="text"
-                                    className="search_box-input"
-                                    placeholder="Поиск по товарам"
-                                />
-                            </form>
-                        </div>
-                    </div>
-                </div>
+                <SearchBar />
                 <div className="right_menu">
                     <div className="menu_item">
                         <Link href="/promo">
