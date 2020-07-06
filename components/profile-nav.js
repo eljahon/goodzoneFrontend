@@ -2,10 +2,14 @@ import Link from "next/link";
 import { logout } from "../redux/actions/authActions/authActions";
 import { useDispatch } from "react-redux";
 import { removeLocalStorage } from "../libs/localStorage";
+import { useRouter } from "next/router";
 
 export default function ProfileNav({ activeTab }) {
+    const router = useRouter();
     const dispatch = useDispatch();
-    const logoutHandler = () => {
+    const logoutHandler = (e) => {
+        e.preventDefault();
+        router.push("/");
         removeLocalStorage("access_token");
         dispatch(logout());
     };

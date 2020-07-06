@@ -1,10 +1,19 @@
 import React from "react";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import { removeLocalStorage } from "../libs/localStorage";
+import { useDispatch } from "react-redux";
+import { logout } from "../redux/actions/authActions/authActions";
 
-export default function ProfileMenu({ logout }) {
-    const handleLogout = (e) => {
+export default function ProfileMenu() {
+    const router = useRouter();
+    const dispatch = useDispatch();
+
+    const logoutHandler = (e) => {
         e.preventDefault();
-        logout();
+        router.push("/");
+        removeLocalStorage("access_token");
+        dispatch(logout());
     };
     return (
         <div className="popover_content">
@@ -21,7 +30,7 @@ export default function ProfileMenu({ logout }) {
                         </a>
                     </Link>
                     <Link href="/logout">
-                        <a onClick={(e) => handleLogout(e)}>
+                        <a onClick={(e) => logoutHandler(e)}>
                             <span className="label">Выйти</span>
                         </a>
                     </Link>

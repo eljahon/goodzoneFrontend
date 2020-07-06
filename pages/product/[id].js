@@ -6,7 +6,6 @@ import { useDispatch } from "react-redux";
 
 import { FaShoppingBag, FaCircle, FaBoxOpen, FaStore } from "react-icons/fa";
 import SEO from "../../components/seo";
-import Header from "../../components/header";
 import Footer from "../../components/footer";
 import CartPopup from "../../components/cart-popup";
 import { asyncAddToCartAction } from "../../redux/actions/cartActions/cartActions";
@@ -15,7 +14,7 @@ import { fetchMultipleUrls } from "../../libs/fetchMultipleUrls";
 import RelatedProducts from "../../components/related-products";
 import ProductImageGallery from "../../components/product-image-gallery";
 
-export default function Product({ data, products, categories }) {
+export default function Product({ data, products }) {
     const router = useRouter();
     const dispatch = useDispatch();
 
@@ -25,8 +24,6 @@ export default function Product({ data, products, categories }) {
     return (
         <>
             <SEO title="Интернет магазин GOODZONE" />
-            <Header logo categories={categories} />
-
             <div className="product_wrapper">
                 <div className="product_container">
                     <Breadcrumb>
@@ -263,19 +260,19 @@ export default function Product({ data, products, categories }) {
                 </div>
             </div>
 
-            <CartPopup data={products} />
+            <CartPopup />
             <Footer />
         </>
     );
 }
 
 export async function getServerSideProps({ params }) {
-    const urls = [process.env.PRODUCT_API_URL, process.env.CATEGORY_API_URL];
+    const urls = [process.env.PRODUCT_API_URL];
 
-    const [{ products }, { categories }] = await fetchMultipleUrls(urls);
+    const [{ products }] = await fetchMultipleUrls(urls);
 
     const data = products.find((product) => product.slug === params.id);
     return {
-        props: { data, products, categories },
+        props: { data, products },
     };
 }
