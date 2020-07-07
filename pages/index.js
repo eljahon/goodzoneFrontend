@@ -23,7 +23,7 @@ export default function Home({ products }) {
     useEffect(() => {
         if (getLocalStorage("access_token")) {
             axiosAuth
-                .get()
+                .get("/profile")
                 .then(({ data: { customer: user } }) => dispatch(setUser(user)))
                 .catch((error) => console.error(error));
         }

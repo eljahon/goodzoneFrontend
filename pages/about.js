@@ -1,5 +1,6 @@
 import SEO from "../components/seo";
 import Footer from "../components/footer";
+import { LazyImage } from "../components/lazy-image";
 
 export default function About() {
     return (
@@ -7,7 +8,7 @@ export default function About() {
             <SEO title="Goodzone" />
             <div className="delivery_splash">
                 <div className="about_splash">
-                    <img
+                    <LazyImage
                         src="images/about_splash.jpg"
                         alt="Goodzone О компании"
                     />

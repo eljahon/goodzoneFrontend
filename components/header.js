@@ -43,10 +43,7 @@ export default function Header({ logo, categories }) {
                     </button>
                     <Link href="/">
                         <a className="logo">
-                            <img
-                                src={logo ? "../logo.png" : "logo.png"}
-                                alt="Goodzone"
-                            />
+                            <img src={"/logo.png"} alt="Goodzone" />
                         </a>
                     </Link>
                     <div className="menu">

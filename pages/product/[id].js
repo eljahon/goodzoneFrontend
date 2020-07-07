@@ -14,7 +14,7 @@ import { fetchMultipleUrls } from "../../libs/fetchMultipleUrls";
 import RelatedProducts from "../../components/related-products";
 import ProductImageGallery from "../../components/product-image-gallery";
 
-export default function Product({ data, products }) {
+export default function Product({ products, product: data }) {
     const router = useRouter();
     const dispatch = useDispatch();
 
@@ -267,12 +267,16 @@ export default function Product({ data, products }) {
 }
 
 export async function getServerSideProps({ params }) {
-    const urls = [process.env.PRODUCT_API_URL];
+    console.log();
 
-    const [{ products }] = await fetchMultipleUrls(urls);
+    const urls = [
+        process.env.PRODUCT_API_URL,
+        `${process.env.PRODUCT_API_URL}/${params.id}`,
+    ];
 
-    const data = products.find((product) => product.slug === params.id);
+    const [{ products }, { product }] = await fetchMultipleUrls(urls);
+
     return {
-        props: { data, products },
+        props: { products, product },
     };
 }

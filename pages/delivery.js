@@ -1,12 +1,16 @@
 import SEO from "../components/seo";
 import Footer from "../components/footer";
+import { LazyImage } from "../components/lazy-image";
 
 export default function Delivery() {
     return (
         <>
             <SEO title="Goodzone" />
             <div className="delivery_splash">
-                <img src="images/delivery_splash.jpg" alt="Goodzone delivery" />
+                <LazyImage
+                    src="images/delivery_splash.jpg"
+                    alt="Goodzone delivery"
+                />
             </div>
             <section className="section_container">
                 <article className="delivery_content">

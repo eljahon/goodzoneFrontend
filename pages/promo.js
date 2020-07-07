@@ -4,6 +4,7 @@ import Footer from "../components/footer";
 import { Row, Col } from "react-bootstrap";
 import Link from "next/link";
 import { FaRegCalendarAlt } from "react-icons/fa";
+import { LazyImage } from "../components/lazy-image";
 
 export default function Promo() {
     const promo = [
@@ -42,7 +43,7 @@ export default function Promo() {
                                 <div className="product_card">
                                     <Link href="/promo/template">
                                         <a className="product_image">
-                                            <img
+                                            <LazyImage
                                                 src={promo.image}
                                                 alt={promo.title}
                                                 className="img-fluid"

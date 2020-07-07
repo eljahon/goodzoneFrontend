@@ -5,6 +5,6 @@ module.exports = {
         BRAND_API_URL: "https://dev.goodzone.uz/v1/brand",
         REGISTER_API_URL: "https://dev.goodzone.uz/v1/customer/register",
         LOGIN_API_URL: "https://dev.goodzone.uz/v1/customer/login",
-        AUTHORIZE_API_URL: "https://dev.goodzone.uz/v1/customer/profile",
+        AUTHORIZE_API_URL: "https://dev.goodzone.uz/v1/customer",
     },
 };
