@@ -254,7 +254,7 @@ export default function Product({ products, product: data }) {
                         </Tabs>
                     </div>
                     <RelatedProducts
-                        products={products}
+                        products={data.related_products}
                         addToCart={() => addToCartHandler(data)}
                     />
                 </div>
