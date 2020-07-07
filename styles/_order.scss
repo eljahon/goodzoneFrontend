@@ -6,8 +6,8 @@
         width: 100%;
     }
     .order_list-wrapper {
-        width: 330px;
-        height: 637px;
+        width: 100%;
+        min-height: 637px;
         display: flex;
         flex-direction: column;
         flex-shrink: 0;
@@ -16,7 +16,7 @@
         border-style: solid;
         border-color: $border-color;
         border-image: initial;
-        overflow: hidden;
+        // overflow: hidden;
         @include sm {
             display: none;
         }
@@ -30,19 +30,21 @@
         }
         .order_content-wrapper {
             position: relative;
-            overflow: hidden;
+            // overflow: hidden;
             width: 100%;
             height: auto;
             min-height: 420px;
-            max-height: 558px;
+            // max-height: 558px;
             .order_content {
                 position: relative;
-                overflow: scroll;
+                // overflow: scroll;
                 margin-right: 0;
                 margin-bottom: 0;
                 min-height: 420px;
-                max-height: 558px;
+                // max-height: 558px;
                 .order_list {
+                    display: flex;
+                    flex-wrap: wrap;
                     width: 100%;
                     padding: 0 20px 20px;
                 }
@@ -86,7 +88,8 @@
 .order_card {
     display: flex;
     flex-direction: column;
-    width: 100%;
+    width: 32%;
+    margin-right: 15px;
     padding: 0;
     background-color: $bg-color;
     margin-bottom: 15px;
@@ -96,11 +99,19 @@
     border-radius: 6px;
     overflow: hidden;
     border: 2px solid transparent;
+    transition: all .2s ease;
+    text-decoration: none;
+    &:nth-of-type(3n) {
+        margin-right: 0;
+    }
     @include sm {
+        width: 100%;
+        margin-right: 0;
         margin-bottom: 0;
     }
-    &.active, &:focus, &:active {
+    &.active, &:focus, &:active, &:hover {
         border: 2px solid $primary-color;
+        text-decoration: none;
     }
     .card_header {
         display: flex;
@@ -205,7 +216,7 @@
             }
         }
         .calculation {
-            width: 300px;
+            width: 50%;
             display: flex;
             flex-direction: column;
             flex-shrink: 0;

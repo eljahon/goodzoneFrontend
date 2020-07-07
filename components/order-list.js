@@ -1,3 +1,4 @@
+import Link from "next/link";
 
 
 export default function OrderList() {
@@ -9,25 +10,27 @@ export default function OrderList() {
                 <div className="order_content">
                     <div className="order_list">
                         {array.map(i => (
-                            <button key={i} className="order_card">
-                                <div className="card_header">
-                                    <span>Заказ #{i}</span>
-                                </div>
-                                <div className="card_body">
-                                    <div className="card_meta">
-                                        <span>Дата:</span>
-                                        <span>июнь 11, 2020 - 17:20</span>
+                            <Link href="/order-single" key={i}>
+                                <a className="order_card">
+                                    <div className="card_header">
+                                        <span>Заказ #{i}</span>
                                     </div>
-                                    <div className="card_meta">
-                                        <span>Статус:</span>
-                                        <span>Доставлен</span>
+                                    <div className="card_body">
+                                        <div className="card_meta">
+                                            <span>Дата:</span>
+                                            <span>июнь 11, 2020 - 17:20</span>
+                                        </div>
+                                        <div className="card_meta">
+                                            <span>Статус:</span>
+                                            <span>Доставлен</span>
+                                        </div>
+                                        <div className="card_meta">
+                                            <span>Всего:</span>
+                                            <span>7 918 000 сум</span>
+                                        </div>
                                     </div>
-                                    <div className="card_meta">
-                                        <span>Всего:</span>
-                                        <span>7 918 000 сум</span>
-                                    </div>
-                                </div>
-                            </button>
+                                </a>
+                            </Link>
                         ))}
                     </div>
                 </div>

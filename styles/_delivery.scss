@@ -13,6 +13,25 @@
     @include sm {
         padding: 0 15px;
     }
+    .promo_status {
+        .status {
+            display: flex;
+            padding: 10px 0;
+            .title {
+                width: 300px;
+                font-size: 16px;
+                font-weight: 700;
+                @include sm {
+                    width: 100%;
+                }
+            }
+            .desc {
+                flex-grow: 1;
+                font-size: 16px;
+                font-weight: 400;
+            }
+        }
+    }
     h1 {
         font-family: $head-font;
         font-size: 26px;
@@ -20,6 +39,9 @@
         color: #000000;
         line-height: 1.8;
         margin-bottom: 20px;
+        @include sm {
+            font-size: 22px;
+        }
     }
     .subtitle {
         font-family: $base-font;
@@ -50,6 +72,9 @@
             line-height: 1.8;
             color: #000000;
             margin-bottom: 20px;
+            @include sm {
+                font-size: 18px;
+            }
         }
         p {
             font-family: $base-font;
@@ -77,11 +102,28 @@
             }
         }
     }
+    .date {
+        margin-top: -10px;
+        font-size: 14px;
+        font-weight: 700;
+        color: $link-color;
+    }
     .img_wrapper {
         width: 100%;
         margin: 30px 0;
         img {
             width: 100%;
+        }
+    }
+    &.payment_plan-rules {
+        .content_block {
+            ul {
+                list-style-type: none;
+                padding: 0;
+                li {
+                    margin-bottom: 15px;
+                }
+            }
         }
     }
 }

@@ -81,7 +81,6 @@ export default function Category({
     return (
         <>
             <SEO title="Интернет магазин GOODZONE" />
-            <Header categories={categories} logo />
             <ProductList products={filteredProducts} brands={brands} />
             <CartPopup />
             <Footer />
