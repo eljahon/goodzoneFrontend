@@ -1,26 +1,40 @@
-import React from 'react'
-import { Container, Row, Col } from 'react-bootstrap'
+import React from "react";
+import { Container, Row, Col } from "react-bootstrap";
+import { LazyImage } from "./lazy-image";
 
 export default function Banner({ double }) {
     return (
         <section className="section_container">
             <Container fluid>
-                {double ?
+                {double ? (
                     <Row className="products_row">
                         <Col lg={9} className="banner">
-                            <img src="images/cashback.jpg" alt="Bonuses" className="img-fluid" />
+                            <LazyImage
+                                src="images/cashback.jpg"
+                                alt="Bonuses"
+                                className="img-fluid"
+                            />
                         </Col>
                         <Col lg={3} className="banner">
-                            <img src="images/card_zero.jpg" alt="Bonuses" className="img-fluid" />
+                            <LazyImage
+                                src="images/card_zero.jpg"
+                                alt="Bonuses"
+                                className="img-fluid"
+                            />
                         </Col>
                     </Row>
-                     :
+                ) : (
                     <Row className="products_row">
                         <Col lg={12} className="banner">
-                            <img src="images/samsung.jpg" alt="Bonuses" className="img-fluid" />
+                            <LazyImage
+                                src="images/samsung.jpg"
+                                alt="Bonuses"
+                                className="img-fluid"
+                            />
                         </Col>
-                    </Row>}
+                    </Row>
+                )}
             </Container>
         </section>
-    )
+    );
 }

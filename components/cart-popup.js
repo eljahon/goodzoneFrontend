@@ -12,6 +12,7 @@ import {
     asyncReduceCartItemQuantityAction,
 } from "../redux/actions/cartActions/cartActions";
 import { numberToPrice } from "../libs/numberToPrice";
+import { LazyImage } from "./lazy-image";
 
 export default function CartPopup() {
     const [cart, setCart] = useState(false);
@@ -46,24 +47,21 @@ export default function CartPopup() {
     useEffect(() => {
         if (!totalQuantity) {
             setCart(false);
-            document.body.classList.remove('overflow');
+            document.body.classList.remove("overflow");
         }
-        return () => document.body.classList.remove('overflow');
-        
+        return () => document.body.classList.remove("overflow");
     }, [totalQuantity]);
 
     const openPopup = () => {
         const vw = window.innerWidth;
         setCart(true);
-        if(vw < 900)
-            document.body.classList.add('overflow');
-    }
+        if (vw < 900) document.body.classList.add("overflow");
+    };
     const closePopup = () => {
         const vw = window.innerWidth;
         setCart(false);
-        if(vw < 900)
-            document.body.classList.remove('overflow');
-    }
+        if (vw < 900) document.body.classList.remove("overflow");
+    };
 
     return totalQuantity ? (
         <>
@@ -124,13 +122,8 @@ export default function CartPopup() {
                                                         <FaPlus />
                                                     </button>
                                                 </div>
-                                                <img
+                                                <LazyImage
                                                     src={cartItem.image}
-                                                    // src={
-                                                    //     dynamic
-                                                    //         ? `../${cartItem.image}`
-                                                    //         : cartItem.image
-                                                    // }
                                                     alt={cartItem.name}
                                                 />
                                                 <div className="cart_info">

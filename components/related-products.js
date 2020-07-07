@@ -4,6 +4,7 @@ import Carousel from "react-multi-carousel";
 import { numberToPrice } from "../libs/numberToPrice";
 import { FaShoppingBasket } from "react-icons/fa";
 import { Col } from "react-bootstrap";
+import { LazyImage } from "./lazy-image";
 
 export default function RelatedProducts({ products, addToCart }) {
     const responsive = {
@@ -45,7 +46,7 @@ export default function RelatedProducts({ products, addToCart }) {
                                 as={`/product/${product.slug}`}
                             >
                                 <a className="product_image">
-                                    <img
+                                    <LazyImage
                                         src={product.image}
                                         alt={product.name}
                                         className="image_wrapper"

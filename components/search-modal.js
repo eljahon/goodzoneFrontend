@@ -1,7 +1,7 @@
-import React from "react";
+import React, { memo } from "react";
 import { FaSearch, FaArrowLeft } from "react-icons/fa";
 
-export default function SearchModal({ closeModal }) {
+function SearchModal({ closeModal }) {
     return (
         <div className="search_modal-wrapper">
             <div className="search_modal-holder">
@@ -27,3 +27,5 @@ export default function SearchModal({ closeModal }) {
         </div>
     );
 }
+
+export default memo(SearchModal);
