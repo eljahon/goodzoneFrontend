@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, memo } from "react";
 import { FaSearch } from "react-icons/fa";
 import { useEffect } from "react";
 import useDebounce from "../libs/hooks/useDebounce";
 import axios from "axios";
 import Link from "next/link";
 import { numberToPrice } from "../libs/numberToPrice";
-import { Spinner } from 'react-bootstrap'
+import { Spinner } from "react-bootstrap";
+import { LazyImage } from "./lazy-image";
 
 const SearchBar = () => {
     const [searchTerm, setSearchTerm] = useState("");
@@ -64,36 +65,47 @@ const SearchBar = () => {
                             </Spinner>
                         </div>
                     ) : (
-                            <>
-                                <ul className="results_list">
-                                    {products.map((product) => {
-                                        return (
-                                            <li
-                                                className="search_result"
-                                                key={product.id}
+                        <>
+                            <ul className="results_list">
+                                {products.map((product) => {
+                                    return (
+                                        <li
+                                            className="search_result"
+                                            key={product.id}
+                                        >
+                                            <Link
+                                                href="/product/[id]"
+                                                as={`/product/${product.slug}`}
                                             >
-                                                <Link href="/product/[id]" as={`/product/${product.slug}`}>
-                                                    <a className="product_card">
-                                                        <div className="product_image">
-                                                            <img src={product.image} alt={product.name} />
-                                                        </div>
-                                                        <div className="product_info">
-                                                            <h3>{product.name}</h3>
-                                                            <span className="price">{numberToPrice(product.price.price)}</span>
-                                                        </div>
-                                                    </a>
-                                                </Link>
-                                            </li>
-                                        );
-                                    })}
-                                </ul>
-                                <div className="product_meta">
-                                    <Link href="/">
-                                        <a>Посмотреть все товары</a>
-                                    </Link>
-                                </div>
-                            </>
-                        )}
+                                                <a className="product_card">
+                                                    <div className="product_image">
+                                                        <LazyImage
+                                                            src={product.image}
+                                                            alt={product.name}
+                                                        />
+                                                    </div>
+                                                    <div className="product_info">
+                                                        <h3>{product.name}</h3>
+                                                        <span className="price">
+                                                            {numberToPrice(
+                                                                product.price
+                                                                    .price
+                                                            )}
+                                                        </span>
+                                                    </div>
+                                                </a>
+                                            </Link>
+                                        </li>
+                                    );
+                                })}
+                            </ul>
+                            <div className="product_meta">
+                                <Link href="/">
+                                    <a>Посмотреть все товары</a>
+                                </Link>
+                            </div>
+                        </>
+                    )}
                 </div>
             ) : null}
             {searchTerm.length && !products ? (
@@ -106,4 +118,4 @@ const SearchBar = () => {
     );
 };
 
-export default SearchBar;
+export default memo(SearchBar);

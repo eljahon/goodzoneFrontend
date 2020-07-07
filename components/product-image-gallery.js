@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Carousel from "react-multi-carousel";
 import ReactImageMagnify from "react-image-magnify";
 import { FaArrowLeft } from "react-icons/fa";
+import { LazyImage } from "./lazy-image";
 
 export default function ProductImageGallery({ data }) {
     const [image, setImage] = useState(data.image);
@@ -98,7 +99,7 @@ export default function ProductImageGallery({ data }) {
                                 className="btn image_btn"
                                 onClick={handleGallery}
                             >
-                                <img src={item.image} alt="Product" />
+                                <LazyImage src={item.image} alt="Product" />
                             </button>
                         </div>
                     ))}
