@@ -5,6 +5,8 @@ import { FaArrowLeft } from "react-icons/fa";
 import { LazyImage } from "./lazy-image";
 
 export default function ProductImageGallery({ data }) {
+    const { gallery } = data;
+
     const [image, setImage] = useState(data.image);
 
     useEffect(() => {
@@ -25,24 +27,7 @@ export default function ProductImageGallery({ data }) {
             items: 2,
         },
     };
-    const images = [
-        {
-            id: 1,
-            image: "../images/product_1.png",
-        },
-        {
-            id: 2,
-            image: "../images/product_2.png",
-        },
-        {
-            id: 3,
-            image: "../images/product_3.png",
-        },
-        {
-            id: 4,
-            image: "../images/product_4.jpg",
-        },
-    ];
+
     const handleGallery = (e) => {
         const imageUrl = e.target.src;
         setImage(imageUrl);
@@ -85,26 +70,29 @@ export default function ProductImageGallery({ data }) {
                     }}
                 />
             </div>
-            <div className="product_gallery">
-                <Carousel
-                    className="no-overflow"
-                    responsive={responsive}
-                    showDots={false}
-                    infinite={true}
-                    autoPlay={false}
-                >
-                    {images.map((item) => (
-                        <div key={item.id} className="product_item">
-                            <button
-                                className="btn image_btn"
-                                onClick={handleGallery}
-                            >
-                                <LazyImage src={item.image} alt="Product" />
-                            </button>
-                        </div>
-                    ))}
-                </Carousel>
-            </div>
+            {console.log("gallery :>> ", gallery)}
+            {gallery ? (
+                <div className="product_gallery">
+                    <Carousel
+                        className="no-overflow"
+                        responsive={responsive}
+                        showDots={false}
+                        infinite={true}
+                        autoPlay={false}
+                    >
+                        {gallery.map((item, idx) => (
+                            <div key={item + idx} className="product_item">
+                                <button
+                                    className="btn image_btn"
+                                    onClick={handleGallery}
+                                >
+                                    <LazyImage src={item} alt="Product" />
+                                </button>
+                            </div>
+                        ))}
+                    </Carousel>
+                </div>
+            ) : null}
         </div>
     );
 }

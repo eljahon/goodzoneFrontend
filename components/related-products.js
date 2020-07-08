@@ -5,8 +5,12 @@ import { numberToPrice } from "../libs/numberToPrice";
 import { FaShoppingBasket } from "react-icons/fa";
 import { Col } from "react-bootstrap";
 import { LazyImage } from "./lazy-image";
+import { useDispatch } from "react-redux";
+import { useCallback } from "react";
 
 export default function RelatedProducts({ products, addToCart }) {
+    const dispatch = useDispatch();
+
     const responsive = {
         desktop: {
             breakpoint: { max: 3000, min: 1024 },
@@ -21,6 +25,11 @@ export default function RelatedProducts({ products, addToCart }) {
             items: 1,
         },
     };
+
+    const addToCartHandler = useCallback((product) => {
+        dispatch(addToCart(product));
+    });
+
     return (
         <div className="related_items">
             <h2>Сопутствующие товары</h2>
@@ -69,7 +78,9 @@ export default function RelatedProducts({ products, addToCart }) {
                                 </Link>
                                 <div className="product_meta">
                                     <button
-                                        onClick={addToCart}
+                                        onClick={() =>
+                                            addToCartHandler(product)
+                                        }
                                         className="btn product_btn"
                                     >
                                         <span className="btn_icon">
