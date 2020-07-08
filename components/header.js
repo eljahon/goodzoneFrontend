@@ -15,7 +15,7 @@ import ProfileMenu from "./profile-menu";
 import { useSelector, shallowEqual } from "react-redux";
 import SearchBar from "./search-bar";
 
-export default function Header({ logo, categories }) {
+export default function Header({ categories }) {
     const [menu, setMenu] = useState(false);
     const [searchPopup, setSearchPopup] = useState(false);
     const [loginPopup, setLoginPopup] = useState(false);
@@ -43,7 +43,7 @@ export default function Header({ logo, categories }) {
                     </button>
                     <Link href="/">
                         <a className="logo">
-                            <img src={"/logo.png"} alt="Goodzone" />
+                            <img src="/logo.png" alt="Goodzone" />
                         </a>
                     </Link>
                     <div className="menu">
@@ -93,6 +93,11 @@ export default function Header({ logo, categories }) {
                             <a>Доставка</a>
                         </Link>
                     </div>
+                    <div className="menu_item">
+                        <Link href="/blog">
+                            <a>Блог</a>
+                        </Link>
+                    </div>
                     {user ? (
                         <div className="popover">
                             <div className="popover_handler">
@@ -104,12 +109,6 @@ export default function Header({ logo, categories }) {
                                 >
                                     <span className="join_icon">
                                         <FaUser />
-                                    </span>
-                                    <span className="btn-text">
-                                        Личный кабинет
-                                    </span>
-                                    <span className="join_icon">
-                                        <FaSortDown />
                                     </span>
                                 </button>
                                 <Link href="/account">
@@ -130,7 +129,7 @@ export default function Header({ logo, categories }) {
                             <span className="join_icon">
                                 <FaSignInAlt />
                             </span>
-                            <span className="btn-text">Войти</span>
+                            {/* <span className="btn-text">Войти</span> */}
                         </button>
                     )}
                     <button

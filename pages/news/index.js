@@ -1,6 +1,6 @@
 import React from "react";
-import SEO from "../components/seo";
-import Footer from "../components/footer";
+import SEO from "../../components/seo";
+import Footer from "../../components/footer";
 import { Row, Col } from "react-bootstrap";
 import Link from "next/link";
 import { FaLongArrowAltRight } from "react-icons/fa";

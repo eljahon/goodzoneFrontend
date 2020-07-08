@@ -47,22 +47,22 @@ export default function Faq() {
                             товара.
                         </p>
                         <h3>
-                            <Link href="/how-to-order">
+                            <Link href="/delivery">
                                 <a>Доставка и самовывоз</a>
                             </Link>
                         </h3>
                         <h3>
-                            <Link href="/how-to-order">
+                            <Link href="/payment-plan">
                                 <a>Рассрочка</a>
                             </Link>
                         </h3>
                         <h3>
-                            <Link href="/how-to-order">
+                            <Link href="/bonuses">
                                 <a>Бонусы</a>
                             </Link>
                         </h3>
                         <h3>
-                            <Link href="/how-to-order">
+                            <Link href="/exchange-return-repair">
                                 <a>Обмен, возврат и ремонт</a>
                             </Link>
                         </h3>

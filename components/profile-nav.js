@@ -41,8 +41,6 @@ export default function ProfileNav({ activeTab }) {
                             </a>
                         </Link>
                     </div>
-                </div>
-                <div className="sidebar_bottom">
                     <div className="sidebar_menu">
                         <Link href="/profile">
                             <a
@@ -61,7 +59,7 @@ export default function ProfileNav({ activeTab }) {
                             <a>
                                 <span onClick={logoutHandler} className="label">
                                     Выйти
-                                </span>
+                            </span>
                             </a>
                         </Link>
                     </div>
