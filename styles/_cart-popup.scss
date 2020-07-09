@@ -92,7 +92,7 @@
   position: fixed;
   bottom: 0;
   right: -550px;
-  z-index: 990;
+  z-index: 1010;
   box-shadow: rgba(0, 0, 0, 0.16) 0 21px 36px;
   transition: all 0.35s ease-in-out 0s;
   &.show {
@@ -104,6 +104,7 @@
     right: unset;
     transform-origin: center bottom;
     transform: scale3d(0, 0, 0);
+    z-index: 990;
     overflow: hidden;
     &.show {
       top: 68px;
