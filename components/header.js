@@ -84,7 +84,7 @@ export default function Header({ categories }) {
                         </Link>
                     </div>
                     <div className="menu_item">
-                        <Link href="/">
+                        <Link href="/shops">
                             <a>Магазины</a>
                         </Link>
                     </div>

@@ -1,0 +1,260 @@
+.map_block {
+    overflow: hidden;
+}
+.branches_content {
+    position: relative;
+    display: block;
+    width: calc(100vw - 17px);
+    height: calc(100vh - 88px);
+    overflow-x: hidden;
+    background-color: $bg-color;
+    transition: all 0.35s ease-in-out 0s;
+    @include sm {
+        width: 100vw;
+    }
+    .branch_map {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        max-width: 100vw;
+        height: 100%;
+        z-index: 1;
+        overflow: hidden;
+        & > div {
+            height: calc(100vh - 88px) !important;
+        }
+    }
+    &.info_open {
+        .branch_map {
+            width: 70%;
+        }
+    }
+}
+
+.branch_info {
+    position: absolute;
+    bottom: 0;
+    right: -550px;
+    width: 30%;
+    height: 100%;
+    z-index: 11;
+    background-color: $bg-color;
+    box-shadow: rgba(0, 0, 0, 0.08) 2px 2px 16px 16px;
+    transition: all 0.35s ease-in-out 0s;
+    @include sm {
+        width: 100%;
+    }
+    &.show {
+        right: 0;
+    }
+    .btn_close {
+        position: absolute;
+        top: 5px;
+        left: -35px;
+        width: 30px;
+        height: 30px;
+        z-index: 3;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0;
+        border-radius: 50%;
+        background-color: $bg-color;
+        box-shadow: rgba(0, 0, 0, 0.08) 2px 2px 16px 0;
+        svg {
+            font-size: 15px;
+            fill: $link-color;
+        }
+        @include sm {
+            left: auto;
+            right: 10px;
+            background-color: transparent;
+            box-shadow: none;
+        }
+    }
+    .branch_info-content {
+        width: 100%;
+        height: 100%;
+        padding: 20px;
+        @include sm {
+            padding-top: 40px;
+        }
+        .branch_image {
+            width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+            img {
+                width: 100%;
+                max-height: 200px;
+                object-fit: cover;
+                -o-object-fit: cover;
+            }
+        }
+        .branch_info-body {
+            width: 100%;
+            h3 {
+                font-size: 18px;
+                font-weight: 700;
+                color: $link-color;
+            }
+            .info_block {
+                width: 100%;
+                margin-bottom: 10px;
+                font-size: 15px;
+                font-weight: 700;
+                .title {
+                    display: inline-flex;
+                    width: 100%;
+                    .icon {
+                        margin-right: 10px;
+                    }
+                }
+                .desc {
+                    display: inline-block;
+                    font-size: 15px;
+                    font-weight: 400;
+                    padding-left: 30px;
+                }
+                &.mobile {
+                    display: none;
+                    @include sm {
+                        display: block;
+                        margin-top: 20px;
+                        .btn {
+                            width: 100%;
+                            font-size: 15px;
+                            cursor: pointer;
+                            -webkit-appearance: none;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            flex-shrink: 0;
+                            text-align: center;
+                            font-family: inherit;
+                            font-weight: 700;
+                            box-sizing: border-box;
+                            color: #fff;
+                            background-color: $primary-color;
+                            height: 48px;
+                            padding: 0 30px;
+                            text-decoration: none;
+                            border: 0;
+                            border-color: initial;
+                            -o-border-image: none;
+                            border-image: none;
+                            -o-border-image: initial;
+                            border-image: initial;
+                            border-radius: 6px;
+                            transition: all .35s ease 0s;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.branches_list {
+    display: block;
+    width: 100%;
+    @include sm {
+        padding: 0 20px;
+    }
+    .branch_card {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        padding: 16px 32px;
+        margin-bottom: 15px;
+        border-radius: 4px;
+        -webkit-box-shadow: 0 1px 2px 0 rgba(142,141,139,.5);
+        box-shadow: 0 1px 2px 0 rgba(142,141,139,.5);
+        -webkit-transition: all .3s linear;
+        transition: all .3s linear;
+        border: 2px solid transparent;
+        background-color: #fff;
+        text-decoration: none;
+        text-align: left;
+        z-index: 2;
+        & > * {
+            pointer-events: none;
+        }
+        &:hover {
+            text-decoration: none;
+            color: $link-color;
+        }
+        &:focus {
+            box-shadow: none;
+            outline: none;
+        }
+        @include sm {
+            display: block;
+            text-align: center;
+        }
+        p {
+            font-size: 15px;
+            font-weight: 400;
+            color: $link-color;
+            margin-bottom: 0;
+            &:first-child {
+                font-weight: 700;
+            }
+            @include sm {
+                margin-bottom: 8px;
+            }
+        }
+        .name {
+            width: 30%;
+            @include sm {
+                width: 100%;
+            }
+            h3 {
+                font-size: 16px;
+                font-weight: 700;
+                color: $link-color;
+                margin-bottom: 0;
+                @include sm {
+                    line-height: 30px;
+                }
+            }
+        }
+        .address {
+            width: 30%;
+            flex-grow: 1;
+            @include sm {
+                width: 100%;
+            }
+            p {
+                &:last-child {
+                    // margin-left: 15px;
+                    &::before {
+                        content: "";
+                        display: inline-block;
+                        width: 10px;
+                        height: 10px;
+                        margin-right: 7px;
+                        background-color: $primary-color;
+                        border-radius: 50%;
+                    }
+                }
+            }
+        }
+        .time {
+            width: 20%;
+            @include sm {
+                width: 100%;
+            }
+        }
+        .location {
+            width: 10%;
+            text-align: right;
+            svg {
+                font-size: 16px;
+            }
+            @include sm {
+                display: none;
+            }
+        }
+    }
+}

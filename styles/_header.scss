@@ -196,7 +196,7 @@ header {
         min-width: 200px;
         background-color: rgb(255, 255, 255);
         box-shadow: rgba(142, 142, 142, 0.14) 0 3px 20px;
-        z-index: 99;
+        z-index: 1099;
         padding: 20px 0;
         border-radius: 6px;
         transition: all 0.35s ease-in-out 0s;
@@ -522,6 +522,7 @@ header {
   }
   .popover {
     position: relative;
+    z-index: 2;
     cursor: pointer;
     border: none;
     .popover_handler {
