@@ -21,7 +21,7 @@ export default function ProfileMenu() {
                 <li className="menu_item">
                     <Link href="/profile">
                         <a>
-                            <span className="label">Пользователь</span>
+                            <span className="label">Личный кабинет</span>
                         </a>
                     </Link>
                     <Link href="/order">

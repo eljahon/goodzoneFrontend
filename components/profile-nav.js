@@ -18,15 +18,15 @@ export default function ProfileNav({ activeTab }) {
             <div className="sidebar_wrapper">
                 <div className="sidebar_top">
                     <div className="sidebar_menu">
-                        <Link href="/account">
+                        <Link href="/profile">
                             <a
                                 className={
-                                    activeTab === "dashboard"
+                                    activeTab === "profile"
                                         ? "current_page"
                                         : ""
                                 }
                             >
-                                <span className="label">Приборная доска</span>
+                                <span className="label">Личный кабинет</span>
                             </a>
                         </Link>
                     </div>
@@ -42,15 +42,15 @@ export default function ProfileNav({ activeTab }) {
                         </Link>
                     </div>
                     <div className="sidebar_menu">
-                        <Link href="/profile">
+                        <Link href="/account">
                             <a
                                 className={
-                                    activeTab === "profile"
+                                    activeTab === "dashboard"
                                         ? "current_page"
                                         : ""
                                 }
                             >
-                                <span className="label">Личный кабинет</span>
+                                <span className="label">Приборная доска</span>
                             </a>
                         </Link>
                     </div>
