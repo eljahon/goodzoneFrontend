@@ -266,6 +266,9 @@ form.checkout_form {
         position: relative !important;
     }
     .sticky_outer-wrapper {
+        position: sticky;
+        top: 108px;
+        padding-bottom: 40px;
         .sticky_inner-wrapper {
             position: relative;
             z-index: 999;

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import { toggleBrand } from "../redux/actions/filterActions/filterActions";
 import RangeSlider from "./react-slider";
@@ -11,24 +11,6 @@ export default function ProductListFilter({ brands, isOpenPopup, closePopup }) {
         (state) => state.filters.brands,
         shallowEqual
     );
-
-    const handleScroll = () => {
-        if (
-            (document.body.scrollTop > 25 &&
-                document.body.scrollTop < document.body.clientHeight - 800) ||
-            (document.documentElement.scrollTop > 25 &&
-                document.documentElement.scrollTop <
-                    document.body.clientHeight - 800)
-        ) {
-            document.getElementById("sidebar").classList.add("sticky");
-        } else {
-            document.getElementById("sidebar").classList.remove("sticky");
-        }
-    };
-    useEffect(() => {
-        window.addEventListener("scroll", handleScroll);
-        return () => window.removeEventListener("scroll", handleScroll);
-    });
 
     const handleToggle = (id) => {
         dispatch(toggleBrand(id));

@@ -14,6 +14,7 @@ import RegisterModal from "./register-modal";
 import ProfileMenu from "./profile-menu";
 import { useSelector, shallowEqual } from "react-redux";
 import SearchBar from "./search-bar";
+import { useRouter } from 'next/router'
 
 export default function Header({ categories }) {
     const [menu, setMenu] = useState(false);
@@ -29,6 +30,8 @@ export default function Header({ categories }) {
     const user = useSelector((state) => state.auth.user, shallowEqual);
     console.log("user", user);
 
+    const router = useRouter();
+    const hasDynamicRouting = router.query.id;
     return (
         <>
             <header>
@@ -43,7 +46,7 @@ export default function Header({ categories }) {
                     </button>
                     <Link href="/">
                         <a className="logo">
-                            <img src="/logo.png" alt="Goodzone" />
+                            <img src={hasDynamicRouting ? "../logo.png" : "/logo.png"} alt="Goodzone" />
                         </a>
                     </Link>
                     <div className="menu">

@@ -1,9 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useSelector, shallowEqual } from "react-redux";
 import { cartTotalPriceSelector } from "../redux/selectors/cartSelectors";
 import { numberToPrice } from "../libs/numberToPrice";
 
-// export default function CheckoutItems({ data }) {
 export default function CheckoutItems() {
     const cartItems = useSelector(
         (state) => state.cart.cartItems,
@@ -15,25 +14,6 @@ export default function CheckoutItems() {
         shallowEqual
     );
 
-    const handleScroll = () => {
-        if (
-            (document.body.scrollTop > 60 &&
-                document.body.scrollTop < document.body.clientHeight - 940) ||
-            (document.documentElement.scrollTop > 60 &&
-                document.documentElement.scrollTop <
-                    document.body.clientHeight - 940)
-        ) {
-            document.getElementById("checkout_items").classList.add("sticky");
-        } else {
-            document
-                .getElementById("checkout_items")
-                .classList.remove("sticky");
-        }
-    };
-    useEffect(() => {
-        window.addEventListener("scroll", handleScroll);
-        return () => window.removeEventListener("scroll", handleScroll);
-    });
     return (
         <aside className="cart_wrapper" id="checkout_items">
             <div className="sticky_outer-wrapper">
