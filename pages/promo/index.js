@@ -4,7 +4,7 @@ import Footer from "../../components/footer";
 import { Row, Col } from "react-bootstrap";
 import Link from "next/link";
 import { FaRegCalendarAlt } from "react-icons/fa";
-import { LazyImage } from "../components/lazy-image";
+import { LazyImage } from "../../components/lazy-image";
 
 export default function Promo() {
     const promo = [
