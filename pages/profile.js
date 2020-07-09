@@ -11,7 +11,7 @@ export default function Profile() {
     const [userData, setUserData] = useState(null);
     useEffect(() => {
         axiosAuth
-            .get()
+            .get("/profile")
             .then((response) => {
                 const {
                     data: { customer: user },

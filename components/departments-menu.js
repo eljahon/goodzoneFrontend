@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { FaArrowRight, FaTimes } from "react-icons/fa";
 
-export default function DepartmentsMenu({ categories, closeMenu, logo }) {
+export default function DepartmentsMenu({ categories, closeMenu }) {
     const [loaded, setLoaded] = useState(false);
     useEffect(() => {
         setLoaded(true);
@@ -15,10 +15,7 @@ export default function DepartmentsMenu({ categories, closeMenu, logo }) {
             <div className="drawer_header">
                 <Link href="/">
                     <a>
-                        <img
-                            src={logo ? "../logo.png" : "logo.png"}
-                            alt="Goodzone"
-                        />
+                        <img src={"/logo.png"} alt="Goodzone" />
                     </a>
                 </Link>
                 <button className="btn btn_close" onClick={closeMenu}>

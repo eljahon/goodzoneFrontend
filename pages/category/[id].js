@@ -1,12 +1,10 @@
 import SEO from "../../components/seo";
-import Header from "../../components/header";
 import ProductList from "../../components/product-list";
 import CartPopup from "../../components/cart-popup";
 import Footer from "../../components/footer";
 import { useDispatch, shallowEqual, useSelector } from "react-redux";
 import { getProductsFromAPI } from "../../redux/actions/productsActions/productsActions";
 import { useEffect, useState } from "react";
-import { getCategoriesFromAPI } from "../../redux/actions/categoryActions/categoryActions";
 import axios from "axios";
 import { fetchMultipleUrls } from "../../libs/fetchMultipleUrls";
 import {
@@ -14,14 +12,21 @@ import {
     getPrices,
 } from "../../redux/actions/filterActions/filterActions";
 
-export default function Category({
-    categoryProducts,
-    categories,
-    brands,
-    categoryId,
-    query,
-}) {
+export default function Category({ categoryProducts, categoryId, query }) {
     const dispatch = useDispatch();
+
+    const [brands, setBrands] = useState([]);
+    useEffect(() => {
+        axios
+            .get(process.env.BRAND_API_URL)
+            .then((response) => {
+                const {
+                    data: { brands },
+                } = response;
+                setBrands(brands);
+            })
+            .catch((error) => console.error(error));
+    }, []);
 
     const [filteredProducts, setFilteredProducts] = useState([]);
 
@@ -38,21 +43,25 @@ export default function Category({
     );
 
     useEffect(() => {
-        const sortedProductsByPrice = categoryProducts.sort(
-            (a, b) => a.price.price - b.price.price
-        );
-        const prices = [
-            +sortedProductsByPrice[0].price.price,
-            +sortedProductsByPrice[sortedProductsByPrice.length - 1].price
-                .price,
-        ];
-        dispatch(getPrices(prices));
+        if (categoryProducts) {
+            const sortedProductsByPrice = categoryProducts.sort(
+                (a, b) => a.price.price - b.price.price
+            );
+            const prices = [
+                +sortedProductsByPrice[0].price.price,
+                +sortedProductsByPrice[sortedProductsByPrice.length - 1].price
+                    .price,
+            ];
+
+            dispatch(getPrices(prices));
+        }
     }, [categoryProducts]);
 
     useEffect(() => {
-        dispatch(getProductsFromAPI(categoryProducts));
-        dispatch(getCategoriesFromAPI(categories));
-    }, [categoryProducts, categories]);
+        if (categoryProducts) {
+            dispatch(getProductsFromAPI(categoryProducts));
+        }
+    }, [categoryProducts]);
 
     useEffect(() => {
         dispatch(clearFilters());
@@ -89,9 +98,9 @@ export default function Category({
 }
 
 export async function getServerSideProps({ query }) {
-    const urls = [process.env.CATEGORY_API_URL, process.env.BRAND_API_URL];
+    const urls = [process.env.CATEGORY_API_URL];
 
-    const [{ categories }, { brands }] = await fetchMultipleUrls(urls);
+    const [{ categories }] = await fetchMultipleUrls(urls);
 
     let categoryId;
     categories.forEach((category) => {
@@ -113,7 +122,6 @@ export async function getServerSideProps({ query }) {
         props: {
             categoryProducts,
             categories,
-            brands,
             categoryId,
             query,
         },

@@ -1,13 +1,14 @@
 import SEO from "../components/seo";
 import Footer from "../components/footer";
 import Link from "next/link";
+import { LazyImage } from "../components/lazy-image";
 
 export default function Faq() {
     return (
         <>
             <SEO title="Goodzone" />
             <div className="delivery_splash">
-                <img src="images/faq.jpg" alt="Goodzone Questions" />
+                <LazyImage src="images/faq.jpg" alt="Goodzone Questions" />
             </div>
             <section className="section_container">
                 <article className="delivery_content">
