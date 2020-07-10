@@ -3,6 +3,8 @@ import { FaCreditCard, FaRegCreditCard, FaWallet, FaBoxOpen, FaTruck } from 'rea
 import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form'
 import { useSelector, shallowEqual } from 'react-redux'
+import axios from 'axios'
+import swal from 'sweetalert'
 
 export default function CheckoutForm() {
     const { register, handleSubmit, errors } = useForm();
@@ -10,27 +12,38 @@ export default function CheckoutForm() {
 
     const cartItems = useSelector((state) => state.cart.cartItems, shallowEqual);
     const user = useSelector((state) => state.auth.user, shallowEqual);
-    const onSubmit = (data) => {
+    const onSubmit = async (data) => {
         // router.push('/order-received');
         const orderItems = [...cartItems];
-        const response = {
-            address: data.address,
-            customer_id: user ? user.id : '',
-            customer_name: data.customer_name,
-            delivery_method: data.delivery_method,
-            items: orderItems.map(item => {
-                return {
-                    price: item.price.price,
-                    product_id: item.id,
-                    product_name: item.name,
-                    quantity: item.quantity
-                }
-            }),
-            note: data.note,
-            payment_method: data.payment_method,
-            phone: data.phone,
+
+        try {
+            const response = await axios.post(process.env.ORDER_API_URL, {
+                address: data.address,
+                customer_id: user ? user.id : '',
+                customer_name: data.customer_name,
+                delivery_method: data.delivery_method,
+                items: orderItems.map(item => {
+                    return {
+                        price: item.price.price,
+                        product_id: item.id,
+                        product_name: item.name,
+                        quantity: item.quantity
+                    }
+                }),
+                note: data.note,
+                payment_method: data.payment_method,
+                phone: data.phone,
+            })
+
+            if (response.status === 200) {
+                router.push('/order-received');
+            }
+            console.log(response);
         }
-        console.log(response)
+        catch(error) {
+            swal(error);
+            console.log(error)
+        }
     }
     return (
         <form className="checkout_form" onSubmit={handleSubmit(onSubmit)}>
