@@ -92,7 +92,7 @@ export default function Profile() {
                                                 )
                                             }
                                         >
-                                            Change password
+                                            Изменить пароль
                                         </button>
                                     </div>
                                     {changePasswordStatus ? (

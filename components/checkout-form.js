@@ -1,38 +1,75 @@
 import React from 'react'
 import { FaCreditCard, FaRegCreditCard, FaWallet, FaBoxOpen, FaTruck } from 'react-icons/fa'
 import { useRouter } from 'next/router'
+import { useForm } from 'react-hook-form'
+import { useSelector, shallowEqual } from 'react-redux'
+import axios from 'axios'
+import swal from 'sweetalert'
 
 export default function CheckoutForm() {
+    const { register, handleSubmit, errors } = useForm();
     const router = useRouter();
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        router.push('/order-received');
+
+    const cartItems = useSelector((state) => state.cart.cartItems, shallowEqual);
+    const user = useSelector((state) => state.auth.user, shallowEqual);
+    const onSubmit = async (data) => {
+        // router.push('/order-received');
+        const orderItems = [...cartItems];
+
+        try {
+            const response = await axios.post(process.env.ORDER_API_URL, {
+                address: data.address,
+                customer_id: user ? user.id : '',
+                customer_name: data.customer_name,
+                delivery_method: data.delivery_method,
+                items: orderItems.map(item => {
+                    return {
+                        price: item.price.price,
+                        product_id: item.id,
+                        product_name: item.name,
+                        quantity: item.quantity
+                    }
+                }),
+                note: data.note,
+                payment_method: data.payment_method,
+                phone: data.phone,
+            })
+
+            if (response.status === 200) {
+                router.push('/order-received');
+            }
+            console.log(response);
+        }
+        catch(error) {
+            swal(error);
+            console.log(error)
+        }
     }
     return (
-        <form className="checkout_form" onSubmit={handleSubmit}>
+        <form className="checkout_form" onSubmit={handleSubmit(onSubmit)}>
             <div className="checkout_form-box">
                 <h3 className="form_heading">Ф.И.О</h3>
                 <div className="field_wrapper">
-                    <input type="text" name="name" id="name" required />
+                    <input type="text" name="customer_name" id="name" required ref={register} />
                 </div>
             </div>
             <div className="checkout_form-box">
                 <h3 className="form_heading">Адрес</h3>
                 <div className="field_wrapper">
-                    <textarea type="text" name="address" id="address" required />
+                    <textarea type="text" name="address" id="address" required ref={register} />
                 </div>
             </div>
             <div className="checkout_form-box">
                 <h3 className="form_heading">Телефон номер</h3>
                 <div className="field_wrapper">
-                    <input type="tel" name="phone_number" id="phone_number" required />
+                    <input type="tel" name="phone" id="phone" required ref={register} />
                 </div>
             </div>
             <div className="checkout_form-box">
                 <h3 className="form_heading">Выберите способ оплаты</h3>
                 <div className="radio_wrapper">
                     <div className="radio_card">
-                        <input type="radio" name="payment" id="cash" defaultChecked />
+                        <input type="radio" name="payment_method" value="cash" id="cash" defaultChecked ref={register} />
                         <label htmlFor="cash">
                             <span className="card_title">Наличные</span>
                             <span className="card_content">
@@ -41,7 +78,7 @@ export default function CheckoutForm() {
                         </label>
                     </div>
                     <div className="radio_card">
-                        <input type="radio" name="payment" id="terminal" />
+                        <input type="radio" name="payment_method" value="terminal" id="terminal" ref={register} />
                         <label htmlFor="terminal">
                             <span className="card_title">Терминал</span>
                             <span className="card_content">
@@ -50,7 +87,7 @@ export default function CheckoutForm() {
                         </label>
                     </div>
                     <div className="radio_card">
-                        <input type="radio" name="payment" id="click" />
+                        <input type="radio" name="payment_method" value="click" id="click" ref={register} />
                         <label htmlFor="click">
                             <span className="card_title">Click</span>
                             <span className="card_content">
@@ -59,7 +96,7 @@ export default function CheckoutForm() {
                         </label>
                     </div>
                     <div className="radio_card">
-                        <input type="radio" name="payment" id="payme" />
+                        <input type="radio" name="payment_method" value="payme" id="payme" ref={register} />
                         <label htmlFor="payme">
                             <span className="card_title">Payme</span>
                             <span className="card_content">
@@ -68,7 +105,7 @@ export default function CheckoutForm() {
                         </label>
                     </div>
                     <div className="radio_card">
-                        <input type="radio" name="payment" id="unired" />
+                        <input type="radio" name="payment_method" value="unired" id="unired" ref={register} />
                         <label htmlFor="unired">
                             <span className="card_title">Unired</span>
                             <span className="card_content">
@@ -82,7 +119,7 @@ export default function CheckoutForm() {
                 <h3 className="form_heading">Выберите способ доставки</h3>
                 <div className="radio_wrapper">
                     <div className="radio_card">
-                        <input type="radio" name="delivery_method" id="pickup" defaultChecked />
+                        <input type="radio" name="delivery_method" value="self" id="pickup" defaultChecked ref={register} />
                         <label htmlFor="pickup">
                             <span className="card_title">Самовывоз</span>
                             <span className="card_content">
@@ -91,7 +128,7 @@ export default function CheckoutForm() {
                         </label>
                     </div>
                     <div className="radio_card">
-                        <input type="radio" name="delivery_method" id="deliver" />
+                        <input type="radio" name="delivery_method" value="deliver" id="deliver" ref={register} />
                         <label htmlFor="deliver">
                             <span className="card_title">Доставка в течении дня</span>
                             <span className="card_content">
@@ -104,10 +141,10 @@ export default function CheckoutForm() {
             <div className="checkout_form-box">
                 <h3 className="form_heading">Примечания к заказу</h3>
                 <div className="field_wrapper">
-                    <textarea type="tel" name="comment" id="comment" placeholder="Заметки о вашем заказе, например. специальные заметки для доставки." />
+                    <textarea type="tel" name="note" id="note" placeholder="Заметки о вашем заказе, например. специальные заметки для доставки." ref={register} />
                 </div>
                 <span className="term_text">Совершая эту покупку, вы соглашаетесь с нашими
-                                    <a href="/terms" target="_blank" rel="noopener noreferrer">термины и условиями.</a>
+                    <a href="/terms" target="_blank" rel="noopener noreferrer">термины и условиями.</a>
                 </span>
                 <div className="checkout_submit">
                     <button className="btn">

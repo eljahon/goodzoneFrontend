@@ -1,8 +1,13 @@
 import SEO from "../components/seo";
 import Footer from "../components/footer";
 import Link from "next/link";
+import { useState } from "react";
 
 export default function OrderReceived() {
+    const [payment, setPayment] = useState("click");
+    const handleChange = (e) => {
+        setPayment(e.target.value);
+    }
     return (
         <>
             <SEO title="Заявка принята | Интернет магазин GOODZONE" />
@@ -66,6 +71,21 @@ export default function OrderReceived() {
                             </div>
                             <div className="list_desc">
                                 <p>12 461 000 сум</p>
+                            </div>
+                        </div>
+                        <div className="list_item pay_now">
+                            <div className="list_title">
+                                <p>Заплатить сейчас:</p>
+                            </div>
+                            <div className="list_desc">
+                                <select name="payment" id="payment" defaultValue="click" onChange={(e) => handleChange(e)}>
+                                    <option value="cash">Наличные</option>
+                                    <option value="terminal">Терминал</option>
+                                    <option value="click">Click</option>
+                                    <option value="payme">Payme</option>
+                                    <option value="unired">Unired</option>
+                                </select>
+                                {(payment == "click" || payment == "payme") ? <button className="btn btn_pay">Заплатить сейчас</button> : ''}
                             </div>
                         </div>
                     </div>

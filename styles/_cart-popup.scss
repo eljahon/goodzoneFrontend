@@ -99,12 +99,15 @@
     right: 0;
   }
   @include sm {
+    height: calc(100vh - 68px);
     width: 100%;
     right: unset;
     transform-origin: center bottom;
     transform: scale3d(0, 0, 0);
+    z-index: 990;
     overflow: hidden;
     &.show {
+      top: 68px;
       bottom: 0;
       transform: scale3d(1, 1, 1);
     }

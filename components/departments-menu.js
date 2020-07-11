@@ -53,7 +53,7 @@ export default function DepartmentsMenu({ categories, closeMenu }) {
                                                   href="/category/[id]"
                                                   as={`/category/${child.slug}`}
                                               >
-                                                  <a>{child.name}</a>
+                                                  <a onClick={closeMenu}>{child.name}</a>
                                               </Link>
                                           ))
                                         : ""}

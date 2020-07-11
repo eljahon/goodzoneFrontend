@@ -204,13 +204,16 @@ main {
     }
   }
   .category_wrapper {
-    position: relative;
+    position: sticky;
+    top: 58px;
     width: 100%;
+    @include sm {
+      position: relative;
+      top: 0;
+    }
     .sidebar_wrapper {
       padding: 45px 0;
       .outer_wrapper {
-        position: relative;
-        transform: translate3d(0px, 0px, 0px);
         overflow: hidden;
         width: 100%;
         height: auto;
@@ -232,7 +235,7 @@ main {
               justify-content: center;
               align-items: center;
               position: absolute;
-              top: -30px;
+              top: 30px;
               right: 10px;
               width: 40px;
               height: 40px;
