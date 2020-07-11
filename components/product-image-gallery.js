@@ -80,7 +80,7 @@ export default function ProductImageGallery({ data }) {
                         infinite={true}
                         autoPlay={false}
                     >
-                        {gallery.map((item, idx) => (
+                        {[data.image, ...gallery].map((item, idx) => (
                             <div key={item + idx} className="product_item">
                                 <button
                                     className="btn image_btn"
