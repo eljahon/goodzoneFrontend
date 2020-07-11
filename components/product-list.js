@@ -53,7 +53,9 @@ export default function ProductList({ products, brands }) {
                     </Breadcrumb.Item>
                 </Breadcrumb>
                 <div className="control_bar">
-                    <h3>Магазин</h3>
+                    <h3>
+                        {products?.length ? products[0].category.name : null}
+                    </h3>
                     <div className="controls">
                         <span className="sort_by">
                             <select
