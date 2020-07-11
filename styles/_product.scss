@@ -14,30 +14,30 @@
                 border-radius: 6px;
                 background-color: #fff;
                 .breadcrumb-item {
-                  line-height: 1.2em;
-                  font-size: 15px;
-                  a {
-                    font-family: $base-font;
-                    font-size: 15px;
-                    font-weight: 500;
-                    color: $link-color;
                     line-height: 1.2em;
-                    text-decoration: none;
-                    transition: all 0.15s ease-in-out 0s;
-                    &:hover {
-                      color: $primary-color;
+                    font-size: 15px;
+                    a {
+                        font-family: $base-font;
+                        font-size: 15px;
+                        font-weight: 500;
+                        color: $link-color;
+                        line-height: 1.2em;
+                        text-decoration: none;
+                        transition: all 0.15s ease-in-out 0s;
+                        &:hover {
+                            color: $primary-color;
+                        }
                     }
-                  }
                 }
                 .breadcrumb-item + .breadcrumb-item::before {
-                  display: inline-block;
-                  padding-right: 0.5rem;
-                  color: $link-color;
-                  content: "›";
-              }
-              @include sm {
-                  display: none;
-              }
+                    display: inline-block;
+                    padding-right: 0.5rem;
+                    color: $link-color;
+                    content: "›";
+                }
+                @include sm {
+                    display: none;
+                }
             }
         }
     }
@@ -100,7 +100,8 @@
                         }
                     }
                 }
-                .react-multiple-carousel__arrow--right, .react-multiple-carousel__arrow--left {
+                .react-multiple-carousel__arrow--right,
+                .react-multiple-carousel__arrow--left {
                     z-index: 99;
                     background-color: transparent;
                     &:focus {
@@ -146,7 +147,7 @@
                 padding: 0 15px;
                 text-decoration: none;
                 transition: all 0.3s ease 0s;
-                border-radius: 6px;    
+                border-radius: 6px;
                 font-size: 13px;
                 font-weight: 700;
                 background-color: #ffffff;
@@ -273,26 +274,26 @@
                     border-radius: 200px;
                     overflow: hidden;
                     .counter_btn {
-                      background-color: transparent;
-                      color: rgb(255, 255, 255);
-                      display: flex;
-                      -webkit-box-align: center;
-                      align-items: center;
-                      -webkit-box-pack: center;
-                      justify-content: center;
-                      height: 100%;
-                      cursor: pointer;
-                      border-width: initial;
-                      border-style: none;
-                      border-color: initial;
-                      border-image: initial;
-                      padding: 10px;
-                      svg {
-                        font-size: 12px;
-                      }
-                      .counter_value {
-                        pointer-events: none;
-                      }
+                        background-color: transparent;
+                        color: rgb(255, 255, 255);
+                        display: flex;
+                        -webkit-box-align: center;
+                        align-items: center;
+                        -webkit-box-pack: center;
+                        justify-content: center;
+                        height: 100%;
+                        cursor: pointer;
+                        border-width: initial;
+                        border-style: none;
+                        border-color: initial;
+                        border-image: initial;
+                        padding: 10px;
+                        svg {
+                            font-size: 12px;
+                        }
+                        .counter_value {
+                            pointer-events: none;
+                        }
                     }
                 }
             }
@@ -320,7 +321,7 @@
     .tab-content {
         overflow-x: hidden;
     }
-    .nav-tabs { 
+    .nav-tabs {
         display: inline-flex;
         padding: 10px !important;
         background-color: #fff;
@@ -346,7 +347,7 @@
             &:first-child {
                 margin-left: 15px;
                 &::after {
-                    content: '';
+                    content: "";
                     position: absolute;
                     top: -10px;
                     right: -25px;
