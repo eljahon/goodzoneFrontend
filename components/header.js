@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
     FaBars,
     FaSortDown,
@@ -16,6 +16,7 @@ import { useSelector, shallowEqual } from "react-redux";
 import SearchBar from "./search-bar";
 import { useRouter } from 'next/router'
 
+
 export default function Header({ categories }) {
     const [menu, setMenu] = useState(false);
     const [searchPopup, setSearchPopup] = useState(false);
@@ -32,9 +33,30 @@ export default function Header({ categories }) {
 
     const router = useRouter();
     const hasDynamicRouting = router.query.id;
+
+    const wrapperRef = useRef(null);
+    useOutsideCloseMenu(wrapperRef);
+
+    function useOutsideCloseMenu(ref) {
+        useEffect(() => {
+            function handleClickOutside(event) {
+                if (ref.current && !ref.current.contains(event.target)) {
+                    setMenu(false)
+                    setProfilePopup(false)
+                }
+            }
+            document.addEventListener("mousedown", handleClickOutside);
+
+            return () => {
+                document.removeEventListener("mousedown", handleClickOutside);
+            };
+
+        }, [ref]);
+    }
+    
     return (
         <>
-            <header>
+            <header ref={wrapperRef}>
                 <div className="left_menu">
                     <button
                         className="btn hamburger_icon"
@@ -122,7 +144,7 @@ export default function Header({ categories }) {
                                     </a>
                                 </Link>
                             </div>
-                            {profilePopup ? <ProfileMenu /> : ""}
+                            {profilePopup ? <ProfileMenu closeMenu={() => setProfilePopup(false)} /> : ""}
                         </div>
                     ) : (
                         <button

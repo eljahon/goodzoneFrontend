@@ -5,7 +5,7 @@ import { removeLocalStorage } from "../libs/localStorage";
 import { useDispatch } from "react-redux";
 import { logout } from "../redux/actions/authActions/authActions";
 
-export default function ProfileMenu() {
+export default function ProfileMenu({ closeMenu }) {
     const router = useRouter();
     const dispatch = useDispatch();
 
@@ -14,18 +14,19 @@ export default function ProfileMenu() {
         router.push("/");
         removeLocalStorage("access_token");
         dispatch(logout());
+        closeMenu();
     };
     return (
         <div className="popover_content">
             <ul className="inner_wrap">
                 <li className="menu_item">
                     <Link href="/profile">
-                        <a>
+                        <a onClick={closeMenu}>
                             <span className="label">Личный кабинет</span>
                         </a>
                     </Link>
                     <Link href="/order">
-                        <a>
+                        <a onClick={closeMenu}>
                             <span className="label">Заказы</span>
                         </a>
                     </Link>

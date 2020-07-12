@@ -12,11 +12,7 @@
         flex-direction: column;
         flex-shrink: 0;
         margin-right: 30px;
-        border-width: 1px;
-        border-style: solid;
-        border-color: $border-color;
-        border-image: initial;
-        // overflow: hidden;
+        border: none;
         @include sm {
             display: none;
         }
@@ -91,7 +87,7 @@
     width: 32%;
     margin-right: 15px;
     padding: 0;
-    background-color: $bg-color;
+    background-color: #ffffff;
     margin-bottom: 15px;
     cursor: pointer;
     outline: none;
@@ -160,6 +156,7 @@
     border-style: solid;
     border-color: $border-color;
     border-image: initial;
+    background-color: #fff;
     @include sm {
         display: none;
         min-height: auto;
