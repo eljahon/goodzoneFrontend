@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { FaCreditCard, FaRegCreditCard, FaWallet, FaBoxOpen, FaTruck } from 'react-icons/fa'
 import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form'
@@ -9,7 +9,7 @@ import swal from 'sweetalert'
 export default function CheckoutForm() {
     const { register, handleSubmit, errors } = useForm();
     const router = useRouter();
-
+        
     const cartItems = useSelector((state) => state.cart.cartItems, shallowEqual);
     const user = useSelector((state) => state.auth.user, shallowEqual);
     const onSubmit = async (data) => {
@@ -36,7 +36,7 @@ export default function CheckoutForm() {
             })
 
             if (response.status === 200) {
-                router.push('/order-received');
+                router.push('/order/[id]', `/order/${response.data.id}`);
             }
             console.log(response);
         }
