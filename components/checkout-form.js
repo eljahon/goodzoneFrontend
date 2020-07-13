@@ -36,7 +36,7 @@ export default function CheckoutForm() {
             })
 
             if (response.status === 200) {
-                router.push('/order/[id]', `/order/${response.data.id}`);
+                router.push('/order/[id]', `/order/${response.data.number}`);
             }
             console.log(response);
         }
@@ -50,19 +50,19 @@ export default function CheckoutForm() {
             <div className="checkout_form-box">
                 <h3 className="form_heading">Ф.И.О</h3>
                 <div className="field_wrapper">
-                    <input type="text" name="customer_name" id="name" required ref={register} />
+                    <input type="text" name="customer_name" id="name" required ref={register} placeholder="Напишите имя" />
                 </div>
             </div>
             <div className="checkout_form-box">
                 <h3 className="form_heading">Адрес</h3>
                 <div className="field_wrapper">
-                    <textarea type="text" name="address" id="address" required ref={register} />
+                    <textarea type="text" name="address" id="address" required ref={register} placeholder="Напишите адрес" />
                 </div>
             </div>
             <div className="checkout_form-box">
                 <h3 className="form_heading">Телефон номер</h3>
                 <div className="field_wrapper">
-                    <input type="tel" name="phone" id="phone" required ref={register} />
+                    <input type="tel" name="phone" id="phone" required ref={register} placeholder="Напишите номер телефона" />
                 </div>
             </div>
             <div className="checkout_form-box">

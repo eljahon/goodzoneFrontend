@@ -11,22 +11,23 @@ export default function OrderDetails({ orderId }) {
     }
         
     const handleSubmit = async () => {
-        try {
-            const response = await axios.get(process.env.PAYMENT_API_URL, {
-                params: {
-                    payment: "click",
-                    order_id: orderId,
-                    secret_key: "b52ca358473ddbbc3a3a3cf374fc4f0c",
-                    amount: 300000
-                }
-            })
+        // try {
+        //     const response = await axios.get(process.env.PAYMENT_API_URL, {
+        //         params: {
+        //             payment: "click",
+        //             order_id: orderId,
+        //             secret_key: "b52ca358473ddbbc3a3a3cf374fc4f0c",
+        //             amount: 300000
+        //         }
+        //     })
             
-            console.log(response);
-        }
-        catch(error) {
-            console.log(error);
-        }
-        // window.location.href = `${process.env.PAYMENT_API_URL}`;
+        //     console.log(response);
+        // }
+        // catch(error) {
+        //     console.log(error);
+        // }
+        
+        window.location.href = `${process.env.PAYMENT_API_URL}?payment=click&order_id=${orderId}&secret_key=b52ca358473ddbbc3a3a3cf374fc4f0c&amount=300000`;
         console.log('submit')
     }
     return (
