@@ -40,7 +40,6 @@ export default function LoginModal({ closeModal, goRegister }) {
                 setLocalStorage("access_token", access_token);
                 dispatch(setUser(data));
                 closeModal();
-                swal("Successfully logged in!");
             }
         } catch (error) {
             swal(error.response.data.Error.Message);

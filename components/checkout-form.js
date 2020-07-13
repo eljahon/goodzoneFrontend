@@ -50,7 +50,7 @@ export default function CheckoutForm() {
             <div className="checkout_form-box">
                 <h3 className="form_heading">Ф.И.О</h3>
                 <div className="field_wrapper">
-                    <input type="text" name="customer_name" id="name" required ref={register} placeholder="Напишите имя" />
+                    <input type="text" name="customer_name" id="name" required ref={register} placeholder="Напишите имя" defaultValue={user ? `${user.lastname} ${user.name}` : ''} />
                 </div>
             </div>
             <div className="checkout_form-box">
@@ -62,7 +62,7 @@ export default function CheckoutForm() {
             <div className="checkout_form-box">
                 <h3 className="form_heading">Телефон номер</h3>
                 <div className="field_wrapper">
-                    <input type="tel" name="phone" id="phone" required ref={register} placeholder="Напишите номер телефона" />
+                    <input type="tel" name="phone" id="phone" required ref={register} placeholder="Напишите номер телефона" defaultValue={user ? user.phone : ''} />
                 </div>
             </div>
             <div className="checkout_form-box">
