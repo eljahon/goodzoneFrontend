@@ -1,4 +1,4 @@
-import React, { useState, memo } from "react";
+import React, { useState, memo, useRef } from "react";
 import { FaSearch } from "react-icons/fa";
 import { useEffect } from "react";
 import useDebounce from "../libs/hooks/useDebounce";
@@ -38,8 +38,29 @@ const SearchBar = () => {
         [debouncedSearchTerm] // Only call effect if debounced search term changes
     );
 
+    const wrapperRef = useRef(null);
+    useOutsideCloseMenu(wrapperRef);
+
+    function useOutsideCloseMenu(ref) {
+        useEffect(() => {
+            function handleClickOutside(event) {
+                if (ref.current && !ref.current.contains(event.target)) {
+                    setSearchTerm("");
+                    setProducts([]);
+                    document.getElementById("searchTerm").value = "";
+                }
+            }
+            document.addEventListener("mousedown", handleClickOutside);
+
+            return () => {
+                document.removeEventListener("mousedown", handleClickOutside);
+            };
+
+        }, [ref]);
+    }
+
     return (
-        <div className="search_box">
+        <div className="search_box" ref={wrapperRef}>
             <div className="search_box-wrapper">
                 <div className="search_input-wrapper">
                     <form>
@@ -51,6 +72,7 @@ const SearchBar = () => {
                             type="text"
                             className="search_box-input"
                             placeholder="Поиск по товарам"
+                            id="searchTerm"
                         />
                     </form>
                 </div>

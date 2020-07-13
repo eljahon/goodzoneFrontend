@@ -131,6 +131,20 @@
             .list_item {
                 display: flex;
                 margin-bottom: 20px;
+                .title {
+                    flex-basis: 210px;
+                    max-width: 210px;
+                    flex-shrink: 0;
+                    position: relative;
+                    font-size: 20px;
+                    font-weight: 700;
+                    color: $link-color;
+                    &:last-child {
+                        flex-basis: auto;
+                        max-width: 100%;
+                        padding-left: 90px;
+                    }
+                }
                 .list_title {
                     flex-basis: 210px;
                     max-width: 210px;

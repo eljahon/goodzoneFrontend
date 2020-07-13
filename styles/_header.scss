@@ -792,10 +792,10 @@ header {
     width: 458px;
     height: auto;
     position: absolute;
-    left: 491px;
-    top: 120px;
+    left: 50%;
+    top: 50%;
     opacity: 1;
-    transform: scale3d(0, 0, 0);
+    transform: translate(-50%, -50%) scale3d(0, 0, 0);
     z-index: 99999;
     padding: 0;
     overflow: auto;
@@ -811,11 +811,11 @@ header {
       width: 458px;
       height: auto;
       position: absolute;
-      left: 20px;
-      top: 50px;
+      left: 50%;
+      top: 50%;
     }
     &.show {
-      transform: scale3d(1, 1, 1);
+      transform: translate(-50%, -50%) scale3d(1, 1, 1);
     }
     .inner_block {
       width: 100%;

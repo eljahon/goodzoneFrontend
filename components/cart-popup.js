@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { FaShoppingBag, FaTimes, FaMinus, FaPlus } from "react-icons/fa";
 import Link from "next/link";
 import { shallowEqual, useSelector, useDispatch } from "react-redux";
@@ -63,9 +63,28 @@ export default function CartPopup() {
         if (vw < 900) document.body.classList.remove("overflow");
     };
 
+    const wrapperRef = useRef(null);
+    useOutsideCloseMenu(wrapperRef);
+
+    function useOutsideCloseMenu(ref) {
+        useEffect(() => {
+            function handleClickOutside(event) {
+                if (ref.current && !ref.current.contains(event.target)) {
+                    setCart(false)
+                }
+            }
+            document.addEventListener("mousedown", handleClickOutside);
+
+            return () => {
+                document.removeEventListener("mousedown", handleClickOutside);
+            };
+
+        }, [ref]);
+    }
+
     return totalQuantity ? (
         <>
-            <div className={`cart_popup ${cart ? "show" : ""}`}>
+            <div className={`cart_popup ${cart ? "show" : ""}`} ref={wrapperRef}>
                 <div className="cart_popup-body">
                     <div className="cart_popup-header">
                         <div className="item_count">

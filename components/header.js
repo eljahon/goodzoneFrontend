@@ -68,7 +68,7 @@ export default function Header({ categories }) {
                     </button>
                     <Link href="/">
                         <a className="logo">
-                            <img src={hasDynamicRouting ? "../logo.png" : "/logo.png"} alt="Goodzone" />
+                            <img src={hasDynamicRouting ? "../logo.svg" : "/logo.svg"} alt="Goodzone" />
                         </a>
                     </Link>
                     <div className="menu">

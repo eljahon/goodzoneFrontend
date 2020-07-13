@@ -26,8 +26,8 @@ export default function OrderDetails({ orderId }) {
         // catch(error) {
         //     console.log(error);
         // }
-        
-        window.location.href = `${process.env.PAYMENT_API_URL}?payment=click&order_id=${orderId}&secret_key=b52ca358473ddbbc3a3a3cf374fc4f0c&amount=300000`;
+
+        window.location.href = `${process.env.PAYMENT_API_URL}?payment=${payment}&order_id=${orderId}&secret_key=b52ca358473ddbbc3a3a3cf374fc4f0c&amount=300000`;
         console.log('submit')
     }
     return (
@@ -65,10 +65,18 @@ export default function OrderDetails({ orderId }) {
                         <h2>Информация о заказе</h2>
                         <div className="list_item">
                             <div className="list_title">
-                                <p>Всего товаров</p>
+                                <p>Холодильник Samsung RT38K5535S8 x 1</p>
                             </div>
                             <div className="list_desc">
-                                <p>6 штук</p>
+                                <p>6 713 750 сум</p>
+                            </div>
+                        </div>
+                        <div className="list_item">
+                            <div className="list_title">
+                                <p>Телевизор Roison KD-49XE8096 x 2</p>
+                            </div>
+                            <div className="list_desc">
+                                <p>23 218 000 сум</p>
                             </div>
                         </div>
                         <div className="list_item">

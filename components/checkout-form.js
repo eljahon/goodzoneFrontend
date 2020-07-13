@@ -36,7 +36,7 @@ export default function CheckoutForm() {
             })
 
             if (response.status === 200) {
-                router.push('/order/[id]', `/order/${response.data.number}`);
+                // router.push('/order/[id]', `/order/${response.data.number}`);
             }
             console.log(response);
         }

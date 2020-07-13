@@ -152,11 +152,9 @@
     min-height: calc(100vh - 190px);
     display: flex;
     flex-direction: column;
-    border-width: 1px;
-    border-style: solid;
-    border-color: $border-color;
-    border-image: initial;
+    border: none;
     background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.16) 0 0 6px;
     @include sm {
         display: none;
         min-height: auto;
@@ -257,13 +255,13 @@
             table.order_table {
                 width: 100%;
                 thead {
-                    background-color: $bg-color;
+                    background-color: $primary-color;
                     tr {
                         th {
                             font-family: $base-font;
                             font-size: 13px;
                             font-weight: 700;
-                            color: $link-color;
+                            color: #fff;
                             padding: 8px 20px;
                             border-width: initial;
                             border-style: none;
