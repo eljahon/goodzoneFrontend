@@ -64,9 +64,6 @@ const SearchBar = () => {
             <div className="search_box-wrapper">
                 <div className="search_input-wrapper">
                     <form>
-                        <span className="search_icon">
-                            <FaSearch />
-                        </span>
                         <input
                             onChange={(e) => setSearchTerm(e.target.value)}
                             type="text"
@@ -74,6 +71,9 @@ const SearchBar = () => {
                             placeholder="Поиск по товарам"
                             id="searchTerm"
                         />
+                        <span className="search_icon">
+                            <FaSearch />
+                        </span>
                     </form>
                 </div>
             </div>
