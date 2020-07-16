@@ -7,7 +7,6 @@ import {
     FaUser,
     FaRegHeart
 } from "react-icons/fa";
-import Link from "next/link";
 import DepartmentsMenu from "./departments-menu";
 import SearchModal from "./search-modal";
 import LoginModal from "./login-modal";
@@ -18,8 +17,9 @@ import SearchBar from "./search-bar";
 import { useRouter } from 'next/router'
 import TopBar from "./top-bar";
 import Headroom from 'react-headroom'
+import { Link, withTranslation } from '../i18n'
 
-export default function Header({ categories }) {
+function Header({ categories, t }) {
     const [menu, setMenu] = useState(false);
     const [searchPopup, setSearchPopup] = useState(false);
     const [loginPopup, setLoginPopup] = useState(false);
@@ -91,7 +91,7 @@ export default function Header({ categories }) {
                                             <span className="menu_icon">
                                                 <FaBars />
                                             </span>
-                                            <span>Все категории</span>
+                                            <span>{t('all-categories')}</span>
                                         </span>
                                         <span className="menu_arrow">
                                             <FaSortDown />
@@ -129,7 +129,7 @@ export default function Header({ categories }) {
                                         <span className="join_icon">
                                             <FaUser />
                                         </span>
-                                        <span className="btn-text">Личный кабинет</span>
+                                        <span className="btn-text">{t('personal-area')}</span>
                                     </button>
                                     <Link href="/account">
                                         <a className="btn join_btn mobile">
@@ -149,7 +149,7 @@ export default function Header({ categories }) {
                                     <span className="join_icon">
                                         <FaSignInAlt />
                                     </span>
-                                    <span className="btn-text">Войти</span>
+                                    <span className="btn-text">{t('login')}</span>
                                 </button>
                             )}
                         <button
@@ -188,3 +188,5 @@ export default function Header({ categories }) {
         </>
     );
 }
+
+export default withTranslation('common')(Header)

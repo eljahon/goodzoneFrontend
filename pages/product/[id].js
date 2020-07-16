@@ -13,8 +13,9 @@ import { numberToPrice } from "../../libs/numberToPrice";
 import { fetchMultipleUrls } from "../../libs/fetchMultipleUrls";
 import RelatedProducts from "../../components/related-products";
 import ProductImageGallery from "../../components/product-image-gallery";
+import { withTranslation } from '../../i18n'
 
-export default function Product({ product: data }) {
+function Product({ product: data, t }) {
     const router = useRouter();
     const dispatch = useDispatch();
 
@@ -68,7 +69,7 @@ export default function Product({ product: data }) {
                                     будет достигать 2-2,5 метров.</p>
                                 )}
                                 <Link href="#details">
-                                    <a className="product_desc-link">О товаре</a>
+                                <a className="product_desc-link">{t('about-product')}</a>
                                 </Link>
                             </div>
                             <div className="product_cart-wrapper">
@@ -84,7 +85,7 @@ export default function Product({ product: data }) {
                                             <FaShoppingBag />
                                         </span>
                                         <span className="btn_text">
-                                            Добавить в корзину
+                                            {t('add-to-cart')}
                                         </span>
                                     </button>
                                 </div>
@@ -97,7 +98,7 @@ export default function Product({ product: data }) {
                                 eventKey="about"
                                 title={
                                     <span>
-                                        <FaBoxOpen /> О товаре
+                                        <FaBoxOpen /> {t('about-product')}
                                     </span>
                                 }
                             >
@@ -181,7 +182,7 @@ export default function Product({ product: data }) {
                                 eventKey="store"
                                 title={
                                     <span>
-                                        <FaStore /> Наличие в магазинах
+                                        <FaStore /> {t('availability-in-stores')}
                                     </span>
                                 }
                             >
@@ -294,6 +295,8 @@ export default function Product({ product: data }) {
         </>
     );
 }
+
+export default withTranslation('common')(Product)
 
 export async function getServerSideProps({ params }) {
     console.log();

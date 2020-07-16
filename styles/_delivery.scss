@@ -3,7 +3,8 @@
     width: 100%;
     img {
         width: 100%;
-        max-height: calc(100vh - 88px);
+        height: calc(100vh - 132px);
+        max-height: calc(100vh - 132px);
         object-fit: cover;
         -o-object-fit: cover;
     }

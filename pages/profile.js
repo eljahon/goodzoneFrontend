@@ -4,8 +4,9 @@ import ProfileNav from "../components/profile-nav";
 import { axiosAuth } from "../libs/axios/axios-instances";
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { withTranslation } from '../i18n'
 
-export default function Profile() {
+function Profile({ t }) {
     const [changePasswordStatus, setChangePasswordStatus] = useState(false);
     const { register, handleSubmit, errors } = useForm();
     const [userData, setUserData] = useState(null);
@@ -44,11 +45,11 @@ export default function Profile() {
                         <div className="settings_form">
                             <div className="settings_form-content">
                                 <div className="heading">
-                                    <h3>Личный кабинет</h3>
+                                    <h3>{t('personal-area')}</h3>
                                 </div>
                                 <form onSubmit={handleSubmit(onSubmit)}>
                                     <div className="input_wrapper">
-                                        <label htmlFor="firstName">Имя</label>
+                                        <label htmlFor="firstName">{t('first-name')}</label>
                                         <input
                                             ref={register}
                                             defaultValue={userData.name}
@@ -60,7 +61,7 @@ export default function Profile() {
                                     </div>
                                     <div className="input_wrapper">
                                         <label htmlFor="lastName">
-                                            Фамилия
+                                            {t('last-name')}
                                         </label>
                                         <input
                                             ref={register}
@@ -72,7 +73,7 @@ export default function Profile() {
                                         />
                                     </div>
                                     <div className="input_wrapper">
-                                        <label htmlFor="phone">Телефон</label>
+                                        <label htmlFor="phone">{t('phone')}</label>
                                         <input
                                             ref={register}
                                             defaultValue={userData.phone}
@@ -92,14 +93,14 @@ export default function Profile() {
                                                 )
                                             }
                                         >
-                                            Изменить пароль
+                                            {t('change-password')}
                                         </button>
                                     </div>
                                     {changePasswordStatus ? (
                                         <>
                                             <div className="input_wrapper">
                                                 <label htmlFor="password">
-                                                    Пароль
+                                                    {t('password')}
                                                 </label>
                                                 <input
                                                     ref={register}
@@ -110,7 +111,7 @@ export default function Profile() {
                                             </div>
                                             <div className="input_wrapper">
                                                 <label htmlFor="passwordConfirm">
-                                                    Подтверждение пароля
+                                                    {t('confirm-password')}
                                                 </label>
                                                 <input
                                                     ref={register}
@@ -125,7 +126,7 @@ export default function Profile() {
                                         <input
                                             type="submit"
                                             className="btn btn_submit"
-                                            value="Обновить"
+                                            value={t('refresh')}
                                         />
                                     </div>
                                 </form>
@@ -138,3 +139,5 @@ export default function Profile() {
         )
     );
 }
+
+export default withTranslation('checkout')(Profile)

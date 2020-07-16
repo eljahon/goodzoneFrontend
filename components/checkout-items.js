@@ -2,8 +2,9 @@ import React from "react";
 import { useSelector, shallowEqual } from "react-redux";
 import { cartTotalPriceSelector } from "../redux/selectors/cartSelectors";
 import { numberToPrice } from "../libs/numberToPrice";
+import { withTranslation } from '../i18n'
 
-export default function CheckoutItems() {
+function CheckoutItems({ t }) {
     const cartItems = useSelector(
         (state) => state.cart.cartItems,
         shallowEqual
@@ -19,7 +20,7 @@ export default function CheckoutItems() {
             <div className="sticky_outer-wrapper">
                 <div className="sticky_inner-wrapper">
                     <div className="order_info">
-                        <h3>Ваш заказ</h3>
+                        <h3>{t('your-order')}</h3>
                         <div className="order_content-wrapper">
                             <div className="order_content">
                                 <div className="items_wrapper">
@@ -47,19 +48,19 @@ export default function CheckoutItems() {
                         </div>
                         <div className="calculation_wrapper">
                             <div className="text_wrapper">
-                                <span>Промежуточный итог</span>
+                                <span>{t('subtotal')}</span>
                                 <span>{numberToPrice(totalPrice)}</span>
                             </div>
                             <div className="text_wrapper">
-                                <span>Стоимость доставки</span>
-                                <span>Бесплатно</span>
+                                <span>{t('cost-of-delivery')}</span>
+                                <span>{t('free')}</span>
                             </div>
                             <div className="text_wrapper">
-                                <span>Скидка</span>
+                                <span>{t('discount')}</span>
                                 <span>0</span>
                             </div>
                             <div className="text_wrapper total">
-                                <span>Итоговая сумма</span>
+                                <span>{t('total-amount')}</span>
                                 <span>{numberToPrice(totalPrice)}</span>
                             </div>
                         </div>
@@ -69,3 +70,5 @@ export default function CheckoutItems() {
         </aside>
     );
 }
+
+export default withTranslation('checkout')(CheckoutItems)

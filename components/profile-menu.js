@@ -1,11 +1,11 @@
 import React from "react";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import { removeLocalStorage } from "../libs/localStorage";
 import { useDispatch } from "react-redux";
 import { logout } from "../redux/actions/authActions/authActions";
+import { withTranslation, Link } from '../i18n'
 
-export default function ProfileMenu({ closeMenu }) {
+function ProfileMenu({ closeMenu, t }) {
     const router = useRouter();
     const dispatch = useDispatch();
 
@@ -22,17 +22,17 @@ export default function ProfileMenu({ closeMenu }) {
                 <li className="menu_item">
                     <Link href="/profile">
                         <a onClick={closeMenu}>
-                            <span className="label">Личный кабинет</span>
+                            <span className="label">{t('personal-area')}</span>
                         </a>
                     </Link>
                     <Link href="/order">
                         <a onClick={closeMenu}>
-                            <span className="label">Заказы</span>
+                            <span className="label">{t('orders')}</span>
                         </a>
                     </Link>
                     <Link href="/logout">
                         <a onClick={(e) => logoutHandler(e)}>
-                            <span className="label">Выйти</span>
+                            <span className="label">{t('exit')}</span>
                         </a>
                     </Link>
                 </li>
@@ -40,3 +40,5 @@ export default function ProfileMenu({ closeMenu }) {
         </div>
     );
 }
+
+export default withTranslation('navigation')(ProfileMenu)

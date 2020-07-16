@@ -1,11 +1,12 @@
 import React, { useRef, useEffect, useState } from 'react'
-import { FaUser, FaSignInAlt, FaLanguage, FaSortDown } from 'react-icons/fa'
+import { FaUser, FaSignInAlt, FaSortDown } from 'react-icons/fa'
 import ProfileMenu from './profile-menu'
 import { useSelector, shallowEqual } from "react-redux";
 import LangMenu from './lang-menu';
-import Link from 'next/link'
+// import Link from 'next/link'
+import { Link, withTranslation, i18n } from '../i18n'
 
-export default function TopBar({ profilePopup, togglePopup, closeMenu, openLoginMenu, hasDynamicRouting }) {
+function TopBar({ profilePopup, togglePopup, closeMenu, openLoginMenu, hasDynamicRouting, t }) {
     const [langMenu, setLangMenu] = useState(false);
     const user = useSelector((state) => state.auth.user, shallowEqual);
 
@@ -34,22 +35,22 @@ export default function TopBar({ profilePopup, togglePopup, closeMenu, openLogin
             <ul className="top_bar-list">
                 <li className="menu_item">
                     <Link href="/promo">
-                        <a>Акции и скидки</a>
+                        <a>{t('promo')}</a>
                     </Link>
                 </li>
                 <li className="menu_item">
                     <Link href="/shops">
-                        <a>Магазины</a>
+                        <a>{t('shops')}</a>
                     </Link>
                 </li>
                 <li className="menu_item">
                     <Link href="/delivery">
-                        <a>Доставка</a>
+                        <a>{t('delivery')}</a>
                     </Link>
                 </li>
                 <li className="menu_item">
                     <Link href="/news">
-                        <a>Блог</a>
+                        <a>{t('blog')}</a>
                     </Link>
                 </li>
             </ul>
@@ -57,15 +58,25 @@ export default function TopBar({ profilePopup, togglePopup, closeMenu, openLogin
                 <li className="list_item">
                     <div className="popover">
                         <div className="popover_handler">
-                            <button
-                                className="btn join_btn"
-                                onClick={() => setLangMenu(!langMenu)}
-                            >
-                                <span className="join_icon">
-                                    <img src={hasDynamicRouting ? '../images/russia.svg' : 'images/russia.svg'} alt="Русский"/>
-                                </span>
-                                <span className="btn-text">Русский</span>
-                            </button>
+                            {i18n.language === 'ru' ?
+                                <button
+                                    className="btn join_btn"
+                                    onClick={() => setLangMenu(!langMenu)}
+                                >
+                                    <span className="join_icon">
+                                        <img src={hasDynamicRouting ? '../images/russia.svg' : 'images/russia.svg'} alt="Русский" />
+                                    </span>
+                                    <span className="btn-text">Русский</span>
+                                </button> :
+                                <button
+                                    className="btn join_btn"
+                                    onClick={() => setLangMenu(!langMenu)}
+                                >
+                                    <span className="join_icon">
+                                        <img src={hasDynamicRouting ? '../images/uzb.svg' : 'images/uzb.svg'} alt="Русский" />
+                                    </span>
+                                    <span className="btn-text">O'zbek</span>
+                                </button>}
                         </div>
                         {langMenu ? <LangMenu hasDynamicRouting={hasDynamicRouting} closeMenu={() => setLangMenu(false)} /> : ""}
                     </div>
@@ -81,7 +92,7 @@ export default function TopBar({ profilePopup, togglePopup, closeMenu, openLogin
                                     <span className="join_icon">
                                         <FaUser />
                                     </span>
-                                    <span className="btn-text">Личный кабинет</span>
+                                    <span className="btn-text">{t('personal-area')}</span>
                                     <span className="join_icon">
                                         <FaSortDown />
                                     </span>
@@ -97,7 +108,7 @@ export default function TopBar({ profilePopup, togglePopup, closeMenu, openLogin
                                 <span className="join_icon">
                                     <FaSignInAlt />
                                 </span>
-                                <span className="btn-text">Войти</span>
+                                <span className="btn-text">{t('login')}</span>
                             </button>
                         )}
                 </li>
@@ -105,3 +116,5 @@ export default function TopBar({ profilePopup, togglePopup, closeMenu, openLogin
         </div>
     )
 }
+
+export default withTranslation('navigation')(TopBar)

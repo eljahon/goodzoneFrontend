@@ -7,8 +7,9 @@ import Link from "next/link";
 import { numberToPrice } from "../libs/numberToPrice";
 import { Spinner } from "react-bootstrap";
 import { LazyImage } from "./lazy-image";
+import { withTranslation } from '../i18n'
 
-const SearchBar = () => {
+const SearchBar = ({ t }) => {
     const [searchTerm, setSearchTerm] = useState("");
     const [products, setProducts] = useState([]);
     const [isFetching, setIsFetching] = useState(false);
@@ -68,7 +69,7 @@ const SearchBar = () => {
                             onChange={(e) => setSearchTerm(e.target.value)}
                             type="text"
                             className="search_box-input"
-                            placeholder="Поиск по товарам"
+                            placeholder={t('product-search')}
                             id="searchTerm"
                         />
                         <span className="search_icon">
@@ -87,57 +88,57 @@ const SearchBar = () => {
                             </Spinner>
                         </div>
                     ) : (
-                        <>
-                            <ul className="results_list">
-                                {products.map((product) => {
-                                    return (
-                                        <li
-                                            className="search_result"
-                                            key={product.id}
-                                        >
-                                            <Link
-                                                href="/product/[id]"
-                                                as={`/product/${product.slug}`}
+                            <>
+                                <ul className="results_list">
+                                    {products.map((product) => {
+                                        return (
+                                            <li
+                                                className="search_result"
+                                                key={product.id}
                                             >
-                                                <a className="product_card">
-                                                    <div className="product_image">
-                                                        <LazyImage
-                                                            src={product.image}
-                                                            alt={product.name}
-                                                        />
-                                                    </div>
-                                                    <div className="product_info">
-                                                        <h3>{product.name}</h3>
-                                                        <span className="price">
-                                                            {numberToPrice(
-                                                                product.price
-                                                                    .price
-                                                            )}
-                                                        </span>
-                                                    </div>
-                                                </a>
-                                            </Link>
-                                        </li>
-                                    );
-                                })}
-                            </ul>
-                            <div className="product_meta">
-                                <Link href="/">
-                                    <a>Посмотреть все товары</a>
-                                </Link>
-                            </div>
-                        </>
-                    )}
+                                                <Link
+                                                    href="/product/[id]"
+                                                    as={`/product/${product.slug}`}
+                                                >
+                                                    <a className="product_card">
+                                                        <div className="product_image">
+                                                            <LazyImage
+                                                                src={product.image}
+                                                                alt={product.name}
+                                                            />
+                                                        </div>
+                                                        <div className="product_info">
+                                                            <h3>{product.name}</h3>
+                                                            <span className="price">
+                                                                {numberToPrice(
+                                                                    product.price
+                                                                        .price
+                                                                )}
+                                                            </span>
+                                                        </div>
+                                                    </a>
+                                                </Link>
+                                            </li>
+                                        );
+                                    })}
+                                </ul>
+                                <div className="product_meta">
+                                    <Link href="/">
+                                        <a>{t('view-all-products')}</a>
+                                    </Link>
+                                </div>
+                            </>
+                        )}
                 </div>
             ) : null}
             {searchTerm.length && !products ? (
                 <div className="search_results">
                     {/* <h4>ТОВАРЫ</h4> */}
-                    <div className="msg">Товары не найдены</div>
+                    <div className="msg">{t('products-not-found')}</div>
                 </div>
             ) : null}
         </div>
     );
 };
 
-export default memo(SearchBar);
+export default withTranslation('common')(memo(SearchBar));

@@ -1,29 +1,29 @@
+import { withTranslation } from '../i18n'
 
-
-export default function OrderDetails() {
+function OrderDetails({ t }) {
     return (
         <div className="order_details">
-            <h3 className="title">Информация для заказа</h3>
+            <h3 className="title">{t('order-info')}</h3>
             <div className="delivery_info">
                 <div className="delivery_address">
-                    <h3>Адресс доставки</h3>
+                    <h3>{t('delivery-address')}</h3>
                     <span>1756  Roy Alley, GIRARDVILLE, Pennsylvania</span>
                 </div>
                 <div className="calculation">
                     <div className="price_row">
-                        <span>Промежуточный итог</span>
+                        <span>{t('subtotal')}</span>
                         <span className="price">7 918 000 сум</span>
                     </div>
                     <div className="price_row">
-                        <span>Скидка</span>
+                        <span>{t('discount')}</span>
                         <span className="price">0%</span>
                     </div>
                     <div className="price_row">
-                        <span>Стоимость доставки</span>
-                        <span className="price">Бесплатный</span>
+                        <span>{t('cost-of-delivery')}</span>
+                        <span className="price">{t('free')}</span>
                     </div>
                     <div className="price_row">
-                        <span>Итоговая сумма</span>
+                        <span>{t('total-amount')}</span>
                         <span className="price">7 918 000 сум</span>
                     </div>
                 </div>
@@ -35,9 +35,9 @@ export default function OrderDetails() {
                             <table className="order_table">
                                 <thead>
                                     <tr>
-                                        <th>Товары</th>
-                                        <th>Количество</th>
-                                        <th>Сумма</th>
+                                        <th>{t('products')}</th>
+                                        <th>{t('quantity')}</th>
+                                        <th>{t('amount')}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -84,3 +84,5 @@ export default function OrderDetails() {
         </div>
     )
 }
+
+export default withTranslation('checkout')(OrderDetails)

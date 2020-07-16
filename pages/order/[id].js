@@ -1,15 +1,15 @@
 import SEO from "../../components/seo";
 import Footer from "../../components/footer";
-import Link from "next/link";
 import { useState } from "react";
 import axios from 'axios'
+import { withTranslation, Link } from '../../i18n'
 
-export default function OrderDetails({ orderId }) {
+function OrderDetails({ orderId, t }) {
     const [payment, setPayment] = useState("click");
     const handleChange = (e) => {
         setPayment(e.target.value);
     }
-        
+
     const handleSubmit = async () => {
         // try {
         //     const response = await axios.get(process.env.PAYMENT_API_URL, {
@@ -20,7 +20,7 @@ export default function OrderDetails({ orderId }) {
         //             amount: 300000
         //         }
         //     })
-            
+
         //     console.log(response);
         // }
         // catch(error) {
@@ -37,32 +37,32 @@ export default function OrderDetails({ orderId }) {
             <div className="order_received-wrapper">
                 <div className="order_received-container">
                     <Link href="/">
-                        <a className="btn home_btn">Вернуться на главную</a>
+                        <a className="btn home_btn">{t('back-to-home')}</a>
                     </Link>
                     <div className="order_info">
-                        <h2>Заявка принята</h2>
-                        <p>Спасибо. Ваш заказ был получен.</p>
+                        <h2>{t('application-accepted')}</h2>
+                        <p>{t('thanks')}</p>
                         <div className="info_block-wrapper">
                             <div className="info_block">
-                                <p className="title">Номер заказа</p>
+                                <p className="title">{t('order-number')}</p>
                                 <p>{orderId}</p>
                             </div>
                             <div className="info_block">
-                                <p className="title">Дата</p>
+                                <p className="title">{t('date')}</p>
                                 <p>июнь 24, 2020 - 22:38</p>
                             </div>
                             <div className="info_block">
-                                <p className="title">Итоговая сумма</p>
+                                <p className="title">{t('total-amount')}</p>
                                 <p>12 461 000 сум</p>
                             </div>
                             <div className="info_block">
-                                <p className="title">Способ оплаты</p>
-                                <p>Наличные</p>
+                                <p className="title">{t('payment-method')}</p>
+                                <p>{t('cash')}</p>
                             </div>
                         </div>
                     </div>
                     <div className="order_info">
-                        <h2>Информация о заказе</h2>
+                        <h2>{t('order-info')}</h2>
                         <div className="list_item">
                             <div className="list_title">
                                 <p>Холодильник Samsung RT38K5535S8 x 1</p>
@@ -81,23 +81,23 @@ export default function OrderDetails({ orderId }) {
                         </div>
                         <div className="list_item">
                             <div className="list_title">
-                                <p>Способ доставки</p>
+                                <p>{t('delivery-method')}</p>
                             </div>
                             <div className="list_desc">
-                                <p>Самовывоз</p>
+                                <p>{t('pickup')}</p>
                             </div>
                         </div>
                         <div className="list_item">
                             <div className="list_title">
-                                <p>Способ оплаты</p>
+                                <p>{t('payment-method')}</p>
                             </div>
                             <div className="list_desc">
-                                <p>Наличные</p>
+                                <p>{t('cash')}</p>
                             </div>
                         </div>
                         <div className="list_item">
                             <div className="list_title">
-                                <p>Итоговая сумма</p>
+                                <p>{t('total-amount')}</p>
                             </div>
                             <div className="list_desc">
                                 <p>12 461 000 сум</p>
@@ -105,19 +105,19 @@ export default function OrderDetails({ orderId }) {
                         </div>
                         <div className="list_item pay_now">
                             <div className="list_title">
-                                <p>Заплатить сейчас:</p>
+                                <p>{t('pay-now')}:</p>
                             </div>
                             <div className="list_desc">
                                 <select name="payment" id="payment" defaultValue="click" onChange={(e) => handleChange(e)}>
-                                    <option value="cash">Наличные</option>
-                                    <option value="terminal">Терминал</option>
+                                    <option value="cash">{t('cash')}</option>
+                                    <option value="terminal">{t('terminal')}</option>
                                     <option value="click">Click</option>
                                     <option value="payme">Payme</option>
                                     <option value="unired">Unired</option>
                                 </select>
                                 {(payment == "click" || payment == "payme") ?
-                                 <button className="btn btn_pay" onClick={() => handleSubmit()}>Заплатить сейчас</button>
-                                  : ''}
+                                    <button className="btn btn_pay" onClick={() => handleSubmit()}>{t('pay-now')}</button>
+                                    : ''}
                             </div>
                         </div>
                     </div>
@@ -128,6 +128,8 @@ export default function OrderDetails({ orderId }) {
         </>
     );
 }
+
+export default withTranslation('checkout')(OrderDetails)
 
 export async function getServerSideProps({ params }) {
     const orderId = params.id;

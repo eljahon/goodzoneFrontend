@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
 import { FaShoppingBag, FaTimes, FaMinus, FaPlus } from "react-icons/fa";
-import Link from "next/link";
 import { shallowEqual, useSelector, useDispatch } from "react-redux";
 import {
     cartTotalPriceSelector,
@@ -13,8 +12,9 @@ import {
 } from "../redux/actions/cartActions/cartActions";
 import { numberToPrice } from "../libs/numberToPrice";
 import { LazyImage } from "./lazy-image";
+import { withTranslation, Link } from '../i18n'
 
-export default function CartPopup() {
+function CartPopup({ t }) {
     const [cart, setCart] = useState(false);
 
     const dispatch = useDispatch();
@@ -91,8 +91,8 @@ export default function CartPopup() {
                             <FaShoppingBag />
                             <span>
                                 {totalQuantity === 1
-                                    ? `${totalQuantity} Предмет`
-                                    : `${totalQuantity} Предметы`}
+                                    ? `${totalQuantity} ${t('item')}`
+                                    : `${totalQuantity} ${t('items')}`}
                             </span>
                         </div>
                         <button
@@ -155,7 +155,7 @@ export default function CartPopup() {
                                                         )}
                                                     </span>
                                                     <span className="item_total mobile">
-                                                        <span>Сумма: </span>
+                                                        <span>{t('amount')}: </span>
                                                         {numberToPrice(
                                                             totalProductPrice
                                                         )}
@@ -180,8 +180,8 @@ export default function CartPopup() {
                                         );
                                     })
                                 ) : (
-                                    <p>No items in the cart</p>
-                                )}
+                                        <p>No items in the cart</p>
+                                    )}
                             </div>
                         </div>
                         <div className="bottom_box">
@@ -194,7 +194,7 @@ export default function CartPopup() {
                     <div className="checkout_button-wrapper">
                         <Link href="/checkout">
                             <a className="btn checkout_button">
-                                <span className="btn_text">Оформить заказ</span>
+                                <span className="btn_text">{t('checkout')}</span>
                                 <span className="price_box">
                                     {numberToPrice(totalPrice)}
                                 </span>
@@ -209,11 +209,13 @@ export default function CartPopup() {
                         <FaShoppingBag />
                     </span>
                     {totalQuantity === 1
-                        ? `${totalQuantity} Предмет`
-                        : `${totalQuantity} Предметы`}
+                        ? `${totalQuantity} ${t('item')}`
+                        : `${totalQuantity} ${t('items')}`}
                 </span>
                 <span className="price">{numberToPrice(totalPrice)}</span>
             </button>
         </>
     ) : null;
 }
+
+export default withTranslation('common')(CartPopup)

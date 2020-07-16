@@ -5,8 +5,9 @@ import { useDispatch } from "react-redux";
 import { asyncAddToCartAction } from "../redux/actions/cartActions/cartActions";
 import { numberToPrice } from "../libs/numberToPrice";
 import { LazyImage } from "./lazy-image";
+import { withTranslation } from '../i18n'
 
-const ProductListItem = ({ product, view, carousel }) => {
+const ProductListItem = ({ product, view, carousel, t }) => {
     const dispatch = useDispatch();
 
     const addToCart = () => {
@@ -19,7 +20,7 @@ const ProductListItem = ({ product, view, carousel }) => {
             lg={view === "row" ? "12" : "3"}
             className={`products_col ${view === "col" ? "mobile" : ""} ${
                 carousel ? "carousel_col" : ""
-            }`}
+                }`}
         >
             <div className={`product_card ${view === "row" ? "view_row" : ""}`}>
                 <Link href="/product/[id]" as={`/product/${product.slug}`}>
@@ -45,7 +46,7 @@ const ProductListItem = ({ product, view, carousel }) => {
                             <span className="btn_icon">
                                 <FaShoppingBasket />
                             </span>
-                            <span className="btn_text">Добавить в корзину</span>
+                            <span className="btn_text">{t('add-to-cart')}</span>
                         </button>
                     </div>
                 </div>
@@ -54,4 +55,4 @@ const ProductListItem = ({ product, view, carousel }) => {
     );
 };
 
-export default ProductListItem;
+export default withTranslation('common')(ProductListItem);

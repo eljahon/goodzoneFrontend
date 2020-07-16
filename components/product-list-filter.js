@@ -3,8 +3,9 @@ import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import { toggleBrand } from "../redux/actions/filterActions/filterActions";
 import RangeSlider from "./react-slider";
 import { FaTimes } from "react-icons/fa";
+import { withTranslation } from '../i18n'
 
-export default function ProductListFilter({ brands, isOpenPopup, closePopup }) {
+function ProductListFilter({ brands, isOpenPopup, closePopup, t }) {
     const dispatch = useDispatch();
 
     const filterBrands = useSelector(
@@ -29,35 +30,35 @@ export default function ProductListFilter({ brands, isOpenPopup, closePopup }) {
                                 <FaTimes />
                             </button>
                             <form>
-                                <h3>Фильтр</h3>
+                                <h3>{t('filter')}</h3>
                                 <div className="filter_group">
-                                    <h5>Фильтрация по цене</h5>
+                                    <h5>{t('filter-by-price')}</h5>
                                     <RangeSlider />
                                 </div>
                                 <div className="filter_group">
-                                    <h5>Бренды</h5>
+                                    <h5>{t('brands')}</h5>
                                     {brands
                                         ? brands.map((brand) => (
-                                              <div
-                                                  key={brand.id}
-                                                  className="check_box"
-                                              >
-                                                  <input
-                                                      onChange={() =>
-                                                          handleToggle(brand.id)
-                                                      }
-                                                      type="checkbox"
-                                                      name={brand.name}
-                                                      id={brand.name}
-                                                      checked={filterBrands.includes(
-                                                          brand.id
-                                                      )}
-                                                  />
-                                                  <label htmlFor={brand.name}>
-                                                      {brand.name}
-                                                  </label>
-                                              </div>
-                                          ))
+                                            <div
+                                                key={brand.id}
+                                                className="check_box"
+                                            >
+                                                <input
+                                                    onChange={() =>
+                                                        handleToggle(brand.id)
+                                                    }
+                                                    type="checkbox"
+                                                    name={brand.name}
+                                                    id={brand.name}
+                                                    checked={filterBrands.includes(
+                                                        brand.id
+                                                    )}
+                                                />
+                                                <label htmlFor={brand.name}>
+                                                    {brand.name}
+                                                </label>
+                                            </div>
+                                        ))
                                         : null}
                                 </div>
                             </form>
@@ -68,3 +69,5 @@ export default function ProductListFilter({ brands, isOpenPopup, closePopup }) {
         </aside>
     );
 }
+
+export default withTranslation('common')(ProductListFilter)
