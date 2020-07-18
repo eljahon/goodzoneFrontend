@@ -262,6 +262,11 @@
                         padding-right: 4px;
                         white-space: nowrap;
                     }
+                    &.btn_unired {
+                        margin-left: 15px;
+                        background-color: $border-color;
+                        color: $primary-color;
+                    }
                 }
                 .counter {
                     display: flex;

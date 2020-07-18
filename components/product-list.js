@@ -45,10 +45,7 @@ function ProductList({ products, brands, t }) {
             <div className="content">
                 <Breadcrumb>
                     <Breadcrumb.Item onClick={() => router.push("/")}>
-                        Главная
-                    </Breadcrumb.Item>
-                    <Breadcrumb.Item onClick={() => router.push("/")}>
-                        Телевизоры, Hi-Fi, аудио
+                        {t('main')}
                     </Breadcrumb.Item>
                     <Breadcrumb.Item active>
                         {products?.length ? products[0].category.name : null}

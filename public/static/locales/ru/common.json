@@ -20,5 +20,12 @@
     "sort-by-price-descending": "Сортировка по цене: по убыванию",
     "about-product": "О товаре",
     "availability-in-stores": "Наличие в магазинах",
-    "related-products": "Сопутствующие товары"
+    "related-products": "Сопутствующие товары",
+    "main": "Главная",
+    "back": "Назад",
+    "calculate-by-unired": "Рассчитать по UNIRED",
+    "login": "Войти",
+    "get-unired-card": "Получить карту Unired",
+    "per-month-unired": "в месяц при покупке через Unired",
+    "payment-plan-for": "Рассрочка оформляется на 9 месяцев"
 }

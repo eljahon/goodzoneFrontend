@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Tabs, Tab, Breadcrumb, Badge } from "react-bootstrap";
 import { useRouter } from "next/router";
 import Link from "next/link";
@@ -14,8 +14,10 @@ import { fetchMultipleUrls } from "../../libs/fetchMultipleUrls";
 import RelatedProducts from "../../components/related-products";
 import ProductImageGallery from "../../components/product-image-gallery";
 import { withTranslation } from '../../i18n'
+import UniredPopup from "../../components/unired-popup";
 
 function Product({ product: data, t }) {
+    const [uniredPopup, setUniredPopup] = useState(false);
     const router = useRouter();
     const dispatch = useDispatch();
 
@@ -31,10 +33,7 @@ function Product({ product: data, t }) {
                 <div className="product_container">
                     <Breadcrumb>
                         <Breadcrumb.Item onClick={() => router.push("/")}>
-                            Главная
-                        </Breadcrumb.Item>
-                        <Breadcrumb.Item onClick={() => router.push("/")}>
-                            Телевизоры, Hi-Fi, аудио
+                            {t('main')}
                         </Breadcrumb.Item>
                         <Breadcrumb.Item
                             onClick={() =>
@@ -88,8 +87,17 @@ function Product({ product: data, t }) {
                                             {t('add-to-cart')}
                                         </span>
                                     </button>
+                                    <button
+                                        className="btn cart_btn btn_unired"
+                                        onClick={() => setUniredPopup(true)}
+                                    >
+                                        <span className="btn_text">
+                                            {t('calculate-by-unired')}
+                                        </span>
+                                    </button>
                                 </div>
                             </div>
+                            {uniredPopup ? <UniredPopup closePopup={() => setUniredPopup(false)} data={data} /> : ''}
                         </div>
                     </div>
                     <div className="details_container" id="details">

@@ -20,5 +20,12 @@
     "sort-by-price-descending": "Narx bo'yicha saralangan: kamayish bo'yicha",
     "about-product": "Tovar haqida",
     "availability-in-stores": "Do'konlarda mavjudligi",
-    "related-products": "Tegishli mahsulotlar"
+    "related-products": "Tegishli mahsulotlar",
+    "main": "Bosh sahifa",
+    "back": "Orqaga",
+    "calculate-by-unired": "UNIRED tomonidan hisoblang",
+    "login": "Kirish",
+    "get-unired-card": "Unired kartasini olish",
+    "per-month-unired": "oyiga Unired kartasi orqali sotib olinganda",
+    "payment-plan-for": "To'lov 9 oyga bo'lib to'lanadi"
 }

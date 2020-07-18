@@ -3,8 +3,9 @@ import Carousel from "react-multi-carousel";
 import ReactImageMagnify from "react-image-magnify";
 import { FaArrowLeft } from "react-icons/fa";
 import { LazyImage } from "./lazy-image";
+import { withTranslation } from '../i18n'
 
-export default function ProductImageGallery({ data }) {
+function ProductImageGallery({ data, t }) {
     const { gallery } = data;
 
     const [image, setImage] = useState(data.image);
@@ -40,7 +41,7 @@ export default function ProductImageGallery({ data }) {
                     <span className="btn_icon">
                         <FaArrowLeft />
                     </span>
-                    <span className="btn_text">Назад</span>
+                    <span className="btn_text">{t('back')}</span>
                 </button>
             </div>
             <div className="product_image">
@@ -96,3 +97,5 @@ export default function ProductImageGallery({ data }) {
         </div>
     );
 }
+
+export default withTranslation('common')(ProductImageGallery)
