@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { asyncAddToCartAction } from "../redux/actions/cartActions/cartActions";
 import { numberToPrice } from "../libs/numberToPrice";
 import { LazyImage } from "./lazy-image";
-import { withTranslation } from '../i18n'
+import { withTranslation, i18n } from '../i18n'
 
 const ProductListItem = ({ product, view, carousel, t }) => {
     const dispatch = useDispatch();
@@ -23,7 +23,7 @@ const ProductListItem = ({ product, view, carousel, t }) => {
                 }`}
         >
             <div className={`product_card ${view === "row" ? "view_row" : ""}`}>
-                <Link href="/product/[id]" as={`/product/${product.slug}`}>
+                <Link href={`${i18n.language === 'ru' ? '' : '/uz'}/product/[id]`} as={`${i18n.language === 'ru' ? '' : '/uz'}/product/${product.slug}`}>
                     <a className="product_image">
                         <LazyImage
                             src={product.image}
@@ -33,7 +33,7 @@ const ProductListItem = ({ product, view, carousel, t }) => {
                     </a>
                 </Link>
                 <div className="product_info">
-                    <Link href="/product/[id]" as={`/product/${product.slug}`}>
+                    <Link href={`${i18n.language === 'ru' ? '' : '/uz'}/product/[id]`} as={`${i18n.language === 'ru' ? '' : '/uz'}/product/${product.slug}`}>
                         <a>
                             <h3 className="product_title">{product.name}</h3>
                             <span className="product_price">

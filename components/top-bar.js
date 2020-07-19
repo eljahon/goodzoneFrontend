@@ -6,8 +6,9 @@ import LangMenu from './lang-menu';
 // import Link from 'next/link'
 import { Link, withTranslation, i18n } from '../i18n'
 
-function TopBar({ profilePopup, togglePopup, closeMenu, openLoginMenu, hasDynamicRouting, t }) {
+function TopBar({ openLoginMenu, hasDynamicRouting, t }) {
     const [langMenu, setLangMenu] = useState(false);
+    const [profileMenu, setProfileMenu] = useState(false);
     const user = useSelector((state) => state.auth.user, shallowEqual);
 
     const wrapperRef = useRef(null);
@@ -17,7 +18,7 @@ function TopBar({ profilePopup, togglePopup, closeMenu, openLoginMenu, hasDynami
         useEffect(() => {
             function handleClickOutside(event) {
                 if (ref.current && !ref.current.contains(event.target)) {
-                    closeMenu();
+                    setProfileMenu(false);
                     setLangMenu(false);
                 }
             }
@@ -87,7 +88,7 @@ function TopBar({ profilePopup, togglePopup, closeMenu, openLoginMenu, hasDynami
                             <div className="popover_handler">
                                 <button
                                     className="btn join_btn"
-                                    onClick={togglePopup}
+                                    onClick={() => setProfileMenu(!profileMenu)}
                                 >
                                     <span className="join_icon">
                                         <FaUser />
@@ -98,7 +99,7 @@ function TopBar({ profilePopup, togglePopup, closeMenu, openLoginMenu, hasDynami
                                     </span>
                                 </button>
                             </div>
-                            {profilePopup ? <ProfileMenu closeMenu={closeMenu} /> : ""}
+                            {profileMenu ? <ProfileMenu closeMenu={() => setProfileMenu(false)} /> : ""}
                         </div>
                     ) : (
                             <button

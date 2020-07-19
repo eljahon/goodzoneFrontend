@@ -31,7 +31,6 @@ function Header({ categories, t }) {
     };
 
     const user = useSelector((state) => state.auth.user, shallowEqual);
-    console.log("user", user);
 
     const router = useRouter();
     const hasDynamicRouting = router.query.id;
@@ -44,6 +43,7 @@ function Header({ categories, t }) {
             function handleClickOutside(event) {
                 if (ref.current && !ref.current.contains(event.target)) {
                     setMenu(false)
+                    setProfilePopup(false)
                 }
             }
             document.addEventListener("mousedown", handleClickOutside);

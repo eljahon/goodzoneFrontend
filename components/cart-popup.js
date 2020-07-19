@@ -34,7 +34,7 @@ function CartPopup({ t }) {
 
     const reduceCartItemQuantityHandler = (cartItem) => {
         if (cartItem.quantity === 1)
-            dispatch(asyncRemoveFromCartAction(cartItem));
+            return;
         else dispatch(asyncReduceCartItemQuantityAction(cartItem));
     };
     const removeFromCartHandler = (cartItem) => {

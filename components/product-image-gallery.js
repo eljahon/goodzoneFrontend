@@ -4,11 +4,14 @@ import ReactImageMagnify from "react-image-magnify";
 import { FaArrowLeft } from "react-icons/fa";
 import { LazyImage } from "./lazy-image";
 import { withTranslation } from '../i18n'
+import { useRouter } from 'next/router'
 
 function ProductImageGallery({ data, t }) {
     const { gallery } = data;
 
     const [image, setImage] = useState(data.image);
+
+    const Router = useRouter();
 
     useEffect(() => {
         setImage(data.image);

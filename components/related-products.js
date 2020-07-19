@@ -7,7 +7,7 @@ import { Col } from "react-bootstrap";
 import { LazyImage } from "./lazy-image";
 import { useDispatch } from "react-redux";
 import { useCallback } from "react";
-import { withTranslation } from '../i18n'
+import { withTranslation, i18n } from '../i18n'
 
 function RelatedProducts({ products, addToCart, t }) {
     const dispatch = useDispatch();
@@ -52,8 +52,8 @@ function RelatedProducts({ products, addToCart, t }) {
                     >
                         <div className="product_card">
                             <Link
-                                href="/product/[id]"
-                                as={`/product/${product.slug}`}
+                                href={`${i18n.language === 'ru' ? '' : '/uz'}/product/[id]`}
+                                as={`${i18n.language === 'ru' ? '' : '/uz'}/product/${product.slug}`}
                             >
                                 <a className="product_image">
                                     <LazyImage
@@ -65,8 +65,8 @@ function RelatedProducts({ products, addToCart, t }) {
                             </Link>
                             <div className="product_info">
                                 <Link
-                                    href="/product/[id]"
-                                    as={`/product/${product.slug}`}
+                                    href={`${i18n.language === 'ru' ? '' : '/uz'}/product/[id]`}
+                                    as={`${i18n.language === 'ru' ? '' : '/uz'}/product/${product.slug}`}
                                 >
                                     <a>
                                         <h3 className="product_title">

@@ -78,7 +78,6 @@ const SearchBar = ({ t }) => {
                     </form>
                 </div>
             </div>
-            {console.log("searchTerm :>> ", searchTerm)}
             {products?.length ? (
                 <div className="search_results">
                     {isFetching ? (

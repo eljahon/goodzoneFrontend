@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { FaArrowRight, FaTimes } from "react-icons/fa";
+import { i18n } from '../i18n'
 
 export default function DepartmentsMenu({ categories, closeMenu }) {
     const [loaded, setLoaded] = useState(false);
@@ -13,9 +14,9 @@ export default function DepartmentsMenu({ categories, closeMenu }) {
     return (
         <div className={`popover_content ${loaded ? "show" : ""}`}>
             <div className="drawer_header">
-                <Link href="/">
+                <Link href={i18n.language === 'ru' ? '/' : '/uz'}>
                     <a>
-                        <img src={"/logo.png"} alt="Goodzone" />
+                        <img src="/logo.png" alt="Goodzone" />
                     </a>
                 </Link>
                 <button className="btn btn_close" onClick={closeMenu}>
@@ -28,8 +29,8 @@ export default function DepartmentsMenu({ categories, closeMenu }) {
                 {categories.map((item) => (
                     <li key={item.id} className="menu_item">
                         <Link
-                            href="/category/[id]"
-                            as={`/category/${item.slug}`}
+                            href={`${i18n.language === 'ru' ? '' : '/uz'}/category/[id]`}
+                            as={`${i18n.language === 'ru' ? '' : '/uz'}/category/${item.slug}`}
                         >
                             <a onClick={(e) => e.preventDefault()}>
                                 <span className="label">
@@ -50,8 +51,8 @@ export default function DepartmentsMenu({ categories, closeMenu }) {
                                         ? item.children.map((child) => (
                                               <Link
                                                   key={child.id}
-                                                  href="/category/[id]"
-                                                  as={`/category/${child.slug}`}
+                                                  href={`${i18n.language === 'ru' ? '' : '/uz'}/category/[id]`}
+                                                  as={`${i18n.language === 'ru' ? '' : '/uz'}/category/${child.slug}`}
                                               >
                                                   <a onClick={closeMenu}>{child.name}</a>
                                               </Link>
