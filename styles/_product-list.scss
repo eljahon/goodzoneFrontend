@@ -449,6 +449,9 @@ main {
             width: auto;
             color: $primary-color;
             background-color: transparent;
+            & > * {
+              pointer-events: none;
+            }
             @include sm {
               height: 32px;
             }
@@ -483,6 +486,33 @@ main {
                   text-indent: 0;
                   line-height: initial;
                 }
+              }
+            }
+            .cart-item {
+              position: absolute;
+              top: 0;
+              left: 0;
+              z-index: 9999;
+              width: 100px;
+              height: 100px;
+              padding: 10px;
+              border-radius: 50%;
+              visibility: hidden;
+              overflow: hidden;
+              background-color: #fff;
+              box-shadow: rgba(0, 0, 0, 0.16) 0 21px 36px;
+              transition: all 1s ease;
+              img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+              }
+            }
+            &.addtocart {
+              pointer-events: all;
+              .cart-item {
+                visibility: visible;
+                transform: translate(500px, -100px);
               }
             }
           }
@@ -580,5 +610,24 @@ main {
         }
       }
     }
+  }
+}
+
+.react-multi-carousel-item {
+  transform-style: flat !important;
+}
+
+@keyframes shakeCart {
+  25% {
+    transform:translateX(6px)
+  }
+  50% {
+    transform:translateX(-4px);
+  }
+  75% {
+    transform:translateX(2px);
+  }
+  100% {
+    transform:translateX(0);
   }
 }

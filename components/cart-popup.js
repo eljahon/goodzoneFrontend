@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { FaShoppingBag, FaTimes, FaMinus, FaPlus } from "react-icons/fa";
+import { FaShoppingBag, FaTimes, FaMinus, FaPlus, FaBoxOpen } from "react-icons/fa";
 import { shallowEqual, useSelector, useDispatch } from "react-redux";
 import {
     cartTotalPriceSelector,
@@ -44,13 +44,13 @@ function CartPopup({ t }) {
         dispatch(asyncAddToCartAction(cartItem));
     };
 
-    useEffect(() => {
-        if (!totalQuantity) {
-            setCart(false);
-            document.body.classList.remove("overflow");
-        }
-        return () => document.body.classList.remove("overflow");
-    }, [totalQuantity]);
+    // useEffect(() => {
+    //     if (!totalQuantity) {
+    //         setCart(false);
+    //         document.body.classList.remove("overflow");
+    //     }
+    //     return () => document.body.classList.remove("overflow");
+    // }, [totalQuantity]);
 
     const openPopup = () => {
         const vw = window.innerWidth;
@@ -82,7 +82,7 @@ function CartPopup({ t }) {
         }, [ref]);
     }
 
-    return totalQuantity ? (
+    return (
         <>
             <div className={`cart_popup ${cart ? "show" : ""}`} ref={wrapperRef}>
                 <div className="cart_popup-body">
@@ -90,7 +90,7 @@ function CartPopup({ t }) {
                         <div className="item_count">
                             <FaShoppingBag />
                             <span>
-                                {totalQuantity === 1
+                                {totalQuantity < 2
                                     ? `${totalQuantity} ${t('item')}`
                                     : `${totalQuantity} ${t('items')}`}
                             </span>
@@ -180,7 +180,12 @@ function CartPopup({ t }) {
                                         );
                                     })
                                 ) : (
-                                        <p>No items in the cart</p>
+                                        <>
+                                            <div className="no_product-img">
+                                                <FaBoxOpen />
+                                            </div>
+                                            <span className="no_product-msg">{t('cart-empty')}</span>
+                                        </>
                                     )}
                             </div>
                         </div>
@@ -191,7 +196,8 @@ function CartPopup({ t }) {
                             <div className="inner_box" />
                         </div>
                     </div>
-                    <div className="checkout_button-wrapper">
+                    {cartItems.length ?
+                     <div className="checkout_button-wrapper">
                         <Link href="/checkout">
                             <a className="btn checkout_button">
                                 <span className="btn_text">{t('checkout')}</span>
@@ -200,22 +206,22 @@ function CartPopup({ t }) {
                                 </span>
                             </a>
                         </Link>
-                    </div>
+                    </div> : ''}
                 </div>
             </div>
-            <button className="btn cart_button" onClick={() => openPopup()}>
+            <button id="cartButton" className="btn cart_button" onClick={() => openPopup()}>
                 <span className="total_items">
                     <span>
                         <FaShoppingBag />
                     </span>
-                    {totalQuantity === 1
+                    {totalQuantity < 2
                         ? `${totalQuantity} ${t('item')}`
                         : `${totalQuantity} ${t('items')}`}
                 </span>
                 <span className="price">{numberToPrice(totalPrice)}</span>
             </button>
         </>
-    ) : null;
+    )
 }
 
 export default withTranslation('common')(CartPopup)

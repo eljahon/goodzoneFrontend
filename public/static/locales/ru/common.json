@@ -27,5 +27,6 @@
     "login": "Войти",
     "get-unired-card": "Получить карту Unired",
     "per-month-unired": "в месяц при покупке через Unired",
-    "payment-plan-for": "Рассрочка оформляется на 9 месяцев"
+    "payment-plan-for": "Рассрочка оформляется на 9 месяцев",
+    "cart-empty": "Корзина пуста"
 }

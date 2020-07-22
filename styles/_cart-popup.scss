@@ -22,6 +22,9 @@
   border-color: initial;
   border-image: initial;
   outline: 0;
+  &.shake {
+    animation: shakeCart .4s ease-in-out forwards;
+  }
   @include sm {
     flex-direction: row;
     justify-content: space-between;
@@ -304,6 +307,28 @@
                 font-size: 14px;
               }
             }
+          }
+          .no_product-img {
+            display: flex;
+            -webkit-box-align: center;
+            align-items: center;
+            -webkit-box-pack: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            margin-top: 50px;
+            svg {
+              fill: $primary-color;
+              font-size: 140px;
+            }
+          }
+          .no_product-msg {
+            font-size: 15px;
+            font-weight: 700;
+            color: $span-color;
+            display: block;
+            width: 100%;
+            text-align: center;
+            padding: 40px 0px;
           }
         }
       }
