@@ -389,11 +389,6 @@ header {
           }
           .menu_item {
             font-family: $base-font;
-            &:last-child a:hover {
-              & + .dropdown_menu {
-                padding: 0;
-              }
-            }
             a {
               font-size: 15px;
               font-weight: 700;
@@ -482,6 +477,9 @@ header {
                     }
                   }
                 }
+              }
+              &.empty {
+                padding: 0;
               }
             }
           }

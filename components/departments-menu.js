@@ -44,7 +44,7 @@ export default function DepartmentsMenu({ categories, closeMenu }) {
                                 </span>
                             </a>
                         </Link>
-                        <ul className="dropdown_menu">
+                        <ul className={`dropdown_menu ${item.children ? '' : 'empty'}`}>
                             <li>
                                 <div className="content">
                                     {item.children

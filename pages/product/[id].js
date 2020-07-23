@@ -334,10 +334,9 @@ function Product({ product: data, t }) {
 
 export default withTranslation('common')(Product)
 
-export async function getServerSideProps({ params }) {
-    console.log();
+export async function getServerSideProps({ params, req }) {
 
-    const urls = [`${process.env.PRODUCT_API_URL}/${params.id}`];
+    const urls = [`${process.env.PRODUCT_API_URL}/${params.id}?lang=${req.i18n.language}`];
 
     const [{ product }] = await fetchMultipleUrls(urls);
 

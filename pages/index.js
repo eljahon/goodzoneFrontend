@@ -48,8 +48,8 @@ function Home({ products, t }) {
 export default withTranslation('common')(Home)
 
 
-export async function getServerSideProps() {
-    const urls = [process.env.PRODUCT_API_URL];
+export async function getServerSideProps({ req }) {
+    const urls = [`${process.env.PRODUCT_API_URL}?lang=${req.i18n.language}`];
     const [{ products }] = await fetchMultipleUrls(urls);
 
     return {

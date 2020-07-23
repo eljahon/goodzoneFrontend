@@ -11,6 +11,7 @@ import {
     clearFilters,
     getPrices,
 } from "../../redux/actions/filterActions/filterActions";
+import { i18n } from '../../i18n'
 
 export default function Category({ categoryProducts, categoryId, query }) {
     const dispatch = useDispatch();
@@ -18,8 +19,8 @@ export default function Category({ categoryProducts, categoryId, query }) {
     const [brands, setBrands] = useState([]);
     useEffect(() => {
         axios
-            .get(process.env.BRAND_API_URL)
-            .then((response) => {
+                .get(process.env.BRAND_API_URL)
+                .then((response) => {
                 const {
                     data: { brands },
                 } = response;
@@ -70,7 +71,7 @@ export default function Category({ categoryProducts, categoryId, query }) {
     useEffect(() => {
         axios
             .get(
-                `${process.env.PRODUCT_API_URL}?brand=${filterBrands.join(
+                `${process.env.PRODUCT_API_URL}?lang=${i18n.language}&brand=${filterBrands.join(
                     ","
                 )}&category=${categoryId}${
                     filterPriceRange.length
@@ -97,7 +98,7 @@ export default function Category({ categoryProducts, categoryId, query }) {
     );
 }
 
-export async function getServerSideProps({ query }) {
+export async function getServerSideProps({ query, req }) {
     const urls = [process.env.CATEGORY_API_URL];
 
     const [{ categories }] = await fetchMultipleUrls(urls);
@@ -115,7 +116,7 @@ export async function getServerSideProps({ query }) {
     });
 
     const [{ products: categoryProducts }] = await fetchMultipleUrls([
-        `${process.env.PRODUCT_API_URL}?category=${categoryId}`,
+        `${process.env.PRODUCT_API_URL}?category=${categoryId}&lang=${req.i18n.language}`,
     ]);
 
     return {
