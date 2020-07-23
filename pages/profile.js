@@ -38,7 +38,7 @@ function Profile({ t }) {
     return (
         userData && (
             <>
-                <SEO title="Goodzone" />
+                <SEO title={t('personal-area')} />
                 <div className="profile_wrapper">
                     <ProfileNav activeTab="profile" />
                     <div className="profile_content">

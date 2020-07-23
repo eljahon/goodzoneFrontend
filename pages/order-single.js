@@ -6,7 +6,7 @@ import OrderDetails from "../components/order-details";
 export default function OrderSingle() {
     return (
         <>
-            <SEO title="Goodzone" />
+            <SEO />
             <div className="profile_wrapper">
                 <ProfileNav activeTab="order" />
                 <div className="order_box">

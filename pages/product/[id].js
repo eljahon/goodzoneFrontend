@@ -52,11 +52,16 @@ function Product({ product: data, t }) {
         }, 2000)        
     }
     
-    console.log(data)
+    console.log(data);
 
     return (
         <>
-            <SEO title="Интернет магазин GOODZONE" />
+            <SEO 
+                title={data.meta.title ? data.meta.title : data.name}
+                description={data.meta.description ? data.meta.description : data.preview_text.replace(/(<([^>]+)>)/gi, "")}
+                image={data.image}
+                keywords={data.meta.tags}
+            />
             <div className="product_wrapper">
                 <div className="product_container">
                     <Breadcrumb>

@@ -32,7 +32,7 @@ function Home({ products, t }) {
 
     return (
         <>
-            <SEO title="Интернет магазин GOODZONE" />
+            <SEO />
             <HomeSplash />
             <Products title={t('new-arrivals')} data={products} />
             <Banner double />

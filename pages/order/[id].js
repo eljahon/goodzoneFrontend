@@ -32,7 +32,7 @@ function OrderDetails({ orderId, t }) {
     }
     return (
         <>
-            <SEO title="Заявка принята | Интернет магазин GOODZONE" />
+            <SEO title={t('application-accepted')} />
 
             <div className="order_received-wrapper">
                 <div className="order_received-container">

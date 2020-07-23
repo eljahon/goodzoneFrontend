@@ -4,7 +4,7 @@ import Footer from "../../components/footer";
 export default function Template() {
     return (
         <>
-            <SEO title="Goodzone" />
+            <SEO />
             <section className="section_container">
                 <article className="delivery_content">
                     <div className="img_wrapper">

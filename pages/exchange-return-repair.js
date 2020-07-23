@@ -4,7 +4,7 @@ import Footer from "../components/footer"
 export default function ExchangeReturnRepair() {
     return (
         <>
-            <SEO title="Goodzone" />
+            <SEO />
             <div className="delivery_splash">
                 <img src="images/exchange.jpg" alt="Goodzone Questions" />
             </div>

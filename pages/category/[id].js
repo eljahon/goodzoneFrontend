@@ -90,7 +90,11 @@ export default function Category({ categoryProducts, categoryId, query }) {
 
     return (
         <>
-            <SEO title="Интернет магазин GOODZONE" />
+            <SEO 
+                title={categoryProducts[0].category.name}
+                description={categoryProducts[0].category.description}
+                image={categoryProducts[0].category.image}
+            />
             <ProductList products={filteredProducts} brands={brands} />
             <CartPopup />
             <Footer />

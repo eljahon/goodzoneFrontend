@@ -32,7 +32,7 @@ function Promo({ t }) {
     ];
     return (
         <>
-            <SEO title="Goodzone promo" />
+            <SEO title={t('promo')} />
 
             <section className="promo_container">
                 <div className="promo_content">

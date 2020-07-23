@@ -16,7 +16,7 @@ function Footer({ t }) {
                         <Link href="/about">
                             <a>{t('about-company')}</a>
                         </Link>
-                        <Link href="/branches">
+                        <Link href="/shops">
                             <a>{t('address-shops')}</a>
                         </Link>
                     </Col>

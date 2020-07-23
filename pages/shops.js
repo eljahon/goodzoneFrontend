@@ -78,7 +78,7 @@ export default function Shops() {
     }
     return (
         <>
-            <SEO title="Goodzone интернет магазин" />
+            <SEO />
             <section className="map_block" id="map">
                 <div className="branches_content">
                     <BranchMap mapState={mapState} branches={branches} openInfo={stateMapInfo} />

@@ -49,7 +49,7 @@ function News({ t }) {
     ];
     return (
         <>
-            <SEO title="Goodzone promo" />
+            <SEO title={t('news')} />
 
             <section className="news_container">
                 <div className="news_content">

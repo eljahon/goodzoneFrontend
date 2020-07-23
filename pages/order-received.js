@@ -10,7 +10,7 @@ export default function OrderReceived() {
     }
     return (
         <>
-            <SEO title="Заявка принята | Интернет магазин GOODZONE" />
+            <SEO title="Заявка принята" />
 
             <div className="order_received-wrapper">
                 <div className="order_received-container">

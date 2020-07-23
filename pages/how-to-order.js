@@ -1,11 +1,10 @@
 import SEO from "../components/seo";
 import Footer from "../components/footer";
-import Link from "next/link";
 
 export default function HowToOrder() {
     return (
         <>
-            <SEO title="Goodzone" />
+            <SEO />
             <section className="section_container">
                 <article className="delivery_content">
                     <h1>Как сделать покупку?</h1>
