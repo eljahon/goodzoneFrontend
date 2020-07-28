@@ -14,8 +14,8 @@ const Layout = ({ children }) => {
             } = response;
             setCategories(categories);
         });
-    }, []);
-
+    }, [i18n.language]);
+    
     console.log("categories :>> ", categories);
 
     return categories ? (

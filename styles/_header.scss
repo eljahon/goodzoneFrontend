@@ -1202,10 +1202,19 @@ header {
             flex-direction: column;
             justify-content: space-between;
             color: #fff;
+            @include sm {
+              top: 10px;
+              bottom: 10px;
+              right: 10px;
+            }
             h3 {
               font-family: $head-font;
               font-size: 21px;
               font-weight: 700;
+              @include sm {
+                font-size: 12px;
+                font-weight: 500;
+              }
             }
             .actions {
               .btn {
@@ -1218,6 +1227,11 @@ header {
                 color: #fff;
                 border: 1px solid #fff;
                 font-size: 15px;
+                @include sm {
+                  width: 90%;
+                  padding: 3px 5px;
+                  font-size: 10px;
+                }
               }
               .cart_btn {
                 display: flex;
@@ -1234,6 +1248,9 @@ header {
                   align-items: center;
                   svg {
                     font-size: 16px;
+                    @include sm {
+                      font-size: 12px;
+                    }
                   }
                 }
               }
@@ -1242,6 +1259,9 @@ header {
               font-size: 15px;
               font-weight: 400;
               margin-bottom: 0;
+              @include sm {
+                font-size: 8px;
+              }
             }
           }
         }
