@@ -1,7 +1,9 @@
 import SEO from "../../components/seo";
 import Footer from "../../components/footer";
+import { fetchMultipleUrls } from "../../libs/fetchMultipleUrls";
 
-export default function Template() {
+export default function NewSingle({ data }) {
+    console.log(data)
     return (
         <>
             <SEO />
@@ -20,4 +22,17 @@ export default function Template() {
             <Footer />
         </>
     );
+}
+
+export async function getServerSideProps({ params, req }) {
+
+    const urls = [`${process.env.NEWS_API_URL}/${params.id}?lang=${req.i18n.language}`];
+
+    const [{ data }] = await fetchMultipleUrls(urls);
+
+    console.log(urls)
+
+    return {
+        props: { data },
+    };
 }

@@ -1,12 +1,15 @@
 import React from "react";
-import SEO from "../../components/seo";
-import Footer from "../../components/footer";
+import Link from 'next/link'
+import SEO from "../components/seo";
+import Footer from "../components/footer";
 import { Row, Col } from "react-bootstrap";
 import { FaLongArrowAltRight } from "react-icons/fa";
-import { withTranslation, Link } from '../../i18n'
+import { withTranslation, i18n } from '../i18n'
+import { fetchMultipleUrls } from "../libs/fetchMultipleUrls";
+import { getLocaleDate } from '../libs/getLocaleDate'
 
-function News({ t }) {
-    const news = [
+function News({ t, news }) {
+    const staticNews = [
         {
             title:
                 "Apple объявила дату конференции WWDC 2020. Она пройдет онлайн",
@@ -47,6 +50,9 @@ function News({ t }) {
             image: "images/news_6.jpg",
         },
     ];
+
+    console.log(news)
+
     return (
         <>
             <SEO title={t('news')} />
@@ -55,25 +61,25 @@ function News({ t }) {
                 <div className="news_content">
                     <h1>{t('news')}</h1>
                     <Row className="products_row">
-                        {news.map((news, i) => (
+                        {news.map(news => (
                             <Col
-                                key={i}
+                                key={news.id}
                                 sm={12}
                                 lg={4}
                                 className="products_col"
                             >
                                 <div className="product_card">
-                                    <Link href="/news/template">
+                                    <Link href={`${i18n.language === 'ru' ? '' : '/uz'}/news/[id]`} as={`${i18n.language === 'ru' ? '' : '/uz'}/news/${news.slug}`}>
                                         <a className="product_image">
                                             <img
-                                                src={news.image}
+                                                src={news.preview_image}
                                                 alt={news.title}
                                                 className="img-fluid"
                                             />
                                         </a>
                                     </Link>
                                     <div className="product_info">
-                                        <Link href="/promo/template">
+                                        <Link href={`${i18n.language === 'ru' ? '' : '/uz'}/news/[id]`} as={`${i18n.language === 'ru' ? '' : '/uz'}/news/${news.slug}`}>
                                             <a>
                                                 <h3 className="product_title">
                                                     {news.title}
@@ -81,13 +87,13 @@ function News({ t }) {
                                             </a>
                                         </Link>
                                         <div className="product_desc">
-                                            {news.desc}
+                                            {news.description}
                                         </div>
                                         <div className="product_meta">
                                             <span className="date">
-                                                13 июня
+                                                {getLocaleDate(news.updated_at)}
                                             </span>
-                                            <Link href="/news/template">
+                                            <Link href={`${i18n.language === 'ru' ? '' : '/uz'}/news/[id]`} as={`${i18n.language === 'ru' ? '' : '/uz'}/news/${news.slug}`}>
                                                 <a className="btn product_btn">
                                                     <span className="btn_text">
                                                         {t('read-more')}
@@ -112,3 +118,14 @@ function News({ t }) {
 }
 
 export default withTranslation('footer')(News)
+
+export async function getServerSideProps({ req }) {
+    const urls = [`${process.env.NEWS_API_URL}?lang=${req.i18n.language}`];
+    const [{ news }] = await fetchMultipleUrls(urls);
+    
+    return {
+        props: {
+            news,
+        },
+    };
+}
