@@ -67,6 +67,9 @@
                             display: inline-block;
                             margin-right: 15px;
                         }
+                        .start_date b, .end_date b {
+                            padding: 0 3px;
+                        }
                     }
                     .offer_timer {
                         display: flex;

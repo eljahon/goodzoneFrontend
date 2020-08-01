@@ -57,8 +57,8 @@ function Product({ product: data, t }) {
     return (
         <>
             <SEO 
-                title={data.meta.title ? data.meta.title : data.name}
-                description={data.meta.description ? data.meta.description : data.preview_text.replace(/(<([^>]+)>)/gi, "")}
+                title={data.meta.title || data.name}
+                description={data.meta.description || data.preview_text.replace(/(<([^>]+)>)/gi, "")}
                 image={data.image}
                 keywords={data.meta.tags}
             />
