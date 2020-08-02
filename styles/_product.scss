@@ -183,6 +183,7 @@
             border-style: initial;
             border-color: initial;
             border-image: initial;
+            overflow-x: hidden;
         }
         h1 {
             font-family: $head-font;
@@ -529,11 +530,19 @@
                         align-items: center;
                         &.danger svg {
                             fill: #dc3545;
-                            margin-right: 5px;
+                            margin-right: 5px; 
                         }
                         &.secondary svg {
                             fill: #6c757d;
-                            margin-right: 5px;
+                            margin-right: 5px; 
+                        }
+                        &.warning svg {
+                            fill: #ffc107;
+                            margin-right: 5px; 
+                        }
+                        &.success svg {
+                            fill: #28a745;
+                            margin-right: 5px; 
                         }
                     }
                 }

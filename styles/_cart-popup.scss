@@ -197,6 +197,9 @@
           height: auto;
           max-height: calc(100vh - 145px);
           background-color: rgb(255, 255, 255);
+          @include sm {
+            max-height: calc(100vh - 145px - 150px);
+          }
           .item_box {
             font-size: 15px;
             font-weight: 700;
@@ -331,6 +334,26 @@
             padding: 40px 0px;
           }
         }
+      }
+      .btn.clear_btn {
+        display: none;
+        position: relative;
+        top: 0;
+        left: 50%;
+        width: 50%;
+        height: 44px;
+        // display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background-color: $primary-color;
+        font-size: 15px;
+        font-weight: 700;
+        color: #ffffff;
+        padding: 0 30px;
+        margin: 30px auto;
+        overflow: hidden;
+        border-radius: 28px;
+        transform: translateX(-50%);
       }
       .right_box {
         position: absolute;

@@ -56,23 +56,15 @@ function CartPopup({ t }) {
         dispatch(asyncAddToCartAction(cartItem));
     };
 
-    // useEffect(() => {
-    //     if (!totalQuantity) {
-    //         setCart(false);
-    //         document.body.classList.remove("overflow");
-    //     }
-    //     return () => document.body.classList.remove("overflow");
-    // }, [totalQuantity]);
-
     const openPopup = () => {
-        const vw = window.innerWidth;
+        // const vw = window.innerWidth;
         setCart(true);
-        if (vw < 900) document.body.classList.add("overflow");
+        // if (vw < 900) document.body.classList.add("overflow");
     };
     const closePopup = () => {
-        const vw = window.innerWidth;
+        // const vw = window.innerWidth;
         setCart(false);
-        if (vw < 900) document.body.classList.remove("overflow");
+        // if (vw < 900) document.body.classList.remove("overflow");
     };
 
     const checkUser = (event) => {
@@ -220,6 +212,11 @@ function CartPopup({ t }) {
                                     )}
                             </div>
                         </div>
+                        <button
+                            className="btn clear_btn"
+                        >
+                            {t('clear-cart')}
+                        </button>
                         <div className="bottom_box">
                             <div className="inner_box" />
                         </div>

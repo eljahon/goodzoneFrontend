@@ -29,5 +29,14 @@
     "per-month-unired": "в месяц при покупке через Unired",
     "payment-plan-for": "Рассрочка оформляется на 9 месяцев",
     "cart-empty": "Корзина пуста",
-    "sitename": "Интернет магазин GOODZONE"
+    "sitename": "Интернет магазин GOODZONE",
+    "not": "Нет",
+    "few": "Мало",
+    "enough": "Достаточно",
+    "lot": "Много",
+    "shop": "Магазин",
+    "address": "Адрес",
+    "operating-mode": "Режим работы",
+    "availibility-in-store": "Наличие в магазине",
+    "clear-cart": "Очистить корзину"
 }

@@ -58,7 +58,7 @@ function UniredPopup({ closePopup, t, data }) {
                         </div>
                         <div className="content">
                             <h3>
-                                <span>{numberToPrice(data.prices[0].price / 9)} </span>
+                                <span>{numberToPrice(Math.round(data.prices[0].price / 9))} </span>
                                 {t('per-month-unired')}
                             </h3>
                             <div className="actions">

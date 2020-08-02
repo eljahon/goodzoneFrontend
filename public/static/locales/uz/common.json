@@ -29,5 +29,14 @@
     "per-month-unired": "oyiga Unired kartasi orqali sotib olinganda",
     "payment-plan-for": "To'lov 9 oyga bo'lib to'lanadi",
     "cart-empty": "Savatda hech narsa yo'q",
-    "sitename": "GOODZONE internet-do'koni"
+    "sitename": "GOODZONE internet-do'koni",
+    "not": "Yo'q",
+    "few": "Kam",
+    "enough": "Yetarli",
+    "lot": "Ko'p",
+    "shop": "Do'kon",
+    "address": "Manzil",
+    "operating-mode": "Ish vaqti",
+    "availibility-in-store": "Do'konlarda mavjudligi",
+    "clear-cart": "Savatni tozalash"
 }

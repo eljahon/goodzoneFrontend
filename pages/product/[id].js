@@ -170,10 +170,10 @@ function Product({ product: data, t, shops }) {
                                     <table>
                                         <thead>
                                             <tr>
-                                                <th>Магазин</th>
-                                                <th>Адрес</th>
-                                                <th>Режим работы</th>
-                                                <th>Наличие в магазине</th>
+                                                <th>{t('shop')}</th>
+                                                <th>{t('address')}</th>
+                                                <th>{t('operating-mode')}</th>
+                                                <th>{t('availibility-in-store')}</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -183,9 +183,10 @@ function Product({ product: data, t, shops }) {
                                                     <td>{item.shop.address}</td>
                                                     <td>{item.shop.working_hours}</td>
                                                     <td>
-                                                        <span className="td_icon danger">
-                                                            <FaCircle /> Мало
-                                                    </span>
+                                                        <span className={`td_icon ${item.quantity == 0 ? 'secondary' : (item.quantity < 6 ? 'danger' : (item.quantity < 11 ? 'warning' : 'success'))}`}>
+                                                            <FaCircle />
+                                                            {item.quantity == 0 ? t('not') : (item.quantity < 6 ? t('few') : (item.quantity < 11 ? t('enough') : t('lot')))}
+                                                        </span>
                                                     </td>
                                                 </tr>
                                             ))}
