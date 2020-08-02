@@ -3,6 +3,7 @@ import { FaTimes, FaShoppingBag } from "react-icons/fa";
 import { withTranslation } from '../i18n'
 import { asyncAddToCartAction } from "../redux/actions/cartActions/cartActions";
 import { useDispatch } from 'react-redux'
+import { numberToPrice } from "../libs/numberToPrice";
 
 function UniredPopup({ closePopup, t, data }) {
     const [load, setLoad] = useState(false);
@@ -57,7 +58,7 @@ function UniredPopup({ closePopup, t, data }) {
                         </div>
                         <div className="content">
                             <h3>
-                                <span>328,133 сум </span>
+                                <span>{numberToPrice(data.prices[0].price / 9)} </span>
                                 {t('per-month-unired')}
                             </h3>
                             <div className="actions">

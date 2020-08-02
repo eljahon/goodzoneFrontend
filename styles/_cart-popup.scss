@@ -125,7 +125,7 @@
     border-radius: 6px;
     @include sm {
       width: 100vw;
-      height: 100vh;
+      height: calc(100vh - 70px);
       overflow: hidden;
     }
     .cart_popup-header {

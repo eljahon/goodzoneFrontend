@@ -121,14 +121,17 @@ function Product({ product: data, t, shops }) {
                                             <img src={data.image} alt={data.name} />
                                         </span>
                                     </button>
-                                    <button
-                                        className="btn cart_btn btn_unired"
-                                        onClick={() => setUniredPopup(true)}
-                                    >
-                                        <span className="btn_text">
-                                            {t('calculate-by-unired')}
-                                        </span>
-                                    </button>
+                                    {
+                                        data.prices[0].price != 0 ?
+                                            <button
+                                                className="btn cart_btn btn_unired"
+                                                onClick={() => setUniredPopup(true)}
+                                            >
+                                                <span className="btn_text">
+                                                    {t('calculate-by-unired')}
+                                                </span>
+                                            </button> : ''
+                                    }
                                 </div>
                             </div>
                             {uniredPopup ? <UniredPopup closePopup={() => setUniredPopup(false)} data={data} /> : ''}
