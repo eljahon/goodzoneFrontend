@@ -134,11 +134,12 @@ export default function RegisterModal({ closeModal, login, goCheckout }) {
                                             placeholder="Подтверждение пароля"
                                             required
                                         />
-                                        <input
+                                        <button
                                             type="submit"
                                             className="btn btn_submit"
-                                            value="Регистрация"
-                                        />
+                                        >
+                                            Регистрация
+                                        </button>
                                     </form>
                                     <p className="auth_form-offer">
                                         <span>Уже есть аккаунт? </span>

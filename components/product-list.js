@@ -47,8 +47,11 @@ function ProductList({ products, brands, t }) {
                     <Breadcrumb.Item onClick={() => router.push("/")}>
                         {t('main')}
                     </Breadcrumb.Item>
+                    {/* <Breadcrumb.Item active>
+                        {products.length ? products[0].category.parent.name : null}
+                    </Breadcrumb.Item> */}
                     <Breadcrumb.Item active>
-                        {products?.length ? products[0].category.name : null}
+                        {products.length ? products[0].category.name : null}
                     </Breadcrumb.Item>
                 </Breadcrumb>
                 <div className="control_bar">
@@ -85,7 +88,7 @@ function ProductList({ products, brands, t }) {
                             <button
                                 className={`controls_icon ${
                                     view === "col" ? "active" : ""
-                                }`}
+                                    }`}
                                 onClick={() => setView("col")}
                             >
                                 <span className="btn_icon">
@@ -95,7 +98,7 @@ function ProductList({ products, brands, t }) {
                             <button
                                 className={`controls_icon ${
                                     view === "row" ? "active" : ""
-                                }`}
+                                    }`}
                                 onClick={() => setView("row")}
                             >
                                 <span className="btn_icon">
@@ -108,14 +111,14 @@ function ProductList({ products, brands, t }) {
                 <Row className="products_row">
                     {products
                         ? products.map((product) => {
-                              return (
-                                  <ProductListItem
-                                      key={product.id}
-                                      product={product}
-                                      view={view}
-                                  />
-                              );
-                          })
+                            return (
+                                <ProductListItem
+                                    key={product.id}
+                                    product={product}
+                                    view={view}
+                                />
+                            );
+                        })
                         : "No products"}
                 </Row>
             </div>

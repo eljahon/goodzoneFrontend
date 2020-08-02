@@ -143,11 +143,12 @@ export default function LoginModal({ closeModal, goRegister, goCheckout }) {
                                                 placeholder="Пароль"
                                                 required
                                             />
-                                            <input
+                                            <button
                                                 type="submit"
                                                 className="btn btn_submit"
-                                                value="Войти"
-                                            />
+                                            >
+                                                Войти
+                                            </button>
                                         </form>
                                         <p className="auth_form-offer">
                                             <span>У вас нет аккаунта? </span>

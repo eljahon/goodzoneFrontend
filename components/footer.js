@@ -58,7 +58,10 @@ function Footer({ t }) {
                         <a href="https://mover.uz/channel/GOODZONE" target="_blank" rel="noopener noreferrer"><FaVideo /></a>
                     </Col>
                 </Row>
-                <p className="copyright">{t('copyright')}</p>
+                <div className="copyright">
+                    <p>{t('copyright')}</p>
+                    <p>Created by <a href="https://udevs.io" target="_blank" rel="noreferrer noopener">Udevs</a></p>
+                </div>
             </Container>
         </footer>
     )
