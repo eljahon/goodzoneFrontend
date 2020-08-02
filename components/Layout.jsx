@@ -8,7 +8,6 @@ const Layout = ({ children }) => {
     const [categories, setCategories] = useState(null);
     useEffect(() => {
         axios(`${process.env.CATEGORY_API_URL}?lang=${i18n.language}`).then((response) => {
-            console.log("data :>> ", response);
             const {
                 data: { categories },
             } = response;

@@ -16,10 +16,12 @@ import ProductImageGallery from "../../components/product-image-gallery";
 import { withTranslation } from '../../i18n'
 import UniredPopup from "../../components/unired-popup";
 
-function Product({ product: data, t }) {
+function Product({ product: data, t, shops }) {
     const [uniredPopup, setUniredPopup] = useState(false);
     const router = useRouter();
     const dispatch = useDispatch();
+
+    console.log('shops', shops)
 
     const addToCartHandler = (event) => {
         const button = event.target;
@@ -36,7 +38,7 @@ function Product({ product: data, t }) {
         setTimeout(() => {
             cartItem.style.transform = `translate(${translateX}, ${translateY}) scale(0.3)`;
             cartItem.style.opacity = '0.7';
-        }, 200); 
+        }, 200);
         setTimeout(() => {
             dispatch(asyncAddToCartAction(data));
             cartButton.classList.add('shake');
@@ -49,14 +51,14 @@ function Product({ product: data, t }) {
             cartItem.style.transform = `translate(0, 0) scale(1)`;
             cartItem.style.opacity = '1';
             button.style.pointerEvents = 'all';
-        }, 2000)        
+        }, 2000)
     }
-    
+
     console.log(data);
 
     return (
         <>
-            <SEO 
+            <SEO
                 title={data.meta.title || data.name}
                 description={data.meta.description || data.preview_text.replace(/(<([^>]+)>)/gi, "")}
                 image={data.image}
@@ -94,11 +96,7 @@ function Product({ product: data, t }) {
                                         }}
                                     ></p>
                                 ) : (
-                                        <p className="product_desc">Диагональ экрана {data.name} равна 32 дюймам
-                                    (80 см). Благодаря этому вы сможете
-                                    закрепить его на стене в небольшой комнате,
-                                    при этом оптимальное расстояние до экрана
-                                    будет достигать 2-2,5 метров.</p>
+                                        <img src={data.brand.image} alt={data.name} className="brand_image" />
                                     )}
                                 <Link href="#details">
                                     <a className="product_desc-link">{t('about-product')}</a>
@@ -154,72 +152,7 @@ function Product({ product: data, t }) {
                                         }}
                                     ></div>
                                 ) : (
-                                        <div className="details_wrapper">
-                                            <h3>Full HD</h3>
-                                            <p>
-                                                Откройте для себя выдающиеся
-                                                изображения высокой четкости с
-                                                точным разрешением Full HD 1366х768
-                                                и улучшенными цветами для более
-                                                синего неба, зеленой травы и более
-                                                реалистичными оттенками кожи,
-                                                которые оживляют исключительную
-                                                яркость и энергоэффективность
-                                                светодиодов.
-                                        </p>
-                                            <h3>Лучше и ярче</h3>
-                                            <p>
-                                                Для того чтоб просмотр был лучше и
-                                                ярче, в этой модели используется
-                                                светодиодные подсветки, что
-                                                обеспечивает непревзойденную
-                                                передачу цветов и исключает по краям
-                                                экрана образование засветленных
-                                                областей.
-                                        </p>
-                                            <h3>Smart TV</h3>
-                                            <p>
-                                                Посмотреть видеоролики и фильмы
-                                                онлайн трясляцией прямо на экране
-                                                вам поможет функция Smart TV. А так
-                                                же управлять всеми функциями
-                                                дистанционно. Для того чтобы
-                                                подключить его к сети Интернет можно
-                                                воспользоваться апортом LAN или
-                                                беспроводным модулем Wi-Fi.
-                                        </p>
-                                            <h2>Характеристики:</h2>
-                                            <h3>Экран</h3>
-                                            <ul>
-                                                <li>Диагональ: 32" (81 см)</li>
-                                                <li>Формат экрана: 16:9</li>
-                                                <li>Разрешение: 1366x768</li>
-                                                <li>Full HD: нет, HD</li>
-                                                <li>
-                                                    Светодиодная подсветка: есть,
-                                                    Direct LED
-                                            </li>
-                                                <li>Частота обновления: 60 Гц</li>
-                                                <li>Технология 3D: нет</li>
-                                                <li>
-                                                    Технология Smart TV: да, webOS
-                                            </li>
-                                            </ul>
-                                            <h3>Прием сигнала</h3>
-                                            <ul>
-                                                <li>
-                                                    Телевизионные стандарты: PAL,
-                                                    NTSC, SECAM
-                                            </li>
-                                                <li>
-                                                    Тюнеры: DVB-T / T2 , DVB-S / S2
-                                            </li>
-                                                <li>
-                                                    Автоматическая настройка: есть
-                                            </li>
-                                                <li>Ручная настройка: есть</li>
-                                            </ul>
-                                        </div>
+                                        ''
                                     )}
                             </Tab>
                             <Tab
@@ -241,86 +174,18 @@ function Product({ product: data, t }) {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>GOODZONE Шахристан</td>
-                                                <td>
-                                                    г. Ташкент, Юнусабадский
-                                                    р-н, ул. А. Тимура 129Б
-                                                </td>
-                                                <td>
-                                                    с 10-00 до 21-00 (без
-                                                    выходных)
-                                                </td>
-                                                <td>
-                                                    <span className="td_icon danger">
-                                                        <FaCircle /> Мало
+                                            {shops.map(item => (
+                                                <tr key={item.shop.id}>
+                                                    <td>{item.shop.name}</td>
+                                                    <td>{item.shop.address}</td>
+                                                    <td>{item.shop.working_hours}</td>
+                                                    <td>
+                                                        <span className="td_icon danger">
+                                                            <FaCircle /> Мало
                                                     </span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>GOODZONE Бунёдкор</td>
-                                                <td>
-                                                    г. Ташкент, массив
-                                                    Чиланзар-6, ТЦ Bunyodkor
-                                                </td>
-                                                <td>
-                                                    с 10-00 до 21-00 (без
-                                                    выходных)
-                                                </td>
-                                                <td>
-                                                    <span className="td_icon danger">
-                                                        <FaCircle /> Мало
-                                                    </span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>GOODZONE Atrium</td>
-                                                <td>
-                                                    г. Ташкент, Яшнободский р-н,
-                                                    ул. Махтумкули, ТРЦ Atrium
-                                                </td>
-                                                <td>
-                                                    с 10-00 до 21-00 (без
-                                                    выходных)
-                                                </td>
-                                                <td>
-                                                    <span className="td_icon danger">
-                                                        <FaCircle /> Мало
-                                                    </span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>GOODZONE Кадышева</td>
-                                                <td>
-                                                    г. Ташкент, Яшнободский р-н,
-                                                    ул. Сивца
-                                                </td>
-                                                <td>
-                                                    с 10-00 до 21-00 (без
-                                                    выходных)
-                                                </td>
-                                                <td>
-                                                    <span className="td_icon secondary">
-                                                        <FaCircle /> Нет
-                                                    </span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>GOODZONE Самарканд</td>
-                                                <td>
-                                                    г. Самарканд, ул. Гагарина,
-                                                    178
-                                                </td>
-                                                <td>
-                                                    с 10-00 до 21-00 (без
-                                                    выходных)
-                                                </td>
-                                                <td>
-                                                    <span className="td_icon secondary">
-                                                        <FaCircle /> Нет
-                                                    </span>
-                                                </td>
-                                            </tr>
+                                                    </td>
+                                                </tr>
+                                            ))}
                                         </tbody>
                                     </table>
                                 </div>
@@ -341,11 +206,17 @@ export default withTranslation('common')(Product)
 
 export async function getServerSideProps({ params, req }) {
 
-    const urls = [`${process.env.PRODUCT_API_URL}/${params.id}?lang=${req.i18n.language}`];
+    const urls = [
+        `${process.env.PRODUCT_API_URL}/${params.id}?lang=${req.i18n.language}`,
+        `${process.env.PRODUCT_API_URL}/${params.id}/shops?lang=${req.i18n.language}`
+    ];
 
-    const [{ product }] = await fetchMultipleUrls(urls);
+    const [{ product }, { shops }] = await fetchMultipleUrls(urls);
 
     return {
-        props: { product },
+        props: {
+            product,
+            shops
+        },
     };
 }

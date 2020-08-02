@@ -13,9 +13,17 @@ import {
 import { numberToPrice } from "../libs/numberToPrice";
 import { LazyImage } from "./lazy-image";
 import { withTranslation, Link } from '../i18n'
+import LoginModal from "./login-modal";
+import RegisterModal from './register-modal'
 
 function CartPopup({ t }) {
     const [cart, setCart] = useState(false);
+    const [loginModal, setLoginModal] = useState(false)
+    const [registerModal, setRegisterModal] = useState(false)
+    const switchPopup = () => {
+        setLoginModal(!loginModal);
+        setRegisterModal(!registerModal);
+    };
 
     const dispatch = useDispatch();
 
@@ -29,6 +37,10 @@ function CartPopup({ t }) {
     );
     const totalQuantity = useSelector(
         (state) => cartItemsTotalQuantitySelector(state),
+        shallowEqual
+    );
+    const user = useSelector(
+        (state) => state.auth.user,
         shallowEqual
     );
 
@@ -63,6 +75,15 @@ function CartPopup({ t }) {
         if (vw < 900) document.body.classList.remove("overflow");
     };
 
+    const checkUser = (event) => {
+        if (!user) {
+            event.preventDefault()
+            setLoginModal(true)
+            setCart(false)
+            return
+        }
+    }
+
     const wrapperRef = useRef(null);
     useOutsideCloseMenu(wrapperRef);
 
@@ -84,6 +105,16 @@ function CartPopup({ t }) {
 
     return (
         <>
+            {loginModal ? <LoginModal
+                                closeModal={() => setLoginModal(false)}
+                                goRegister={() => switchPopup()}
+                                goCheckout
+                /> : ''}
+            {registerModal ? <RegisterModal
+                                closeModal={() => setRegisterPopup(false)}
+                                login={() => switchPopup()}
+                                goCheckout
+                /> : ''}
             <div className={`cart_popup ${cart ? "show" : ""}`} ref={wrapperRef}>
                 <div className="cart_popup-body">
                     <div className="cart_popup-header">
@@ -199,7 +230,7 @@ function CartPopup({ t }) {
                     {cartItems.length ?
                      <div className="checkout_button-wrapper">
                         <Link href="/checkout">
-                            <a className="btn checkout_button">
+                            <a className="btn checkout_button" onClick={(event) => checkUser(event)}>
                                 <span className="btn_text">{t('checkout')}</span>
                                 <span className="price_box">
                                     {numberToPrice(totalPrice)}

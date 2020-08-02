@@ -987,6 +987,9 @@ header {
     background-color: rgb(255, 255, 255);
     color: rgb(34, 34, 34);
     border-radius: 15px;
+    @include sm {
+      display: none;
+    }
     svg {
       font-size: 32px;
     }
@@ -1018,9 +1021,19 @@ header {
       position: absolute;
       left: 50%;
       top: 50%;
+      overflow: visible;
     }
     &.show {
       transform: translate(-50%, -50%) scale3d(1, 1, 1);
+    }
+    .btn.close_btn {
+      display: none;
+      @include sm {
+        display: inline-flex;
+        position: absolute;
+        top: -40px;
+        right: -10px;
+      }
     }
     .inner_block {
       width: 100%;

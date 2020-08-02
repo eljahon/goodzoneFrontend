@@ -3,14 +3,11 @@ import { FaTimes } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { setLocalStorage } from "../libs/localStorage";
-import swal from "sweetalert";
 import { setUser } from "../redux/actions/authActions/authActions";
 import { useDispatch } from "react-redux";
-import { useRouter } from "next/router";
 import RegisterConfirm from "./register-confirm";
 
-export default function RegisterModal({ closeModal, login }) {
-    const router = useRouter();
+export default function RegisterModal({ closeModal, login, goCheckout }) {
     const dispatch = useDispatch();
     const [load, setLoad] = useState(false);
     const [registerConfirm, setRegisterConfirm] = useState(false);
@@ -47,10 +44,10 @@ export default function RegisterModal({ closeModal, login }) {
             if (response.status === 200) {
                 setLocalStorage("access_token", access_token);
                 setRegisterConfirm(true);
-                dispatch(setUser(data));
+                dispatch(setUser(response.data));
             }
         } catch (error) {
-            swal(error.response.data.Error.Message);
+            console.log(error)
         }
     };
 
@@ -72,82 +69,86 @@ export default function RegisterModal({ closeModal, login }) {
 
         }, [ref]);
     }
-    
+
     return (
         <div className="login_modal-wrapper">
             <button className="btn close_btn" onClick={closeModal}>
                 <FaTimes />
             </button>
             <div className={`login_modal-holder ${load ? "show" : ""}`} ref={wrapperRef}>
+                <button className="btn close_btn" onClick={closeModal}>
+                    <FaTimes />
+                </button>
                 <div className="inner_block">
                     <div className="auth_form">
                         {registerConfirm ? (
                             <RegisterConfirm
                                 phoneNumber={getValues("phoneNumber")}
+                                goCheckout={goCheckout}
                             />
                         ) : (
-                            <div className="auth_form-container">
-                                <h3>Регистрация</h3>
-                                <span className="sub_heading"></span>
-                                <form onSubmit={handleSubmit(onSubmit)}>
-                                    <input
-                                        ref={register}
-                                        name="firstName"
-                                        placeholder="Имя"
-                                        required
-                                    />
-                                    <input
-                                        ref={register}
-                                        name="lastName"
-                                        placeholder="Фамилия"
-                                        required
-                                    />
-                                    <input
-                                        ref={register({
-                                            maxLength: 13,
-                                            minLength: 13,
-                                        })}
-                                        defaultValue="+998"
-                                        type="tel"
-                                        name="phoneNumber"
-                                        placeholder="Номер телефона"
-                                        required
-                                    />
-                                    {errors.phoneNumber && (
-                                        <p>
-                                            Phone number should be 13 characters
-                                            long
-                                        </p>
-                                    )}
-                                    <input
-                                        ref={register}
-                                        type="password"
-                                        name="password"
-                                        placeholder="Пароль"
-                                        required
-                                    />
-                                    <input
-                                        ref={register}
-                                        type="password"
-                                        name="passwordConfirmation"
-                                        placeholder="Подтверждение пароля"
-                                        required
-                                    />
-                                    <input
-                                        type="submit"
-                                        className="btn btn_submit"
-                                        value="Регистрация"
-                                    />
-                                </form>
-                                <p className="auth_form-offer">
-                                    <span>Уже есть аккаунт? </span>
-                                    <button className="btn" onClick={login}>
-                                        {" "}
+                                <div className="auth_form-container">
+                                    <h3>Регистрация</h3>
+                                    <span className="sub_heading"></span>
+                                    <form onSubmit={handleSubmit(onSubmit)}>
+                                        <input
+                                            ref={register}
+                                            name="firstName"
+                                            placeholder="Имя"
+                                            required
+                                        />
+                                        <input
+                                            ref={register}
+                                            name="lastName"
+                                            placeholder="Фамилия"
+                                            required
+                                        />
+                                        <input
+                                            ref={register({
+                                                maxLength: 13,
+                                                minLength: 13,
+                                            })}
+                                            defaultValue="+998"
+                                            type="tel"
+                                            name="phoneNumber"
+                                            placeholder="Номер телефона"
+                                            required
+                                        />
+                                        {errors.phoneNumber && (
+                                            <p>
+                                                Phone number should be 13 characters
+                                                long
+                                            </p>
+                                        )}
+                                        <input
+                                            ref={register}
+                                            type="password"
+                                            name="password"
+                                            placeholder="Пароль"
+                                            required
+                                        />
+                                        <input
+                                            ref={register}
+                                            type="password"
+                                            name="passwordConfirmation"
+                                            placeholder="Подтверждение пароля"
+                                            required
+                                        />
+                                        <input
+                                            type="submit"
+                                            className="btn btn_submit"
+                                            value="Регистрация"
+                                        />
+                                    </form>
+                                    <p className="auth_form-offer">
+                                        <span>Уже есть аккаунт? </span>
+                                        <button className="btn" onClick={login}>
+                                            {" "}
                                         Войти
                                     </button>
-                                </p>
-                            </div>
-                        )}
+                                    </p>
+                                </div>
+                            )}
                     </div>
                 </div>
             </div>

@@ -66,6 +66,7 @@ function ProductImageGallery({ data, t }) {
                             marginLeft: "0",
                             border: "1px solid rgb(241, 241, 241)",
                             backgroundColor: "#fff",
+                            zIndex: "101",
                         },
                         enlargedImageContainerDimensions: {
                             width: "212%",

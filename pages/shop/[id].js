@@ -18,16 +18,25 @@ export default function Category({ categoryProducts, categoryId, query }) {
 
     const [brands, setBrands] = useState([]);
     useEffect(() => {
-        axios
-                .get(process.env.BRAND_API_URL)
-                .then((response) => {
-                const {
-                    data: { brands },
-                } = response;
-                setBrands(brands);
-            })
-            .catch((error) => console.error(error));
-    }, []);
+        // axios
+        //         .get(process.env.BRAND_API_URL)
+        //         .then((response) => {
+        //         const {
+        //             data: { brands },
+        //         } = response;
+        //         setBrands(brands);
+        //     })
+        //     .catch((error) => console.error(error));
+
+        const brands = categoryProducts.map(item => {
+            return item.brand
+        }).filter((brands, index, self) =>
+            index === self.findIndex((t) => (
+                t.id === brands.id && t.name === brands.name
+            ))
+        )
+        setBrands(brands)
+    }, [categoryProducts]);
 
     const [filteredProducts, setFilteredProducts] = useState([]);
 
@@ -120,7 +129,7 @@ export async function getServerSideProps({ query, req }) {
     });
 
     const [{ products: categoryProducts }] = await fetchMultipleUrls([
-        `${process.env.PRODUCT_API_URL}?category=${categoryId}&lang=${req.i18n.language}`,
+        `${process.env.PRODUCT_API_URL}?category=${categoryId}&lang=${req.i18n.language}&limit=20`,
     ]);
 
     return {

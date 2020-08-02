@@ -29,8 +29,8 @@ export default function DepartmentsMenu({ categories, closeMenu }) {
                 {categories.map((item) => (
                     <li key={item.id} className="menu_item">
                         <Link
-                            href={`${i18n.language === 'ru' ? '' : '/uz'}/category/[id]`}
-                            as={`${i18n.language === 'ru' ? '' : '/uz'}/category/${item.slug}`}
+                            href={`${i18n.language === 'ru' ? '' : '/uz'}/shop/[id]`}
+                            as={`${i18n.language === 'ru' ? '' : '/uz'}/shop/${item.slug}`}
                         >
                             <a onClick={(e) => e.preventDefault()}>
                                 <span className="label">
@@ -51,8 +51,8 @@ export default function DepartmentsMenu({ categories, closeMenu }) {
                                         ? item.children.map((child) => (
                                               <Link
                                                   key={child.id}
-                                                  href={`${i18n.language === 'ru' ? '' : '/uz'}/category/[id]`}
-                                                  as={`${i18n.language === 'ru' ? '' : '/uz'}/category/${child.slug}`}
+                                                  href={`${i18n.language === 'ru' ? '' : '/uz'}/shop/[id]`}
+                                                  as={`${i18n.language === 'ru' ? '' : '/uz'}/shop/${child.slug}`}
                                               >
                                                   <a onClick={closeMenu}>{child.name}</a>
                                               </Link>

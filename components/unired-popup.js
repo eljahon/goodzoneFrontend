@@ -47,6 +47,9 @@ function UniredPopup({ closePopup, t, data }) {
                 <FaTimes />
             </button>
             <div className={`login_modal-holder unired_wrapper ${load ? "show" : ""}`} ref={wrapperRef}>
+                <button className="btn close_btn" onClick={closePopup}>
+                    <FaTimes />
+                </button>
                 <div className="inner_block">
                     <div className="unired_banner">
                         <div className="img_wrapper">

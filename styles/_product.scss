@@ -201,6 +201,10 @@
             flex-direction: column;
             margin-top: 30px;
             margin-bottom: 40px;
+            .brand_image {
+                max-width: 150px;
+                margin-bottom: 15px;
+            }
             .product_desc {
                 font-size: 15px;
                 font-weight: 400;

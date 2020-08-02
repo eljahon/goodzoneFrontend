@@ -13,12 +13,13 @@ import { axiosAuth } from "../libs/axios/axios-instances";
 import { setUser } from "../redux/actions/authActions/authActions";
 import { withTranslation } from '../i18n'
 
-function Home({ products, t }) {
+function Home({ new_products, recommended_products, popular_products, t }) {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(getProductsFromAPI(products));
-        // dispatch(getCategoriesFromAPI(categories));
+        dispatch(getProductsFromAPI(new_products.products));
+        // dispatch(getProductsFromAPI(recommended_products.products));
+        // dispatch(getProductsFromAPI(popular_products.products));
     }, []);
 
     useEffect(() => {
@@ -34,11 +35,11 @@ function Home({ products, t }) {
         <>
             <SEO />
             <HomeSplash />
-            <Products title={t('new-arrivals')} data={products} />
+            <Products title={t('new-arrivals')} data={new_products.products} />
             <Banner double />
-            <Products title={t('popular-items')} data={products} />
+            <Products title={t('popular-items')} data={recommended_products.products} />
             <Banner />
-            <Products title={t('the-best-selection-for-you')} data={products} />
+            <Products title={t('the-best-selection-for-you')} data={popular_products.products} />
             <CartPopup />
             <Footer />
         </>
@@ -49,12 +50,18 @@ export default withTranslation('common')(Home)
 
 
 export async function getServerSideProps({ req }) {
-    const urls = [`${process.env.PRODUCT_API_URL}?lang=${req.i18n.language}`];
-    const [{ products }] = await fetchMultipleUrls(urls);
+    const urls = [
+        `${process.env.PRODUCT_API_URL}?lang=${req.i18n.language}`,
+        `${process.env.PRODUCT_API_URL}?lang=${req.i18n.language}&popular=true`,
+        `${process.env.PRODUCT_API_URL}?lang=${req.i18n.language}&recommended=true`
+    ]
+    const [new_products, popular_products, recommended_products] = await fetchMultipleUrls(urls);
 
     return {
         props: {
-            products,
+            new_products,
+            popular_products,
+            recommended_products,
         },
     };
 }

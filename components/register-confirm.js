@@ -4,7 +4,7 @@ import { axiosAuth } from "../libs/axios/axios-instances";
 import swal from "sweetalert";
 import { Router } from "next/router";
 
-const RegisterConfirm = ({ phoneNumber }) => {
+const RegisterConfirm = ({ phoneNumber, goCheckout }) => {
     const { register, handleSubmit, errors } = useForm();
 
     const onSubmit = (data) => {
@@ -15,15 +15,21 @@ const RegisterConfirm = ({ phoneNumber }) => {
             })
             .then((response) => {
                 if (response.status === 200) {
-                    swal("Phone number verified succesfully!");
-                    Router.push("/profile");
+                    // swal("Phone number verified succesfully!");
+                    if(goCheckout) {
+                        Router.push('/checkout')
+                    } else {
+                        Router.push("/profile");
+                    }
                 }
             })
             .catch((error) => {
                 if (error.response.status === 400) {
-                    swal("Code is incorrect. Please try again");
+                    // swal("Code is incorrect. Please try again");
+                    console.log(error)
                 } else if (error.response.status === 500) {
-                    swal("Internal Server error");
+                    // swal("Internal Server error");
+                    console.log(error)
                 }
             });
     };
