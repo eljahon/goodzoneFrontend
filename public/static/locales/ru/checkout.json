@@ -46,5 +46,6 @@
     "delivery-address": "Адресс доставки",
     "products": "Товары",
     "quantity": "Количество",
-    "amount": "Сумма"
+    "amount": "Сумма",
+    "self": "Самовывоз"
 }

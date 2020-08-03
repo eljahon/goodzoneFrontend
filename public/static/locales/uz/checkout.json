@@ -46,5 +46,6 @@
     "delivery-address": "Yetkazib berish manzili",
     "products": "Tovarlar",
     "quantity": "Miqdori",
-    "amount": "Narxi"
+    "amount": "Narxi",
+    "self": "O'zi olib ketmoq"
 }
