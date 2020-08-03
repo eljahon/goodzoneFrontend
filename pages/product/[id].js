@@ -96,7 +96,7 @@ function Product({ product: data, t, shops }) {
                                         }}
                                     ></p>
                                 ) : (
-                                        <img src={data.brand.image} alt={data.name} className="brand_image" />
+                                        data.brand.image ? <img src={data.brand.image} alt={data.name} className="brand_image" /> : ''
                                     )}
                                 <Link href="#details">
                                     <a className="product_desc-link">{t('about-product')}</a>
