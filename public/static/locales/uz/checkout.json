@@ -48,5 +48,6 @@
     "quantity": "Miqdori",
     "amount": "Narxi",
     "self": "O'zi olib ketmoq",
-    "deliver": "Bir kun ichida yetkazib berish"
+    "deliver": "Bir kun ichida yetkazib berish",
+    "you-havent-ordered-yet": "Siz hali hech nima buyurtma qilmadingiz"
 }
