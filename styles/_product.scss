@@ -103,19 +103,19 @@
                 .react-multiple-carousel__arrow--right,
                 .react-multiple-carousel__arrow--left {
                     z-index: 99;
-                    background-color: transparent;
+                    background-color: $primary-color;
                     &:focus {
                         outline: none;
                     }
                 }
                 .react-multiple-carousel__arrow--right {
-                    right: -10%;
+                    right: -15%;
                 }
                 .react-multiple-carousel__arrow--left {
-                    left: -10%;
+                    left: -15%;
                 }
                 .react-multiple-carousel__arrow::before {
-                    color: $link-color;
+                    color: #fff;
                 }
             }
         }

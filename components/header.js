@@ -5,7 +5,8 @@ import {
     FaSearch,
     FaSignInAlt,
     FaUser,
-    FaRegHeart
+    FaRegHeart,
+    FaPhoneAlt
 } from "react-icons/fa";
 import DepartmentsMenu from "./departments-menu";
 import SearchModal from "./search-modal";
@@ -18,6 +19,7 @@ import { useRouter } from 'next/router'
 import TopBar from "./top-bar";
 import Headroom from 'react-headroom'
 import { Link, withTranslation } from '../i18n'
+import BottomBar from "./bottom-bar";
 
 function Header({ categories, t }) {
     const [menu, setMenu] = useState(false);
@@ -164,6 +166,7 @@ function Header({ categories, t }) {
                 </header>
             </Headroom>
             <div className="base_header" />
+            <BottomBar openLoginMenu={() => setLoginPopup(true)} />
             {searchPopup ? (
                 <SearchModal closeModal={() => setSearchPopup(false)} />
             ) : (

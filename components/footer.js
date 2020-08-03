@@ -1,9 +1,34 @@
-import React from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Col, Row, Container } from "react-bootstrap";
 import { FaPhoneAlt, FaFacebookF, FaInstagram, FaTelegram, FaOdnoklassniki, FaYoutube, FaVideo } from "react-icons/fa"
-import { withTranslation, Link } from '../i18n'
+import { withTranslation, Link, i18n } from '../i18n'
+import LangMenu from './lang-menu'
+import { useRouter } from 'next/router'
 
 function Footer({ t }) {
+    const [langMenu, setLangMenu] = useState(false);
+
+    const router = useRouter();
+    const hasDynamicRouting = router.query.id;
+
+    const wrapperRef = useRef(null);
+    useOutsideCloseMenu(wrapperRef);
+
+    function useOutsideCloseMenu(ref) {
+        useEffect(() => {
+            function handleClickOutside(event) {
+                if (ref.current && !ref.current.contains(event.target)) {
+                    setLangMenu(false);
+                }
+            }
+            document.addEventListener("mousedown", handleClickOutside);
+
+            return () => {
+                document.removeEventListener("mousedown", handleClickOutside);
+            };
+
+        }, [ref]);
+    }
     return (
         <footer>
             <Container>
@@ -59,7 +84,33 @@ function Footer({ t }) {
                     </Col>
                 </Row>
                 <div className="copyright">
-                    <p>{t('copyright')}</p>
+                    <div className="popover_wrapper">
+                        <p>{t('copyright')}</p>
+                        <div className="popover" ref={wrapperRef}>
+                        <div className="popover_handler">
+                            {i18n.language === 'ru' ?
+                                <button
+                                    className="btn join_btn"
+                                    onClick={() => setLangMenu(!langMenu)}
+                                >
+                                    <span className="join_icon">
+                                        <img src={hasDynamicRouting ? '../images/russia.svg' : 'images/russia.svg'} alt="Русский" />
+                                    </span>
+                                    <span className="btn-text">Русский</span>
+                                </button> :
+                                <button
+                                    className="btn join_btn"
+                                    onClick={() => setLangMenu(!langMenu)}
+                                >
+                                    <span className="join_icon">
+                                        <img src={hasDynamicRouting ? '../images/uzb.svg' : 'images/uzb.svg'} alt="Русский" />
+                                    </span>
+                                    <span className="btn-text">O'zbek</span>
+                                </button>}
+                        </div>
+                        {langMenu ? <LangMenu hasDynamicRouting={hasDynamicRouting} closeMenu={() => setLangMenu(false)} /> : ""}
+                    </div>
+                    </div>
                     <p>Created by <a href="https://udevs.io" target="_blank" rel="noreferrer noopener">Udevs</a></p>
                 </div>
             </Container>

@@ -1,13 +1,10 @@
 import React, { useRef, useEffect, useState } from 'react'
-import { FaUser, FaSignInAlt, FaSortDown } from 'react-icons/fa'
+import { FaUser, FaSignInAlt, FaSortDown, FaPhoneAlt } from 'react-icons/fa'
 import ProfileMenu from './profile-menu'
 import { useSelector, shallowEqual } from "react-redux";
-import LangMenu from './lang-menu';
-// import Link from 'next/link'
 import { Link, withTranslation, i18n } from '../i18n'
 
-function TopBar({ openLoginMenu, hasDynamicRouting, t }) {
-    const [langMenu, setLangMenu] = useState(false);
+function TopBar({ openLoginMenu, t }) {
     const [profileMenu, setProfileMenu] = useState(false);
     const user = useSelector((state) => state.auth.user, shallowEqual);
 
@@ -19,7 +16,6 @@ function TopBar({ openLoginMenu, hasDynamicRouting, t }) {
             function handleClickOutside(event) {
                 if (ref.current && !ref.current.contains(event.target)) {
                     setProfileMenu(false);
-                    setLangMenu(false);
                 }
             }
             document.addEventListener("mousedown", handleClickOutside);
@@ -56,31 +52,8 @@ function TopBar({ openLoginMenu, hasDynamicRouting, t }) {
                 </li>
             </ul>
             <ul className="top_bar-list">
-                <li className="list_item">
-                    <div className="popover">
-                        <div className="popover_handler">
-                            {i18n.language === 'ru' ?
-                                <button
-                                    className="btn join_btn"
-                                    onClick={() => setLangMenu(!langMenu)}
-                                >
-                                    <span className="join_icon">
-                                        <img src={hasDynamicRouting ? '../images/russia.svg' : 'images/russia.svg'} alt="Русский" />
-                                    </span>
-                                    <span className="btn-text">Русский</span>
-                                </button> :
-                                <button
-                                    className="btn join_btn"
-                                    onClick={() => setLangMenu(!langMenu)}
-                                >
-                                    <span className="join_icon">
-                                        <img src={hasDynamicRouting ? '../images/uzb.svg' : 'images/uzb.svg'} alt="Русский" />
-                                    </span>
-                                    <span className="btn-text">O'zbek</span>
-                                </button>}
-                        </div>
-                        {langMenu ? <LangMenu hasDynamicRouting={hasDynamicRouting} closeMenu={() => setLangMenu(false)} /> : ""}
-                    </div>
+                <li className="list_item menu_item">
+                    <a href="tel:+998712070307" className="phone_number"><FaPhoneAlt /> +998 (71) 207-03-07</a>
                 </li>
                 <li className="list_item">
                     {user ? (

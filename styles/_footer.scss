@@ -4,6 +4,9 @@ footer {
   padding: 42px 0;
   color: $border-color;
   background-color: $link-color;
+  @include sm {
+    padding: 42px 0 100px;
+  }
   h3 {
     color: #fff;
     margin-bottom: 20px;
@@ -65,6 +68,7 @@ footer {
     margin-top: 30px;
     color: #bababa;
     p {
+      display: inline-block;
       margin: 0;
     }
     a {
@@ -74,8 +78,92 @@ footer {
       opacity: 1;
     }
     @include sm {
+      flex-direction: column;
       margin-top: 20px;
       font-size: 14px;
+    }
+    .popover_wrapper {
+      position: relative;
+      @include sm {
+        display: flex;
+        flex-direction: column;
+        p {
+          order: 1;
+          margin-bottom: 10px;
+        }
+      }
+    }
+    .popover_content {
+      min-width: 100px;
+      padding: 10px 0;
+      top: auto;
+      bottom: calc(100% + 15px);
+      @include sm {
+        right: auto;
+        left: 0;
+      }
+      &::before {
+        top: auto;
+        bottom: -8px;
+        border-color: transparent transparent white;
+        transform: rotate(180deg);
+        @include sm {
+          right: auto;
+          left: 15px;
+        }
+      }
+      .inner_wrap {
+        @include sm {
+          padding: 0;
+        }
+        .menu_item {
+          a {
+            padding: 6px 15px;
+            font-weight: normal;
+            img {
+              width: 15px;
+            }
+          }
+        }
+      }
+    }
+    .popover {
+      position: static;
+      display: inline-block;
+      width: 100px;
+      max-width: 100%;
+      margin-left: 15px;
+      border: none;
+      z-index: 1010;
+      background-color: transparent;
+      @include sm {
+        margin-left: 0;
+        margin-bottom: 10px;
+      }
+    }
+    .join_btn {
+      display: flex;
+      align-items: center;
+      padding: 0;
+      border: none;
+      box-shadow: none;
+      .join_icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1rem;    
+        img {
+          margin-right: 6px;
+          width: 15px;
+        }
+      }
+      .btn-text {
+        display: inline-block;
+        width: 100%;
+        padding: 0;
+        white-space: nowrap;
+        color: #bababa;
+      }
     }
   }
 }

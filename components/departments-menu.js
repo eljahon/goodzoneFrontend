@@ -15,8 +15,8 @@ export default function DepartmentsMenu({ categories, closeMenu }) {
         <div className={`popover_content ${loaded ? "show" : ""}`}>
             <div className="drawer_header">
                 <Link href={i18n.language === 'ru' ? '/' : '/uz'}>
-                    <a>
-                        <img src="/logo.png" alt="Goodzone" />
+                    <a onClick={closeMenu}>
+                        <img src="/logo.svg" alt="Goodzone" />
                     </a>
                 </Link>
                 <button className="btn btn_close" onClick={closeMenu}>

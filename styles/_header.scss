@@ -4,18 +4,15 @@
     position: fixed !important;
   }
   &.headroom--unfixed {
+    header {
+      box-shadow: none;
+    }
     .right_menu {
       .popover {
         display: none;
-        @include sm {
-          display: block;
-        }
       }
       .join_btn {
         display: none;
-        @include sm {
-          display: inline-flex;
-        }
       }
     }
   }
@@ -28,6 +25,78 @@
       margin-right: 6px;
     }
   }
+}
+.bottom_bar {
+  display: none;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 15px 10px;
+  box-shadow: rgba(0, 0, 0, 0.06) 0 1px 2px;
+  @include sm {
+    display: flex;
+  }
+  a {
+    display: inline-flex;
+    align-items: center;
+    color: $link-color;
+    text-decoration: none;
+    transition: all .2s ease-in-out;
+    svg {
+      margin-right: 5px;
+    }
+    &:hover {
+      text-decoration: none;
+      color: $primary-color;
+    }
+  }
+  .btn.join_btn {
+    display: inline-flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    background-color: $primary-color;
+    width: 165px;
+    padding: 0 10px;
+    color: #fff;
+    font-weight: 700;
+    height: 38px;
+    font-size: 15px;
+    text-decoration: none;
+    border: none;
+    transition: all 0.3s ease 0s;
+    border-radius: 6px;
+    &.mobile {
+      display: none;
+    }
+    span {
+      display: flex;
+      -webkit-box-align: center;
+      align-items: center;
+      margin-right: auto;
+      padding: 0 2px;
+      font-family: $base-font;
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
+      text-decoration: none;
+    }
+  }
+}
+  .popover {
+    position: relative;
+    z-index: 2;
+    cursor: pointer;
+    border: none;
+  .popover_handler {
+    display: inline-block;
+    cursor: pointer;
+  .popover_content {
+    .inner_wrap {
+      padding: 0;
+    }
+  }
+}
 }
 .top_bar {
   display: flex;
@@ -53,9 +122,15 @@
       font-weight: 500;
       padding: 0 10px;
       a {
+        display: inline-flex;
+        align-items: center;
         color: $link-color;
         text-decoration: none;
         transition: all .2s ease-in-out;
+        white-space: nowrap;
+        svg {
+          margin-right: 6px;
+        }
         &:hover {
           text-decoration: none;
           color: $primary-color;
@@ -612,7 +687,7 @@ header {
     transition: all 0.3s ease 0s;
     border-radius: 6px;
     @include sm {
-      display: inline-flex;
+      display: none;
       margin-right: 10px;
       background-color: #fff;
       color: $primary-color;
@@ -662,7 +737,7 @@ header {
     cursor: pointer;
     border: none;
     @include sm {
-      display: block;
+      display: none;
     }
     .popover_handler {
       display: inline-block;
