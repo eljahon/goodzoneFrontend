@@ -12,7 +12,7 @@ function OrderDetails({ order, t }) {
     }
 
     const prices = order.items.map(item => {
-        return item.price
+        return item.price * item.quantity
     })
     const totalPrice = prices.reduce((a, b) => {
         return Math.round(a + b)
@@ -61,7 +61,7 @@ function OrderDetails({ order, t }) {
                                     <p>{item.product_name} x {item.quantity}</p>
                                 </div>
                                 <div className="list_desc">
-                                    <p>{numberToPrice(item.price)}</p>
+                                    <p>{numberToPrice(item.price * item.quantity)}</p>
                                 </div>
                             </div>
                         ))}

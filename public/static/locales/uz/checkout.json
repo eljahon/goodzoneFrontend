@@ -47,5 +47,6 @@
     "products": "Tovarlar",
     "quantity": "Miqdori",
     "amount": "Narxi",
-    "self": "O'zi olib ketmoq"
+    "self": "O'zi olib ketmoq",
+    "deliver": "Bir kun ichida yetkazib berish"
 }
