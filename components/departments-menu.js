@@ -11,6 +11,7 @@ export default function DepartmentsMenu({ categories, closeMenu }) {
         if (vw < 900) document.body.classList.add("overflow");
         return () => document.body.classList.remove("overflow");
     });
+
     return (
         <div className={`popover_content ${loaded ? "show" : ""}`}>
             <div className="drawer_header">
@@ -47,21 +48,40 @@ export default function DepartmentsMenu({ categories, closeMenu }) {
                                     </a>
                                 </Link>
                                 <ul className={`dropdown_menu ${item.children ? '' : 'empty'}`}>
-                                    <li>
-                                        <div className="content">
-                                            {item.children
-                                                ? item.children.map((child) => (
-                                                    <Link
-                                                        key={child.id}
-                                                        href={`${i18n.language === 'ru' ? '' : '/uz'}/shop/[id]`}
-                                                        as={`${i18n.language === 'ru' ? '' : '/uz'}/shop/${child.slug}`}
-                                                    >
-                                                        <a onClick={closeMenu}>{child.name}</a>
-                                                    </Link>
-                                                ))
-                                                : ""}
-                                        </div>
-                                    </li>
+                                    {item.children
+                                        ? item.children.map((child) => (
+                                            <li key={child.id} className="menu_item">
+                                                <Link
+                                                    href={`${i18n.language === 'ru' ? '' : '/uz'}/shop/[id]`}
+                                                    as={`${i18n.language === 'ru' ? '' : '/uz'}/shop/${child.slug}`}
+                                                >
+                                                    <a onClick={child.children ? (e) => e.preventDefault() : closeMenu}>
+                                                        <span className="label">
+                                                            {child.name}
+                                                        </span>
+                                                        {child.children ?
+                                                            <span className="menu_icon">
+                                                                <FaArrowRight />
+                                                            </span> : ''}
+                                                    </a>
+                                                </Link>
+                                                <ul className={`dropdown_menu sub_menu ${!child.children ? 'empty' : (child.children.length > 10 ? 'column_menu' : '')}`}>
+                                                    {child.children
+                                                        ? child.children.map(sub => (
+                                                            <li key={sub.id} className={child.children.length > 10 ? 'column' : ''}>
+                                                                <Link
+                                                                    href={`${i18n.language === 'ru' ? '' : '/uz'}/shop/[id]`}
+                                                                    as={`${i18n.language === 'ru' ? '' : '/uz'}/shop/${sub.slug}`}
+                                                                >
+                                                                    <a onClick={closeMenu}>{sub.name}</a>
+                                                                </Link>
+                                                            </li>
+                                                        ))
+                                                        : ""}
+                                                </ul>
+                                            </li>
+                                        ))
+                                        : ""}
                                 </ul>
                             </li>
                         )

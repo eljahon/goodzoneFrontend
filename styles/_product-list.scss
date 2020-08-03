@@ -346,13 +346,18 @@ main {
       }
     }
     .product_card {
-      display: block;
+      display: flex;
+      flex-direction: column;
       height: 100%;
+      min-height: 440px;
       width: 100%;
       background-color: rgb(255, 255, 255);
       position: relative;
       font-family: $base-font;
       border-radius: 6px;
+      @include sm {
+        min-height: 312px;
+      }
       .product_image {
         height: 240px;
         position: relative;
@@ -380,6 +385,7 @@ main {
         justify-content: space-between;
         height: calc(100% - 240px);
         padding: 20px 25px 30px;
+        flex-grow: 1;
         @include sm {
           height: calc(100% - 145px);
           min-height: 123px;
@@ -433,6 +439,7 @@ main {
           justify-content: center;
           @include sm {
             min-height: 32px;
+            margin-top: 15px;
           }
           .product_btn {
             height: 36px;
@@ -562,7 +569,9 @@ main {
       }
       &.view_row {
         display: flex;
+        flex-direction: row;
         height: 160px;
+        min-height: 160px;
         .product_image {
           width: 30%;
           height: 100%;
