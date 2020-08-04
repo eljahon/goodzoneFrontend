@@ -37,9 +37,9 @@ function Home({ new_products, recommended_products, popular_products, t }) {
             <HomeSplash />
             <Products title={t('new-arrivals')} data={new_products.products} />
             <Banner double />
-            <Products title={t('popular-items')} data={recommended_products.products} />
+            <Products title={t('popular-items')} data={popular_products.products} />
             <Banner />
-            <Products title={t('the-best-selection-for-you')} data={popular_products.products} />
+            <Products title={t('the-best-selection-for-you')} data={recommended_products.products} />
             <CartPopup />
             <Footer />
         </>
