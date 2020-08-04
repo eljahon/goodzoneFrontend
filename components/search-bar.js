@@ -8,13 +8,17 @@ import { numberToPrice } from "../libs/numberToPrice";
 import { Spinner } from "react-bootstrap";
 import { LazyImage } from "./lazy-image";
 import { withTranslation } from '../i18n'
+import { useRouter } from 'next/router'
+import { transliterate } from "../libs/transliterate";
 
 const SearchBar = ({ t }) => {
     const [searchTerm, setSearchTerm] = useState("");
     const [products, setProducts] = useState([]);
     const [isFetching, setIsFetching] = useState(false);
 
-    const debouncedSearchTerm = useDebounce(searchTerm, 500);
+    const debouncedSearchTerm = useDebounce(searchTerm, 200);
+
+    const router = useRouter()
 
     useEffect(
         () => {
@@ -38,6 +42,15 @@ const SearchBar = ({ t }) => {
         },
         [debouncedSearchTerm] // Only call effect if debounced search term changes
     );
+
+    const handleSubmit = (event) => {
+        event.preventDefault()
+        if (debouncedSearchTerm) {
+            router.push(`/search/${transliterate(debouncedSearchTerm)}`)
+            setProducts([]);
+            document.getElementById("searchTerm").value = "";
+        }
+    }
 
     const wrapperRef = useRef(null);
     useOutsideCloseMenu(wrapperRef);
@@ -64,7 +77,7 @@ const SearchBar = ({ t }) => {
         <div className="search_box" ref={wrapperRef}>
             <div className="search_box-wrapper">
                 <div className="search_input-wrapper">
-                    <form>
+                    <form onSubmit={(e) => handleSubmit(e)}>
                         <input
                             onChange={(e) => setSearchTerm(e.target.value)}
                             type="text"
@@ -123,7 +136,7 @@ const SearchBar = ({ t }) => {
                                 </ul>
                                 <div className="product_meta">
                                     <Link href="/">
-                                        <a>{t('view-all-products')}</a>
+                                        <a onClick={(e) => handleSubmit(e)}>{t('view-all-products')}</a>
                                     </Link>
                                 </div>
                             </>

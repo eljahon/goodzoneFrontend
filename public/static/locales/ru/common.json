@@ -38,5 +38,6 @@
     "address": "Адрес",
     "operating-mode": "Режим работы",
     "availibility-in-store": "Наличие в магазине",
-    "clear-cart": "Очистить корзину"
+    "clear-cart": "Очистить корзину",
+    "search-result": "Результаты поиска"
 }

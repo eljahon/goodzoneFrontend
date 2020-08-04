@@ -8,7 +8,7 @@ import { selectDropdownChange } from "../redux/actions/filterActions/filterActio
 import { useRouter } from "next/router";
 import { withTranslation } from '../i18n'
 
-function ProductList({ products, brands, t }) {
+function ProductList({ products, brands, t, searchResult }) {
     const router = useRouter();
 
     const dispatch = useDispatch();
@@ -47,15 +47,16 @@ function ProductList({ products, brands, t }) {
                     <Breadcrumb.Item onClick={() => router.push("/")}>
                         {t('main')}
                     </Breadcrumb.Item>
-                    {/* <Breadcrumb.Item active>
-                        {products.length ? products[0].category.parent.name : null}
-                    </Breadcrumb.Item> */}
-                    <Breadcrumb.Item active>
-                        {products.length ? products[0].category.name : null}
-                    </Breadcrumb.Item>
+                    {searchResult ?
+                        <Breadcrumb.Item active>
+                            {t('search-result')}
+                        </Breadcrumb.Item> :
+                        <Breadcrumb.Item active>
+                            {products.length ? products[0].category.name : null}
+                        </Breadcrumb.Item>}
                 </Breadcrumb>
                 <div className="control_bar">
-                    <h3>{products?.length ? products[0].category.name : null}</h3>
+                    <h3>{searchResult ? t('search-result') : (products.length ? products[0].category.name : null)}</h3>
                     <div className="controls">
                         <span className="sort_by">
                             <select
