@@ -85,9 +85,11 @@ const SearchBar = ({ t }) => {
                             placeholder={t('product-search')}
                             id="searchTerm"
                         />
-                        <span className="search_icon">
-                            <FaSearch />
-                        </span>
+                        <button className="btn search_icon" type="submit">
+                            <span>
+                                <FaSearch />
+                            </span>
+                        </button>
                     </form>
                 </div>
             </div>

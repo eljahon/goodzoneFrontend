@@ -635,8 +635,10 @@ header {
           display: flex;
           justify-content: center;
           align-items: center;
-          cursor: pointer;
+          width: 56px;
+          height: 48px;
           padding: 0 20px;
+          box-shadow: none;
           svg {
             font-size: 14px;
             color: #fff;
