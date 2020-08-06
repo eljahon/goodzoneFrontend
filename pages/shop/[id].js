@@ -13,7 +13,7 @@ import {
 } from "../../redux/actions/filterActions/filterActions";
 import { i18n } from '../../i18n'
 
-export default function Category({ categoryProducts, categoryId, query }) {
+export default function Category({ categoryProducts, categoryId, query, categories }) {
     const dispatch = useDispatch();
 
     const [brands, setBrands] = useState([]);
@@ -83,9 +83,9 @@ export default function Category({ categoryProducts, categoryId, query }) {
                 `${process.env.PRODUCT_API_URL}?lang=${i18n.language}&brand=${filterBrands.join(
                     ","
                 )}&category=${categoryId}${
-                    filterPriceRange.length
-                        ? `&price_from=${filterPriceRange[0]}&price_till=${filterPriceRange[1]}`
-                        : ""
+                filterPriceRange.length
+                    ? `&price_from=${filterPriceRange[0]}&price_till=${filterPriceRange[1]}`
+                    : ""
                 }&sort=price|${selectDropdownFilter}`
             )
             .then((data) => {
@@ -99,7 +99,7 @@ export default function Category({ categoryProducts, categoryId, query }) {
 
     return (
         <>
-            <SEO 
+            <SEO
                 title={categoryProducts[0].category.name}
                 description={categoryProducts[0].category.description}
                 image={categoryProducts[0].category.image}
@@ -123,6 +123,15 @@ export async function getServerSideProps({ query, req }) {
             foundCategory = category.children.find(
                 (ctg) => ctg.slug === query.id
             );
+            if (!foundCategory) {
+                category.children.forEach((childCategory) => {
+                    if (childCategory.children) {
+                        foundCategory = childCategory.children.find(
+                            (ctg) => ctg.slug === query.id
+                        );
+                    }
+                })
+            }
         }
 
         if (foundCategory) categoryId = foundCategory.id;
