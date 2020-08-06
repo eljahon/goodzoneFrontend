@@ -28,17 +28,19 @@ export default function Category({ categoryProducts, categoryId, query, categori
         //     })
         //     .catch((error) => console.error(error));
 
-        const brands = categoryProducts.map(item => {
-            return item.brand
-        }).filter((brands, index, self) =>
-            index === self.findIndex((t) => (
-                t.id === brands.id && t.name === brands.name
-            ))
-        )
-        setBrands(brands)
+        if (categoryProducts) {
+            const brands = categoryProducts.map(item => {
+                return item.brand
+            }).filter((brands, index, self) =>
+                index === self.findIndex((t) => (
+                    t.id === brands.id && t.name === brands.name
+                ))
+            )
+            setBrands(brands)
+        }
     }, [categoryProducts]);
 
-    const [filteredProducts, setFilteredProducts] = useState([]);
+    const [filteredProducts, setFilteredProducts] = useState(null);
 
     const filterPriceRange = useSelector(
         (state) => state.filters.filterPriceRange
@@ -100,9 +102,9 @@ export default function Category({ categoryProducts, categoryId, query, categori
     return (
         <>
             <SEO
-                title={categoryProducts[0].category.name}
-                description={categoryProducts[0].category.description}
-                image={categoryProducts[0].category.image}
+                title={categoryProducts ? categoryProducts[0].category.name : ''}
+                description={categoryProducts ? categoryProducts[0].category.description : ''}
+                image={categoryProducts ? categoryProducts[0].category.image : ''}
             />
             <ProductList products={filteredProducts} brands={brands} />
             <CartPopup />

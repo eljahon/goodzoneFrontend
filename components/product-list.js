@@ -52,11 +52,11 @@ function ProductList({ products, brands, t, searchResult }) {
                             {t('search-result')}
                         </Breadcrumb.Item> :
                         <Breadcrumb.Item active>
-                            {products.length ? products[0].category.name : null}
+                            {products ? products[0].category.name : null}
                         </Breadcrumb.Item>}
                 </Breadcrumb>
                 <div className="control_bar">
-                    <h3>{searchResult ? t('search-result') : (products.length ? products[0].category.name : null)}</h3>
+                    <h3>{searchResult ? t('search-result') : (products ? products[0].category.name : t('products-not-found'))}</h3>
                     <div className="controls">
                         <span className="sort_by">
                             <select
@@ -120,7 +120,7 @@ function ProductList({ products, brands, t, searchResult }) {
                                 />
                             );
                         })
-                        : "No products"}
+                        : ''}
                 </Row>
             </div>
         </main>
