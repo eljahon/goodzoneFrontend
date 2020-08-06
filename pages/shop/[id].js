@@ -151,25 +151,26 @@ export async function getServerSideProps({ query, req }) {
 
     const [{ categories }] = await fetchMultipleUrls(urls);
 
-    let categoryId;
+    let categoryId = null
+    let foundChildCategory = null
     categories.forEach((category) => {
         let foundCategory;
         if (category.children) {
             foundCategory = category.children.find(
                 (ctg) => ctg.slug === query.id
             );
+            if (foundCategory) categoryId = foundCategory.id;
             if (!foundCategory) {
                 category.children.forEach((childCategory) => {
                     if (childCategory.children) {
-                        foundCategory = childCategory.children.find(
-                            (ctg) => ctg.slug === query.id
+                        foundChildCategory = childCategory.children.find(
+                            (item) => item.slug === query.id
                         );
+                        if (foundChildCategory) categoryId = foundChildCategory.id
                     }
                 })
             }
         }
-
-        if (foundCategory) categoryId = foundCategory.id;
     });
 
     const [products] = await fetchMultipleUrls([
