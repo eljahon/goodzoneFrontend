@@ -180,7 +180,7 @@ function Product({ product: data, t, shops }) {
                                             {shops.map(item => (
                                                 <tr key={item.shop.id}>
                                                     <td>{item.shop.name}</td>
-                                                    <td>{item.shop.address}</td>
+                                                    <td dangerouslySetInnerHTML={{__html: item.shop.address}} />
                                                     <td>{item.shop.working_hours}</td>
                                                     <td>
                                                         <span className={`td_icon ${item.quantity == 0 ? 'secondary' : (item.quantity < 6 ? 'danger' : (item.quantity < 11 ? 'warning' : 'success'))}`}>

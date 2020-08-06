@@ -13,9 +13,12 @@ import {
 } from "../../redux/actions/filterActions/filterActions";
 import { i18n } from '../../i18n'
 
-export default function Category({ categoryProducts, categoryId, query, categories }) {
+export default function Category({ products, categoryId, query }) {
     const dispatch = useDispatch();
+    const categoryProducts = products.products
 
+    const [loading, setLoading] = useState(false)
+    const [productLimit, setProductLimit] = useState(20)
     const [brands, setBrands] = useState([]);
     useEffect(() => {
         // axios
@@ -39,6 +42,31 @@ export default function Category({ categoryProducts, categoryId, query, categori
             setBrands(brands)
         }
     }, [categoryProducts]);
+
+    useEffect(() => {
+        window.addEventListener("scroll", handleScroll)
+        return () => {
+            window.removeEventListener("scroll", handleScroll)
+        }
+    })
+
+    const handleScroll = () => {
+        const lastProductLoaded = document.querySelector(
+            ".products_row > .products_col:last-child"
+        )
+
+        if (lastProductLoaded) {
+            const lastProductLoadedOffset =
+                lastProductLoaded.offsetTop + lastProductLoaded.clientHeight
+            const pageOffset = window.pageYOffset + window.innerHeight
+
+            if (pageOffset > lastProductLoadedOffset) {
+                if (products.count > productLimit) {
+                    setProductLimit(productLimit + 20)
+                }
+            }
+        }
+    }
 
     const [filteredProducts, setFilteredProducts] = useState(null);
 
@@ -80,11 +108,12 @@ export default function Category({ categoryProducts, categoryId, query, categori
     }, [query]);
 
     useEffect(() => {
+        setLoading(true)
         axios
             .get(
                 `${process.env.PRODUCT_API_URL}?lang=${i18n.language}&brand=${filterBrands.join(
                     ","
-                )}&category=${categoryId}${
+                )}&category=${categoryId}&limit=${productLimit}&${
                 filterPriceRange.length
                     ? `&price_from=${filterPriceRange[0]}&price_till=${filterPriceRange[1]}`
                     : ""
@@ -93,20 +122,25 @@ export default function Category({ categoryProducts, categoryId, query, categori
             .then((data) => {
                 const { products } = data.data;
                 setFilteredProducts(products);
-                console.log("products", products);
+                setLoading(false)
+                setDataLoaded(true)
+                console.log("products", productLimit);
             })
-            .catch((error) => console.error("error", error));
+            .catch((error) => {
+                setLoading(false)
+                console.error("error", error)
+            });
         console.log("selectDropdownFilter", selectDropdownFilter);
-    }, [filterBrands, categoryId, filterPriceRange, selectDropdownFilter]);
+    }, [filterBrands, filterPriceRange, selectDropdownFilter, productLimit]);
 
     return (
         <>
             <SEO
-                title={categoryProducts ? categoryProducts[0].category.name : ''}
-                description={categoryProducts ? categoryProducts[0].category.description : ''}
-                image={categoryProducts ? categoryProducts[0].category.image : ''}
+                title={products.count > 0 ? categoryProducts[0].category.name : ''}
+                description={products.count > 0 ? categoryProducts[0].category.description : ''}
+                image={products.count > 0 ? categoryProducts[0].category.image : ''}
             />
-            <ProductList products={filteredProducts} brands={brands} />
+            <ProductList products={filteredProducts} brands={brands} loading={loading} />
             <CartPopup />
             <Footer />
         </>
@@ -139,13 +173,13 @@ export async function getServerSideProps({ query, req }) {
         if (foundCategory) categoryId = foundCategory.id;
     });
 
-    const [{ products: categoryProducts }] = await fetchMultipleUrls([
-        `${process.env.PRODUCT_API_URL}?category=${categoryId}&lang=${req.i18n.language}&limit=20`,
+    const [products] = await fetchMultipleUrls([
+        `${process.env.PRODUCT_API_URL}?category=${categoryId}&lang=${req.i18n.language}`,
     ]);
 
     return {
         props: {
-            categoryProducts,
+            products,
             categories,
             categoryId,
             query,

@@ -522,6 +522,13 @@
                     color: rgb(66, 69, 97);
                     line-height: 2;
                     border-bottom: 1px solid $border-color;
+                    p {
+                        margin-bottom: 0;
+                        font-size: 15px;
+                        font-weight: 400;
+                        color: rgb(66, 69, 97);
+                        line-height: 2;
+                    }
                     @include sm {
                         font-size: 13px;
                     }

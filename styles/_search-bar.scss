@@ -51,13 +51,14 @@
         font-weight: 700;
         color: $link-color;
     }
-    .spinner {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 20px;
-        margin: 0 auto;
-    }
+}
+
+.spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    margin: 0 auto;
 }
 
 .results_list {

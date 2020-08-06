@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Row, Breadcrumb } from "react-bootstrap";
+import { Row, Breadcrumb, Col, Spinner } from "react-bootstrap";
 import ProductListItem from "./product-list-item";
 import ProductListFilter from "./product-list-filter";
 import { FaTh, FaBars, FaFilter } from "react-icons/fa";
@@ -8,14 +8,14 @@ import { selectDropdownChange } from "../redux/actions/filterActions/filterActio
 import { useRouter } from "next/router";
 import { withTranslation } from '../i18n'
 
-function ProductList({ products, brands, t, searchResult }) {
+function ProductList({ products, brands, t, searchResult, loading }) {
     const router = useRouter();
 
+    console.log('loading', loading)
     const dispatch = useDispatch();
     const [view, setView] = useState("col");
     const [filterPopup, setFilterPopup] = useState(false);
 
-    console.log(products)
     const [selectDropdownOptions] = useState([
         {
             value: "newness",
@@ -122,6 +122,11 @@ function ProductList({ products, brands, t, searchResult }) {
                         })
                         : ''}
                 </Row>
+                {loading ? <div className="spinner">
+                    <Spinner animation="border" role="status">
+                        <span className="sr-only">Loading...</span>
+                    </Spinner>
+                </div> : ''}
             </div>
         </main>
     );
