@@ -36,7 +36,7 @@ export default function Category({ products, categoryId, query }) {
                 return item.brand
             }).filter((brands, index, self) =>
                 index === self.findIndex((t) => (
-                    t.id === brands.id && t.name === brands.name
+                    t.id === brands.id && t.name === brands.name && brands.active === true
                 ))
             )
             setBrands(brands)
@@ -123,8 +123,7 @@ export default function Category({ products, categoryId, query }) {
                 const { products } = data.data;
                 setFilteredProducts(products);
                 setLoading(false)
-                setDataLoaded(true)
-                console.log("products", productLimit);
+                console.log("products", products);
             })
             .catch((error) => {
                 setLoading(false)

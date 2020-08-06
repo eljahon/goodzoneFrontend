@@ -11,7 +11,6 @@ import { withTranslation } from '../i18n'
 function ProductList({ products, brands, t, searchResult, loading }) {
     const router = useRouter();
 
-    console.log('loading', loading)
     const dispatch = useDispatch();
     const [view, setView] = useState("col");
     const [filterPopup, setFilterPopup] = useState(false);
