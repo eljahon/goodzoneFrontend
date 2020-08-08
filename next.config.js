@@ -6,6 +6,7 @@ module.exports = {
         REGISTER_API_URL: "https://dev.goodzone.uz/v1/customer/register",
         LOGIN_API_URL: "https://dev.goodzone.uz/v1/customer/login",
         AUTHORIZE_API_URL: "https://dev.goodzone.uz/v1/customer",
-        ORDER_API_URL: "https://dev.goodzone.uz/v1/order"
+        ORDER_API_URL: "https://dev.goodzone.uz/v1/order",
+        PAYMENT_API_URL: "https://pay.goodzone.uz/redirectPayment",
     },
 };

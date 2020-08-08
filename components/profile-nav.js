@@ -1,10 +1,10 @@
-import Link from "next/link";
 import { logout } from "../redux/actions/authActions/authActions";
 import { useDispatch } from "react-redux";
 import { removeLocalStorage } from "../libs/localStorage";
 import { useRouter } from "next/router";
+import { withTranslation, Link } from '../i18n'
 
-export default function ProfileNav({ activeTab }) {
+function ProfileNav({ activeTab, t }) {
     const router = useRouter();
     const dispatch = useDispatch();
     const logoutHandler = (e) => {
@@ -26,7 +26,7 @@ export default function ProfileNav({ activeTab }) {
                                         : ""
                                 }
                             >
-                                <span className="label">Личный кабинет</span>
+                                <span className="label">{t('personal-area')}</span>
                             </a>
                         </Link>
                     </div>
@@ -37,7 +37,7 @@ export default function ProfileNav({ activeTab }) {
                                     activeTab === "order" ? "current_page" : ""
                                 }
                             >
-                                <span className="label">Заказы</span>
+                                <span className="label">{t('orders')}</span>
                             </a>
                         </Link>
                     </div>
@@ -50,7 +50,7 @@ export default function ProfileNav({ activeTab }) {
                                         : ""
                                 }
                             >
-                                <span className="label">Приборная доска</span>
+                                <span className="label">{t('dashboard')}</span>
                             </a>
                         </Link>
                     </div>
@@ -58,7 +58,7 @@ export default function ProfileNav({ activeTab }) {
                         <Link href="/">
                             <a>
                                 <span onClick={logoutHandler} className="label">
-                                    Выйти
+                                    {t('exit')}
                             </span>
                             </a>
                         </Link>
@@ -68,3 +68,5 @@ export default function ProfileNav({ activeTab }) {
         </div>
     );
 }
+
+export default withTranslation('navigation')(ProfileNav)

@@ -1,8 +1,9 @@
 import SEO from "../components/seo";
 import Footer from "../components/footer";
 import ProfileNav from "../components/profile-nav";
+import { withTranslation } from '../i18n'
 
-export default function Account() {
+function Account({ t }) {
     return (
         <>
             <SEO title="Goodzone" />
@@ -12,7 +13,7 @@ export default function Account() {
                     <div className="settings_form">
                         <div className="settings_form-content">
                             <div className="heading">
-                                <h3>Приборная доска</h3>
+                                <h3>{t('dashboard')}</h3>
                             </div>
                             {/* <p>Здраствуйте 
                                 <span className="user"> User </span>
@@ -21,12 +22,7 @@ export default function Account() {
                                      <a> Выйти</a>
                                 </Link>)
                             </p> */}
-                            <p>
-                                С панели управления вашей учетной записи вы
-                                можете просмотреть Недавние заказы, управлять
-                                своимадреса доставки и выставления счетов и
-                                измените свой пароль и данные учетной записи.
-                            </p>
+                            <p>{t('dashboard-description')}</p>
                         </div>
                     </div>
                 </div>
@@ -35,3 +31,5 @@ export default function Account() {
         </>
     );
 }
+
+export default withTranslation('navigation')(Account)

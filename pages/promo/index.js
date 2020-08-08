@@ -2,11 +2,11 @@ import React from "react";
 import SEO from "../../components/seo";
 import Footer from "../../components/footer";
 import { Row, Col } from "react-bootstrap";
-import Link from "next/link";
 import { FaRegCalendarAlt } from "react-icons/fa";
 import { LazyImage } from "../../components/lazy-image";
+import { withTranslation, Link } from '../../i18n'
 
-export default function Promo() {
+function Promo({ t }) {
     const promo = [
         {
             title: "LG DUAL Inverter",
@@ -36,7 +36,7 @@ export default function Promo() {
 
             <section className="promo_container">
                 <div className="promo_content">
-                    <h1>Акции и скидки</h1>
+                    <h1>{t('promo')}</h1>
                     <Row className="products_row">
                         {promo.map((promo, i) => (
                             <Col key={i} sm={6} lg={3} className="products_col">
@@ -98,11 +98,13 @@ export default function Promo() {
                                             </div>
                                         </div>
                                         <div className="product_meta">
-                                            <button className="btn product_btn">
+                                            <Link href="/promo/template">
+                                                <a className="btn product_btn">
                                                 <span className="btn_text">
-                                                    Узнать подробнее
+                                                    {t('know-more')}
                                                 </span>
-                                            </button>
+                                                </a>
+                                            </Link>
                                         </div>
                                     </div>
                                 </div>
@@ -116,3 +118,5 @@ export default function Promo() {
         </>
     );
 }
+
+export default withTranslation('navigation')(Promo)

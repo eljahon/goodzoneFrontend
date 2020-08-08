@@ -2,10 +2,10 @@ import React from "react";
 import SEO from "../../components/seo";
 import Footer from "../../components/footer";
 import { Row, Col } from "react-bootstrap";
-import Link from "next/link";
 import { FaLongArrowAltRight } from "react-icons/fa";
+import { withTranslation, Link } from '../../i18n'
 
-export default function News() {
+function News({ t }) {
     const news = [
         {
             title:
@@ -53,7 +53,7 @@ export default function News() {
 
             <section className="news_container">
                 <div className="news_content">
-                    <h1>Новости</h1>
+                    <h1>{t('news')}</h1>
                     <Row className="products_row">
                         {news.map((news, i) => (
                             <Col
@@ -90,7 +90,7 @@ export default function News() {
                                             <Link href="/news/template">
                                                 <a className="btn product_btn">
                                                     <span className="btn_text">
-                                                        Читать далее
+                                                        {t('read-more')}
                                                     </span>
                                                     <span className="btn_icon">
                                                         <FaLongArrowAltRight />
@@ -110,3 +110,5 @@ export default function News() {
         </>
     );
 }
+
+export default withTranslation('footer')(News)

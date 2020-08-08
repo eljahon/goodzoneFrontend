@@ -11,8 +11,9 @@ import { fetchMultipleUrls } from "../libs/fetchMultipleUrls";
 import { getLocalStorage } from "../libs/localStorage";
 import { axiosAuth } from "../libs/axios/axios-instances";
 import { setUser } from "../redux/actions/authActions/authActions";
+import { withTranslation } from '../i18n'
 
-export default function Home({ products }) {
+function Home({ products, t }) {
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -33,16 +34,19 @@ export default function Home({ products }) {
         <>
             <SEO title="Интернет магазин GOODZONE" />
             <HomeSplash />
-            <Products title="Новые поступления" data={products} />
+            <Products title={t('new-arrivals')} data={products} />
             <Banner double />
-            <Products title="Популярные товары" data={products} />
+            <Products title={t('popular-items')} data={products} />
             <Banner />
-            <Products title="Лучшая подборка для вас" data={products} />
+            <Products title={t('the-best-selection-for-you')} data={products} />
             <CartPopup />
             <Footer />
         </>
     );
 }
+
+export default withTranslation('common')(Home)
+
 
 export async function getServerSideProps() {
     const urls = [process.env.PRODUCT_API_URL];

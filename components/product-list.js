@@ -6,26 +6,28 @@ import { FaTh, FaBars, FaFilter } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { selectDropdownChange } from "../redux/actions/filterActions/filterActions";
 import { useRouter } from "next/router";
+import { withTranslation } from '../i18n'
 
-export default function ProductList({ products, brands }) {
+function ProductList({ products, brands, t }) {
     const router = useRouter();
 
     const dispatch = useDispatch();
     const [view, setView] = useState("col");
     const [filterPopup, setFilterPopup] = useState(false);
 
+    console.log(products)
     const [selectDropdownOptions] = useState([
         {
             value: "newness",
-            title: "Сортировка по новизне",
+            title: t('sort-by-newness'),
         },
         {
             value: "asc",
-            title: "Сортировка по цене: по возрастанию",
+            title: t('sort-by-price-ascending'),
         },
         {
             value: "desc",
-            title: "Сортировка по цене: по убыванию",
+            title: t('sort-by-price-descending'),
         },
     ]);
 
@@ -53,9 +55,7 @@ export default function ProductList({ products, brands }) {
                     </Breadcrumb.Item>
                 </Breadcrumb>
                 <div className="control_bar">
-                    <h3>
-                        {products?.length ? products[0].category.name : null}
-                    </h3>
+                    <h3>{products?.length ? products[0].category.name : null}</h3>
                     <div className="controls">
                         <span className="sort_by">
                             <select
@@ -82,7 +82,7 @@ export default function ProductList({ products, brands }) {
                             <span className="filter_icon">
                                 <FaFilter />
                             </span>
-                            <span className="btn_text">Фильтр</span>
+                            <span className="btn_text">{t('filter')}</span>
                         </button>
                         <div>
                             <button
@@ -125,3 +125,5 @@ export default function ProductList({ products, brands }) {
         </main>
     );
 }
+
+export default withTranslation('common')(ProductList)

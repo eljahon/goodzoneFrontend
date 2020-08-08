@@ -1,12 +1,13 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { FaCreditCard, FaRegCreditCard, FaWallet, FaBoxOpen, FaTruck } from 'react-icons/fa'
 import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form'
 import { useSelector, shallowEqual } from 'react-redux'
 import axios from 'axios'
 import swal from 'sweetalert'
+import { withTranslation } from '../i18n'
 
-export default function CheckoutForm() {
+function CheckoutForm({ t }) {
     const { register, handleSubmit, errors } = useForm();
     const router = useRouter();
 
@@ -36,11 +37,11 @@ export default function CheckoutForm() {
             })
 
             if (response.status === 200) {
-                router.push('/order-received');
+                router.push('/order/[id]', `/order/${response.data.number}`);
             }
             console.log(response);
         }
-        catch(error) {
+        catch (error) {
             swal(error);
             console.log(error)
         }
@@ -48,30 +49,30 @@ export default function CheckoutForm() {
     return (
         <form className="checkout_form" onSubmit={handleSubmit(onSubmit)}>
             <div className="checkout_form-box">
-                <h3 className="form_heading">Ф.И.О</h3>
+                <h3 className="form_heading">{t('full-name')}</h3>
                 <div className="field_wrapper">
-                    <input type="text" name="customer_name" id="name" required ref={register} />
+                    <input type="text" name="customer_name" id="name" required ref={register} placeholder={t('write-name')} defaultValue={user ? `${user.lastname} ${user.name}` : ''} />
                 </div>
             </div>
             <div className="checkout_form-box">
-                <h3 className="form_heading">Адрес</h3>
+                <h3 className="form_heading">{t('address')}</h3>
                 <div className="field_wrapper">
-                    <textarea type="text" name="address" id="address" required ref={register} />
+                    <textarea type="text" name="address" id="address" required ref={register} placeholder={t('write-address')} />
                 </div>
             </div>
             <div className="checkout_form-box">
-                <h3 className="form_heading">Телефон номер</h3>
+                <h3 className="form_heading">{t('phone-number')}</h3>
                 <div className="field_wrapper">
-                    <input type="tel" name="phone" id="phone" required ref={register} />
+                    <input type="tel" name="phone" id="phone" required ref={register} placeholder={t('write-phone-number')} defaultValue={user ? user.phone : ''} />
                 </div>
             </div>
             <div className="checkout_form-box">
-                <h3 className="form_heading">Выберите способ оплаты</h3>
+                <h3 className="form_heading">{t('select-payment-method')}</h3>
                 <div className="radio_wrapper">
                     <div className="radio_card">
                         <input type="radio" name="payment_method" value="cash" id="cash" defaultChecked ref={register} />
                         <label htmlFor="cash">
-                            <span className="card_title">Наличные</span>
+                            <span className="card_title">{t('cash')}</span>
                             <span className="card_content">
                                 <FaWallet />
                             </span>
@@ -80,7 +81,7 @@ export default function CheckoutForm() {
                     <div className="radio_card">
                         <input type="radio" name="payment_method" value="terminal" id="terminal" ref={register} />
                         <label htmlFor="terminal">
-                            <span className="card_title">Терминал</span>
+                            <span className="card_title">{t('terminal')}</span>
                             <span className="card_content">
                                 <FaCreditCard />
                             </span>
@@ -116,12 +117,12 @@ export default function CheckoutForm() {
                 </div>
             </div>
             <div className="checkout_form-box">
-                <h3 className="form_heading">Выберите способ доставки</h3>
+                <h3 className="form_heading">{t('select-delivery-method')}</h3>
                 <div className="radio_wrapper">
                     <div className="radio_card">
                         <input type="radio" name="delivery_method" value="self" id="pickup" defaultChecked ref={register} />
                         <label htmlFor="pickup">
-                            <span className="card_title">Самовывоз</span>
+                            <span className="card_title">{t('pickup')}</span>
                             <span className="card_content">
                                 <FaBoxOpen />
                             </span>
@@ -130,7 +131,7 @@ export default function CheckoutForm() {
                     <div className="radio_card">
                         <input type="radio" name="delivery_method" value="deliver" id="deliver" ref={register} />
                         <label htmlFor="deliver">
-                            <span className="card_title">Доставка в течении дня</span>
+                            <span className="card_title">{t('delivery-within-a-day')}</span>
                             <span className="card_content">
                                 <FaTruck />
                             </span>
@@ -139,19 +140,21 @@ export default function CheckoutForm() {
                 </div>
             </div>
             <div className="checkout_form-box">
-                <h3 className="form_heading">Примечания к заказу</h3>
+                <h3 className="form_heading">{t('order-notes')}</h3>
                 <div className="field_wrapper">
-                    <textarea type="tel" name="note" id="note" placeholder="Заметки о вашем заказе, например. специальные заметки для доставки." ref={register} />
+                    <textarea type="tel" name="note" id="note" placeholder={t('order-notes-example')} ref={register} />
                 </div>
-                <span className="term_text">Совершая эту покупку, вы соглашаетесь с нашими
-                    <a href="/terms" target="_blank" rel="noopener noreferrer">термины и условиями.</a>
+                <span className="term_text">{t('by-making-purchase')}
+                    <a href="/terms" target="_blank" rel="noopener noreferrer">{t('terms-and-conditions')}.</a>
                 </span>
                 <div className="checkout_submit">
                     <button className="btn">
-                        <span className="btn_text">Оформить заказ</span>
+                        <span className="btn_text">{t('checkout')}</span>
                     </button>
                 </div>
             </div>
         </form>
     )
 }
+
+export default withTranslation('checkout')(CheckoutForm)

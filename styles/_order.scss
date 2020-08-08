@@ -12,11 +12,7 @@
         flex-direction: column;
         flex-shrink: 0;
         margin-right: 30px;
-        border-width: 1px;
-        border-style: solid;
-        border-color: $border-color;
-        border-image: initial;
-        // overflow: hidden;
+        border: none;
         @include sm {
             display: none;
         }
@@ -91,7 +87,7 @@
     width: 32%;
     margin-right: 15px;
     padding: 0;
-    background-color: $bg-color;
+    background-color: #ffffff;
     margin-bottom: 15px;
     cursor: pointer;
     outline: none;
@@ -156,10 +152,9 @@
     min-height: calc(100vh - 190px);
     display: flex;
     flex-direction: column;
-    border-width: 1px;
-    border-style: solid;
-    border-color: $border-color;
-    border-image: initial;
+    border: none;
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.16) 0 0 6px;
     @include sm {
         display: none;
         min-height: auto;
@@ -260,13 +255,13 @@
             table.order_table {
                 width: 100%;
                 thead {
-                    background-color: $bg-color;
+                    background-color: $primary-color;
                     tr {
                         th {
                             font-family: $base-font;
                             font-size: 13px;
                             font-weight: 700;
-                            color: $link-color;
+                            color: #fff;
                             padding: 8px 20px;
                             border-width: initial;
                             border-style: none;

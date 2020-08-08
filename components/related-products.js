@@ -7,8 +7,9 @@ import { Col } from "react-bootstrap";
 import { LazyImage } from "./lazy-image";
 import { useDispatch } from "react-redux";
 import { useCallback } from "react";
+import { withTranslation } from '../i18n'
 
-export default function RelatedProducts({ products, addToCart }) {
+function RelatedProducts({ products, addToCart, t }) {
     const dispatch = useDispatch();
 
     const responsive = {
@@ -32,7 +33,7 @@ export default function RelatedProducts({ products, addToCart }) {
 
     return (
         <div className="related_items">
-            <h2>Сопутствующие товары</h2>
+            <h2>{t('related-products')}</h2>
             <Carousel
                 className="products_row"
                 responsive={responsive}
@@ -87,7 +88,7 @@ export default function RelatedProducts({ products, addToCart }) {
                                             <FaShoppingBasket />
                                         </span>
                                         <span className="btn_text">
-                                            Добавить в корзину
+                                            {t('add-to-cart')}
                                         </span>
                                     </button>
                                 </div>
@@ -99,3 +100,5 @@ export default function RelatedProducts({ products, addToCart }) {
         </div>
     );
 }
+
+export default withTranslation('common')(RelatedProducts)

@@ -1,4 +1,4 @@
-import React, { useState, memo } from "react";
+import React, { useState, memo, useRef } from "react";
 import { FaSearch } from "react-icons/fa";
 import { useEffect } from "react";
 import useDebounce from "../libs/hooks/useDebounce";
@@ -7,8 +7,9 @@ import Link from "next/link";
 import { numberToPrice } from "../libs/numberToPrice";
 import { Spinner } from "react-bootstrap";
 import { LazyImage } from "./lazy-image";
+import { withTranslation } from '../i18n'
 
-const SearchBar = () => {
+const SearchBar = ({ t }) => {
     const [searchTerm, setSearchTerm] = useState("");
     const [products, setProducts] = useState([]);
     const [isFetching, setIsFetching] = useState(false);
@@ -38,20 +39,42 @@ const SearchBar = () => {
         [debouncedSearchTerm] // Only call effect if debounced search term changes
     );
 
+    const wrapperRef = useRef(null);
+    useOutsideCloseMenu(wrapperRef);
+
+    function useOutsideCloseMenu(ref) {
+        useEffect(() => {
+            function handleClickOutside(event) {
+                if (ref.current && !ref.current.contains(event.target)) {
+                    setSearchTerm("");
+                    setProducts([]);
+                    document.getElementById("searchTerm").value = "";
+                }
+            }
+            document.addEventListener("mousedown", handleClickOutside);
+
+            return () => {
+                document.removeEventListener("mousedown", handleClickOutside);
+            };
+
+        }, [ref]);
+    }
+
     return (
-        <div className="search_box">
+        <div className="search_box" ref={wrapperRef}>
             <div className="search_box-wrapper">
                 <div className="search_input-wrapper">
                     <form>
-                        <span className="search_icon">
-                            <FaSearch />
-                        </span>
                         <input
                             onChange={(e) => setSearchTerm(e.target.value)}
                             type="text"
                             className="search_box-input"
-                            placeholder="Поиск по товарам"
+                            placeholder={t('product-search')}
+                            id="searchTerm"
                         />
+                        <span className="search_icon">
+                            <FaSearch />
+                        </span>
                     </form>
                 </div>
             </div>
@@ -65,57 +88,57 @@ const SearchBar = () => {
                             </Spinner>
                         </div>
                     ) : (
-                        <>
-                            <ul className="results_list">
-                                {products.map((product) => {
-                                    return (
-                                        <li
-                                            className="search_result"
-                                            key={product.id}
-                                        >
-                                            <Link
-                                                href="/product/[id]"
-                                                as={`/product/${product.slug}`}
+                            <>
+                                <ul className="results_list">
+                                    {products.map((product) => {
+                                        return (
+                                            <li
+                                                className="search_result"
+                                                key={product.id}
                                             >
-                                                <a className="product_card">
-                                                    <div className="product_image">
-                                                        <LazyImage
-                                                            src={product.image}
-                                                            alt={product.name}
-                                                        />
-                                                    </div>
-                                                    <div className="product_info">
-                                                        <h3>{product.name}</h3>
-                                                        <span className="price">
-                                                            {numberToPrice(
-                                                                product.price
-                                                                    .price
-                                                            )}
-                                                        </span>
-                                                    </div>
-                                                </a>
-                                            </Link>
-                                        </li>
-                                    );
-                                })}
-                            </ul>
-                            <div className="product_meta">
-                                <Link href="/">
-                                    <a>Посмотреть все товары</a>
-                                </Link>
-                            </div>
-                        </>
-                    )}
+                                                <Link
+                                                    href="/product/[id]"
+                                                    as={`/product/${product.slug}`}
+                                                >
+                                                    <a className="product_card">
+                                                        <div className="product_image">
+                                                            <LazyImage
+                                                                src={product.image}
+                                                                alt={product.name}
+                                                            />
+                                                        </div>
+                                                        <div className="product_info">
+                                                            <h3>{product.name}</h3>
+                                                            <span className="price">
+                                                                {numberToPrice(
+                                                                    product.price
+                                                                        .price
+                                                                )}
+                                                            </span>
+                                                        </div>
+                                                    </a>
+                                                </Link>
+                                            </li>
+                                        );
+                                    })}
+                                </ul>
+                                <div className="product_meta">
+                                    <Link href="/">
+                                        <a>{t('view-all-products')}</a>
+                                    </Link>
+                                </div>
+                            </>
+                        )}
                 </div>
             ) : null}
             {searchTerm.length && !products ? (
                 <div className="search_results">
                     {/* <h4>ТОВАРЫ</h4> */}
-                    <div className="msg">Товары не найдены</div>
+                    <div className="msg">{t('products-not-found')}</div>
                 </div>
             ) : null}
         </div>
     );
 };
 
-export default memo(SearchBar);
+export default withTranslation('common')(memo(SearchBar));

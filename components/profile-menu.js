@@ -1,11 +1,11 @@
 import React from "react";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import { removeLocalStorage } from "../libs/localStorage";
 import { useDispatch } from "react-redux";
 import { logout } from "../redux/actions/authActions/authActions";
+import { withTranslation, Link } from '../i18n'
 
-export default function ProfileMenu() {
+function ProfileMenu({ closeMenu, t }) {
     const router = useRouter();
     const dispatch = useDispatch();
 
@@ -14,24 +14,25 @@ export default function ProfileMenu() {
         router.push("/");
         removeLocalStorage("access_token");
         dispatch(logout());
+        closeMenu();
     };
     return (
         <div className="popover_content">
             <ul className="inner_wrap">
                 <li className="menu_item">
                     <Link href="/profile">
-                        <a>
-                            <span className="label">Личный кабинет</span>
+                        <a onClick={closeMenu}>
+                            <span className="label">{t('personal-area')}</span>
                         </a>
                     </Link>
                     <Link href="/order">
-                        <a>
-                            <span className="label">Заказы</span>
+                        <a onClick={closeMenu}>
+                            <span className="label">{t('orders')}</span>
                         </a>
                     </Link>
                     <Link href="/logout">
                         <a onClick={(e) => logoutHandler(e)}>
-                            <span className="label">Выйти</span>
+                            <span className="label">{t('exit')}</span>
                         </a>
                     </Link>
                 </li>
@@ -39,3 +40,5 @@ export default function ProfileMenu() {
         </div>
     );
 }
+
+export default withTranslation('navigation')(ProfileMenu)

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { FaTimes } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import axios from "axios";
@@ -54,12 +54,31 @@ export default function RegisterModal({ closeModal, login }) {
         }
     };
 
+    const wrapperRef = useRef(null);
+    useOutsideCloseMenu(wrapperRef);
+
+    function useOutsideCloseMenu(ref) {
+        useEffect(() => {
+            function handleClickOutside(event) {
+                if (ref.current && !ref.current.contains(event.target)) {
+                    closeModal();
+                }
+            }
+            document.addEventListener("mousedown", handleClickOutside);
+
+            return () => {
+                document.removeEventListener("mousedown", handleClickOutside);
+            };
+
+        }, [ref]);
+    }
+    
     return (
         <div className="login_modal-wrapper">
             <button className="btn close_btn" onClick={closeModal}>
                 <FaTimes />
             </button>
-            <div className={`login_modal-holder ${load ? "show" : ""}`}>
+            <div className={`login_modal-holder ${load ? "show" : ""}`} ref={wrapperRef}>
                 <div className="inner_block">
                     <div className="auth_form">
                         {registerConfirm ? (

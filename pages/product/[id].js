@@ -1,5 +1,5 @@
 import React from "react";
-import { Tabs, Tab, Breadcrumb } from "react-bootstrap";
+import { Tabs, Tab, Breadcrumb, Badge } from "react-bootstrap";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { useDispatch } from "react-redux";
@@ -13,13 +13,16 @@ import { numberToPrice } from "../../libs/numberToPrice";
 import { fetchMultipleUrls } from "../../libs/fetchMultipleUrls";
 import RelatedProducts from "../../components/related-products";
 import ProductImageGallery from "../../components/product-image-gallery";
+import { withTranslation } from '../../i18n'
 
-export default function Product({ product: data }) {
+function Product({ product: data, t }) {
     const router = useRouter();
     const dispatch = useDispatch();
 
     const addToCartHandler = (cartItem) =>
         dispatch(asyncAddToCartAction(cartItem));
+
+    console.log(data)
 
     return (
         <>
@@ -48,7 +51,8 @@ export default function Product({ product: data }) {
                     <div className="product_details-wrapper">
                         <ProductImageGallery data={data} />
                         <div className="product_info">
-                            <h1>{data.name}</h1>
+                        <h1>{data.name}</h1>
+                        {data.price.old_price > data.price.price ? <Badge variant="secondary">{numberToPrice(data.price.old_price)}</Badge> : ''}
                             <div className="product_desc-wrapper">
                                 {data.preview_text ? (
                                     <p
@@ -58,14 +62,14 @@ export default function Product({ product: data }) {
                                         }}
                                     ></p>
                                 ) : (
-                                    `Диагональ экрана ${data.name} равна 32 дюймам
+                                    <p className="product_desc">Диагональ экрана {data.name} равна 32 дюймам
                                     (80 см). Благодаря этому вы сможете
                                     закрепить его на стене в небольшой комнате,
                                     при этом оптимальное расстояние до экрана
-                                    будет достигать 2-2,5 метров.`
+                                    будет достигать 2-2,5 метров.</p>
                                 )}
                                 <Link href="#details">
-                                    <a>О товаре</a>
+                                <a className="product_desc-link">{t('about-product')}</a>
                                 </Link>
                             </div>
                             <div className="product_cart-wrapper">
@@ -81,7 +85,7 @@ export default function Product({ product: data }) {
                                             <FaShoppingBag />
                                         </span>
                                         <span className="btn_text">
-                                            Добавить в корзину
+                                            {t('add-to-cart')}
                                         </span>
                                     </button>
                                 </div>
@@ -94,7 +98,7 @@ export default function Product({ product: data }) {
                                 eventKey="about"
                                 title={
                                     <span>
-                                        <FaBoxOpen /> О товаре
+                                        <FaBoxOpen /> {t('about-product')}
                                     </span>
                                 }
                             >
@@ -178,7 +182,7 @@ export default function Product({ product: data }) {
                                 eventKey="store"
                                 title={
                                     <span>
-                                        <FaStore /> Наличие в магазинах
+                                        <FaStore /> {t('availability-in-stores')}
                                     </span>
                                 }
                             >
@@ -291,6 +295,8 @@ export default function Product({ product: data }) {
         </>
     );
 }
+
+export default withTranslation('common')(Product)
 
 export async function getServerSideProps({ params }) {
     console.log();
