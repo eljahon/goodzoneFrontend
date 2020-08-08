@@ -10,7 +10,7 @@ import "react-multi-carousel/lib/styles.css";
 import { PersistGate } from "redux-persist/integration/react";
 import { persistStore } from "redux-persist";
 import Layout from "../components/Layout";
-import { appWithTranslation } from '../i18n'
+import { appWithTranslation } from "../i18n";
 
 //Binding events.
 Router.events.on("routeChangeStart", () => NProgress.start());
@@ -31,4 +31,4 @@ function App({ Component, pageProps }) {
     );
 }
 
-export default appWithTranslation(App)
+export default appWithTranslation(App);
