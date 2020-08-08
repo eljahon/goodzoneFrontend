@@ -30,6 +30,7 @@ export default function Products({ title, data }) {
                     showDots={true}
                     infinite={true}
                     autoPlay={true}
+                    autoPlaySpeed={5000}
                     removeArrowOnDeviceType={["desktop", "mobile", "tablet"]}
                     dotListClass="custom_dot-list"
                 >

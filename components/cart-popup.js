@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { FaShoppingBag, FaTimes, FaMinus, FaPlus } from "react-icons/fa";
+import { FaShoppingBag, FaTimes, FaMinus, FaPlus, FaBoxOpen } from "react-icons/fa";
 import { shallowEqual, useSelector, useDispatch } from "react-redux";
 import {
     cartTotalPriceSelector,
@@ -13,9 +13,17 @@ import {
 import { numberToPrice } from "../libs/numberToPrice";
 import { LazyImage } from "./lazy-image";
 import { withTranslation, Link } from '../i18n'
+import LoginModal from "./login-modal";
+import RegisterModal from './register-modal'
 
 function CartPopup({ t }) {
     const [cart, setCart] = useState(false);
+    const [loginModal, setLoginModal] = useState(false)
+    const [registerModal, setRegisterModal] = useState(false)
+    const switchPopup = () => {
+        setLoginModal(!loginModal);
+        setRegisterModal(!registerModal);
+    };
 
     const dispatch = useDispatch();
 
@@ -31,10 +39,14 @@ function CartPopup({ t }) {
         (state) => cartItemsTotalQuantitySelector(state),
         shallowEqual
     );
+    const user = useSelector(
+        (state) => state.auth.user,
+        shallowEqual
+    );
 
     const reduceCartItemQuantityHandler = (cartItem) => {
         if (cartItem.quantity === 1)
-            dispatch(asyncRemoveFromCartAction(cartItem));
+            return;
         else dispatch(asyncReduceCartItemQuantityAction(cartItem));
     };
     const removeFromCartHandler = (cartItem) => {
@@ -44,24 +56,25 @@ function CartPopup({ t }) {
         dispatch(asyncAddToCartAction(cartItem));
     };
 
-    useEffect(() => {
-        if (!totalQuantity) {
-            setCart(false);
-            document.body.classList.remove("overflow");
-        }
-        return () => document.body.classList.remove("overflow");
-    }, [totalQuantity]);
-
     const openPopup = () => {
-        const vw = window.innerWidth;
+        // const vw = window.innerWidth;
         setCart(true);
-        if (vw < 900) document.body.classList.add("overflow");
+        // if (vw < 900) document.body.classList.add("overflow");
     };
     const closePopup = () => {
-        const vw = window.innerWidth;
+        // const vw = window.innerWidth;
         setCart(false);
-        if (vw < 900) document.body.classList.remove("overflow");
+        // if (vw < 900) document.body.classList.remove("overflow");
     };
+
+    const checkUser = (event) => {
+        if (!user) {
+            event.preventDefault()
+            setLoginModal(true)
+            setCart(false)
+            return
+        }
+    }
 
     const wrapperRef = useRef(null);
     useOutsideCloseMenu(wrapperRef);
@@ -82,15 +95,25 @@ function CartPopup({ t }) {
         }, [ref]);
     }
 
-    return totalQuantity ? (
+    return (
         <>
+            {loginModal ? <LoginModal
+                                closeModal={() => setLoginModal(false)}
+                                goRegister={() => switchPopup()}
+                                goCheckout
+                /> : ''}
+            {registerModal ? <RegisterModal
+                                closeModal={() => setRegisterPopup(false)}
+                                login={() => switchPopup()}
+                                goCheckout
+                /> : ''}
             <div className={`cart_popup ${cart ? "show" : ""}`} ref={wrapperRef}>
                 <div className="cart_popup-body">
                     <div className="cart_popup-header">
                         <div className="item_count">
                             <FaShoppingBag />
                             <span>
-                                {totalQuantity === 1
+                                {totalQuantity < 2
                                     ? `${totalQuantity} ${t('item')}`
                                     : `${totalQuantity} ${t('items')}`}
                             </span>
@@ -180,10 +203,20 @@ function CartPopup({ t }) {
                                         );
                                     })
                                 ) : (
-                                        <p>No items in the cart</p>
+                                        <>
+                                            <div className="no_product-img">
+                                                <FaBoxOpen />
+                                            </div>
+                                            <span className="no_product-msg">{t('cart-empty')}</span>
+                                        </>
                                     )}
                             </div>
                         </div>
+                        <button
+                            className="btn clear_btn"
+                        >
+                            {t('clear-cart')}
+                        </button>
                         <div className="bottom_box">
                             <div className="inner_box" />
                         </div>
@@ -191,31 +224,32 @@ function CartPopup({ t }) {
                             <div className="inner_box" />
                         </div>
                     </div>
-                    <div className="checkout_button-wrapper">
+                    {cartItems.length ?
+                     <div className="checkout_button-wrapper">
                         <Link href="/checkout">
-                            <a className="btn checkout_button">
+                            <a className="btn checkout_button" onClick={(event) => checkUser(event)}>
                                 <span className="btn_text">{t('checkout')}</span>
                                 <span className="price_box">
                                     {numberToPrice(totalPrice)}
                                 </span>
                             </a>
                         </Link>
-                    </div>
+                    </div> : ''}
                 </div>
             </div>
-            <button className="btn cart_button" onClick={() => openPopup()}>
+            <button id="cartButton" className="btn cart_button" onClick={() => openPopup()}>
                 <span className="total_items">
                     <span>
                         <FaShoppingBag />
                     </span>
-                    {totalQuantity === 1
+                    {totalQuantity < 2
                         ? `${totalQuantity} ${t('item')}`
                         : `${totalQuantity} ${t('items')}`}
                 </span>
                 <span className="price">{numberToPrice(totalPrice)}</span>
             </button>
         </>
-    ) : null;
+    )
 }
 
 export default withTranslation('common')(CartPopup)

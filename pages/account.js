@@ -6,7 +6,7 @@ import { withTranslation } from '../i18n'
 function Account({ t }) {
     return (
         <>
-            <SEO title="Goodzone" />
+            <SEO />
             <div className="profile_wrapper">
                 <ProfileNav activeTab="dashboard" />
                 <div className="profile_content">

@@ -5,7 +5,7 @@ import { LazyImage } from "../components/lazy-image";
 export default function About() {
     return (
         <>
-            <SEO title="Goodzone" />
+            <SEO />
             <div className="delivery_splash">
                 <div className="about_splash">
                     <LazyImage

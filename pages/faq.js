@@ -6,7 +6,7 @@ import { LazyImage } from "../components/lazy-image";
 export default function Faq() {
     return (
         <>
-            <SEO title="Goodzone" />
+            <SEO />
             <div className="delivery_splash">
                 <LazyImage src="images/faq.jpg" alt="Goodzone Questions" />
             </div>

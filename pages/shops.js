@@ -4,8 +4,7 @@ import Footer from "../components/footer";
 import BranchMap from '../components/branch-map';
 import BranchInfo from '../components/branch-info';
 import { FaMapMarkerAlt } from 'react-icons/fa';
-import Link from 'next/link';
-import { Button } from 'react-bootstrap';
+import { useRouter } from 'next/router'
 
 // const mapState = { center: [41.31, 69.31], zoom: 12 };
 const branches = [
@@ -64,6 +63,7 @@ const branches = [
 export default function Shops() {
     const [mapInfo, setMapInfo] = useState(false);
     const [mapState, setMapState] = useState({ center: [41.31, 69.31], zoom: 12 })
+    const router = useRouter()
     const stateMapInfo = (e) => {
         const branch_name = e.originalEvent.target.properties._data.hintContent;
         const data = branches.find(branch => branch.name === branch_name);
@@ -74,17 +74,12 @@ export default function Shops() {
         const data = branches.find(branch => branch.name === branch_name);
         setMapInfo(data);
         setMapState({center: [data.long, data.lat]});
-        window.scrollTo(0, 0);
+        // window.location.href.push('#map');
+        router.push('/shops#map')
     }
     return (
         <>
-            <SEO title="Goodzone интернет магазин" />
-            <section className="map_block" id="map">
-                <div className="branches_content">
-                    <BranchMap mapState={mapState} branches={branches} openInfo={stateMapInfo} />
-                    {mapInfo ? <BranchInfo data={mapInfo} closeInfo={() => setMapInfo(false)} /> : ''}
-                </div>
-            </section>
+            <SEO />
             <section className="section_container">
                 <div className="branches_list">
                     {branches.map((branch, i) => (
@@ -105,6 +100,12 @@ export default function Shops() {
                             </div>
                         </button>
                     ))}
+                </div>
+            </section>
+            <section className="map_block" id="map">
+                <div className="branches_content">
+                    <BranchMap mapState={mapState} branches={branches} openInfo={stateMapInfo} />
+                    {mapInfo ? <BranchInfo data={mapInfo} closeInfo={() => setMapInfo(false)} /> : ''}
                 </div>
             </section>
             <Footer />

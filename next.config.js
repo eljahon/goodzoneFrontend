@@ -1,3 +1,8 @@
+const { nextI18NextRewrites } = require('next-i18next/rewrites')
+const localeSubpaths = {
+    uz: 'uz'
+}
+
 module.exports = {
     env: {
         PRODUCT_API_URL: "https://dev.goodzone.uz/v1/product",
@@ -8,5 +13,18 @@ module.exports = {
         AUTHORIZE_API_URL: "https://dev.goodzone.uz/v1/customer",
         ORDER_API_URL: "https://dev.goodzone.uz/v1/order",
         PAYMENT_API_URL: "https://pay.goodzone.uz/redirectPayment",
+        NEWS_API_URL: "https://dev.goodzone.uz/v1/new",
+        PROMO_API_URL: "https://dev.goodzone.uz/v1/promo",
+        MY_ORDERS_API_URL: "https://dev.goodzone.uz/v1/my-orders",
     },
+    publicRuntimeConfig: {
+        localeSubpaths,
+    },
+    experimental: {
+        async rewrites() {
+            return [
+                ...nextI18NextRewrites(localeSubpaths)
+            ]
+        }
+    }
 };

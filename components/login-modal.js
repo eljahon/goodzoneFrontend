@@ -1,17 +1,19 @@
 import React, { useEffect, useState, useRef } from "react";
 import { FaTimes } from "react-icons/fa";
 import { useForm } from "react-hook-form";
+import { useRouter } from 'next/router'
 import axios from "axios";
 import { setLocalStorage } from "../libs/localStorage";
 import swal from "sweetalert";
 import { setUser } from "../redux/actions/authActions/authActions";
 import { useDispatch } from "react-redux";
 
-export default function LoginModal({ closeModal, goRegister }) {
+export default function LoginModal({ closeModal, goRegister, goCheckout }) {
     const dispatch = useDispatch();
     // changed register to goRegister because I used register from useForm (react-hook-form)
     // to avoid duplicate variables
 
+    const router = useRouter();
     const [load, setLoad] = useState(false);
     const [resetPassword, setResetPassword] = useState(false);
     useEffect(() => {
@@ -38,7 +40,9 @@ export default function LoginModal({ closeModal, goRegister }) {
 
             if (response.status === 200) {
                 setLocalStorage("access_token", access_token);
-                dispatch(setUser(data));
+                dispatch(setUser(response.data));
+                if (goCheckout)
+                    router.push('/checkout')
                 closeModal();
             }
         } catch (error) {
@@ -64,13 +68,16 @@ export default function LoginModal({ closeModal, goRegister }) {
 
         }, [ref]);
     }
-    
+
     return (
         <div className="login_modal-wrapper">
             <button className="btn close_btn" onClick={closeModal}>
                 <FaTimes />
             </button>
             <div className={`login_modal-holder ${load ? "show" : ""}`} ref={wrapperRef}>
+                <button className="btn close_btn" onClick={closeModal}>
+                    <FaTimes />
+                </button>
                 <div className="inner_block">
                     <div className="auth_form">
                         {resetPassword ? (
@@ -105,70 +112,71 @@ export default function LoginModal({ closeModal, goRegister }) {
                                 </p>
                             </div>
                         ) : (
-                            <>
-                                <div className="auth_form-container">
-                                    <h3>Добро пожаловать</h3>
-                                    <span className="sub_heading">
-                                        Войдите с вашим номером телефона и
-                                        паролем
+                                <>
+                                    <div className="auth_form-container">
+                                        <h3>Добро пожаловать</h3>
+                                        <span className="sub_heading">
+                                            Войдите с вашим номером телефона и
+                                            паролем
                                     </span>
-                                    <form onSubmit={handleSubmit(onSubmit)}>
-                                        <input
-                                            ref={register({
-                                                maxLength: 13,
-                                                minLength: 13,
-                                            })}
-                                            type="tel"
-                                            name="phoneNumber"
-                                            defaultValue="+998"
-                                            required
-                                        />
-                                        {errors.phoneNumber && (
-                                            <p>
-                                                Phone number should be 13
-                                                characters long
-                                            </p>
-                                        )}
-                                        <input
-                                            ref={register}
-                                            type="password"
-                                            name="password"
-                                            placeholder="Пароль"
-                                            required
-                                        />
-                                        <input
-                                            type="submit"
-                                            className="btn btn_submit"
-                                            value="Войти"
-                                        />
-                                    </form>
-                                    <p className="auth_form-offer">
-                                        <span>У вас нет аккаунта? </span>
-                                        <button
-                                            className="btn"
-                                            onClick={goRegister}
-                                        >
-                                            {" "}
+                                        <form onSubmit={handleSubmit(onSubmit)}>
+                                            <input
+                                                ref={register({
+                                                    maxLength: 13,
+                                                    minLength: 13,
+                                                })}
+                                                type="tel"
+                                                name="phoneNumber"
+                                                defaultValue="+998"
+                                                required
+                                            />
+                                            {errors.phoneNumber && (
+                                                <p>
+                                                    Phone number should be 13
+                                                    characters long
+                                                </p>
+                                            )}
+                                            <input
+                                                ref={register}
+                                                type="password"
+                                                name="password"
+                                                placeholder="Пароль"
+                                                required
+                                            />
+                                            <button
+                                                type="submit"
+                                                className="btn btn_submit"
+                                            >
+                                                Войти
+                                            </button>
+                                        </form>
+                                        <p className="auth_form-offer">
+                                            <span>У вас нет аккаунта? </span>
+                                            <button
+                                                className="btn"
+                                                onClick={goRegister}
+                                            >
+                                                {" "}
                                             Регистрация
                                         </button>
-                                    </p>
-                                </div>
-                                <div className="auth_form-offer-section">
-                                    <p className="auth_form-offer">
-                                        <span>Забыли пароль? </span>
-                                        <button
-                                            className="btn"
-                                            onClick={() =>
-                                                setResetPassword(true)
-                                            }
-                                        >
-                                            {" "}
+                                        </p>
+                                    </div>
+                                    <div className="auth_form-offer-section">
+                                        <p className="auth_form-offer">
+                                            <span>Забыли пароль? </span>
+                                            <button
+                                                className="btn"
+                                                onClick={() =>
+                                                    setResetPassword(true)
+                                                }
+                                            >
+                                                {" "}
                                             Сбросить
                                         </button>
-                                    </p>
-                                </div>
-                            </>
-                        )}
+                                        </p>
+                                    </div>
+                                </>
+                            )}
                     </div>
                 </div>
             </div>

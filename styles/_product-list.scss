@@ -343,17 +343,21 @@ main {
         padding-left: 7.5px;
         padding-right: 7.5px;
         margin-bottom: 15px;
-        overflow: hidden;
       }
     }
     .product_card {
-      display: block;
+      display: flex;
+      flex-direction: column;
       height: 100%;
+      min-height: 440px;
       width: 100%;
       background-color: rgb(255, 255, 255);
       position: relative;
       font-family: $base-font;
       border-radius: 6px;
+      @include sm {
+        min-height: 312px;
+      }
       .product_image {
         height: 240px;
         position: relative;
@@ -376,8 +380,14 @@ main {
         }
       }
       .product_info {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: calc(100% - 240px);
         padding: 20px 25px 30px;
+        flex-grow: 1;
         @include sm {
+          height: calc(100% - 145px);
           min-height: 123px;
           padding: 15px 20px;
         }
@@ -389,8 +399,8 @@ main {
             font-weight: 700;
             color: $link-color;
             width: 100%;
-            text-overflow: ellipsis;
-            white-space: nowrap;
+            // text-overflow: ellipsis;
+            // white-space: nowrap;
             margin: 0 0 7px;
             overflow: hidden;
             @include sm {
@@ -429,6 +439,7 @@ main {
           justify-content: center;
           @include sm {
             min-height: 32px;
+            margin-top: 15px;
           }
           .product_btn {
             height: 36px;
@@ -449,6 +460,9 @@ main {
             width: auto;
             color: $primary-color;
             background-color: transparent;
+            & > * {
+              pointer-events: none;
+            }
             @include sm {
               height: 32px;
             }
@@ -483,6 +497,33 @@ main {
                   text-indent: 0;
                   line-height: initial;
                 }
+              }
+            }
+            .cart-item {
+              position: absolute;
+              top: 0;
+              left: 0;
+              z-index: 9999;
+              width: 100px;
+              height: 100px;
+              padding: 10px;
+              border-radius: 50%;
+              visibility: hidden;
+              overflow: hidden;
+              background-color: #fff;
+              box-shadow: rgba(0, 0, 0, 0.16) 0 21px 36px;
+              transition: all 1s ease;
+              img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+              }
+            }
+            &.addtocart {
+              pointer-events: all;
+              .cart-item {
+                visibility: visible;
+                transform: translate(500px, -100px);
               }
             }
           }
@@ -528,10 +569,12 @@ main {
       }
       &.view_row {
         display: flex;
-        height: 140px;
+        flex-direction: row;
+        height: 160px;
+        min-height: 160px;
         .product_image {
           width: 30%;
-          height: 140px;
+          height: 100%;
           padding: 15px 0;
           overflow: hidden;
           @include sm {
@@ -546,7 +589,9 @@ main {
         }
         .product_info {
           display: flex;
+          flex-direction: row;
           flex-grow: 1;
+          height: 100%;
           @include sm {
             display: flex;
             flex-direction: column;
@@ -561,9 +606,9 @@ main {
             width: 50%;
             @include sm {
               width: 100%;
-              h3 {
-                white-space: unset;
-              }
+            }
+            h3 {
+              white-space: unset;
             }
             .product_price {
               margin-top: auto;
@@ -580,5 +625,24 @@ main {
         }
       }
     }
+  }
+}
+
+.react-multi-carousel-item {
+  transform-style: flat !important;
+}
+
+@keyframes shakeCart {
+  25% {
+    transform:translateX(6px)
+  }
+  50% {
+    transform:translateX(-4px);
+  }
+  75% {
+    transform:translateX(2px);
+  }
+  100% {
+    transform:translateX(0);
   }
 }

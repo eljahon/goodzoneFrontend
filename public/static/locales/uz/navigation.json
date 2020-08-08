@@ -9,5 +9,10 @@
     "exit": "Chiqish",
     "dashboard": "Ma'lumotlar paneli",
     "dashboard-description": "Ma'lumotlar boshqaruvi panelidan so'nggi buyurtmalarni ko'rishingiz, yetkazib berish va to'lov manzillaringizni boshqarishingiz, shuningdek, parolingiz va qayd yozuvingiz ma'lumotlarini o'zgartirishingiz mumkin.",
-    "know-more": "Узнать подробнее"
+    "know-more": "Batafsil ma'lumot",
+    "days": "Kun",
+    "hours": "Soat",
+    "minutes": "Daqiqa",
+    "from": "dan",
+    "to": "gacha"
 }

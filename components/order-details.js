@@ -1,18 +1,20 @@
 import { withTranslation } from '../i18n'
+import { calcTotalPrice } from '../libs/calcTotalPrice'
+import { numberToPrice } from '../libs/numberToPrice'
 
-function OrderDetails({ t }) {
-    return (
+function OrderDetails({ t, data }) {
+    return data ? (
         <div className="order_details">
             <h3 className="title">{t('order-info')}</h3>
             <div className="delivery_info">
                 <div className="delivery_address">
                     <h3>{t('delivery-address')}</h3>
-                    <span>1756  Roy Alley, GIRARDVILLE, Pennsylvania</span>
+                    <span>{data.address}</span>
                 </div>
                 <div className="calculation">
                     <div className="price_row">
                         <span>{t('subtotal')}</span>
-                        <span className="price">7 918 000 сум</span>
+                        <span className="price">{numberToPrice(calcTotalPrice(data.items))}</span>
                     </div>
                     <div className="price_row">
                         <span>{t('discount')}</span>
@@ -24,7 +26,7 @@ function OrderDetails({ t }) {
                     </div>
                     <div className="price_row">
                         <span>{t('total-amount')}</span>
-                        <span className="price">7 918 000 сум</span>
+                        <span className="price">{numberToPrice(calcTotalPrice(data.items))}</span>
                     </div>
                 </div>
             </div>
@@ -41,40 +43,26 @@ function OrderDetails({ t }) {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>
-                                            <span className="item_wrapper">
-                                                <span className="image_wrapper">
-                                                    <img src="images/product_1.png" alt="Product" />
+                                    {data.items.map(item => (
+                                        <tr key={item.product_id}>
+                                            <td>
+                                                <span className="item_wrapper">
+                                                    <span className="image_wrapper">
+                                                        <img src="images/product_1.png" alt="need image" />
+                                                    </span>
+                                                    <span className="item_details">
+                                                        <span className="item_name">{item.product_name}</span>
+                                                        <span className="item_price">{numberToPrice(item.price)}</span>
+                                                    </span>
                                                 </span>
-                                                <span className="item_details">
-                                                    <span className="item_name">Телевизор Samsung</span>
-                                                    <span className="item_price">7 918 000 сум</span>
-                                                </span>
-                                            </span>
-                                        </td>
-                                        <td>1</td>
-                                        <td className="price">
-                                            <p>7 918 000 сум</p>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <span className="item_wrapper">
-                                                <span className="image_wrapper">
-                                                    <img src="images/product_2.png" alt="Product" />
-                                                </span>
-                                                <span className="item_details">
-                                                    <span className="item_name">Телевизор LG</span>
-                                                    <span className="item_price">7 918 000 сум</span>
-                                                </span>
-                                            </span>
-                                        </td>
-                                        <td>1</td>
-                                        <td className="price">
-                                            <p>7 918 000 сум</p>
-                                        </td>
-                                    </tr>
+                                            </td>
+                                            <td>{item.quantity}</td>
+                                            <td className="price">
+                                                <p>{numberToPrice(item.price * item.quantity)}</p>
+                                            </td>
+                                        </tr>
+                                    ))}
+
                                 </tbody>
                             </table>
                         </div>
@@ -82,7 +70,7 @@ function OrderDetails({ t }) {
                 </div>
             </div>
         </div>
-    )
+    ) : ''
 }
 
 export default withTranslation('checkout')(OrderDetails)

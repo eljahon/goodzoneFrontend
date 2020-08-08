@@ -4,7 +4,7 @@ import Footer from "../components/footer";
 export default function GoodcartBonus() {
     return (
         <>
-            <SEO title="Goodzone" />
+            <SEO />
             <section className="section_container">
                 <article className="delivery_content payment_plan-rules">
                     <h1>Правила программы лояльности GOODCARD</h1>

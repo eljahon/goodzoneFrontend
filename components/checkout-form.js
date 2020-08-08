@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { FaCreditCard, FaRegCreditCard, FaWallet, FaBoxOpen, FaTruck } from 'react-icons/fa'
 import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form'
@@ -10,9 +10,10 @@ import { withTranslation } from '../i18n'
 function CheckoutForm({ t }) {
     const { register, handleSubmit, errors } = useForm();
     const router = useRouter();
-
+    
     const cartItems = useSelector((state) => state.cart.cartItems, shallowEqual);
-    const user = useSelector((state) => state.auth.user, shallowEqual);
+    const user = useSelector((state) => state.auth.user)
+
     const onSubmit = async (data) => {
         // router.push('/order-received');
         const orderItems = [...cartItems];

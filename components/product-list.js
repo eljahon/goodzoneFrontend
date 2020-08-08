@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Row, Breadcrumb } from "react-bootstrap";
+import { Row, Breadcrumb, Col, Spinner } from "react-bootstrap";
 import ProductListItem from "./product-list-item";
 import ProductListFilter from "./product-list-filter";
 import { FaTh, FaBars, FaFilter } from "react-icons/fa";
@@ -8,14 +8,13 @@ import { selectDropdownChange } from "../redux/actions/filterActions/filterActio
 import { useRouter } from "next/router";
 import { withTranslation } from '../i18n'
 
-function ProductList({ products, brands, t }) {
+function ProductList({ products, brands, t, searchResult, loading }) {
     const router = useRouter();
 
     const dispatch = useDispatch();
     const [view, setView] = useState("col");
     const [filterPopup, setFilterPopup] = useState(false);
 
-    console.log(products)
     const [selectDropdownOptions] = useState([
         {
             value: "newness",
@@ -45,17 +44,18 @@ function ProductList({ products, brands, t }) {
             <div className="content">
                 <Breadcrumb>
                     <Breadcrumb.Item onClick={() => router.push("/")}>
-                        Главная
+                        {t('main')}
                     </Breadcrumb.Item>
-                    <Breadcrumb.Item onClick={() => router.push("/")}>
-                        Телевизоры, Hi-Fi, аудио
-                    </Breadcrumb.Item>
-                    <Breadcrumb.Item active>
-                        {products?.length ? products[0].category.name : null}
-                    </Breadcrumb.Item>
+                    {searchResult ?
+                        <Breadcrumb.Item active>
+                            {t('search-result')}
+                        </Breadcrumb.Item> :
+                        <Breadcrumb.Item active>
+                            {products ? products[0].category.name : null}
+                        </Breadcrumb.Item>}
                 </Breadcrumb>
                 <div className="control_bar">
-                    <h3>{products?.length ? products[0].category.name : null}</h3>
+                    <h3>{searchResult ? t('search-result') : (products ? products[0].category.name : t('products-not-found'))}</h3>
                     <div className="controls">
                         <span className="sort_by">
                             <select
@@ -88,7 +88,7 @@ function ProductList({ products, brands, t }) {
                             <button
                                 className={`controls_icon ${
                                     view === "col" ? "active" : ""
-                                }`}
+                                    }`}
                                 onClick={() => setView("col")}
                             >
                                 <span className="btn_icon">
@@ -98,7 +98,7 @@ function ProductList({ products, brands, t }) {
                             <button
                                 className={`controls_icon ${
                                     view === "row" ? "active" : ""
-                                }`}
+                                    }`}
                                 onClick={() => setView("row")}
                             >
                                 <span className="btn_icon">
@@ -111,16 +111,21 @@ function ProductList({ products, brands, t }) {
                 <Row className="products_row">
                     {products
                         ? products.map((product) => {
-                              return (
-                                  <ProductListItem
-                                      key={product.id}
-                                      product={product}
-                                      view={view}
-                                  />
-                              );
-                          })
-                        : "No products"}
+                            return (
+                                <ProductListItem
+                                    key={product.id}
+                                    product={product}
+                                    view={view}
+                                />
+                            );
+                        })
+                        : ''}
                 </Row>
+                {loading ? <div className="spinner">
+                    <Spinner animation="border" role="status">
+                        <span className="sr-only">Loading...</span>
+                    </Spinner>
+                </div> : ''}
             </div>
         </main>
     );

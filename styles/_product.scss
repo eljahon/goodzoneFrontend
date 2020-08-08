@@ -103,19 +103,19 @@
                 .react-multiple-carousel__arrow--right,
                 .react-multiple-carousel__arrow--left {
                     z-index: 99;
-                    background-color: transparent;
+                    background-color: $primary-color;
                     &:focus {
                         outline: none;
                     }
                 }
                 .react-multiple-carousel__arrow--right {
-                    right: -10%;
+                    right: -15%;
                 }
                 .react-multiple-carousel__arrow--left {
-                    left: -10%;
+                    left: -15%;
                 }
                 .react-multiple-carousel__arrow::before {
-                    color: $link-color;
+                    color: #fff;
                 }
             }
         }
@@ -131,7 +131,7 @@
             position: absolute;
             top: 30px;
             left: 30px;
-            z-index: 888;
+            z-index: 88;
             @include sm {
                 top: 20px;
                 left: 25px;
@@ -183,6 +183,7 @@
             border-style: initial;
             border-color: initial;
             border-image: initial;
+            overflow-x: hidden;
         }
         h1 {
             font-family: $head-font;
@@ -201,6 +202,10 @@
             flex-direction: column;
             margin-top: 30px;
             margin-bottom: 40px;
+            .brand_image {
+                max-width: 150px;
+                margin-bottom: 15px;
+            }
             .product_desc {
                 font-size: 15px;
                 font-weight: 400;
@@ -230,6 +235,9 @@
                 display: flex;
                 -webkit-box-align: center;
                 align-items: center;
+                @include sm {
+                    display: block;
+                }
                 .cart_btn {
                     display: inline-flex;
                     -webkit-box-align: center;
@@ -250,6 +258,13 @@
                     border-image: initial;
                     border-radius: 20px;
                     transition: all 0.3s ease 0s;
+                    @include sm {
+                        display: flex;
+                        width: 100%;
+                    }
+                    & > * {
+                        pointer-events: none;
+                    }
                     .btn_icon {
                         display: flex;
                         margin-right: 5px;
@@ -261,6 +276,35 @@
                         padding-left: 4px;
                         padding-right: 4px;
                         white-space: nowrap;
+                    }
+                    &.btn_unired {
+                        margin-left: 15px;
+                        background-color: $border-color;
+                        color: $primary-color;
+                        @include sm {
+                            margin-left: 0;
+                            margin-top: 15px;
+                        }
+                    }
+                    .cart-item {
+                        position: absolute;
+                        top: 50px;
+                        left: 40%;
+                        z-index: 90;
+                        width: 100px;
+                        height: 100px;
+                        padding: 10px;
+                        border-radius: 50%;
+                        visibility: hidden;
+                        overflow: hidden;
+                        background-color: #fff;
+                        box-shadow: rgba(0, 0, 0, 0.16) 0 21px 36px;
+                        transition: all 1s ease;
+                        img {
+                          width: 100%;
+                          height: 100%;
+                          object-fit: cover;
+                        }
                     }
                 }
                 .counter {
@@ -478,6 +522,13 @@
                     color: rgb(66, 69, 97);
                     line-height: 2;
                     border-bottom: 1px solid $border-color;
+                    p {
+                        margin-bottom: 0;
+                        font-size: 15px;
+                        font-weight: 400;
+                        color: rgb(66, 69, 97);
+                        line-height: 2;
+                    }
                     @include sm {
                         font-size: 13px;
                     }
@@ -486,11 +537,19 @@
                         align-items: center;
                         &.danger svg {
                             fill: #dc3545;
-                            margin-right: 5px;
+                            margin-right: 5px; 
                         }
                         &.secondary svg {
                             fill: #6c757d;
-                            margin-right: 5px;
+                            margin-right: 5px; 
+                        }
+                        &.warning svg {
+                            fill: #ffc107;
+                            margin-right: 5px; 
+                        }
+                        &.success svg {
+                            fill: #28a745;
+                            margin-right: 5px; 
                         }
                     }
                 }

@@ -5,13 +5,40 @@ import { useDispatch } from "react-redux";
 import { asyncAddToCartAction } from "../redux/actions/cartActions/cartActions";
 import { numberToPrice } from "../libs/numberToPrice";
 import { LazyImage } from "./lazy-image";
-import { withTranslation } from '../i18n'
+import { withTranslation, i18n } from '../i18n'
 
 const ProductListItem = ({ product, view, carousel, t }) => {
     const dispatch = useDispatch();
 
-    const addToCart = () => {
-        dispatch(asyncAddToCartAction(product));
+    const addToCart = (e) => {
+        const button = e.target;
+        const cartItem = button.querySelector('.cart-item');
+        const pointCartItemX = cartItem.getBoundingClientRect().x;
+        const pointCartItemY = cartItem.getBoundingClientRect().y;
+        const cartButton = document.getElementById('cartButton');
+        const pointCartButtonX = cartButton.getBoundingClientRect().x;
+        const pointCartButtonY = cartButton.getBoundingClientRect().y;
+        const translateX = (pointCartButtonX - pointCartItemX) + 'px';
+        const translateY = (pointCartButtonY - pointCartItemY) + 'px';
+        cartItem.style.visibility = 'visible';
+        button.style.pointerEvents = 'none';
+        setTimeout(() => {
+            cartItem.style.transform = `translate(${translateX}, ${translateY}) scale(0.3)`;
+            cartItem.style.opacity = '0.7';
+        }, 200); 
+        setTimeout(() => {
+            dispatch(asyncAddToCartAction(product));
+            cartButton.classList.add('shake');
+            cartItem.style.visibility = 'hidden';
+        }, 1000);
+        setTimeout(() => {
+            cartButton.classList.remove('shake');
+        }, 1500);
+        setTimeout(() => {
+            cartItem.style.transform = `translate(0, 0) scale(1)`;
+            cartItem.style.opacity = '1';
+            button.style.pointerEvents = 'all';
+        }, 2000)
     };
 
     return (
@@ -23,7 +50,7 @@ const ProductListItem = ({ product, view, carousel, t }) => {
                 }`}
         >
             <div className={`product_card ${view === "row" ? "view_row" : ""}`}>
-                <Link href="/product/[id]" as={`/product/${product.slug}`}>
+                <Link href={`${i18n.language === 'ru' ? '' : '/uz'}/product/[id]`} as={`${i18n.language === 'ru' ? '' : '/uz'}/product/${product.slug}`}>
                     <a className="product_image">
                         <LazyImage
                             src={product.image}
@@ -33,7 +60,7 @@ const ProductListItem = ({ product, view, carousel, t }) => {
                     </a>
                 </Link>
                 <div className="product_info">
-                    <Link href="/product/[id]" as={`/product/${product.slug}`}>
+                    <Link href={`${i18n.language === 'ru' ? '' : '/uz'}/product/[id]`} as={`${i18n.language === 'ru' ? '' : '/uz'}/product/${product.slug}`}>
                         <a>
                             <h3 className="product_title">{product.name}</h3>
                             <span className="product_price">
@@ -47,6 +74,9 @@ const ProductListItem = ({ product, view, carousel, t }) => {
                                 <FaShoppingBasket />
                             </span>
                             <span className="btn_text">{t('add-to-cart')}</span>
+                            <span className="cart-item">
+                                <img src={product.image} alt={product.name} />
+                            </span>
                         </button>
                     </div>
                 </div>

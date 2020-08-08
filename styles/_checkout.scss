@@ -279,10 +279,10 @@ form.checkout_form {
                 flex-direction: column;
                 background-color: white;
                 padding: 30px 30px 20px;
+                box-shadow: rgba(0, 0, 0, 0.08) 0 2px 16px 0;
                 @include sm {
                     padding: 20px 5px;
                     background-color: white;
-                    box-shadow: rgba(0, 0, 0, 0.08) 0 2px 16px 0;
                 }
                 h3 {
                     font-family: $base-font;
@@ -305,10 +305,10 @@ form.checkout_form {
                         margin-right: -17px;
                         margin-bottom: -17px;
                         min-height: 17px;
-                        max-height: calc(407px);
+                        max-height: 280px;
                         margin-left: 0;
                         padding-left: 0;
-                        padding-right: 15px;
+                        padding-right: 17px;
                         @include sm {
                             position: relative;
                             overflow: scroll;
@@ -321,7 +321,7 @@ form.checkout_form {
                         .items_wrapper {
                             display: flex;
                             flex-direction: column;
-                            padding-left: 15px;
+                            padding-left: 17px;
                             .items {
                                 display: flex;
                                 width: 100%;

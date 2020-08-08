@@ -5,7 +5,7 @@ import Link from 'next/link'
 export default function PaymentPlan() {
     return (
         <>
-            <SEO title="Goodzone" />
+            <SEO />
             <div className="delivery_splash">
                 <img src="images/payment-plan_1.jpg" alt="Goodzone Questions" />
             </div>

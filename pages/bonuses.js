@@ -5,7 +5,7 @@ import Link from 'next/link'
 export default function Bonuses() {
     return (
         <>
-            <SEO title="Goodzone" />
+            <SEO />
             <div className="delivery_splash">
                 <img src="images/bonus_1.png" alt="Goodzone бонусы" />
             </div>

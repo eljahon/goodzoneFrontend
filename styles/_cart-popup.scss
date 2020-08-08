@@ -22,6 +22,9 @@
   border-color: initial;
   border-image: initial;
   outline: 0;
+  &.shake {
+    animation: shakeCart .4s ease-in-out forwards;
+  }
   @include sm {
     flex-direction: row;
     justify-content: space-between;
@@ -122,7 +125,7 @@
     border-radius: 6px;
     @include sm {
       width: 100vw;
-      height: 100vh;
+      height: calc(100vh - 70px);
       overflow: hidden;
     }
     .cart_popup-header {
@@ -194,6 +197,9 @@
           height: auto;
           max-height: calc(100vh - 145px);
           background-color: rgb(255, 255, 255);
+          @include sm {
+            max-height: calc(100vh - 145px - 150px);
+          }
           .item_box {
             font-size: 15px;
             font-weight: 700;
@@ -305,7 +311,49 @@
               }
             }
           }
+          .no_product-img {
+            display: flex;
+            -webkit-box-align: center;
+            align-items: center;
+            -webkit-box-pack: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            margin-top: 50px;
+            svg {
+              fill: $primary-color;
+              font-size: 140px;
+            }
+          }
+          .no_product-msg {
+            font-size: 15px;
+            font-weight: 700;
+            color: $span-color;
+            display: block;
+            width: 100%;
+            text-align: center;
+            padding: 40px 0px;
+          }
         }
+      }
+      .btn.clear_btn {
+        display: none;
+        position: relative;
+        top: 0;
+        left: 50%;
+        width: 50%;
+        height: 44px;
+        // display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background-color: $primary-color;
+        font-size: 15px;
+        font-weight: 700;
+        color: #ffffff;
+        padding: 0 30px;
+        margin: 30px auto;
+        overflow: hidden;
+        border-radius: 28px;
+        transform: translateX(-50%);
       }
       .right_box {
         position: absolute;

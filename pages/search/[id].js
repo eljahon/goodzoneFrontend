@@ -11,22 +11,32 @@ import {
     clearFilters,
     getPrices,
 } from "../../redux/actions/filterActions/filterActions";
+import { i18n } from '../../i18n'
 
-export default function Category({ categoryProducts, categoryId, query }) {
+export default function Search({ products, searchTerm, query }) {
     const dispatch = useDispatch();
 
     const [brands, setBrands] = useState([]);
     useEffect(() => {
-        axios
-            .get(process.env.BRAND_API_URL)
-            .then((response) => {
-                const {
-                    data: { brands },
-                } = response;
-                setBrands(brands);
-            })
-            .catch((error) => console.error(error));
-    }, []);
+        // axios
+        //         .get(process.env.BRAND_API_URL)
+        //         .then((response) => {
+        //         const {
+        //             data: { brands },
+        //         } = response;
+        //         setBrands(brands);
+        //     })
+        //     .catch((error) => console.error(error));
+
+        const brands = products.map(item => {
+            return item.brand
+        }).filter((brands, index, self) =>
+            index === self.findIndex((t) => (
+                t.id === brands.id && t.name === brands.name
+            ))
+        )
+        setBrands(brands)
+    }, [products]);
 
     const [filteredProducts, setFilteredProducts] = useState([]);
 
@@ -43,8 +53,8 @@ export default function Category({ categoryProducts, categoryId, query }) {
     );
 
     useEffect(() => {
-        if (categoryProducts) {
-            const sortedProductsByPrice = categoryProducts.sort(
+        if (products) {
+            const sortedProductsByPrice = products.sort(
                 (a, b) => a.price.price - b.price.price
             );
             const prices = [
@@ -55,13 +65,13 @@ export default function Category({ categoryProducts, categoryId, query }) {
 
             dispatch(getPrices(prices));
         }
-    }, [categoryProducts]);
+    }, [products]);
 
     useEffect(() => {
-        if (categoryProducts) {
-            dispatch(getProductsFromAPI(categoryProducts));
+        if (products) {
+            dispatch(getProductsFromAPI(products));
         }
-    }, [categoryProducts]);
+    }, [products]);
 
     useEffect(() => {
         dispatch(clearFilters());
@@ -70,9 +80,9 @@ export default function Category({ categoryProducts, categoryId, query }) {
     useEffect(() => {
         axios
             .get(
-                `${process.env.PRODUCT_API_URL}?brand=${filterBrands.join(
+                `${process.env.PRODUCT_API_URL}?lang=${i18n.language}&brand=${filterBrands.join(
                     ","
-                )}&category=${categoryId}${
+                )}&search=${searchTerm}${
                     filterPriceRange.length
                         ? `&price_from=${filterPriceRange[0]}&price_till=${filterPriceRange[1]}`
                         : ""
@@ -85,45 +95,29 @@ export default function Category({ categoryProducts, categoryId, query }) {
             })
             .catch((error) => console.error("error", error));
         console.log("selectDropdownFilter", selectDropdownFilter);
-    }, [filterBrands, categoryId, filterPriceRange, selectDropdownFilter]);
+    }, [filterBrands, searchTerm, filterPriceRange, selectDropdownFilter]);
 
     return (
         <>
-            <SEO title="Интернет магазин GOODZONE" />
-            <ProductList products={filteredProducts} brands={brands} />
+            <SEO />
+            <ProductList products={filteredProducts} brands={brands} searchResult={searchTerm} />
             <CartPopup />
             <Footer />
         </>
     );
 }
 
-export async function getServerSideProps({ query }) {
-    const urls = [process.env.CATEGORY_API_URL];
+export async function getServerSideProps({ query, req }) {
+    const searchTerm = query.id
+    const urls = [`${process.env.PRODUCT_API_URL}?search=${searchTerm}&lang=${req.i18n.language}`];
 
-    const [{ categories }] = await fetchMultipleUrls(urls);
-
-    let categoryId;
-    categories.forEach((category) => {
-        let foundCategory;
-        if (category.children) {
-            foundCategory = category.children.find(
-                (ctg) => ctg.slug === query.id
-            );
-        }
-
-        if (foundCategory) categoryId = foundCategory.id;
-    });
-
-    const [{ products: categoryProducts }] = await fetchMultipleUrls([
-        `${process.env.PRODUCT_API_URL}?category=${categoryId}`,
-    ]);
+    const [{ products }] = await fetchMultipleUrls(urls);
 
     return {
         props: {
-            categoryProducts,
-            categories,
-            categoryId,
-            query,
+            products,
+            searchTerm,
+            query
         },
     };
 }
