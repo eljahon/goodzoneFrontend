@@ -506,29 +506,6 @@ header {
                                 & + .dropdown_menu {
                                     display: flex;
                                     flex-wrap: wrap;
-                                    .left {
-                                        width: 50%;
-                                    }
-                                    .left:empty {
-                                        width: 0;
-                                        & ~ .right {
-                                            width: 100%;
-                                            display: flex;
-                                            flex-wrap: wrap;
-                                        }
-                                    }
-                                    .right {
-                                        width: 50%;
-                                    }
-                                    .right:empty {
-                                        width: 0;
-                                    }
-                                    .right:empty + .left {
-                                        .menu-item {
-                                            width: 50%;
-                                            display: inline-block;
-                                        }
-                                    }
                                 }
                                 @include sm {
                                     svg {
@@ -568,7 +545,7 @@ header {
                             left: 100%;
                             right: 0;
                             min-width: 500px;
-                            // min-height: calc(100% + 40px);
+                            max-height: calc(100vh - 140px);
                             margin: 0;
                             background-color: rgb(255, 255, 255);
                             box-shadow: rgba(142, 142, 142, 0.14) 0 3px 20px;
@@ -576,12 +553,44 @@ header {
                             z-index: 199;
                             border-radius: 6px;
                             list-style-type: none;
+                            overflow-y: scroll;
                             @include sm {
                                 display: none;
                                 position: static;
                                 width: 100%;
+                                max-height: auto;
                                 box-shadow: none;
                                 padding: 0;
+                                overflow-y: hidden;
+                            }
+                            .left {
+                                width: 50%;
+                            }
+                            .left:empty {
+                                width: 0;
+                                & ~ .right {
+                                    width: 100%;
+                                    display: flex;
+                                    flex-wrap: wrap;
+                                    li {
+                                        width: 50%;
+                                        @include sm {
+                                            width: 100%;
+                                        }
+                                    }
+                                }
+                            }
+                            .right {
+                                width: 50%;
+                            }
+                            .right:empty {
+                                width: 0;
+                            }
+                            .right:empty + .left {
+                                .menu-item {
+                                    width: 50%;
+                                    display: inline-block;
+                                }
                             }
                             &:hover {
                                 display: flex;
