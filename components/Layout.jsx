@@ -2,19 +2,21 @@ import React, { useState } from "react";
 import Header from "./header";
 import { useEffect } from "react";
 import axios from "axios";
-import { i18n } from '../i18n'
+import { i18n } from "../i18n";
 
 const Layout = ({ children }) => {
     const [categories, setCategories] = useState(null);
     useEffect(() => {
-        axios(`${process.env.CATEGORY_API_URL}?lang=${i18n.language}`).then((response) => {
-            const {
-                data: { categories },
-            } = response;
-            setCategories(categories);
-        });
+        axios(`${process.env.CATEGORY_API_URL}?lang=${i18n.language}`)
+            .then((response) => {
+                const {
+                    data: { categories },
+                } = response;
+                setCategories(categories);
+            })
+            .catch((err) => console.error(err));
     }, [i18n.language]);
-    
+
     console.log("categories :>> ", categories);
 
     return categories ? (

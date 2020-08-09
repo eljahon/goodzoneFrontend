@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { FaArrowRight, FaTimes } from "react-icons/fa";
-import { i18n } from '../i18n'
+import { FaArrowRight, FaArrowDown, FaTimes } from "react-icons/fa";
+import { i18n } from "../i18n";
 
 export default function DepartmentsMenu({ categories, closeMenu }) {
     const [loaded, setLoaded] = useState(false);
@@ -15,7 +15,7 @@ export default function DepartmentsMenu({ categories, closeMenu }) {
     return (
         <div className={`popover_content ${loaded ? "show" : ""}`}>
             <div className="drawer_header">
-                <Link href={i18n.language === 'ru' ? '/' : '/uz'}>
+                <Link href={i18n.language === "ru" ? "/" : "/uz"}>
                     <a onClick={closeMenu}>
                         <img src="/logo.svg" alt="Goodzone" />
                     </a>
@@ -30,10 +30,14 @@ export default function DepartmentsMenu({ categories, closeMenu }) {
                 {categories.map((item) => {
                     if (item.children) {
                         return (
-                            <li key={item.id} className="menu_item">
+                            <li key={item.id} className="menu_item bold">
                                 <Link
-                                    href={`${i18n.language === 'ru' ? '' : '/uz'}/shop/[id]`}
-                                    as={`${i18n.language === 'ru' ? '' : '/uz'}/shop/${item.slug}`}
+                                    href={`${
+                                        i18n.language === "ru" ? "" : "/uz"
+                                    }/shop/[id]`}
+                                    as={`${
+                                        i18n.language === "ru" ? "" : "/uz"
+                                    }/shop/${item.slug}`}
                                 >
                                     <a onClick={(e) => e.preventDefault()}>
                                         <span className="label">
@@ -47,44 +51,163 @@ export default function DepartmentsMenu({ categories, closeMenu }) {
                                         </span>
                                     </a>
                                 </Link>
-                                <ul className={`dropdown_menu ${item.children ? '' : 'empty'}`}>
-                                    {item.children
-                                        ? item.children.map((child) => (
-                                            <li key={child.id} className="menu_item">
-                                                <Link
-                                                    href={`${i18n.language === 'ru' ? '' : '/uz'}/shop/[id]`}
-                                                    as={`${i18n.language === 'ru' ? '' : '/uz'}/shop/${child.slug}`}
+                                <ul
+                                    className={`dropdown_menu ${
+                                        item.children ? "" : "empty"
+                                    }`}
+                                >
+                                    <div className="left">
+                                        {item.children.map((child) => {
+                                            return child.children ? null : (
+                                                <li
+                                                    key={child.id}
+                                                    className={`menu_item bold ${
+                                                        child.children
+                                                            ? "with-children"
+                                                            : "no-children"
+                                                    }`}
                                                 >
-                                                    <a onClick={child.children ? (e) => e.preventDefault() : closeMenu}>
-                                                        <span className="label">
-                                                            {child.name}
-                                                        </span>
-                                                        {child.children ?
-                                                            <span className="menu_icon">
-                                                                <FaArrowRight />
-                                                            </span> : ''}
-                                                    </a>
-                                                </Link>
-                                                <ul className={`dropdown_menu sub_menu ${!child.children ? 'empty' : (child.children.length > 10 ? 'column_menu' : '')}`}>
-                                                    {child.children
-                                                        ? child.children.map(sub => (
-                                                            <li key={sub.id} className={child.children.length > 10 ? 'column' : ''}>
-                                                                <Link
-                                                                    href={`${i18n.language === 'ru' ? '' : '/uz'}/shop/[id]`}
-                                                                    as={`${i18n.language === 'ru' ? '' : '/uz'}/shop/${sub.slug}`}
-                                                                >
-                                                                    <a onClick={closeMenu}>{sub.name}</a>
-                                                                </Link>
-                                                            </li>
-                                                        ))
-                                                        : ""}
-                                                </ul>
-                                            </li>
-                                        ))
-                                        : ""}
+                                                    <Link
+                                                        href={`${
+                                                            i18n.language ===
+                                                            "ru"
+                                                                ? ""
+                                                                : "/uz"
+                                                        }/shop/[id]`}
+                                                        as={`${
+                                                            i18n.language ===
+                                                            "ru"
+                                                                ? ""
+                                                                : "/uz"
+                                                        }/shop/${child.slug}`}
+                                                    >
+                                                        <a
+                                                            onClick={
+                                                                child.children
+                                                                    ? (e) =>
+                                                                          e.preventDefault()
+                                                                    : closeMenu
+                                                            }
+                                                        >
+                                                            <span className="label">
+                                                                {child.name}
+                                                            </span>
+                                                            {child.children ? (
+                                                                <span className="menu_icon">
+                                                                    <FaArrowRight />
+                                                                </span>
+                                                            ) : (
+                                                                ""
+                                                            )}
+                                                        </a>
+                                                    </Link>
+                                                </li>
+                                            );
+                                        })}
+                                    </div>
+                                    <div className="right">
+                                        {item.children.map((child) => {
+                                            return child.children ? (
+                                                <li
+                                                    key={child.id}
+                                                    className={`menu_item bold ${
+                                                        child.children
+                                                            ? "with-children"
+                                                            : "no-children"
+                                                    }`}
+                                                >
+                                                    <Link
+                                                        href={`${
+                                                            i18n.language ===
+                                                            "ru"
+                                                                ? ""
+                                                                : "/uz"
+                                                        }/shop/[id]`}
+                                                        as={`${
+                                                            i18n.language ===
+                                                            "ru"
+                                                                ? ""
+                                                                : "/uz"
+                                                        }/shop/${child.slug}`}
+                                                    >
+                                                        <a
+                                                            onClick={
+                                                                child.children
+                                                                    ? (e) =>
+                                                                          e.preventDefault()
+                                                                    : closeMenu
+                                                            }
+                                                        >
+                                                            <span className="label">
+                                                                {child.name}
+                                                            </span>
+                                                            {child.children ? (
+                                                                <span className="menu_icon">
+                                                                    <FaArrowDown />
+                                                                </span>
+                                                            ) : (
+                                                                ""
+                                                            )}
+                                                        </a>
+                                                    </Link>
+                                                    {child.children ? (
+                                                        <ul>
+                                                            {child.children.map(
+                                                                (sub) => (
+                                                                    <li
+                                                                        key={
+                                                                            sub.id
+                                                                        }
+                                                                        className={
+                                                                            child
+                                                                                .children
+                                                                                .length >
+                                                                            10
+                                                                                ? "column"
+                                                                                : ""
+                                                                        }
+                                                                    >
+                                                                        <Link
+                                                                            href={`${
+                                                                                i18n.language ===
+                                                                                "ru"
+                                                                                    ? ""
+                                                                                    : "/uz"
+                                                                            }/shop/[id]`}
+                                                                            as={`${
+                                                                                i18n.language ===
+                                                                                "ru"
+                                                                                    ? ""
+                                                                                    : "/uz"
+                                                                            }/shop/${
+                                                                                sub.slug
+                                                                            }`}
+                                                                        >
+                                                                            <a
+                                                                                className="normal"
+                                                                                onClick={
+                                                                                    closeMenu
+                                                                                }
+                                                                            >
+                                                                                {
+                                                                                    sub.name
+                                                                                }
+                                                                            </a>
+                                                                        </Link>
+                                                                    </li>
+                                                                )
+                                                            )}
+                                                        </ul>
+                                                    ) : (
+                                                        ""
+                                                    )}
+                                                </li>
+                                            ) : null;
+                                        })}
+                                    </div>
                                 </ul>
                             </li>
-                        )
+                        );
                     }
                 })}
             </ul>
