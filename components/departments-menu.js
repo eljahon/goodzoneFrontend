@@ -151,7 +151,7 @@ export default function DepartmentsMenu({ categories, closeMenu }) {
                                                         </a>
                                                     </Link>
                                                     {child.children ? (
-                                                        <ul>
+                                                        <ul className="sub-list">
                                                             {child.children.map(
                                                                 (sub) => (
                                                                     <li

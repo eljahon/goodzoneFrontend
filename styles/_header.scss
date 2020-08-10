@@ -519,15 +519,11 @@ header {
                                     }
                                     .right {
                                         width: 50%;
+                                        display: flex;
+                                        flex-wrap: wrap;
                                     }
                                     .right:empty {
                                         width: 0;
-                                    }
-                                    .right:empty + .left {
-                                        .menu-item {
-                                            width: 50%;
-                                            display: inline-block;
-                                        }
                                     }
                                 }
                                 @include sm {
@@ -568,6 +564,9 @@ header {
                             left: 100%;
                             right: 0;
                             min-width: 500px;
+                            @include lg {
+                                min-width: 400px;
+                            }
                             // min-height: calc(100% + 40px);
                             margin: 0;
                             background-color: rgb(255, 255, 255);
@@ -582,12 +581,35 @@ header {
                                 width: 100%;
                                 box-shadow: none;
                                 padding: 0;
+                                .sub-list {
+                                    display: none;
+                                }
+                                .left,
+                                .right {
+                                    width: 100% !important;
+                                    .with-children > a {
+                                        pointer-events: none;
+                                    }
+                                }
                             }
                             &:hover {
+                                @include sm {
+                                    flex-direction: column;
+                                    & .menu_item.with-children:hover {
+                                        .sub-list {
+                                            display: block;
+                                        }
+                                    }
+                                }
                                 display: flex;
                                 flex-wrap: wrap;
                                 .left {
                                     width: 50%;
+                                }
+                                .left:not(:empty) {
+                                    & ~ .right {
+                                        width: 50%;
+                                    }
                                 }
                                 .left:empty {
                                     width: 0;
@@ -598,20 +620,15 @@ header {
                                     }
                                 }
                                 .right {
-                                    width: 50%;
+                                    width: 100%;
                                 }
                                 .right:empty {
                                     width: 0;
                                 }
-                                .right:empty + .left {
-                                    .menu-item {
-                                        width: 49%;
-                                    }
-                                }
                             }
                             li {
                                 a {
-                                    width: 100%;
+                                    width: fit-content;
                                     white-space: pre-wrap;
                                     @include sm {
                                         padding-left: 40px;

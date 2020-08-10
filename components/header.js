@@ -6,7 +6,7 @@ import {
     FaSignInAlt,
     FaUser,
     FaRegHeart,
-    FaPhoneAlt
+    FaPhoneAlt,
 } from "react-icons/fa";
 import DepartmentsMenu from "./departments-menu";
 import SearchModal from "./search-modal";
@@ -15,10 +15,10 @@ import RegisterModal from "./register-modal";
 import ProfileMenu from "./profile-menu";
 import { useSelector, shallowEqual } from "react-redux";
 import SearchBar from "./search-bar";
-import { useRouter } from 'next/router'
+import { useRouter } from "next/router";
 import TopBar from "./top-bar";
-import Headroom from 'react-headroom'
-import { Link, withTranslation } from '../i18n'
+import Headroom from "react-headroom";
+import { Link, withTranslation } from "../i18n";
 import BottomBar from "./bottom-bar";
 
 function Header({ categories, t }) {
@@ -44,8 +44,8 @@ function Header({ categories, t }) {
         useEffect(() => {
             function handleClickOutside(event) {
                 if (ref.current && !ref.current.contains(event.target)) {
-                    setMenu(false)
-                    setProfilePopup(false)
+                    setMenu(false);
+                    setProfilePopup(false);
                 }
             }
             document.addEventListener("mousedown", handleClickOutside);
@@ -53,7 +53,6 @@ function Header({ categories, t }) {
             return () => {
                 document.removeEventListener("mousedown", handleClickOutside);
             };
-
         }, [ref]);
     }
 
@@ -67,7 +66,7 @@ function Header({ categories, t }) {
                 hasDynamicRouting={hasDynamicRouting}
             />
             <Headroom>
-                <header ref={wrapperRef}>
+                <header>
                     <div className="left_menu">
                         <button
                             className="btn hamburger_icon"
@@ -79,10 +78,17 @@ function Header({ categories, t }) {
                         </button>
                         <Link href="/">
                             <a className="logo">
-                                <img src={hasDynamicRouting ? "../logo.svg" : "/logo.svg"} alt="Goodzone" />
+                                <img
+                                    src={
+                                        hasDynamicRouting
+                                            ? "../logo.svg"
+                                            : "/logo.svg"
+                                    }
+                                    alt="Goodzone"
+                                />
                             </a>
                         </Link>
-                        <div className="menu">
+                        <div className="menu" ref={wrapperRef}>
                             <div className="popover">
                                 <div className="popover_handler">
                                     <button
@@ -93,7 +99,7 @@ function Header({ categories, t }) {
                                             <span className="menu_icon">
                                                 <FaBars />
                                             </span>
-                                            <span>{t('all-categories')}</span>
+                                            <span>{t("all-categories")}</span>
                                         </span>
                                         <span className="menu_arrow">
                                             <FaSortDown />
@@ -107,8 +113,8 @@ function Header({ categories, t }) {
                                         closeMenu={() => setMenu(false)}
                                     />
                                 ) : (
-                                        ""
-                                    )}
+                                    ""
+                                )}
                             </div>
                         </div>
                     </div>
@@ -131,7 +137,9 @@ function Header({ categories, t }) {
                                         <span className="join_icon">
                                             <FaUser />
                                         </span>
-                                        <span className="btn-text">{t('personal-area')}</span>
+                                        <span className="btn-text">
+                                            {t("personal-area")}
+                                        </span>
                                     </button>
                                     <Link href="/account">
                                         <a className="btn join_btn mobile">
@@ -141,19 +149,25 @@ function Header({ categories, t }) {
                                         </a>
                                     </Link>
                                 </div>
-                                {profilePopup ? <ProfileMenu closeMenu={() => setProfilePopup(false)} /> : ""}
+                                {profilePopup ? (
+                                    <ProfileMenu
+                                        closeMenu={() => setProfilePopup(false)}
+                                    />
+                                ) : (
+                                    ""
+                                )}
                             </div>
                         ) : (
-                                <button
-                                    className="btn join_btn"
-                                    onClick={() => setLoginPopup(true)}
-                                >
-                                    <span className="join_icon">
-                                        <FaSignInAlt />
-                                    </span>
-                                    <span className="btn-text">{t('login')}</span>
-                                </button>
-                            )}
+                            <button
+                                className="btn join_btn"
+                                onClick={() => setLoginPopup(true)}
+                            >
+                                <span className="join_icon">
+                                    <FaSignInAlt />
+                                </span>
+                                <span className="btn-text">{t("login")}</span>
+                            </button>
+                        )}
                         <button
                             className="btn search_btn mobile"
                             onClick={() => setSearchPopup(true)}
@@ -170,26 +184,26 @@ function Header({ categories, t }) {
             {searchPopup ? (
                 <SearchModal closeModal={() => setSearchPopup(false)} />
             ) : (
-                    ""
-                )}
+                ""
+            )}
             {loginPopup ? (
                 <LoginModal
                     closeModal={() => setLoginPopup(false)}
                     goRegister={() => switchPopup()}
                 />
             ) : (
-                    ""
-                )}
+                ""
+            )}
             {registerPopup ? (
                 <RegisterModal
                     closeModal={() => setRegisterPopup(false)}
                     login={() => switchPopup()}
                 />
             ) : (
-                    ""
-                )}
+                ""
+            )}
         </>
     );
 }
 
-export default withTranslation('common')(Header)
+export default withTranslation("common")(Header);
