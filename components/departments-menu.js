@@ -4,6 +4,7 @@ import { FaArrowRight, FaArrowDown, FaTimes } from "react-icons/fa";
 import { i18n } from "../i18n";
 
 export default function DepartmentsMenu({ categories, closeMenu }) {
+    const vw = window.innerWidth;
     const [loaded, setLoaded] = useState(false);
     useEffect(() => {
         setLoaded(true);
@@ -94,7 +95,12 @@ export default function DepartmentsMenu({ categories, closeMenu }) {
                                                             </span>
                                                             {child.children ? (
                                                                 <span className="menu_icon">
-                                                                    <FaArrowRight />
+                                                                    {vw >
+                                                                    576 ? (
+                                                                        <FaArrowDown />
+                                                                    ) : (
+                                                                        <FaArrowRight />
+                                                                    )}
                                                                 </span>
                                                             ) : (
                                                                 ""
@@ -143,7 +149,7 @@ export default function DepartmentsMenu({ categories, closeMenu }) {
                                                             </span>
                                                             {child.children ? (
                                                                 <span className="menu_icon">
-                                                                    <FaArrowDown />
+                                                                    <FaArrowRight />
                                                                 </span>
                                                             ) : (
                                                                 ""

@@ -499,6 +499,7 @@ header {
                             background-color: #fff;
                             text-decoration: none;
                             transition: all 0.15s ease-in-out 0s;
+
                             &:hover,
                             &:active,
                             &:focus {
@@ -563,12 +564,12 @@ header {
                             top: -20px;
                             left: 100%;
                             right: 0;
-                            min-width: 500px;
+                            min-width: 700px;
                             @include lg {
                                 min-width: 400px;
-                                min-height: calc(100% + 40px);
+                                // min-height: calc(100% + 40px);
                             }
-                            min-height: calc(100% + 40px);
+                            // min-height: calc(100% + 40px);
                             max-height: calc(100vh - 140px);
                             margin: 0;
                             background-color: rgb(255, 255, 255);
@@ -591,7 +592,7 @@ header {
                                 .left,
                                 .right {
                                     width: 100% !important;
-                                    .with-children > a {
+                                    .with-children + a {
                                         pointer-events: none;
                                     }
                                 }
@@ -599,7 +600,6 @@ header {
                             }
                             &:hover {
                                 @include sm {
-                                    flex-direction: column;
                                     & .menu_item.with-children:hover {
                                         .sub-list {
                                             display: block;
@@ -611,11 +611,6 @@ header {
                                 .left {
                                     width: 50%;
                                 }
-                                .left:not(:empty) {
-                                    & ~ .right {
-                                        width: 50%;
-                                    }
-                                }
                                 .left:empty {
                                     width: 0;
                                     & ~ .right {
@@ -625,7 +620,7 @@ header {
                                     }
                                 }
                                 .right {
-                                    width: 100%;
+                                    width: 50%;
                                 }
                                 .right:empty {
                                     width: 0;
@@ -640,26 +635,26 @@ header {
                                     }
                                 }
                             }
-                            &.sub_menu {
-                                top: 0;
-                                &.column_menu {
-                                    min-width: 350px;
-                                }
-                                li {
-                                    &.column {
-                                        display: inline-block;
-                                        width: 50%;
-                                        @include sm {
-                                            width: 100%;
-                                        }
-                                    }
-                                    a {
-                                        @include sm {
-                                            padding-left: 50px;
-                                        }
-                                    }
-                                }
-                            }
+                            // &.sub_menu {
+                            //     top: 0;
+                            //     &.column_menu {
+                            //         min-width: 350px;
+                            //     }
+                            //     li {
+                            //         &.column {
+                            //             display: inline-block;
+                            //             width: 50%;
+                            //             @include sm {
+                            //                 width: 100%;
+                            //             }
+                            //         }
+                            //         a {
+                            //             @include sm {
+                            //                 padding-left: 50px;
+                            //             }
+                            //         }
+                            //     }
+                            // }
                             &.empty {
                                 padding: 0;
                             }
