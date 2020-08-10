@@ -566,8 +566,10 @@ header {
                             min-width: 500px;
                             @include lg {
                                 min-width: 400px;
+                                min-height: calc(100% + 40px);
                             }
-                            // min-height: calc(100% + 40px);
+                            min-height: calc(100% + 40px);
+                            max-height: calc(100vh - 140px);
                             margin: 0;
                             background-color: rgb(255, 255, 255);
                             box-shadow: rgba(142, 142, 142, 0.14) 0 3px 20px;
@@ -575,10 +577,12 @@ header {
                             z-index: 199;
                             border-radius: 6px;
                             list-style-type: none;
+                            overflow-y: scroll;
                             @include sm {
                                 display: none;
                                 position: static;
                                 width: 100%;
+                                max-height: auto;
                                 box-shadow: none;
                                 padding: 0;
                                 .sub-list {
@@ -591,6 +595,7 @@ header {
                                         pointer-events: none;
                                     }
                                 }
+                                overflow-y: hidden;
                             }
                             &:hover {
                                 @include sm {
