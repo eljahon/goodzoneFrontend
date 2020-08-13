@@ -1,26 +1,39 @@
 import React from "react";
 import { useSelector, shallowEqual } from "react-redux";
-import { cartTotalPriceSelector } from "../redux/selectors/cartSelectors";
+import {
+    cartTotalPriceSelector,
+    cartTotalUniredPriceSelector,
+} from "../redux/selectors/cartSelectors";
 import { numberToPrice } from "../libs/numberToPrice";
-import { withTranslation } from '../i18n'
+import { withTranslation } from "../i18n";
 
-function CheckoutItems({ t }) {
+function CheckoutItems({ t, unired }) {
     const cartItems = useSelector(
         (state) => state.cart.cartItems,
         shallowEqual
     );
 
+    console.log("cartItems", cartItems);
+
     const totalPrice = useSelector(
         (state) => cartTotalPriceSelector(state),
         shallowEqual
     );
+    const uniredTotalPrice = useSelector(
+        (state) => cartTotalUniredPriceSelector(state),
+        shallowEqual
+    );
+
+    let price = unired
+        ? numberToPrice(totalPrice)
+        : numberToPrice(uniredTotalPrice);
 
     return (
         <aside className="cart_wrapper" id="checkout_items">
             <div className="sticky_outer-wrapper">
                 <div className="sticky_inner-wrapper">
                     <div className="order_info">
-                        <h3>{t('your-order')}</h3>
+                        <h3>{t("your-order")}</h3>
                         <div className="order_content-wrapper">
                             <div className="order_content">
                                 <div className="items_wrapper">
@@ -38,7 +51,10 @@ function CheckoutItems({ t }) {
                                             </span>
                                             <span className="price">
                                                 {numberToPrice(
-                                                    cartItem.price.price
+                                                    unired
+                                                        ? cartItem.prices[0]
+                                                              .price
+                                                        : cartItem.price.price
                                                 )}
                                             </span>
                                         </div>
@@ -48,20 +64,20 @@ function CheckoutItems({ t }) {
                         </div>
                         <div className="calculation_wrapper">
                             <div className="text_wrapper">
-                                <span>{t('subtotal')}</span>
-                                <span>{numberToPrice(totalPrice)}</span>
+                                <span>{t("subtotal")}</span>
+                                <span>{price}</span>
                             </div>
                             <div className="text_wrapper">
-                                <span>{t('cost-of-delivery')}</span>
-                                <span>{t('free')}</span>
+                                <span>{t("cost-of-delivery")}</span>
+                                <span>{t("free")}</span>
                             </div>
                             <div className="text_wrapper">
-                                <span>{t('discount')}</span>
+                                <span>{t("discount")}</span>
                                 <span>0</span>
                             </div>
                             <div className="text_wrapper total">
-                                <span>{t('total-amount')}</span>
-                                <span>{numberToPrice(totalPrice)}</span>
+                                <span>{t("total-amount")}</span>
+                                <span>{price}</span>
                             </div>
                         </div>
                     </div>
@@ -71,4 +87,4 @@ function CheckoutItems({ t }) {
     );
 }
 
-export default withTranslation('checkout')(CheckoutItems)
+export default withTranslation("checkout")(CheckoutItems);

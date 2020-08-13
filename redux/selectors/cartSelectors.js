@@ -5,6 +5,13 @@ export const cartTotalPriceSelector = (state) => {
         0
     );
 };
+export const cartTotalUniredPriceSelector = (state) => {
+    return state.cart.cartItems.reduce(
+        (total, cartItem) =>
+            (total += cartItem.prices[0].price * cartItem.quantity),
+        0
+    );
+};
 
 export const cartItemsTotalQuantitySelector = (state) => {
     return state.cart.cartItems.reduce(
@@ -12,7 +19,6 @@ export const cartItemsTotalQuantitySelector = (state) => {
         0
     );
 };
-
 // export const cartItemSelector = (state, id) => {
 //     console.log("id", id);
 //     console.log("state", state.cart.cartItems);

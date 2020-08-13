@@ -11,62 +11,61 @@ import {
     clearFilters,
     getPrices,
 } from "../../redux/actions/filterActions/filterActions";
-import { i18n } from '../../i18n'
+import { i18n } from "../../i18n";
 
 export default function Category({ products, categoryId, query }) {
     const dispatch = useDispatch();
-    const categoryProducts = products.products
+    const categoryProducts = products.products;
 
-    const [loading, setLoading] = useState(false)
-    const [productLimit, setProductLimit] = useState(20)
+    const [loading, setLoading] = useState(false);
+    const [productLimit, setProductLimit] = useState(20);
     const [brands, setBrands] = useState([]);
     useEffect(() => {
-        // axios
-        //         .get(process.env.BRAND_API_URL)
-        //         .then((response) => {
-        //         const {
-        //             data: { brands },
-        //         } = response;
-        //         setBrands(brands);
-        //     })
-        //     .catch((error) => console.error(error));
-
         if (categoryProducts) {
-            const brands = categoryProducts.map(item => {
-                return item.brand
-            }).filter((brands, index, self) =>
-                index === self.findIndex((t) => (
-                    t.id === brands.id && t.name === brands.name && brands.active === true
-                ))
-            )
-            setBrands(brands)
+            axios
+                .get(`${process.env.BRAND_API_URL}?category=${categoryId}`)
+                .then((response) => {
+                    const {
+                        data: { brands },
+                    } = response;
+                    setBrands(brands);
+                })
+                .catch((error) => console.error(error));
+            // const brands = categoryProducts.map(item => {
+            //     return item.brand
+            // }).filter((brands, index, self) =>
+            //     index === self.findIndex((t) => (
+            //         t.id === brands.id && t.name === brands.name && brands.active === true
+            //     ))
+            // )
+            // setBrands(brands)
         }
     }, [categoryProducts]);
 
     useEffect(() => {
-        window.addEventListener("scroll", handleScroll)
+        window.addEventListener("scroll", handleScroll);
         return () => {
-            window.removeEventListener("scroll", handleScroll)
-        }
-    })
+            window.removeEventListener("scroll", handleScroll);
+        };
+    });
 
     const handleScroll = () => {
         const lastProductLoaded = document.querySelector(
             ".products_row > .products_col:last-child"
-        )
+        );
 
         if (lastProductLoaded) {
             const lastProductLoadedOffset =
-                lastProductLoaded.offsetTop + lastProductLoaded.clientHeight
-            const pageOffset = window.pageYOffset + window.innerHeight
+                lastProductLoaded.offsetTop + lastProductLoaded.clientHeight;
+            const pageOffset = window.pageYOffset + window.innerHeight;
 
             if (pageOffset > lastProductLoadedOffset) {
                 if (products.count > productLimit) {
-                    setProductLimit(productLimit + 20)
+                    setProductLimit(productLimit + 20);
                 }
             }
         }
-    }
+    };
 
     const [filteredProducts, setFilteredProducts] = useState(null);
 
@@ -108,26 +107,28 @@ export default function Category({ products, categoryId, query }) {
     }, [query]);
 
     useEffect(() => {
-        setLoading(true)
+        setLoading(true);
         axios
             .get(
-                `${process.env.PRODUCT_API_URL}?lang=${i18n.language}&brand=${filterBrands.join(
+                `${process.env.PRODUCT_API_URL}?lang=${
+                    i18n.language
+                }&brand=${filterBrands.join(
                     ","
                 )}&category=${categoryId}&limit=${productLimit}&${
-                filterPriceRange.length
-                    ? `&price_from=${filterPriceRange[0]}&price_till=${filterPriceRange[1]}`
-                    : ""
+                    filterPriceRange.length
+                        ? `&price_from=${filterPriceRange[0]}&price_till=${filterPriceRange[1]}`
+                        : ""
                 }&sort=price|${selectDropdownFilter}`
             )
             .then((data) => {
                 const { products } = data.data;
                 setFilteredProducts(products);
-                setLoading(false)
+                setLoading(false);
                 console.log("products", products);
             })
             .catch((error) => {
-                setLoading(false)
-                console.error("error", error)
+                setLoading(false);
+                console.error("error", error);
             });
         console.log("selectDropdownFilter", selectDropdownFilter);
     }, [filterBrands, filterPriceRange, selectDropdownFilter, productLimit]);
@@ -135,11 +136,23 @@ export default function Category({ products, categoryId, query }) {
     return (
         <>
             <SEO
-                title={products.count > 0 ? categoryProducts[0].category.name : ''}
-                description={products.count > 0 ? categoryProducts[0].category.description : ''}
-                image={products.count > 0 ? categoryProducts[0].category.image : ''}
+                title={
+                    products.count > 0 ? categoryProducts[0].category.name : ""
+                }
+                description={
+                    products.count > 0
+                        ? categoryProducts[0].category.description
+                        : ""
+                }
+                image={
+                    products.count > 0 ? categoryProducts[0].category.image : ""
+                }
             />
-            <ProductList products={filteredProducts} brands={brands} loading={loading} />
+            <ProductList
+                products={filteredProducts}
+                brands={brands}
+                loading={loading}
+            />
             <CartPopup />
             <Footer />
         </>
@@ -151,8 +164,8 @@ export async function getServerSideProps({ query, req }) {
 
     const [{ categories }] = await fetchMultipleUrls(urls);
 
-    let categoryId = null
-    let foundChildCategory = null
+    let categoryId = null;
+    let foundChildCategory = null;
     categories.forEach((category) => {
         let foundCategory;
         if (category.children) {
@@ -166,9 +179,10 @@ export async function getServerSideProps({ query, req }) {
                         foundChildCategory = childCategory.children.find(
                             (item) => item.slug === query.id
                         );
-                        if (foundChildCategory) categoryId = foundChildCategory.id
+                        if (foundChildCategory)
+                            categoryId = foundChildCategory.id;
                     }
-                })
+                });
             }
         }
     });

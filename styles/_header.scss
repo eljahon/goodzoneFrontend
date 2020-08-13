@@ -6,6 +6,9 @@
     &.headroom--unfixed {
         header {
             box-shadow: none;
+            @include md {
+                padding: 20px;
+            }
         }
         .right_menu {
             .popover {
@@ -109,6 +112,9 @@
     @include sm {
         display: none;
     }
+    @include md {
+        padding: 10px;
+    }
     .title {
         display: inline-block;
         color: $link-color;
@@ -174,6 +180,9 @@
                     width: 100%;
                     padding: 0 5px;
                     white-space: nowrap;
+                    @include md {
+                        display: none;
+                    }
                 }
             }
             .item_link {
@@ -193,7 +202,7 @@
                 content: "|";
                 color: #cad5d5;
                 display: inline-block;
-                margin: 0 1em;
+                margin: 0 0.5em;
             }
         }
     }
@@ -306,6 +315,9 @@ header {
             font-size: 0;
             width: 0;
             height: 0;
+        }
+        @include md {
+            margin-right: 0;
         }
         .popover {
             position: relative;
@@ -674,6 +686,9 @@ header {
     position: relative;
     @include sm {
         display: none;
+    }
+    @include md {
+        margin: 0;
     }
     .search_box-wrapper {
         width: 100%;

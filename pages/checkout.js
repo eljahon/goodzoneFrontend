@@ -2,16 +2,18 @@ import SEO from "../components/seo";
 import Footer from "../components/footer";
 import CheckoutForm from "../components/checkout-form";
 import CheckoutItems from "../components/checkout-items";
-import { withTranslation } from '../i18n'
+import { withTranslation } from "../i18n";
+import { useState } from "react";
 
 function Checkout({ t }) {
+    const [unired, setUnired] = useState(false);
     return (
         <>
-            <SEO title={t('checkout')} />
+            <SEO title={t("checkout")} />
             <div className="checkout_wrapper">
                 <div className="checkout_container">
-                    <CheckoutForm />
-                    <CheckoutItems />
+                    <CheckoutForm setUnired={setUnired} />
+                    <CheckoutItems unired={unired} />
                 </div>
             </div>
             <Footer />
@@ -19,4 +21,4 @@ function Checkout({ t }) {
     );
 }
 
-export default withTranslation('checkout')(Checkout)
+export default withTranslation("checkout")(Checkout);

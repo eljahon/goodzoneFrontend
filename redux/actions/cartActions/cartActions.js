@@ -6,7 +6,7 @@ export const asyncAddToCartAction = (product) => (dispatch) => {
     } catch (error) {
         // error
     }
-
+    console.log("product", product);
     dispatch({
         type: cartActionTypes.ADD_TO_CART,
         payload: product,

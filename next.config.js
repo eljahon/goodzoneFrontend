@@ -1,7 +1,7 @@
-const { nextI18NextRewrites } = require('next-i18next/rewrites')
+const { nextI18NextRewrites } = require("next-i18next/rewrites");
 const localeSubpaths = {
-    uz: 'uz'
-}
+    uz: "uz",
+};
 
 module.exports = {
     env: {
@@ -23,9 +23,7 @@ module.exports = {
     },
     experimental: {
         async rewrites() {
-            return [
-                ...nextI18NextRewrites(localeSubpaths)
-            ]
-        }
-    }
+            return [...nextI18NextRewrites(localeSubpaths)];
+        },
+    },
 };

@@ -6,9 +6,8 @@ import { FaShoppingBasket } from "react-icons/fa";
 import { Col } from "react-bootstrap";
 import { LazyImage } from "./lazy-image";
 import { useDispatch } from "react-redux";
-import { withTranslation, i18n } from '../i18n'
+import { withTranslation, i18n } from "../i18n";
 import { asyncAddToCartAction } from "../redux/actions/cartActions/cartActions";
-
 
 function RelatedProducts({ products, t }) {
     const dispatch = useDispatch();
@@ -32,39 +31,40 @@ function RelatedProducts({ products, t }) {
     };
 
     const addToCartHandler = (product, event) => {
+        console.log("product", product);
         const button = event.target;
-        const cartItem = button.querySelector('.cart-item');
+        const cartItem = button.querySelector(".cart-item");
         const pointCartItemX = cartItem.getBoundingClientRect().x;
         const pointCartItemY = cartItem.getBoundingClientRect().y;
-        const cartButton = document.getElementById('cartButton');
+        const cartButton = document.getElementById("cartButton");
         const pointCartButtonX = cartButton.getBoundingClientRect().x;
         const pointCartButtonY = cartButton.getBoundingClientRect().y;
-        const translateX = (pointCartButtonX - pointCartItemX) + 'px';
-        const translateY = (pointCartButtonY - pointCartItemY) + 'px';
-        cartItem.style.visibility = 'visible';
-        button.style.pointerEvents = 'none';
+        const translateX = pointCartButtonX - pointCartItemX + "px";
+        const translateY = pointCartButtonY - pointCartItemY + "px";
+        cartItem.style.visibility = "visible";
+        button.style.pointerEvents = "none";
         setTimeout(() => {
             cartItem.style.transform = `translate(${translateX}, ${translateY}) scale(0.3)`;
-            cartItem.style.opacity = '0.7';
-        }, 200); 
+            cartItem.style.opacity = "0.7";
+        }, 200);
         setTimeout(() => {
             dispatch(asyncAddToCartAction(product));
-            cartButton.classList.add('shake');
-            cartItem.style.visibility = 'hidden';
+            cartButton.classList.add("shake");
+            cartItem.style.visibility = "hidden";
         }, 1000);
         setTimeout(() => {
-            cartButton.classList.remove('shake');
+            cartButton.classList.remove("shake");
         }, 1500);
         setTimeout(() => {
             cartItem.style.transform = `translate(0, 0) scale(1)`;
-            cartItem.style.opacity = '1';
-            button.style.pointerEvents = 'all';
-        }, 2000)
+            cartItem.style.opacity = "1";
+            button.style.pointerEvents = "all";
+        }, 2000);
     };
 
     return (
         <div className="related_items">
-            <h2>{t('related-products')}</h2>
+            <h2>{t("related-products")}</h2>
             <Carousel
                 className="products_row"
                 responsive={responsive}
@@ -83,8 +83,12 @@ function RelatedProducts({ products, t }) {
                     >
                         <div className="product_card">
                             <Link
-                                href={`${i18n.language === 'ru' ? '' : '/uz'}/product/[id]`}
-                                as={`${i18n.language === 'ru' ? '' : '/uz'}/product/${product.slug}`}
+                                href={`${
+                                    i18n.language === "ru" ? "" : "/uz"
+                                }/product/[id]`}
+                                as={`${
+                                    i18n.language === "ru" ? "" : "/uz"
+                                }/product/${product.slug}`}
                             >
                                 <a className="product_image">
                                     <LazyImage
@@ -96,8 +100,12 @@ function RelatedProducts({ products, t }) {
                             </Link>
                             <div className="product_info">
                                 <Link
-                                    href={`${i18n.language === 'ru' ? '' : '/uz'}/product/[id]`}
-                                    as={`${i18n.language === 'ru' ? '' : '/uz'}/product/${product.slug}`}
+                                    href={`${
+                                        i18n.language === "ru" ? "" : "/uz"
+                                    }/product/[id]`}
+                                    as={`${
+                                        i18n.language === "ru" ? "" : "/uz"
+                                    }/product/${product.slug}`}
                                 >
                                     <a>
                                         <h3 className="product_title">
@@ -119,10 +127,13 @@ function RelatedProducts({ products, t }) {
                                             <FaShoppingBasket />
                                         </span>
                                         <span className="btn_text">
-                                            {t('add-to-cart')}
+                                            {t("add-to-cart")}
                                         </span>
                                         <span className="cart-item">
-                                            <img src={product.image} alt={product.name} />
+                                            <img
+                                                src={product.image}
+                                                alt={product.name}
+                                            />
                                         </span>
                                     </button>
                                 </div>
@@ -135,4 +146,4 @@ function RelatedProducts({ products, t }) {
     );
 }
 
-export default withTranslation('common')(RelatedProducts)
+export default withTranslation("common")(RelatedProducts);
