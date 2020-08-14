@@ -22,11 +22,19 @@ import { Link, withTranslation } from "../i18n";
 import BottomBar from "./bottom-bar";
 
 function Header({ categories, t }) {
+    const vw = window.innerWidth;
+
     const [menu, setMenu] = useState(false);
     const [searchPopup, setSearchPopup] = useState(false);
     const [loginPopup, setLoginPopup] = useState(false);
     const [registerPopup, setRegisterPopup] = useState(false);
     const [profilePopup, setProfilePopup] = useState(false);
+    useEffect(() => {
+        vw <= 850 ? setMenu(false) : setMenu(true);
+        console.log("vw", vw);
+    }, []);
+    console.log("menu", menu);
+
     const switchPopup = () => {
         setLoginPopup(!loginPopup);
         setRegisterPopup(!registerPopup);
@@ -181,10 +189,12 @@ function Header({ categories, t }) {
             </Headroom>
             <div className="base_header" />
             <BottomBar openLoginMenu={() => setLoginPopup(true)} />
-            <DepartmentsMenu
-                categories={categories}
-                closeMenu={() => setMenu(false)}
-            />
+            {menu && (
+                <DepartmentsMenu
+                    categories={categories}
+                    closeMenu={() => setMenu(false)}
+                />
+            )}
             {searchPopup ? (
                 <SearchModal closeModal={() => setSearchPopup(false)} />
             ) : (

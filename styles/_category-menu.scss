@@ -47,6 +47,9 @@ nav {
     font-size: 0.75rem;
     text-transform: uppercase;
     transition: color 650ms;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .nav-list a:hover {
@@ -101,6 +104,11 @@ nav {
 }
 
 @media screen and (max-width: 850px) {
+    .btn.btn_close {
+        z-index: 1001;
+        display: flex;
+        align-self: flex-start;
+    }
     .sub-menu {
         width: 100%;
     }
@@ -116,15 +124,17 @@ nav {
     }
 
     .sub-menu li {
+        svg {
+            transform: rotate(90deg);
+        }
         display: block;
         line-height: 1rem;
         height: initial;
     }
     .nav-list {
         position: fixed;
-        top: 0;
+        top: 20px;
         left: 0;
-        display: none;
         flex-direction: column;
         height: 100vh;
         align-items: initial;

@@ -45,6 +45,7 @@ html {
 body {
     box-sizing: border-box;
     font-family: $base-font;
+    overflow-x: hidden;
     &.overflow {
         overflow: hidden;
     }

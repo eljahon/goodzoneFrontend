@@ -6,13 +6,13 @@ import { i18n } from "../i18n";
 export default function DepartmentsMenu({ categories, closeMenu }) {
     return (
         <>
-            {/* <button className="btn btn_close" onClick={closeMenu}>
-                <span className="close_icon">
-                    <FaTimes />
-                </span>
-            </button> */}
             <nav>
                 <ul className="nav-list">
+                    <button className="btn btn_close" onClick={closeMenu}>
+                        <span className="close_icon">
+                            <FaTimes />
+                        </span>
+                    </button>
                     {categories.map((item) => {
                         return (
                             <li key={item.id}>
@@ -27,8 +27,8 @@ export default function DepartmentsMenu({ categories, closeMenu }) {
                                     <>
                                         <a onClick={(e) => e.preventDefault()}>
                                             {item.name}
+                                            {item.children && <FaArrowDown />}
                                         </a>
-                                        {item.children && <FaArrowDown />}
                                     </>
                                 </Link>
                                 {item.children && (
@@ -60,10 +60,10 @@ export default function DepartmentsMenu({ categories, closeMenu }) {
                                                                 }
                                                             >
                                                                 {child.name}
+                                                                {child.children && (
+                                                                    <FaArrowRight />
+                                                                )}
                                                             </a>
-                                                            {child.children && (
-                                                                <FaArrowRight />
-                                                            )}
                                                         </>
                                                     </Link>
                                                     {child.children && (
