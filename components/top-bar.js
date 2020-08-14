@@ -1,8 +1,8 @@
-import React, { useRef, useEffect, useState } from 'react'
-import { FaUser, FaSignInAlt, FaSortDown, FaPhoneAlt } from 'react-icons/fa'
-import ProfileMenu from './profile-menu'
+import React, { useRef, useEffect, useState } from "react";
+import { FaUser, FaSignInAlt, FaSortDown, FaPhoneAlt } from "react-icons/fa";
+import ProfileMenu from "./profile-menu";
 import { useSelector, shallowEqual } from "react-redux";
-import { Link, withTranslation, i18n } from '../i18n'
+import { Link, withTranslation, i18n } from "../i18n";
 
 function TopBar({ openLoginMenu, t }) {
     const [profileMenu, setProfileMenu] = useState(false);
@@ -23,7 +23,6 @@ function TopBar({ openLoginMenu, t }) {
             return () => {
                 document.removeEventListener("mousedown", handleClickOutside);
             };
-
         }, [ref]);
     }
 
@@ -32,30 +31,32 @@ function TopBar({ openLoginMenu, t }) {
             <ul className="top_bar-list">
                 <li className="menu_item">
                     <Link href="/promo">
-                        <a>{t('promo')}</a>
+                        <a>{t("promo")}</a>
                     </Link>
                 </li>
                 <li className="menu_item">
                     <Link href="/shops">
-                        <a>{t('shops')}</a>
+                        <a>{t("shops")}</a>
                     </Link>
                 </li>
                 <li className="menu_item">
                     <Link href="/delivery">
-                        <a>{t('delivery')}</a>
+                        <a>{t("delivery")}</a>
                     </Link>
                 </li>
                 <li className="menu_item">
                     <Link href="/news">
-                        <a>{t('blog')}</a>
+                        <a>{t("blog")}</a>
                     </Link>
                 </li>
             </ul>
             <ul className="top_bar-list">
                 <li className="list_item menu_item">
-                    <a href="tel:+998712070307" className="phone_number"><FaPhoneAlt /> +998 (71) 207-03-07</a>
+                    <a href="tel:+998712070307" className="phone_number">
+                        <FaPhoneAlt /> +998 (71) 207-03-07
+                    </a>
                 </li>
-                <li className="list_item">
+                {/* <li className="list_item">
                     {user ? (
                         <div className="popover">
                             <div className="popover_handler">
@@ -85,10 +86,10 @@ function TopBar({ openLoginMenu, t }) {
                                 <span className="btn-text">{t('login')}</span>
                             </button>
                         )}
-                </li>
+                </li> */}
             </ul>
         </div>
-    )
+    );
 }
 
-export default withTranslation('navigation')(TopBar)
+export default withTranslation("navigation")(TopBar);

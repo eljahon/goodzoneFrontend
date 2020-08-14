@@ -1,37 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Link from "next/link";
-import { FaArrowRight, FaArrowDown, FaTimes } from "react-icons/fa";
+import { FaTimes, FaArrowDown, FaArrowRight } from "react-icons/fa";
 import { i18n } from "../i18n";
 
 export default function DepartmentsMenu({ categories, closeMenu }) {
-    const vw = window.innerWidth;
-    const [loaded, setLoaded] = useState(false);
-    useEffect(() => {
-        setLoaded(true);
-        const vw = window.innerWidth;
-        if (vw < 900) document.body.classList.add("overflow");
-        return () => document.body.classList.remove("overflow");
-    });
-
     return (
-        <div className={`popover_content ${loaded ? "show" : ""}`}>
-            <div className="drawer_header">
-                <Link href={i18n.language === "ru" ? "/" : "/uz"}>
-                    <a onClick={closeMenu}>
-                        <img src="/logo.svg" alt="Goodzone" />
-                    </a>
-                </Link>
-                <button className="btn btn_close" onClick={closeMenu}>
-                    <span className="close_icon">
-                        <FaTimes />
-                    </span>
-                </button>
-            </div>
-            <ul className="inner_wrap">
-                {categories.map((item) => {
-                    if (item.children) {
+        <>
+            {/* <button className="btn btn_close" onClick={closeMenu}>
+                <span className="close_icon">
+                    <FaTimes />
+                </span>
+            </button> */}
+            <nav>
+                <ul className="nav-list">
+                    {categories.map((item) => {
                         return (
-                            <li key={item.id} className="menu_item bold">
+                            <li key={item.id}>
                                 <Link
                                     href={`${
                                         i18n.language === "ru" ? "" : "/uz"
@@ -40,34 +24,18 @@ export default function DepartmentsMenu({ categories, closeMenu }) {
                                         i18n.language === "ru" ? "" : "/uz"
                                     }/shop/${item.slug}`}
                                 >
-                                    <a onClick={(e) => e.preventDefault()}>
-                                        <span className="label">
-                                            {/* <span className="menu_icon">
-                                        <img src={item.image} alt={item.name} className="img-fluid" />
-                                    </span> */}
+                                    <>
+                                        <a onClick={(e) => e.preventDefault()}>
                                             {item.name}
-                                        </span>
-                                        <span className="menu_icon">
-                                            <FaArrowRight />
-                                        </span>
-                                    </a>
+                                        </a>
+                                        {item.children && <FaArrowDown />}
+                                    </>
                                 </Link>
-                                <ul
-                                    className={`dropdown_menu ${
-                                        item.children ? "" : "empty"
-                                    }`}
-                                >
-                                    <div className="left">
+                                {item.children && (
+                                    <ul className="sub-menu">
                                         {item.children.map((child) => {
-                                            return child.children ? null : (
-                                                <li
-                                                    key={child.id}
-                                                    className={`menu_item bold ${
-                                                        child.children
-                                                            ? "with-children"
-                                                            : "no-children"
-                                                    }`}
-                                                >
+                                            return (
+                                                <li key={child.id}>
                                                     <Link
                                                         href={`${
                                                             i18n.language ===
@@ -82,95 +50,29 @@ export default function DepartmentsMenu({ categories, closeMenu }) {
                                                                 : "/uz"
                                                         }/shop/${child.slug}`}
                                                     >
-                                                        <a
-                                                            onClick={
-                                                                child.children
-                                                                    ? (e) =>
-                                                                          e.preventDefault()
-                                                                    : closeMenu
-                                                            }
-                                                        >
-                                                            <span className="label">
+                                                        <>
+                                                            <a
+                                                                onClick={
+                                                                    child.children
+                                                                        ? (e) =>
+                                                                              e.preventDefault()
+                                                                        : closeMenu
+                                                                }
+                                                            >
                                                                 {child.name}
-                                                            </span>
-                                                            {child.children ? (
-                                                                <span className="menu_icon">
-                                                                    {vw >
-                                                                    576 ? (
-                                                                        <FaArrowDown />
-                                                                    ) : (
-                                                                        <FaArrowRight />
-                                                                    )}
-                                                                </span>
-                                                            ) : (
-                                                                ""
+                                                            </a>
+                                                            {child.children && (
+                                                                <FaArrowRight />
                                                             )}
-                                                        </a>
+                                                        </>
                                                     </Link>
-                                                </li>
-                                            );
-                                        })}
-                                    </div>
-                                    <div className="right">
-                                        {item.children.map((child) => {
-                                            return child.children ? (
-                                                <li
-                                                    key={child.id}
-                                                    className={`menu_item bold ${
-                                                        child.children
-                                                            ? "with-children"
-                                                            : "no-children"
-                                                    }`}
-                                                >
-                                                    <Link
-                                                        href={`${
-                                                            i18n.language ===
-                                                            "ru"
-                                                                ? ""
-                                                                : "/uz"
-                                                        }/shop/[id]`}
-                                                        as={`${
-                                                            i18n.language ===
-                                                            "ru"
-                                                                ? ""
-                                                                : "/uz"
-                                                        }/shop/${child.slug}`}
-                                                    >
-                                                        <a
-                                                            onClick={
-                                                                child.children
-                                                                    ? (e) =>
-                                                                          e.preventDefault()
-                                                                    : closeMenu
-                                                            }
-                                                        >
-                                                            <span className="label">
-                                                                {child.name}
-                                                            </span>
-                                                            {child.children ? (
-                                                                <span className="menu_icon">
-                                                                    <FaArrowRight />
-                                                                </span>
-                                                            ) : (
-                                                                ""
-                                                            )}
-                                                        </a>
-                                                    </Link>
-                                                    {child.children ? (
-                                                        <ul className="sub-list">
+                                                    {child.children && (
+                                                        <ul className="sub-menu">
                                                             {child.children.map(
                                                                 (sub) => (
                                                                     <li
                                                                         key={
                                                                             sub.id
-                                                                        }
-                                                                        className={
-                                                                            child
-                                                                                .children
-                                                                                .length >
-                                                                            10
-                                                                                ? "column"
-                                                                                : ""
                                                                         }
                                                                     >
                                                                         <Link
@@ -190,7 +92,6 @@ export default function DepartmentsMenu({ categories, closeMenu }) {
                                                                             }`}
                                                                         >
                                                                             <a
-                                                                                className="normal"
                                                                                 onClick={
                                                                                     closeMenu
                                                                                 }
@@ -204,19 +105,17 @@ export default function DepartmentsMenu({ categories, closeMenu }) {
                                                                 )
                                                             )}
                                                         </ul>
-                                                    ) : (
-                                                        ""
                                                     )}
                                                 </li>
-                                            ) : null;
+                                            );
                                         })}
-                                    </div>
-                                </ul>
+                                    </ul>
+                                )}
                             </li>
                         );
-                    }
-                })}
-            </ul>
-        </div>
+                    })}
+                </ul>
+            </nav>
+        </>
     );
 }

@@ -36,3 +36,6 @@ export const asyncReduceCartItemQuantityAction = (product) => (dispatch) => {
         payload: product,
     });
 };
+export const clearCartAction = () => ({
+    type: cartActionTypes.CLEAR_CART,
+});

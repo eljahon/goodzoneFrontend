@@ -88,7 +88,7 @@ function Header({ categories, t }) {
                                 />
                             </a>
                         </Link>
-                        <div className="menu" ref={wrapperRef}>
+                        {/* <div className="menu" ref={wrapperRef}>
                             <div className="popover">
                                 <div className="popover_handler">
                                     <button
@@ -116,7 +116,7 @@ function Header({ categories, t }) {
                                     ""
                                 )}
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                     <SearchBar />
                     <div className="right_menu">
@@ -181,6 +181,10 @@ function Header({ categories, t }) {
             </Headroom>
             <div className="base_header" />
             <BottomBar openLoginMenu={() => setLoginPopup(true)} />
+            <DepartmentsMenu
+                categories={categories}
+                closeMenu={() => setMenu(false)}
+            />
             {searchPopup ? (
                 <SearchModal closeModal={() => setSearchPopup(false)} />
             ) : (

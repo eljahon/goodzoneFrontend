@@ -146,7 +146,7 @@
                             -o-border-image: initial;
                             border-image: initial;
                             border-radius: 6px;
-                            transition: all .35s ease 0s;
+                            transition: all 0.35s ease 0s;
                         }
                     }
                 }
@@ -169,10 +169,10 @@
         padding: 16px 32px;
         margin-bottom: 15px;
         border-radius: 4px;
-        -webkit-box-shadow: 0 1px 2px 0 rgba(142,141,139,.5);
-        box-shadow: 0 1px 2px 0 rgba(142,141,139,.5);
-        -webkit-transition: all .3s linear;
-        transition: all .3s linear;
+        -webkit-box-shadow: 0 1px 2px 0 rgba(142, 141, 139, 0.5);
+        box-shadow: 0 1px 2px 0 rgba(142, 141, 139, 0.5);
+        -webkit-transition: all 0.3s linear;
+        transition: all 0.3s linear;
         border: 2px solid transparent;
         background-color: #fff;
         text-decoration: none;

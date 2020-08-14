@@ -12,7 +12,7 @@ function Checkout({ t }) {
             <SEO title={t("checkout")} />
             <div className="checkout_wrapper">
                 <div className="checkout_container">
-                    <CheckoutForm setUnired={setUnired} />
+                    <CheckoutForm setUnired={setUnired} unired={unired} />
                     <CheckoutItems unired={unired} />
                 </div>
             </div>

@@ -8,13 +8,15 @@ import {
 } from "react-icons/fa";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
-import { useSelector, shallowEqual } from "react-redux";
+import { useSelector, shallowEqual, useDispatch } from "react-redux";
 import axios from "axios";
 import swal from "sweetalert";
 import { withTranslation } from "../i18n";
 import { useEffect } from "react";
+import { clearCartAction } from "../redux/actions/cartActions/cartActions";
 
-function CheckoutForm({ t, setUnired }) {
+function CheckoutForm({ t, setUnired, unired }) {
+    const dispatch = useDispatch();
     const { register, handleSubmit, errors, watch } = useForm();
     const router = useRouter();
 
@@ -36,7 +38,7 @@ function CheckoutForm({ t, setUnired }) {
                 delivery_method: data.delivery_method || "deliver",
                 items: orderItems.map((item) => {
                     return {
-                        price: item.price.price,
+                        price: unired ? item.prices[0].price : item.price.price,
                         product_id: item.id,
                         product_name: item.name,
                         quantity: item.quantity,
@@ -48,6 +50,7 @@ function CheckoutForm({ t, setUnired }) {
             });
 
             if (response.status === 200) {
+                dispatch(clearCartAction());
                 router.push("/order/[id]", `/order/${response.data.number}`);
             }
             console.log(response);
@@ -60,7 +63,6 @@ function CheckoutForm({ t, setUnired }) {
     const paymentMethod = watch("payment_method");
     console.log("paymentMethod", paymentMethod);
     useEffect(() => {
-        console.log("paymentMethod", paymentMethod);
         if (paymentMethod === "unired") setUnired(true);
         else setUnired(false);
     }, [paymentMethod]);
