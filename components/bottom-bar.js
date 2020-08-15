@@ -1,8 +1,10 @@
-import React, { useEffect, useState, useRef } from 'react'
-import { withTranslation, Link } from '../i18n'
-import { FaPhoneAlt, FaUser, FaSignInAlt } from 'react-icons/fa'
-import ProfileMenu from './profile-menu'
+import React, { useEffect, useState, useRef } from "react";
+import { withTranslation, Link } from "../i18n";
+import { FaSignInAlt } from "react-icons/fa";
+import ProfileMenu from "./profile-menu";
 import { useSelector, shallowEqual } from "react-redux";
+import IconUser from "./icons/IconUser";
+import IconPhone from "./icons/IconPhone";
 
 function BottomBar({ t, openLoginMenu }) {
     const [profileMenu, setProfileMenu] = useState(false);
@@ -23,42 +25,43 @@ function BottomBar({ t, openLoginMenu }) {
             return () => {
                 document.removeEventListener("mousedown", handleClickOutside);
             };
-
         }, [ref]);
     }
     return (
         <div className="bottom_bar">
-            <a href="tel:+998712070307" className="phone_number"><FaPhoneAlt /> +998 (71) 207-03-07</a>
+            <a href="tel:+998712070307" className="phone_number">
+                <IconPhone />
+                +998 (71) 207-03-07
+            </a>
             {user ? (
                 <div className="popover" ref={wrapperRef}>
                     <div className="popover_handler">
                         <button
                             className="btn join_btn"
-                            onClick={() =>
-                                setProfileMenu(!profileMenu)
-                            }
+                            onClick={() => setProfileMenu(!profileMenu)}
                         >
-                            <span className="join_icon">
-                                <FaUser />
+                            <IconUser />
+                            <span className="btn-text">
+                                {t("personal-area")}
                             </span>
-                            <span className="btn-text">{t('personal-area')}</span>
                         </button>
                     </div>
-                    {profileMenu ? <ProfileMenu closeMenu={() => setProfileMenu(false)} /> : ""}
+                    {profileMenu ? (
+                        <ProfileMenu closeMenu={() => setProfileMenu(false)} />
+                    ) : (
+                        ""
+                    )}
                 </div>
             ) : (
-                    <button
-                        className="btn join_btn"
-                        onClick={openLoginMenu}
-                    >
-                        <span className="join_icon">
-                            <FaSignInAlt />
-                        </span>
-                        <span className="btn-text">{t('login')}</span>
-                    </button>
-                )}
+                <button className="btn join_btn" onClick={openLoginMenu}>
+                    <span className="join_icon">
+                        <FaSignInAlt />
+                    </span>
+                    <span className="btn-text">{t("login")}</span>
+                </button>
+            )}
         </div>
-    )
-} 
+    );
+}
 
-export default withTranslation('common')(BottomBar)
+export default withTranslation("common")(BottomBar);

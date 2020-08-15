@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { FaTimes, FaClock, FaPhoneAlt, FaMapMarkerAlt } from "react-icons/fa";
+import { FaTimes, FaClock, FaMapMarkerAlt } from "react-icons/fa";
+import IconPhone from "./icons/IconPhone";
 
 export default function BranchInfo({ data, closeInfo }) {
     const [info, setInfo] = useState(false);
@@ -46,9 +47,7 @@ export default function BranchInfo({ data, closeInfo }) {
                     </div>
                     <div className="info_block">
                         <span className="title">
-                            <span className="icon">
-                                <FaPhoneAlt />
-                            </span>
+                            <IconPhone />
                             <span className="text">Телефоны:</span>
                         </span>
                         <span className="desc">{data.phone}</span>

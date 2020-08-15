@@ -24,12 +24,10 @@ export default function DepartmentsMenu({ categories, closeMenu }) {
                                         i18n.language === "ru" ? "" : "/uz"
                                     }/shop/${item.slug}`}
                                 >
-                                    <>
-                                        <a onClick={(e) => e.preventDefault()}>
-                                            {item.name}
-                                            {item.children && <FaArrowDown />}
-                                        </a>
-                                    </>
+                                    <a>
+                                        {item.name}
+                                        {item.children && <FaArrowDown />}
+                                    </a>
                                 </Link>
                                 {item.children && (
                                     <ul className="sub-menu">
@@ -50,21 +48,12 @@ export default function DepartmentsMenu({ categories, closeMenu }) {
                                                                 : "/uz"
                                                         }/shop/${child.slug}`}
                                                     >
-                                                        <>
-                                                            <a
-                                                                onClick={
-                                                                    child.children
-                                                                        ? (e) =>
-                                                                              e.preventDefault()
-                                                                        : closeMenu
-                                                                }
-                                                            >
-                                                                {child.name}
-                                                                {child.children && (
-                                                                    <FaArrowRight />
-                                                                )}
-                                                            </a>
-                                                        </>
+                                                        <a>
+                                                            {child.name}
+                                                            {child.children && (
+                                                                <FaArrowRight />
+                                                            )}
+                                                        </a>
                                                     </Link>
                                                     {child.children && (
                                                         <ul className="sub-menu">
@@ -91,11 +80,7 @@ export default function DepartmentsMenu({ categories, closeMenu }) {
                                                                                 sub.slug
                                                                             }`}
                                                                         >
-                                                                            <a
-                                                                                onClick={
-                                                                                    closeMenu
-                                                                                }
-                                                                            >
+                                                                            <a>
                                                                                 {
                                                                                     sub.name
                                                                                 }

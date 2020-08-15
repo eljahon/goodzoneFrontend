@@ -1,13 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import {
-    FaBars,
-    FaSortDown,
-    FaSearch,
-    FaSignInAlt,
-    FaUser,
-    FaRegHeart,
-    FaPhoneAlt,
-} from "react-icons/fa";
+import { FaSearch, FaSignInAlt } from "react-icons/fa";
 import DepartmentsMenu from "./departments-menu";
 import SearchModal from "./search-modal";
 import LoginModal from "./login-modal";
@@ -20,6 +12,7 @@ import TopBar from "./top-bar";
 import Headroom from "react-headroom";
 import { Link, withTranslation } from "../i18n";
 import BottomBar from "./bottom-bar";
+import IconUser from "./icons/IconUser";
 
 function Header({ categories, t }) {
     const vw = window.innerWidth;
@@ -142,18 +135,14 @@ function Header({ categories, t }) {
                                             setProfilePopup(!profilePopup)
                                         }
                                     >
-                                        <span className="join_icon">
-                                            <FaUser />
-                                        </span>
+                                        <IconUser />
                                         <span className="btn-text">
                                             {t("personal-area")}
                                         </span>
                                     </button>
                                     <Link href="/account">
                                         <a className="btn join_btn mobile">
-                                            <span className="join_icon">
-                                                <FaUser />
-                                            </span>
+                                            <IconUser />
                                         </a>
                                     </Link>
                                 </div>

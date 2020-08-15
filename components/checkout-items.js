@@ -25,8 +25,8 @@ function CheckoutItems({ t, unired }) {
     );
 
     let price = unired
-        ? numberToPrice(totalPrice)
-        : numberToPrice(uniredTotalPrice);
+        ? numberToPrice(uniredTotalPrice)
+        : numberToPrice(totalPrice);
 
     return (
         <aside className="cart_wrapper" id="checkout_items">

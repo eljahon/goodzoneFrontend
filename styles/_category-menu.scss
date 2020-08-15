@@ -50,6 +50,7 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    cursor: pointer;
 }
 
 .nav-list a:hover {
@@ -101,6 +102,10 @@ nav {
 .sub-menu li:hover > .sub-menu {
     left: 100%;
     top: 0;
+}
+
+.btn.btn_close {
+    display: none;
 }
 
 @media screen and (max-width: 850px) {

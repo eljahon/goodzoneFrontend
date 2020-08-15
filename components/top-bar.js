@@ -1,8 +1,7 @@
 import React, { useRef, useEffect, useState } from "react";
-import { FaUser, FaSignInAlt, FaSortDown, FaPhoneAlt } from "react-icons/fa";
-import ProfileMenu from "./profile-menu";
 import { useSelector, shallowEqual } from "react-redux";
 import { Link, withTranslation, i18n } from "../i18n";
+import IconPhone from "./icons/IconPhone";
 
 function TopBar({ openLoginMenu, t }) {
     const [profileMenu, setProfileMenu] = useState(false);
@@ -53,7 +52,8 @@ function TopBar({ openLoginMenu, t }) {
             <ul className="top_bar-list">
                 <li className="list_item menu_item">
                     <a href="tel:+998712070307" className="phone_number">
-                        <FaPhoneAlt /> +998 (71) 207-03-07
+                        <IconPhone />
+                        +998 (71) 207-03-07
                     </a>
                 </li>
                 {/* <li className="list_item">

@@ -186,7 +186,7 @@ export async function getServerSideProps({ query, req }) {
             }
         }
     });
-
+    console.log("categoryId :>> ", categoryId);
     const [products] = await fetchMultipleUrls([
         `${process.env.PRODUCT_API_URL}?category=${categoryId}&lang=${req.i18n.language}`,
     ]);
