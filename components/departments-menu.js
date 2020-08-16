@@ -6,7 +6,7 @@ import { i18n } from "../i18n";
 export default function DepartmentsMenu({ categories, closeMenu }) {
     return (
         <>
-            <nav>
+            <nav className="departments_menu">
                 <ul className="nav-list">
                     <button className="btn btn_close" onClick={closeMenu}>
                         <span className="close_icon">
@@ -24,10 +24,7 @@ export default function DepartmentsMenu({ categories, closeMenu }) {
                                         i18n.language === "ru" ? "" : "/uz"
                                     }/shop/${item.slug}`}
                                 >
-                                    <a>
-                                        {item.name}
-                                        {item.children && <FaArrowDown />}
-                                    </a>
+                                    <a onClick={e => e.preventDefault()}>{item.name}</a>
                                 </Link>
                                 {item.children && (
                                     <ul className="sub-menu">
@@ -48,8 +45,8 @@ export default function DepartmentsMenu({ categories, closeMenu }) {
                                                                 : "/uz"
                                                         }/shop/${child.slug}`}
                                                     >
-                                                        <a>
-                                                            {child.name}
+                                                        <a onClick={e => child.children ? e.preventDefault() : console.log(e)}>
+                                                            <span>{child.name}</span>
                                                             {child.children && (
                                                                 <FaArrowRight />
                                                             )}

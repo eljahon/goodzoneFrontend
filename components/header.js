@@ -45,7 +45,6 @@ function Header({ categories, t }) {
         useEffect(() => {
             function handleClickOutside(event) {
                 if (ref.current && !ref.current.contains(event.target)) {
-                    setMenu(false);
                     setProfilePopup(false);
                 }
             }
@@ -127,7 +126,7 @@ function Header({ categories, t }) {
                             </Link>
                         </div> */}
                         {user ? (
-                            <div className="popover">
+                            <div className="popover" ref={wrapperRef}>
                                 <div className="popover_handler">
                                     <button
                                         className="btn join_btn"
