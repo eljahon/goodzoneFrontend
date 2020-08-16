@@ -24,9 +24,7 @@ function Header({ categories, t }) {
     const [profilePopup, setProfilePopup] = useState(false);
     useEffect(() => {
         vw <= 850 ? setMenu(false) : setMenu(true);
-        console.log("vw", vw);
     }, []);
-    console.log("menu", menu);
 
     const switchPopup = () => {
         setLoginPopup(!loginPopup);
