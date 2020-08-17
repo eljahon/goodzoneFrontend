@@ -50,5 +50,9 @@
     "self": "O'zi olib ketmoq",
     "deliver": "Bir kun ichida yetkazib berish",
     "you-havent-ordered-yet": "Siz hali hech nima buyurtma qilmadingiz",
-    "save": "Saqlash"
+    "save": "Saqlash",
+    "cancel-order": "Bekor qilish",
+    "cancel-order-alert-text": "Buyurtmani bekor qilishni xohlaysizmi?",
+    "success": "Muvaffaqiyatli bajarildi",
+    "fail": "Xatolik yuz berdi, iltimos yana urinib ko'ring"
 }

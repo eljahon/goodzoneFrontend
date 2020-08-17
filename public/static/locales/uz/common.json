@@ -30,7 +30,6 @@
     "payment-plan-for": "To'lov 9 oyga bo'lib to'lanadi",
     "cart-empty": "Savatda hech narsa yo'q",
     "sitename": "GOODZONE internet-do'koni",
-    "not": "Yo'q",
     "few": "Kam",
     "enough": "Yetarli",
     "lot": "Ko'p",
@@ -39,5 +38,7 @@
     "operating-mode": "Ish vaqti",
     "availibility-in-store": "Do'konlarda mavjudligi",
     "clear-cart": "Savatni tozalash",
-    "search-result": "Qidiruv natijalari"
+    "search-result": "Qidiruv natijalari",
+    "yes": "Ha",
+    "not": "Yo'q"
 }

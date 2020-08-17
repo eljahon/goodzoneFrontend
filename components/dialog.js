@@ -6,6 +6,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { makeStyles } from "@material-ui/core";
+import { withTranslation } from "../i18n";
 
 const useStyles = makeStyles(() => ({
     btn: {
@@ -26,7 +27,7 @@ const useStyles = makeStyles(() => ({
     },
 }));
 
-export default function AlertDialog({ title, content, resolve }) {
+function AlertDialog({ t, title, content, resolve }) {
     const cls = useStyles();
 
     const [open, setOpen] = React.useState(false);
@@ -85,7 +86,7 @@ export default function AlertDialog({ title, content, resolve }) {
                         color="default"
                         variant="outlined"
                     >
-                        Disagree
+                        {t("not")}
                     </Button>
                     <Button
                         className={cls.ctaBtn}
@@ -94,10 +95,11 @@ export default function AlertDialog({ title, content, resolve }) {
                         variant="contained"
                         autoFocus
                     >
-                        Agree
+                        {t("yes")}
                     </Button>
                 </DialogActions>
             </Dialog>
         </div>
     );
 }
+export default withTranslation("common")(AlertDialog);

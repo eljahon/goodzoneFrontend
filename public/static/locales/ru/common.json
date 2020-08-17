@@ -30,7 +30,6 @@
     "payment-plan-for": "Рассрочка оформляется на 9 месяцев",
     "cart-empty": "Корзина пуста",
     "sitename": "Интернет магазин GOODZONE",
-    "not": "Нет",
     "few": "Мало",
     "enough": "Достаточно",
     "lot": "Много",
@@ -39,5 +38,7 @@
     "operating-mode": "Режим работы",
     "availibility-in-store": "Наличие в магазине",
     "clear-cart": "Очистить корзину",
-    "search-result": "Результаты поиска"
+    "search-result": "Результаты поиска",
+    "yes": "Да",
+    "not": "Нет"
 }

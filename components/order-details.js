@@ -56,9 +56,10 @@ function OrderDetails({ t, data }) {
                 phone,
                 status,
             });
-            swal("Successfull");
+            swal(t("success"));
             console.log("saved :>> ");
         } catch (error) {
+            swal(t("fail"));
             console.error(error);
         } finally {
             setDisabled(true);
@@ -97,8 +98,8 @@ function OrderDetails({ t, data }) {
                 <h3 className="title">{t("order-info")}</h3>
                 {inProcess ? (
                     <AlertDialog
-                        title={"Cancel order"}
-                        content="Do you really want to cancel order?"
+                        title={t("cancel-order")}
+                        content={t("cancel-order-alert-text")}
                         resolve={cancelOrder}
                     />
                 ) : null}
