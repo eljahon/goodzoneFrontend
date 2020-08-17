@@ -6,27 +6,34 @@ import { i18n } from "../i18n";
 export default function DepartmentsMenu({ categories, closeMenu }) {
     return (
         <>
-            <nav>
-                <ul className="nav-list">
+            <nav className="departments_menu">
+                <div className="drawer_header">
+                    <Link href={i18n.language === "ru" ? "/" : "/uz"}>
+                        <a>
+                            <img src="./logo.svg" alt="Goodzone"/>
+                        </a>
+                    </Link>
                     <button className="btn btn_close" onClick={closeMenu}>
                         <span className="close_icon">
                             <FaTimes />
                         </span>
                     </button>
+                </div>
+                <ul className="nav-list">
                     {categories.map((item) => {
                         return (
                             <li key={item.id}>
                                 <Link
                                     href={`${
                                         i18n.language === "ru" ? "" : "/uz"
-                                    }/shop/[id]`}
+                                        }/shop/[id]`}
                                     as={`${
                                         i18n.language === "ru" ? "" : "/uz"
-                                    }/shop/${item.slug}`}
+                                        }/shop/${item.slug}`}
                                 >
-                                    <a>
-                                        {item.name}
-                                        {item.children && <FaArrowDown />}
+                                    <a onClick={e => e.preventDefault()}>
+                                        <span>{item.name}</span>
+                                        <FaArrowRight />
                                     </a>
                                 </Link>
                                 {item.children && (
@@ -37,19 +44,19 @@ export default function DepartmentsMenu({ categories, closeMenu }) {
                                                     <Link
                                                         href={`${
                                                             i18n.language ===
-                                                            "ru"
+                                                                "ru"
                                                                 ? ""
                                                                 : "/uz"
-                                                        }/shop/[id]`}
+                                                            }/shop/[id]`}
                                                         as={`${
                                                             i18n.language ===
-                                                            "ru"
+                                                                "ru"
                                                                 ? ""
                                                                 : "/uz"
-                                                        }/shop/${child.slug}`}
+                                                            }/shop/${child.slug}`}
                                                     >
-                                                        <a>
-                                                            {child.name}
+                                                        <a onClick={e => child.children ? e.preventDefault() : console.log(e)}>
+                                                            <span>{child.name}</span>
                                                             {child.children && (
                                                                 <FaArrowRight />
                                                             )}
@@ -67,18 +74,18 @@ export default function DepartmentsMenu({ categories, closeMenu }) {
                                                                         <Link
                                                                             href={`${
                                                                                 i18n.language ===
-                                                                                "ru"
+                                                                                    "ru"
                                                                                     ? ""
                                                                                     : "/uz"
-                                                                            }/shop/[id]`}
+                                                                                }/shop/[id]`}
                                                                             as={`${
                                                                                 i18n.language ===
-                                                                                "ru"
+                                                                                    "ru"
                                                                                     ? ""
                                                                                     : "/uz"
-                                                                            }/shop/${
+                                                                                }/shop/${
                                                                                 sub.slug
-                                                                            }`}
+                                                                                }`}
                                                                         >
                                                                             <a>
                                                                                 {
