@@ -9,7 +9,7 @@
     "write-name": "Ismingizni kiriting",
     "write-address": "Manzilni kiriting",
     "write-phone-number": "Telefon raqamni kiriting",
-    "cash": "Naqd pul", 
+    "cash": "Naqd pul",
     "terminal": "Terminal",
     "pickup": "O'zi olib ketmoq",
     "delivery-within-a-day": "Bir kun ichida yetkazib berish",
@@ -49,5 +49,6 @@
     "amount": "Narxi",
     "self": "O'zi olib ketmoq",
     "deliver": "Bir kun ichida yetkazib berish",
-    "you-havent-ordered-yet": "Siz hali hech nima buyurtma qilmadingiz"
+    "you-havent-ordered-yet": "Siz hali hech nima buyurtma qilmadingiz",
+    "save": "Saqlash"
 }

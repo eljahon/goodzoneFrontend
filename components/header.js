@@ -13,6 +13,7 @@ import Headroom from "react-headroom";
 import { Link, withTranslation } from "../i18n";
 import BottomBar from "./bottom-bar";
 import IconUser from "./icons/IconUser";
+import IconMenu from "./icons/IconMenu";
 
 function Header({ categories, t }) {
     const vw = window.innerWidth;
@@ -73,9 +74,7 @@ function Header({ categories, t }) {
                             className="btn hamburger_icon"
                             onClick={() => setMenu(true)}
                         >
-                            <span />
-                            <span />
-                            <span />
+                            <IconMenu />
                         </button>
                         <Link href="/">
                             <a className="logo">

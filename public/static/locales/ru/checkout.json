@@ -9,7 +9,7 @@
     "write-name": "Напишите имя",
     "write-address": "Напишите адрес",
     "write-phone-number": "Напишите номер телефона",
-    "cash": "Наличные", 
+    "cash": "Наличные",
     "terminal": "Терминал",
     "pickup": "Самовывоз",
     "delivery-within-a-day": "Доставка в течении дня",
@@ -49,5 +49,6 @@
     "amount": "Сумма",
     "self": "Самовывоз",
     "deliver": "Доставка в течении дня",
-    "you-havent-ordered-yet": "Вы еще ничего не заказали"
+    "you-havent-ordered-yet": "Вы еще ничего не заказали",
+    "save": "Сохранить"
 }
