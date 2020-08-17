@@ -122,11 +122,12 @@ function CheckoutForm({ t, setUnired, unired }) {
                             value="cash"
                             id="cash"
                             ref={register}
+                            defaultChecked
                         />
                         <label htmlFor="cash">
                             <span className="card_title">{t("cash")}</span>
                             <span className="card_content">
-                                <FaWallet />
+                                <img src="./images/payment_logo/banknote.svg" className="cash" alt="Cash"/>
                             </span>
                         </label>
                     </div>
@@ -141,7 +142,7 @@ function CheckoutForm({ t, setUnired, unired }) {
                         <label htmlFor="terminal">
                             <span className="card_title">{t("terminal")}</span>
                             <span className="card_content">
-                                <FaCreditCard />
+                                <img src="./images/payment_logo/credit-card.svg" className="credit-card" alt="Credit card"/>
                             </span>
                         </label>
                     </div>
@@ -156,7 +157,7 @@ function CheckoutForm({ t, setUnired, unired }) {
                         <label htmlFor="click">
                             <span className="card_title">Click</span>
                             <span className="card_content">
-                                <FaRegCreditCard />
+                                <img src="./images/payment_logo/click.svg" className="click" alt="Click"/>
                             </span>
                         </label>
                     </div>
@@ -171,7 +172,7 @@ function CheckoutForm({ t, setUnired, unired }) {
                         <label htmlFor="payme">
                             <span className="card_title">Payme</span>
                             <span className="card_content">
-                                <FaCreditCard />
+                                <img src="./images/payment_logo/payme.svg" className="payme" alt="Payme"/>
                             </span>
                         </label>
                     </div>
@@ -186,7 +187,7 @@ function CheckoutForm({ t, setUnired, unired }) {
                         <label htmlFor="unired">
                             <span className="card_title">Unired</span>
                             <span className="card_content">
-                                <FaRegCreditCard />
+                                <img src="./images/payment_logo/unired.jpeg" className="unired" alt="Unired"/>
                             </span>
                         </label>
                     </div>

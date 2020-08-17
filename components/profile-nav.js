@@ -39,7 +39,18 @@ function ProfileNav({ activeTab, t }) {
                                     activeTab === "order" ? "current_page" : ""
                                 }
                             >
-                                <span className="label">{t("orders")}</span>
+                                <span className="label">{t("my-orders")}</span>
+                            </a>
+                        </Link>
+                    </div>
+                    <div className="sidebar_menu">
+                        <Link href="/address">
+                            <a
+                                className={
+                                    activeTab === "address" ? "current_page" : ""
+                                }
+                            >
+                                <span className="label">{t("my-addresses")}</span>
                             </a>
                         </Link>
                     </div>

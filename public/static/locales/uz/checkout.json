@@ -40,6 +40,8 @@
     "confirm-password": "Parolni tasdiqlash",
     "refresh": "Yangilash",
     "my-orders": "Mening buyurtmalarim",
+    "my-addresses": "Mening manzillarim",
+    "add-address": "Manzil qo'shish",
     "order": "Buyurtma",
     "status": "Status",
     "total": "Umumiy",

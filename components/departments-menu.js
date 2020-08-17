@@ -2,22 +2,32 @@ import React from "react";
 import Link from "next/link";
 import { FaTimes, FaArrowDown, FaArrowRight } from "react-icons/fa";
 import { i18n } from "../i18n";
+import { useRouter } from "next/router";
 
 export default function DepartmentsMenu({ categories, closeMenu }) {
+
+    const router = useRouter();
+    const hasDynamicRouting = router.query.id;
+
     return (
         <>
             <nav className="departments_menu">
                 <div className="drawer_header">
-                    <Link href={i18n.language === "ru" ? "/" : "/uz"}>
-                        <a>
-                            <img src="./logo.svg" alt="Goodzone"/>
-                        </a>
-                    </Link>
                     <button className="btn btn_close" onClick={closeMenu}>
                         <span className="close_icon">
                             <FaTimes />
                         </span>
                     </button>
+                    <Link href={i18n.language === "ru" ? "/" : "/uz"}>
+                        <a onClick={() => closeMenu()}>
+                            <img src={
+                                hasDynamicRouting
+                                    ? "../logo.svg"
+                                    : "/logo.svg"
+                            }
+                                alt="Goodzone" />
+                        </a>
+                    </Link>
                 </div>
                 <ul className="nav-list">
                     {categories.map((item) => {
@@ -55,7 +65,13 @@ export default function DepartmentsMenu({ categories, closeMenu }) {
                                                                 : "/uz"
                                                             }/shop/${child.slug}`}
                                                     >
-                                                        <a onClick={e => child.children ? e.preventDefault() : console.log(e)}>
+                                                        <a onClick={e => {
+                                                            if (child.children) {
+                                                                e.preventDefault()
+                                                            } else {
+                                                                closeMenu()
+                                                            }
+                                                        }}>
                                                             <span>{child.name}</span>
                                                             {child.children && (
                                                                 <FaArrowRight />
@@ -87,7 +103,7 @@ export default function DepartmentsMenu({ categories, closeMenu }) {
                                                                                 sub.slug
                                                                                 }`}
                                                                         >
-                                                                            <a>
+                                                                            <a onClick={() => closeMenu()}>
                                                                                 {
                                                                                     sub.name
                                                                                 }

@@ -6,6 +6,8 @@
     "login": "Kirish",
     "personal-area": "Shaxsiy kabinet",
     "orders": "Buyurtmalar",
+    "my-orders": "Mening buyurtmalarim",
+    "my-addresses": "Mening manzillarim",
     "exit": "Chiqish",
     "dashboard": "Ma'lumotlar paneli",
     "dashboard-description": "Ma'lumotlar boshqaruvi panelidan so'nggi buyurtmalarni ko'rishingiz, yetkazib berish va to'lov manzillaringizni boshqarishingiz, shuningdek, parolingiz va qayd yozuvingiz ma'lumotlarini o'zgartirishingiz mumkin.",

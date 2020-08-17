@@ -22,12 +22,12 @@ nav.departments_menu {
         overflow-x: hidden;
         .drawer_header {
             display: flex;
-            justify-content: space-between;
             align-items: center;
             padding: 20px;
             background-color: $bg-color;
             a {
                 display: block;
+                margin: 0 auto;    
                 img {
                     width: 100%;
                     max-width: 150px;
@@ -35,6 +35,9 @@ nav.departments_menu {
             }
             .btn.btn_close {
                 display: block;
+                position: absolute;
+                top: 15px;
+                left: 15px;
             }
         }
         ul.nav-list {
@@ -49,6 +52,7 @@ nav.departments_menu {
                 &:hover {
                     & > a {
                         color: $primary-color;
+                        background-color: $border-color;
                         svg {
                             transform: rotate(90deg);
                         }
@@ -69,9 +73,7 @@ nav.departments_menu {
                     padding: 12px 30px;
                     margin: 0;
                     white-space: nowrap;
-                    border-radius: 6px;
-                    border-bottom: 0;
-                    background-color: #fff;
+                    border: none;
                     text-decoration: none;
                 }
                 .sub-menu {
@@ -192,6 +194,9 @@ nav.departments_menu {
 .sub-menu li:hover > .sub-menu {
     left: 100%;
     top: 0;
+}
+.sub-menu li:hover > a {
+    background-color: $border-color;
 }
 .sub-menu li a {
     font-size: 14px;
