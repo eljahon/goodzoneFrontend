@@ -247,6 +247,18 @@ form.checkout_form {
                         color: rgb(66, 69, 97);
                         svg {
                             fill: rgb(66, 69, 97);
+                            font-size: 25px;
+                        }
+                        img {
+                            width: 30px;
+                            height: 30px;
+                            &.click {
+                                width: 60px;
+                            }
+                            &.unired {
+                                width: 60px;
+                                height: auto;
+                            }
                         }
                     }
                 }

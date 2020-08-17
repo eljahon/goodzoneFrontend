@@ -27,7 +27,12 @@ function ProfileMenu({ closeMenu, t }) {
                     </Link>
                     <Link href="/order">
                         <a onClick={closeMenu}>
-                            <span className="label">{t('orders')}</span>
+                            <span className="label">{t('my-orders')}</span>
+                        </a>
+                    </Link>
+                    <Link href="/address">
+                        <a onClick={closeMenu}>
+                            <span className="label">{t('my-addresses')}</span>
                         </a>
                     </Link>
                     <Link href="/logout">
