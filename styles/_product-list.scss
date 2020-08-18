@@ -204,29 +204,32 @@ main {
     }
   }
   .category_wrapper {
-    position: sticky;
-    top: 58px;
+    // position: sticky;
+    // top: 58px;
     width: 100%;
     @include sm {
       position: relative;
       top: 0;
     }
     .sidebar_wrapper {
-      padding: 45px 0;
+      padding: 0;
       .outer_wrapper {
         overflow: hidden;
         width: 100%;
         height: auto;
         min-height: 0;
-        max-height: 688px;
+        max-height: 100vh;
+        padding-bottom: 100px;  
         @include sm {
-          overflow: visible;
+          overflow: scroll;
         }
         .inner_wrapper {
+          padding-top: 45px;
           padding-left: 40px;
           padding-right: 20px;
           @include sm {
             padding: 0 20px;
+            padding-top: 45px;
           }
           .btn.close_filter {
             display: none;

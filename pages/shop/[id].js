@@ -20,6 +20,7 @@ export default function Category({ products, categoryId, query }) {
     const [loading, setLoading] = useState(false);
     const [productLimit, setProductLimit] = useState(20);
     const [brands, setBrands] = useState([]);
+    const [productProperty, setProductProperty] = useState([])
     useEffect(() => {
         if (categoryProducts) {
             axios
@@ -40,6 +41,14 @@ export default function Category({ products, categoryId, query }) {
             // )
             // setBrands(brands)
         }
+        axios.get(`${process.env.CATEGORY_API_URL}/${query.id}`)
+            .then(response => {
+                setProductProperty(response.data.category.product_properties)
+                console.log('product_properties', response.data.category.product_properties)
+            })
+            .catch(err => {
+                console.log(err)
+            })
     }, [categoryProducts]);
 
     useEffect(() => {
@@ -152,6 +161,7 @@ export default function Category({ products, categoryId, query }) {
                 products={filteredProducts}
                 brands={brands}
                 loading={loading}
+                productProperty={productProperty}
             />
             <CartPopup />
             <Footer />

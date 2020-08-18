@@ -57,14 +57,14 @@ function CartPopup({ t }) {
     };
 
     const openPopup = () => {
-        // const vw = window.innerWidth;
+        const vw = window.innerWidth;
         setCart(true);
-        // if (vw < 900) document.body.classList.add("overflow");
+        if (vw < 900) document.body.classList.add("overflow");
     };
     const closePopup = () => {
-        // const vw = window.innerWidth;
+        const vw = window.innerWidth;
         setCart(false);
-        // if (vw < 900) document.body.classList.remove("overflow");
+        if (vw < 900) document.body.classList.remove("overflow");
     };
 
     const checkUser = (event) => {

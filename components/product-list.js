@@ -8,7 +8,7 @@ import { selectDropdownChange } from "../redux/actions/filterActions/filterActio
 import { useRouter } from "next/router";
 import { withTranslation } from '../i18n'
 
-function ProductList({ products, brands, t, searchResult, loading }) {
+function ProductList({ products, brands, t, searchResult, loading, productProperty }) {
     const router = useRouter();
 
     const dispatch = useDispatch();
@@ -39,6 +39,7 @@ function ProductList({ products, brands, t, searchResult, loading }) {
             <ProductListFilter
                 brands={brands}
                 isOpenPopup={filterPopup}
+                productProperty={productProperty}
                 closePopup={() => setFilterPopup(false)}
             />
             <div className="content">

@@ -5,7 +5,7 @@ import RangeSlider from "./react-slider";
 import { FaTimes } from "react-icons/fa";
 import { withTranslation } from '../i18n'
 
-function ProductListFilter({ brands, isOpenPopup, closePopup, t }) {
+function ProductListFilter({ brands, isOpenPopup, closePopup, t, productProperty }) {
     const dispatch = useDispatch();
 
     const filterBrands = useSelector(
@@ -61,6 +61,31 @@ function ProductListFilter({ brands, isOpenPopup, closePopup, t }) {
                                         ))
                                         : null}
                                 </div>
+                                {productProperty
+                                    ? productProperty.map((property) => (
+                                        <div className="filter_group" key={property.id}>
+                                            <h5>{property.name}</h5>
+                                            {property.options.map(item => (
+                                                <div
+                                                    key={item.name}
+                                                    className="check_box"
+                                                >
+                                                    <input
+                                                        onChange={() =>
+                                                            handleToggle(item.value)
+                                                        }
+                                                        type="checkbox"
+                                                        name={item.value}
+                                                        id={item.value}
+                                                    />
+                                                    <label htmlFor={item.value}>
+                                                        {item.name}
+                                                    </label>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    ))
+                                    : null}
                             </form>
                         </div>
                     </div>
