@@ -73,6 +73,8 @@ function CartPopup({ t }) {
             setLoginModal(true)
             setCart(false)
             return
+        } else {
+            closePopup()
         }
     }
 

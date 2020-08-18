@@ -1203,7 +1203,7 @@ header {
         left: 50%;
         top: 50%;
         opacity: 1;
-        transform: translate(-50%, -50%) scale3d(0, 0, 0);
+        transform: translate(-50%, -50%) scale(0);
         z-index: 99999;
         padding: 0;
         overflow: auto;
@@ -1224,7 +1224,7 @@ header {
             overflow: visible;
         }
         &.show {
-            transform: translate(-50%, -50%) scale3d(1, 1, 1);
+            transform: translate(-50%, -50%) scale(1);
         }
         .btn.close_btn {
             display: none;
