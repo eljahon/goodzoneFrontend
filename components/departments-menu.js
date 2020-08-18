@@ -5,9 +5,14 @@ import { i18n } from "../i18n";
 import { useRouter } from "next/router";
 
 export default function DepartmentsMenu({ categories, closeMenu }) {
+    const vw = window.innerWidth;
 
     const router = useRouter();
     const hasDynamicRouting = router.query.id;
+
+    const handleClose = () => {
+        if (vw <= 850) closeMenu()
+    }
 
     return (
         <>
@@ -69,7 +74,7 @@ export default function DepartmentsMenu({ categories, closeMenu }) {
                                                             if (child.children) {
                                                                 e.preventDefault()
                                                             } else {
-                                                                closeMenu()
+                                                                handleClose()
                                                             }
                                                         }}>
                                                             <span>{child.name}</span>
@@ -103,7 +108,7 @@ export default function DepartmentsMenu({ categories, closeMenu }) {
                                                                                 sub.slug
                                                                                 }`}
                                                                         >
-                                                                            <a onClick={() => closeMenu()}>
+                                                                            <a onClick={() => handleClose()}>
                                                                                 {
                                                                                     sub.name
                                                                                 }

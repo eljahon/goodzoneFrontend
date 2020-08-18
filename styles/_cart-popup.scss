@@ -200,7 +200,7 @@
           max-height: calc(100vh - 145px);
           background-color: rgb(255, 255, 255);
           @include sm {
-            max-height: calc(100vh - 190px);
+            max-height: calc(100vh - 220px);
           }
           .item_box {
             font-size: 15px;
@@ -404,7 +404,7 @@
       margin-top: auto;
       .btn.checkout_button {
         position: absolute;
-        bottom: 70px;
+        bottom: 100px;
         left: 0;
         height: 48px;
         width: calc(100% - 30px);
