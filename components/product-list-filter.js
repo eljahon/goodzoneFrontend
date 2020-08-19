@@ -5,7 +5,7 @@ import RangeSlider from "./react-slider";
 import { FaTimes } from "react-icons/fa";
 import { withTranslation } from '../i18n'
 
-function ProductListFilter({ brands, isOpenPopup, closePopup, t, productProperty }) {
+function ProductListFilter({ brands, isOpenPopup, closePopup, t, productProperty, setProperties }) {
     const dispatch = useDispatch();
 
     const filterBrands = useSelector(
@@ -16,6 +16,13 @@ function ProductListFilter({ brands, isOpenPopup, closePopup, t, productProperty
     const handleToggle = (id) => {
         dispatch(toggleBrand(id));
     };
+
+    const handleInput = (item) => {
+        setProperties({
+            property_id: item.id,
+            value: item.value
+        })
+    }
 
     return (
         <aside className={`sidebar ${isOpenPopup ? "show" : ""}`} id="sidebar">
@@ -72,7 +79,7 @@ function ProductListFilter({ brands, isOpenPopup, closePopup, t, productProperty
                                                 >
                                                     <input
                                                         onChange={() =>
-                                                            handleToggle(item.value)
+                                                            handleInput(item)
                                                         }
                                                         type="checkbox"
                                                         name={item.value}

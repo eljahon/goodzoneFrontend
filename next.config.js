@@ -18,6 +18,7 @@ module.exports = {
         MY_ORDERS_API_URL: "https://dev.goodzone.uz/v1/my-orders",
         SHOPS_API_URL: "https://dev.goodzone.uz/v1/shop",
         PROFILE_API_URL: "https://dev.goodzone.uz/v1/customer/profile",
+        PRODUCT_FILTER_API_URL: "https://dev.goodzone.uz/v1/product/filter"
     },
     publicRuntimeConfig: {
         localeSubpaths,

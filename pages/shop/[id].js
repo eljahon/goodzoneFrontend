@@ -21,6 +21,8 @@ export default function Category({ products, categoryId, query }) {
     const [productLimit, setProductLimit] = useState(20);
     const [brands, setBrands] = useState([]);
     const [productProperty, setProductProperty] = useState([])
+    const [properties, setProperties] = useState([])
+    console.log(properties)
     useEffect(() => {
         if (categoryProducts) {
             axios
@@ -162,6 +164,7 @@ export default function Category({ products, categoryId, query }) {
                 brands={brands}
                 loading={loading}
                 productProperty={productProperty}
+                properties={setProperties}
             />
             <CartPopup />
             <Footer />
