@@ -21,8 +21,7 @@ export default function Category({ products, categoryId, query }) {
     const [productLimit, setProductLimit] = useState(20);
     const [brands, setBrands] = useState([]);
     const [productProperty, setProductProperty] = useState([])
-    const [properties, setProperties] = useState([])
-    console.log(properties)
+
     useEffect(() => {
         if (categoryProducts) {
             axios
@@ -34,23 +33,15 @@ export default function Category({ products, categoryId, query }) {
                     setBrands(brands);
                 })
                 .catch((error) => console.error(error));
-            // const brands = categoryProducts.map(item => {
-            //     return item.brand
-            // }).filter((brands, index, self) =>
-            //     index === self.findIndex((t) => (
-            //         t.id === brands.id && t.name === brands.name && brands.active === true
-            //     ))
-            // )
-            // setBrands(brands)
         }
         axios.get(`${process.env.CATEGORY_API_URL}/${query.id}`)
             .then(response => {
                 setProductProperty(response.data.category.product_properties)
-                console.log('product_properties', response.data.category.product_properties)
             })
             .catch(err => {
                 console.log(err)
             })
+
     }, [categoryProducts]);
 
     useEffect(() => {
@@ -91,6 +82,10 @@ export default function Category({ products, categoryId, query }) {
         (state) => state.filters.selectDropdownFilter,
         shallowEqual
     );
+    const filterProperties = useSelector(
+        (state) => state.filters.properties,
+        shallowEqual
+    );
 
     useEffect(() => {
         if (categoryProducts) {
@@ -119,30 +114,35 @@ export default function Category({ products, categoryId, query }) {
 
     useEffect(() => {
         setLoading(true);
+        const filterData = {
+            active: true,
+            brand: filterBrands.join(","),
+            category: categoryId,
+            inactive: true,
+            lang: i18n.language,
+            limit: productLimit.toString(),
+            page: "1",
+            price_from: filterPriceRange.length ? filterPriceRange[0] : "0",
+            price_till: filterPriceRange.length ? filterPriceRange[1] : "0",
+            properties: filterProperties,
+            search: "",
+            sort: selectDropdownFilter ? `price|${selectDropdownFilter}` : ""
+        }
+        console.log(filterData)
         axios
-            .get(
-                `${process.env.PRODUCT_API_URL}?lang=${
-                    i18n.language
-                }&brand=${filterBrands.join(
-                    ","
-                )}&category=${categoryId}&limit=${productLimit}&${
-                    filterPriceRange.length
-                        ? `&price_from=${filterPriceRange[0]}&price_till=${filterPriceRange[1]}`
-                        : ""
-                }&sort=price|${selectDropdownFilter}`
+            .post(
+                `${process.env.PRODUCT_FILTER_API_URL}`, filterData
             )
             .then((data) => {
                 const { products } = data.data;
                 setFilteredProducts(products);
                 setLoading(false);
-                console.log("products", products);
             })
             .catch((error) => {
                 setLoading(false);
                 console.error("error", error);
             });
-        console.log("selectDropdownFilter", selectDropdownFilter);
-    }, [filterBrands, filterPriceRange, selectDropdownFilter, productLimit]);
+    }, [filterBrands, filterPriceRange, selectDropdownFilter, productLimit, filterProperties]);
 
     return (
         <>
@@ -164,7 +164,6 @@ export default function Category({ products, categoryId, query }) {
                 brands={brands}
                 loading={loading}
                 productProperty={productProperty}
-                properties={setProperties}
             />
             <CartPopup />
             <Footer />

@@ -26,4 +26,9 @@ export const selectDropdownChange = (value) => {
     };
 };
 
+export const toggleProperty = (propertyId) => ({
+    type: filterActionTypes.ADD_PROPERTY_FOR_FILTER,
+    payload: propertyId,
+});
+
 export const clearFilters = () => ({ type: filterActionTypes.CLEAR_FILTERS });
