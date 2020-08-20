@@ -86,7 +86,7 @@ export default function Search({ products, searchTerm, query }) {
                     filterPriceRange.length
                         ? `&price_from=${filterPriceRange[0]}&price_till=${filterPriceRange[1]}`
                         : ""
-                }&sort=price|${selectDropdownFilter}`
+                }&sort=price|${selectDropdownFilter}&limit=20`
             )
             .then((data) => {
                 const { products } = data.data;
