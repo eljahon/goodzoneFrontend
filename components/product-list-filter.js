@@ -1,15 +1,19 @@
 import React from "react";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
-import { toggleBrand } from "../redux/actions/filterActions/filterActions";
+import { toggleBrand, toggleProperty } from "../redux/actions/filterActions/filterActions";
 import RangeSlider from "./react-slider";
 import { FaTimes } from "react-icons/fa";
 import { withTranslation } from '../i18n'
 
-function ProductListFilter({ brands, isOpenPopup, closePopup, t, productProperty, setProperties }) {
+function ProductListFilter({ brands, isOpenPopup, closePopup, t, productProperty }) {
     const dispatch = useDispatch();
 
     const filterBrands = useSelector(
         (state) => state.filters.brands,
+        shallowEqual
+    );
+    const filterProperties = useSelector(
+        (state) => state.filters.properties,
         shallowEqual
     );
 
@@ -17,11 +21,11 @@ function ProductListFilter({ brands, isOpenPopup, closePopup, t, productProperty
         dispatch(toggleBrand(id));
     };
 
-    const handleInput = (item) => {
-        setProperties({
-            property_id: item.id,
-            value: item.value
-        })
+    const handleInput = (id, value) => {
+        dispatch(toggleProperty({
+            property_id: id,
+            value
+        }))
     }
 
     return (
@@ -79,11 +83,12 @@ function ProductListFilter({ brands, isOpenPopup, closePopup, t, productProperty
                                                 >
                                                     <input
                                                         onChange={() =>
-                                                            handleInput(item)
+                                                            handleInput(property.id, item.value)
                                                         }
                                                         type="checkbox"
                                                         name={item.value}
                                                         id={item.value}
+                                                        checked={filterProperties.some(prop => prop.value === item.value)}
                                                     />
                                                     <label htmlFor={item.value}>
                                                         {item.name}

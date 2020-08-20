@@ -5,6 +5,7 @@ const inititalState = {
     filterPriceRange: [],
     brands: [],
     selectDropdownFilter: "",
+    properties: [],
 };
 
 const filterReducer = (state = inititalState, action) => {
@@ -20,6 +21,11 @@ const filterReducer = (state = inititalState, action) => {
             return {
                 ...state,
                 brands: toggleBrandCheckbox(state.brands, payload),
+            };
+        case filterActionTypes.ADD_PROPERTY_FOR_FILTER:
+            return {
+                ...state,
+                properties: toggleFilterProperties(state.properties, payload),
             };
         case filterActionTypes.GET_PRICES:
             return {
@@ -50,6 +56,10 @@ const filterReducer = (state = inititalState, action) => {
 function toggleBrandCheckbox(brands, id) {
     if (brands.includes(id)) return brands.filter((brandId) => brandId !== id);
     return [...brands, id];
+}
+function toggleFilterProperties(productProperties, property) {
+    if (productProperties.some(prop => prop.value === property.value)) return productProperties.filter((productProperty) => productProperty.value !== property.value)
+    return [...productProperties, property]
 }
 
 export default filterReducer;

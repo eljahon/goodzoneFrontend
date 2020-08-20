@@ -115,7 +115,7 @@ nav.departments_menu {
     display: block;
     color: $link-color;
     padding: 0;
-    margin-right: 16px;
+    margin-right: 32px;
     font-size: 15px;
     font-weight: 700;
     transition: all 0.15s ease-in-out 0s;
@@ -139,8 +139,8 @@ nav.departments_menu {
 
 .sub-menu {
     position: absolute;
-    left: 0;
-    right: auto;
+    left: auto;
+    right: 30px;
     top: calc(100% + 25px);
     display: block;
     min-width: 200px;
@@ -155,6 +155,10 @@ nav.departments_menu {
     &:hover + a {
         color: $primary-color;
     }
+    @include sm {
+        left: 0;
+        right: auto;
+    }
 }
 
 .sub-menu::before {
@@ -163,8 +167,8 @@ nav.departments_menu {
     width: 0;
     height: 0;
     top: -8px;
-    left: 15px;
-    right: auto;
+    right: 15px;
+    left: auto;
     box-shadow: rgba(142, 142, 142, 0.14) -4px -4px 8px -3px;
     pointer-events: none;
     border-style: solid;
