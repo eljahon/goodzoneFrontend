@@ -13,10 +13,14 @@ import {
 } from "../../redux/actions/filterActions/filterActions";
 import { i18n } from '../../i18n'
 
-export default function Search({ products, searchTerm, query }) {
+export default function Search({ searchResult, searchTerm, query }) {
     const dispatch = useDispatch();
+    const products = searchResult.products;
 
+    const [loading, setLoading] = useState(false);
     const [brands, setBrands] = useState([]);
+    const [productLimit, setProductLimit] = useState(20);
+
     useEffect(() => {
         // axios
         //         .get(process.env.BRAND_API_URL)
@@ -78,29 +82,61 @@ export default function Search({ products, searchTerm, query }) {
     }, [query]);
 
     useEffect(() => {
+        window.addEventListener("scroll", handleScroll);
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+        };
+    });
+
+    const handleScroll = () => {
+        const lastProductLoaded = document.querySelector(
+            ".products_row > .products_col:last-child"
+        );
+
+        if (lastProductLoaded) {
+            const lastProductLoadedOffset =
+                lastProductLoaded.offsetTop + lastProductLoaded.clientHeight;
+            const pageOffset = window.pageYOffset + window.innerHeight;
+
+            if (pageOffset > lastProductLoadedOffset) {
+                if (searchResult.count > productLimit) {
+                    setProductLimit(productLimit + 20);
+                }
+            }
+        }
+    };
+
+    useEffect(() => {
+        setLoading(true)
         axios
             .get(
                 `${process.env.PRODUCT_API_URL}?lang=${i18n.language}&brand=${filterBrands.join(
                     ","
                 )}&search=${searchTerm}${
-                    filterPriceRange.length
-                        ? `&price_from=${filterPriceRange[0]}&price_till=${filterPriceRange[1]}`
-                        : ""
-                }&sort=price|${selectDropdownFilter}&limit=20`
+                filterPriceRange.length
+                    ? `&price_from=${filterPriceRange[0]}&price_till=${filterPriceRange[1]}`
+                    : ""
+                }&sort=price|${selectDropdownFilter}&limit=${productLimit}`
             )
             .then((data) => {
                 const { products } = data.data;
                 setFilteredProducts(products);
+                setLoading(false)
                 console.log("products", products);
             })
             .catch((error) => console.error("error", error));
         console.log("selectDropdownFilter", selectDropdownFilter);
-    }, [filterBrands, searchTerm, filterPriceRange, selectDropdownFilter]);
+    }, [filterBrands, searchTerm, filterPriceRange, selectDropdownFilter, productLimit]);
 
     return (
         <>
             <SEO />
-            <ProductList products={filteredProducts} brands={brands} searchResult={searchTerm} />
+            <ProductList
+                products={filteredProducts}
+                brands={brands}
+                searchResult={searchTerm}
+                loading={loading}
+            />
             <CartPopup />
             <Footer />
         </>
@@ -111,11 +147,11 @@ export async function getServerSideProps({ query, req }) {
     const searchTerm = query.id
     const urls = [`${process.env.PRODUCT_API_URL}?search=${searchTerm}&lang=${req.i18n.language}`];
 
-    const [{ products }] = await fetchMultipleUrls(urls);
+    const [searchResult] = await fetchMultipleUrls(urls);
 
     return {
         props: {
-            products,
+            searchResult,
             searchTerm,
             query
         },
