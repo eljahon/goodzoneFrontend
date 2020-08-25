@@ -2,10 +2,15 @@ import React, { useRef, useEffect, useState } from "react";
 import { useSelector, shallowEqual } from "react-redux";
 import { Link, withTranslation, i18n } from "../i18n";
 import IconPhone from "./icons/IconPhone";
+import { useRouter } from 'next/router'
+import LangMenu from './lang-menu'
 
 function TopBar({ openLoginMenu, t }) {
     const [profileMenu, setProfileMenu] = useState(false);
     const user = useSelector((state) => state.auth.user, shallowEqual);
+    const [langMenu, setLangMenu] = useState(false);
+    const router = useRouter();
+    const hasDynamicRouting = router.query.id;
 
     const wrapperRef = useRef(null);
     useOutsideCloseMenu(wrapperRef);
@@ -15,6 +20,7 @@ function TopBar({ openLoginMenu, t }) {
             function handleClickOutside(event) {
                 if (ref.current && !ref.current.contains(event.target)) {
                     setProfileMenu(false);
+                    setLangMenu(false)
                 }
             }
             document.addEventListener("mousedown", handleClickOutside);
@@ -28,11 +34,6 @@ function TopBar({ openLoginMenu, t }) {
     return (
         <div className="top_bar" ref={wrapperRef}>
             <ul className="top_bar-list">
-                <li className="menu_item">
-                    <Link href="/promo">
-                        <a>{t("promo")}</a>
-                    </Link>
-                </li>
                 <li className="menu_item">
                     <Link href="/shops">
                         <a>{t("shops")}</a>
@@ -50,7 +51,58 @@ function TopBar({ openLoginMenu, t }) {
                 </li>
             </ul>
             <ul className="top_bar-list">
-                <li className="list_item menu_item">
+                <li className="list_item">
+                    <div className="popover" ref={wrapperRef}>
+                        <div className="popover_handler">
+                            {i18n.language === "ru" ? (
+                                <button
+                                    className="btn join_btn"
+                                    onClick={() => setLangMenu(!langMenu)}
+                                >
+                                    <span className="join_icon">
+                                        <img
+                                            src={
+                                                hasDynamicRouting
+                                                    ? "../images/russia.svg"
+                                                    : "images/russia.svg"
+                                            }
+                                            alt="Русский"
+                                        />
+                                    </span>
+                                    <span className="btn-text">
+                                        Русский
+                                        </span>
+                                </button>
+                            ) : (
+                                    <button
+                                        className="btn join_btn"
+                                        onClick={() => setLangMenu(!langMenu)}
+                                    >
+                                        <span className="join_icon">
+                                            <img
+                                                src={
+                                                    hasDynamicRouting
+                                                        ? "../images/uzb.svg"
+                                                        : "images/uzb.svg"
+                                                }
+                                                alt="Русский"
+                                            />
+                                        </span>
+                                        <span className="btn-text">O'zbek</span>
+                                    </button>
+                                )}
+                        </div>
+                        {langMenu ? (
+                            <LangMenu
+                                hasDynamicRouting={hasDynamicRouting}
+                                closeMenu={() => setLangMenu(false)}
+                            />
+                        ) : (
+                                ""
+                            )}
+                    </div>
+                </li>
+                <li className="list_item menu_item no_padding">
                     <a href="tel:+998712070307" className="phone_number">
                         <IconPhone />
                         +998 (71) 207-03-07

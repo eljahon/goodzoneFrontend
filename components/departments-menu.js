@@ -3,8 +3,9 @@ import Link from "next/link";
 import { FaTimes, FaArrowDown, FaArrowRight } from "react-icons/fa";
 import { i18n } from "../i18n";
 import { useRouter } from "next/router";
+import { withTranslation } from '../i18n'
 
-export default function DepartmentsMenu({ categories, closeMenu }) {
+function DepartmentsMenu({ categories, closeMenu, t }) {
     const vw = window.innerWidth;
 
     const router = useRouter();
@@ -35,6 +36,13 @@ export default function DepartmentsMenu({ categories, closeMenu }) {
                     </Link>
                 </div>
                 <ul className="nav-list">
+                    <li>
+                        <Link href={i18n.language === "ru" ? "/promo" : "/uz/promo"}>
+                            <a>
+                                <span>{t('promo')}</span>
+                            </a>
+                        </Link>
+                    </li>
                     {categories.map((item) => {
                         return (
                             <li key={item.id}>
@@ -132,3 +140,5 @@ export default function DepartmentsMenu({ categories, closeMenu }) {
         </>
     );
 }
+
+export default withTranslation('navigation')(DepartmentsMenu)

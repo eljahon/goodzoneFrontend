@@ -130,58 +130,7 @@ function Footer({ t }) {
                     </Col>
                 </Row>
                 <div className="copyright">
-                    <div className="popover_wrapper">
-                        <p>{t("copyright")}</p>
-                        <div className="popover" ref={wrapperRef}>
-                            <div className="popover_handler">
-                                {i18n.language === "ru" ? (
-                                    <button
-                                        className="btn join_btn"
-                                        onClick={() => setLangMenu(!langMenu)}
-                                    >
-                                        <span className="join_icon">
-                                            <img
-                                                src={
-                                                    hasDynamicRouting
-                                                        ? "../images/russia.svg"
-                                                        : "images/russia.svg"
-                                                }
-                                                alt="Русский"
-                                            />
-                                        </span>
-                                        <span className="btn-text">
-                                            Русский
-                                        </span>
-                                    </button>
-                                ) : (
-                                    <button
-                                        className="btn join_btn"
-                                        onClick={() => setLangMenu(!langMenu)}
-                                    >
-                                        <span className="join_icon">
-                                            <img
-                                                src={
-                                                    hasDynamicRouting
-                                                        ? "../images/uzb.svg"
-                                                        : "images/uzb.svg"
-                                                }
-                                                alt="Русский"
-                                            />
-                                        </span>
-                                        <span className="btn-text">O'zbek</span>
-                                    </button>
-                                )}
-                            </div>
-                            {langMenu ? (
-                                <LangMenu
-                                    hasDynamicRouting={hasDynamicRouting}
-                                    closeMenu={() => setLangMenu(false)}
-                                />
-                            ) : (
-                                ""
-                            )}
-                        </div>
-                    </div>
+                    <p>{t("copyright")}</p>
                     <p>
                         Created by{" "}
                         <a

@@ -116,8 +116,8 @@ function CartPopup({ t }) {
                             <FaShoppingBag />
                             <span>
                                 {totalQuantity < 2
-                                    ? `${totalQuantity} ${t('item')}`
-                                    : `${totalQuantity} ${t('items')}`}
+                                    ? `${totalQuantity} ${t('pcs')}`
+                                    : `${totalQuantity} ${t('pcs')}`}
                             </span>
                         </div>
                         <button
@@ -245,8 +245,8 @@ function CartPopup({ t }) {
                         <FaShoppingBag />
                     </span>
                     {totalQuantity < 2
-                        ? `${totalQuantity} ${t('item')}`
-                        : `${totalQuantity} ${t('items')}`}
+                        ? `${totalQuantity} ${t('pcs')}`
+                        : `${totalQuantity} ${t('pcs')}`}
                 </span>
                 <span className="price">{numberToPrice(totalPrice)}</span>
             </button>

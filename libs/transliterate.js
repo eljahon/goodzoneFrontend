@@ -15,7 +15,7 @@ export const transliterate = (text) => {
         .replace(/\u042A/g, '')
         .replace(/\u0451/g, 'yo')
         .replace(/\u0439/g, 'i')
-        .replace(/\u0446/g, 'ts')
+        .replace(/\u0446/g, 'c')
         .replace(/\u0443/g, 'u')
         .replace(/\u043A/g, 'k')
         .replace(/\u0435/g, 'e')
