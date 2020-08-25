@@ -1,36 +1,30 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { axiosAuth } from "../libs/axios/axios-instances";
-import swal from "sweetalert";
-import { Router } from "next/router";
+import { useRouter } from 'next/router'
 
 const RegisterConfirm = ({ phoneNumber, goCheckout }) => {
     const { register, handleSubmit, errors } = useForm();
+    const router = useRouter()
 
     const onSubmit = (data) => {
         axiosAuth
             .post(`${process.env.AUTHORIZE_API_URL}/verify-phone`, {
                 code: data.code,
-                phone: data.phone,
+                phone: phoneNumber,
             })
             .then((response) => {
                 if (response.status === 200) {
-                    // swal("Phone number verified succesfully!");
                     if(goCheckout) {
-                        Router.push('/checkout')
+                        router.push('/checkout')
                     } else {
-                        Router.push("/profile");
+                        router.push("/profile");
                     }
+                    console.log(response)
                 }
             })
             .catch((error) => {
-                if (error.response.status === 400) {
-                    // swal("Code is incorrect. Please try again");
-                    console.log(error)
-                } else if (error.response.status === 500) {
-                    // swal("Internal Server error");
-                    console.log(error)
-                }
+                console.log(error)
             });
     };
     return (

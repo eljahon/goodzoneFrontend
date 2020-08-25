@@ -11,6 +11,8 @@ export default function RegisterModal({ closeModal, login, goCheckout }) {
     const dispatch = useDispatch();
     const [load, setLoad] = useState(false);
     const [registerConfirm, setRegisterConfirm] = useState(false);
+    const [userPassword, setUserPassword] = useState(null)
+
     useEffect(() => {
         setLoad(true);
         document.body.classList.add("overflow");
@@ -19,9 +21,8 @@ export default function RegisterModal({ closeModal, login, goCheckout }) {
             document.body.classList.remove("overflow");
         };
     });
-
-    const { register, handleSubmit, errors, getValues } = useForm();
-    console.log("register :>> ", getValues());
+    
+    const { register, handleSubmit, errors } = useForm();
 
     const onSubmit = async (data) => {
         if (data.password !== data.passwordConfirmation) {
@@ -43,6 +44,7 @@ export default function RegisterModal({ closeModal, login, goCheckout }) {
 
             if (response.status === 200) {
                 setLocalStorage("access_token", access_token);
+                setUserPassword(response.data.phone)
                 setRegisterConfirm(true);
                 dispatch(setUser(response.data));
             }
@@ -83,7 +85,7 @@ export default function RegisterModal({ closeModal, login, goCheckout }) {
                     <div className="auth_form">
                         {registerConfirm ? (
                             <RegisterConfirm
-                                phoneNumber={getValues("phoneNumber")}
+                                phoneNumber={userPassword}
                                 goCheckout={goCheckout}
                             />
                         ) : (
