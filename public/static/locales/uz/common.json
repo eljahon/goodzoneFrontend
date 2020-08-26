@@ -40,5 +40,9 @@
     "clear-cart": "Savatni tozalash",
     "search-result": "Qidiruv natijalari",
     "yes": "Ha",
-    "not": "Yo'q"
+    "not": "Yo'q",
+    "reviews": "Sharhlar",
+    "load-more": "Ko'proq yuklash",
+    "enter-name": "Ismingizni kiriting",
+    "leave-comment": "Fikringizni qoldiring..."
 }
