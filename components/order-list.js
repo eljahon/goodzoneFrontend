@@ -62,7 +62,7 @@ function OrderList({ t }) {
                                             <div className="card_meta">
                                                 <span>{t("status")}:</span>
                                                 <span>
-                                                    {statusDict[order.Status]}
+                                                    {statusDict[order.status]}
                                                 </span>
                                             </div>
                                             <div className="card_meta">
