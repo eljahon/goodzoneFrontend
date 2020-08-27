@@ -1,6 +1,11 @@
 import React from "react";
 import Link from "next/link";
-import { FaTimes, FaArrowDown, FaArrowRight } from "react-icons/fa";
+import {
+    FaTimes,
+    FaArrowDown,
+    FaArrowRight,
+    FaArrowLeft,
+} from "react-icons/fa";
 import { i18n } from "../i18n";
 import { useRouter } from "next/router";
 import { withTranslation } from "../i18n";
@@ -39,21 +44,19 @@ function DepartmentsMenu({ categories, closeMenu, t }) {
                 </div>
                 <ul className="nav-list">
                     <li>
-                            <Link
-                                href={
-                                    i18n.language === "ru"
-                                        ? "/promo"
-                                        : "/uz/promo"
-                                }
-                            >
-                                <a>
-                                    <button className="btn btn_promo">
-                                        <span>{t("promo")}</span>
-                                    </button>
-                                    </a>
-                            </Link>
+                        <Link
+                            href={
+                                i18n.language === "ru" ? "/promo" : "/uz/promo"
+                            }
+                        >
+                            <a>
+                                <button className="btn btn_promo">
+                                    <span>{t("promo")}</span>
+                                </button>
+                            </a>
+                        </Link>
                     </li>
-                    {categories.map((item) => {
+                    {categories.map((item, i) => {
                         return (
                             <li key={item.id}>
                                 <Link
@@ -99,12 +102,23 @@ function DepartmentsMenu({ categories, closeMenu, t }) {
                                                                 }
                                                             }}
                                                         >
+                                                            {i ===
+                                                            categories.length -
+                                                                1
+                                                                ? child.children && (
+                                                                      <FaArrowLeft />
+                                                                  )
+                                                                : ""}
                                                             <span>
                                                                 {child.name}
                                                             </span>
-                                                            {child.children && (
-                                                                <FaArrowRight />
-                                                            )}
+                                                            {i !==
+                                                            categories.length -
+                                                                1
+                                                                ? child.children && (
+                                                                      <FaArrowRight />
+                                                                  )
+                                                                : ""}
                                                         </a>
                                                     </Link>
                                                     {child.children && (
