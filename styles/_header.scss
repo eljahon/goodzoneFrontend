@@ -56,6 +56,10 @@
         background-color: $primary-color;
         width: 165px;
         padding: 0 10px;
+        @include md {
+            padding: 8px;
+            width: auto;
+        }
         color: #fff;
         font-weight: 700;
         height: 38px;
