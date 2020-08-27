@@ -96,6 +96,9 @@ nav.departments_menu {
     position: relative;
 }
 .nav-list li {
+    &:first-child {
+        margin-right: 1rem;
+    }
     position: relative;
     height: 100%;
     padding: 0;
@@ -111,7 +114,6 @@ nav.departments_menu {
         -webkit-box-pack: center;
         justify-content: center;
         background-color: $primary-color;
-        margin-right: 1rem;
         color: #fff;
         font-weight: 700;
         font-size: 15px;
@@ -119,10 +121,6 @@ nav.departments_menu {
         border: none;
         transition: all 0.3s ease 0s;
         border-radius: 6px;
-        a {
-            color: #fff;
-            margin: 0 auto;
-        }
     }
 }
 .sub-menu li {

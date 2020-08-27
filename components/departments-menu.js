@@ -39,7 +39,6 @@ function DepartmentsMenu({ categories, closeMenu, t }) {
                 </div>
                 <ul className="nav-list">
                     <li>
-                        <button className="btn btn_promo">
                             <Link
                                 href={
                                     i18n.language === "ru"
@@ -48,10 +47,11 @@ function DepartmentsMenu({ categories, closeMenu, t }) {
                                 }
                             >
                                 <a>
-                                    <span>{t("promo")}</span>
-                                </a>
+                                    <button className="btn btn_promo">
+                                        <span>{t("promo")}</span>
+                                    </button>
+                                    </a>
                             </Link>
-                        </button>
                     </li>
                     {categories.map((item) => {
                         return (
