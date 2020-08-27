@@ -3,7 +3,7 @@ import Link from "next/link";
 import { FaTimes, FaArrowDown, FaArrowRight } from "react-icons/fa";
 import { i18n } from "../i18n";
 import { useRouter } from "next/router";
-import { withTranslation } from '../i18n'
+import { withTranslation } from "../i18n";
 
 function DepartmentsMenu({ categories, closeMenu, t }) {
     const vw = window.innerWidth;
@@ -12,8 +12,8 @@ function DepartmentsMenu({ categories, closeMenu, t }) {
     const hasDynamicRouting = router.query.id;
 
     const handleClose = () => {
-        if (vw <= 850) closeMenu()
-    }
+        if (vw <= 850) closeMenu();
+    };
 
     return (
         <>
@@ -26,22 +26,32 @@ function DepartmentsMenu({ categories, closeMenu, t }) {
                     </button>
                     <Link href={i18n.language === "ru" ? "/" : "/uz"}>
                         <a onClick={() => closeMenu()}>
-                            <img src={
-                                hasDynamicRouting
-                                    ? "../logo.svg"
-                                    : "/logo.svg"
-                            }
-                                alt="Goodzone" />
+                            <img
+                                src={
+                                    hasDynamicRouting
+                                        ? "../logo.svg"
+                                        : "/logo.svg"
+                                }
+                                alt="Goodzone"
+                            />
                         </a>
                     </Link>
                 </div>
                 <ul className="nav-list">
                     <li>
-                        <Link href={i18n.language === "ru" ? "/promo" : "/uz/promo"}>
-                            <a>
-                                <span>{t('promo')}</span>
-                            </a>
-                        </Link>
+                        <button className="btn btn_promo">
+                            <Link
+                                href={
+                                    i18n.language === "ru"
+                                        ? "/promo"
+                                        : "/uz/promo"
+                                }
+                            >
+                                <a>
+                                    <span>{t("promo")}</span>
+                                </a>
+                            </Link>
+                        </button>
                     </li>
                     {categories.map((item) => {
                         return (
@@ -49,12 +59,12 @@ function DepartmentsMenu({ categories, closeMenu, t }) {
                                 <Link
                                     href={`${
                                         i18n.language === "ru" ? "" : "/uz"
-                                        }/shop/[id]`}
+                                    }/shop/[id]`}
                                     as={`${
                                         i18n.language === "ru" ? "" : "/uz"
-                                        }/shop/${item.slug}`}
+                                    }/shop/${item.slug}`}
                                 >
-                                    <a onClick={e => e.preventDefault()}>
+                                    <a onClick={(e) => e.preventDefault()}>
                                         <span>{item.name}</span>
                                         <FaArrowRight />
                                     </a>
@@ -67,25 +77,31 @@ function DepartmentsMenu({ categories, closeMenu, t }) {
                                                     <Link
                                                         href={`${
                                                             i18n.language ===
-                                                                "ru"
+                                                            "ru"
                                                                 ? ""
                                                                 : "/uz"
-                                                            }/shop/[id]`}
+                                                        }/shop/[id]`}
                                                         as={`${
                                                             i18n.language ===
-                                                                "ru"
+                                                            "ru"
                                                                 ? ""
                                                                 : "/uz"
-                                                            }/shop/${child.slug}`}
+                                                        }/shop/${child.slug}`}
                                                     >
-                                                        <a onClick={e => {
-                                                            if (child.children) {
-                                                                e.preventDefault()
-                                                            } else {
-                                                                handleClose()
-                                                            }
-                                                        }}>
-                                                            <span>{child.name}</span>
+                                                        <a
+                                                            onClick={(e) => {
+                                                                if (
+                                                                    child.children
+                                                                ) {
+                                                                    e.preventDefault();
+                                                                } else {
+                                                                    handleClose();
+                                                                }
+                                                            }}
+                                                        >
+                                                            <span>
+                                                                {child.name}
+                                                            </span>
                                                             {child.children && (
                                                                 <FaArrowRight />
                                                             )}
@@ -103,20 +119,24 @@ function DepartmentsMenu({ categories, closeMenu, t }) {
                                                                         <Link
                                                                             href={`${
                                                                                 i18n.language ===
-                                                                                    "ru"
+                                                                                "ru"
                                                                                     ? ""
                                                                                     : "/uz"
-                                                                                }/shop/[id]`}
+                                                                            }/shop/[id]`}
                                                                             as={`${
                                                                                 i18n.language ===
-                                                                                    "ru"
+                                                                                "ru"
                                                                                     ? ""
                                                                                     : "/uz"
-                                                                                }/shop/${
+                                                                            }/shop/${
                                                                                 sub.slug
-                                                                                }`}
+                                                                            }`}
                                                                         >
-                                                                            <a onClick={() => handleClose()}>
+                                                                            <a
+                                                                                onClick={() =>
+                                                                                    handleClose()
+                                                                                }
+                                                                            >
                                                                                 {
                                                                                     sub.name
                                                                                 }
@@ -141,4 +161,4 @@ function DepartmentsMenu({ categories, closeMenu, t }) {
     );
 }
 
-export default withTranslation('navigation')(DepartmentsMenu)
+export default withTranslation("navigation")(DepartmentsMenu);

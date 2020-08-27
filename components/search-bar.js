@@ -7,8 +7,8 @@ import Link from "next/link";
 import { numberToPrice } from "../libs/numberToPrice";
 import { Spinner } from "react-bootstrap";
 import { LazyImage } from "./lazy-image";
-import { withTranslation } from '../i18n'
-import { useRouter } from 'next/router'
+import { withTranslation } from "../i18n";
+import { useRouter } from "next/router";
 import { transliterate } from "../libs/transliterate";
 
 const SearchBar = ({ t }) => {
@@ -18,7 +18,7 @@ const SearchBar = ({ t }) => {
 
     const debouncedSearchTerm = useDebounce(searchTerm, 200);
 
-    const router = useRouter()
+    const router = useRouter();
 
     useEffect(
         () => {
@@ -44,13 +44,13 @@ const SearchBar = ({ t }) => {
     );
 
     const handleSubmit = (event) => {
-        event.preventDefault()
+        event.preventDefault();
         if (debouncedSearchTerm) {
-            router.push(`/search/${transliterate(debouncedSearchTerm)}`)
+            router.push(`/search/${transliterate(debouncedSearchTerm)}`);
             setProducts([]);
             document.getElementById("searchTerm").value = "";
         }
-    }
+    };
 
     const wrapperRef = useRef(null);
     useOutsideCloseMenu(wrapperRef);
@@ -69,7 +69,6 @@ const SearchBar = ({ t }) => {
             return () => {
                 document.removeEventListener("mousedown", handleClickOutside);
             };
-
         }, [ref]);
     }
 
@@ -82,7 +81,7 @@ const SearchBar = ({ t }) => {
                             onChange={(e) => setSearchTerm(e.target.value)}
                             type="text"
                             className="search_box-input"
-                            placeholder={t('product-search')}
+                            placeholder={t("product-search")}
                             id="searchTerm"
                         />
                         <button className="btn search_icon" type="submit">
@@ -102,57 +101,58 @@ const SearchBar = ({ t }) => {
                             </Spinner>
                         </div>
                     ) : (
-                            <>
-                                <ul className="results_list">
-                                    {products.map((product) => {
-                                        return (
-                                            <li
-                                                className="search_result"
-                                                key={product.id}
+                        <>
+                            <ul className="results_list">
+                                {products.map((product) => {
+                                    return (
+                                        <li
+                                            className="search_result"
+                                            key={product.id}
+                                        >
+                                            <Link
+                                                href="/product/[id]"
+                                                as={`/product/${product.slug}`}
                                             >
-                                                <Link
-                                                    href="/product/[id]"
-                                                    as={`/product/${product.slug}`}
-                                                >
-                                                    <a className="product_card">
-                                                        <div className="product_image">
-                                                            <LazyImage
-                                                                src={product.image}
-                                                                alt={product.name}
-                                                            />
-                                                        </div>
-                                                        <div className="product_info">
-                                                            <h3>{product.name}</h3>
-                                                            <span className="price">
-                                                                {numberToPrice(
-                                                                    product.price
-                                                                        .price
-                                                                )}
-                                                            </span>
-                                                        </div>
-                                                    </a>
-                                                </Link>
-                                            </li>
-                                        );
-                                    })}
-                                </ul>
-                                <div className="product_meta">
-                                    <Link href="/">
-                                        <a onClick={(e) => handleSubmit(e)}>{t('view-all-products')}</a>
-                                    </Link>
-                                </div>
-                            </>
-                        )}
+                                                <a className="product_card">
+                                                    <div className="product_image">
+                                                        <LazyImage
+                                                            src={product.image}
+                                                            alt={product.name}
+                                                        />
+                                                    </div>
+                                                    <div className="product_info">
+                                                        <h3>{product.name}</h3>
+                                                        <span className="price">
+                                                            {numberToPrice(
+                                                                product.price
+                                                                    .price
+                                                            )}
+                                                        </span>
+                                                    </div>
+                                                </a>
+                                            </Link>
+                                        </li>
+                                    );
+                                })}
+                            </ul>
+                            <div className="product_meta">
+                                <Link href="/">
+                                    <a onClick={(e) => handleSubmit(e)}>
+                                        {t("view-all-products")}
+                                    </a>
+                                </Link>
+                            </div>
+                        </>
+                    )}
                 </div>
             ) : null}
             {searchTerm.length && !products ? (
                 <div className="search_results">
-                    {/* <h4>ТОВАРЫ</h4> */}
-                    <div className="msg">{t('products-not-found')}</div>
+                    <div className="msg">{t("products-not-found")}</div>
                 </div>
             ) : null}
         </div>
     );
 };
 
-export default withTranslation('common')(memo(SearchBar));
+export default withTranslation("common")(memo(SearchBar));

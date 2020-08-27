@@ -7,7 +7,7 @@ nav.departments_menu {
     .drawer_header {
         display: none;
     }
-    @include sm {
+    @include md {
         display: block;
         padding: 0;
         position: fixed;
@@ -27,7 +27,7 @@ nav.departments_menu {
             background-color: $bg-color;
             a {
                 display: block;
-                margin: 0 auto;    
+                margin: 0 auto;
                 img {
                     width: 100%;
                     max-width: 150px;
@@ -103,7 +103,27 @@ nav.departments_menu {
         & > a {
             color: $primary-color;
         }
-    } 
+    }
+    .btn.btn_promo {
+        display: inline-flex;
+        -webkit-box-align: center;
+        align-items: center;
+        -webkit-box-pack: center;
+        justify-content: center;
+        background-color: $primary-color;
+        margin-right: 1rem;
+        color: #fff;
+        font-weight: 700;
+        font-size: 15px;
+        text-decoration: none;
+        border: none;
+        transition: all 0.3s ease 0s;
+        border-radius: 6px;
+        a {
+            color: #fff;
+            margin: 0 auto;
+        }
+    }
 }
 .sub-menu li {
     height: 100%;

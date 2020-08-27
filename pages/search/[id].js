@@ -11,7 +11,7 @@ import {
     clearFilters,
     getPrices,
 } from "../../redux/actions/filterActions/filterActions";
-import { i18n } from '../../i18n'
+import { i18n } from "../../i18n";
 
 export default function Search({ searchResult, searchTerm, query }) {
     const dispatch = useDispatch();
@@ -32,14 +32,20 @@ export default function Search({ searchResult, searchTerm, query }) {
         //     })
         //     .catch((error) => console.error(error));
 
-        const brands = products.map(item => {
-            return item.brand
-        }).filter((brands, index, self) =>
-            index === self.findIndex((t) => (
-                t.id === brands.id && t.name === brands.name
-            ))
-        )
-        setBrands(brands)
+        const brands =
+            products &&
+            products
+                .map((item) => {
+                    return item.brand;
+                })
+                .filter(
+                    (brands, index, self) =>
+                        index ===
+                        self.findIndex(
+                            (t) => t.id === brands.id && t.name === brands.name
+                        )
+                );
+        setBrands(brands);
     }, [products]);
 
     const [filteredProducts, setFilteredProducts] = useState([]);
@@ -107,26 +113,32 @@ export default function Search({ searchResult, searchTerm, query }) {
     };
 
     useEffect(() => {
-        setLoading(true)
+        setLoading(true);
         axios
             .get(
-                `${process.env.PRODUCT_API_URL}?lang=${i18n.language}&brand=${filterBrands.join(
-                    ","
-                )}&search=${searchTerm}${
-                filterPriceRange.length
-                    ? `&price_from=${filterPriceRange[0]}&price_till=${filterPriceRange[1]}`
-                    : ""
+                `${process.env.PRODUCT_API_URL}?lang=${
+                    i18n.language
+                }&brand=${filterBrands.join(",")}&search=${searchTerm}${
+                    filterPriceRange.length
+                        ? `&price_from=${filterPriceRange[0]}&price_till=${filterPriceRange[1]}`
+                        : ""
                 }&sort=price|${selectDropdownFilter}&limit=${productLimit}`
             )
             .then((data) => {
                 const { products } = data.data;
                 setFilteredProducts(products);
-                setLoading(false)
+                setLoading(false);
                 console.log("products", products);
             })
             .catch((error) => console.error("error", error));
         console.log("selectDropdownFilter", selectDropdownFilter);
-    }, [filterBrands, searchTerm, filterPriceRange, selectDropdownFilter, productLimit]);
+    }, [
+        filterBrands,
+        searchTerm,
+        filterPriceRange,
+        selectDropdownFilter,
+        productLimit,
+    ]);
 
     return (
         <>
@@ -144,8 +156,10 @@ export default function Search({ searchResult, searchTerm, query }) {
 }
 
 export async function getServerSideProps({ query, req }) {
-    const searchTerm = query.id
-    const urls = [`${process.env.PRODUCT_API_URL}?search=${searchTerm}&lang=${req.i18n.language}`];
+    const searchTerm = query.id;
+    const urls = [
+        `${process.env.PRODUCT_API_URL}?search=${searchTerm}&lang=${req.i18n.language}`,
+    ];
 
     const [searchResult] = await fetchMultipleUrls(urls);
 
@@ -153,7 +167,7 @@ export async function getServerSideProps({ query, req }) {
         props: {
             searchResult,
             searchTerm,
-            query
+            query,
         },
     };
 }
