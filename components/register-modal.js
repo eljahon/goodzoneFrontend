@@ -32,8 +32,7 @@ export default function RegisterModal({ closeModal, login, goCheckout }) {
 
     try {
       const response = await axios.post(
-        `https://cors-anywhere.herokuapp.com/`,
-        process.env.REGISTER_API_URL,
+        `https://cors-anywhere.herokuapp.com/` + process.env.REGISTER_API_URL,
         {
           lastname: data.lastName,
           name: data.firstName,

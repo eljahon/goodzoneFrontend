@@ -15,6 +15,8 @@ export default function LoginModal({ closeModal, goRegister, goCheckout }) {
 
   const router = useRouter();
   const [load, setLoad] = useState(false);
+  const [isLogin, setIsLogin] = useState(false);
+  const [errorText, setErrorText] = useState("");
   const [resetPassword, setResetPassword] = useState(false);
   useEffect(() => {
     setLoad(true);
@@ -27,11 +29,33 @@ export default function LoginModal({ closeModal, goRegister, goCheckout }) {
 
   const { register, handleSubmit, errors } = useForm();
 
+  const checkUser = async (data) => {
+    console.log(process.env.CHECK_USER_API_URL);
+    try {
+      const response = await axios.get(
+        `${
+          process.env.CHECK_USER_API_URL +
+          `?phone=%2B` +
+          data.phoneNumber.substring(1, data.phoneNumber.length)
+        }`
+      );
+      if (Object.keys(response.data).length !== 0) {
+        if (response.data.exists) {
+          setIsLogin(true);
+          setErrorText("");
+        }
+      } else {
+        setErrorText("Вы еще не зарегистрированы в сети");
+      }
+    } catch (error) {
+      swal(error.response.data);
+    }
+  };
+
   const onSubmit = async (data) => {
     try {
       const response = await axios.post(
-        `https://cors-anywhere.herokuapp.com/`,
-        process.env.LOGIN_API_URL,
+        `https://thingproxy.freeboard.io/fetch/` + process.env.LOGIN_API_URL,
         {
           password: data.password,
           phone: data.phoneNumber,
@@ -47,6 +71,7 @@ export default function LoginModal({ closeModal, goRegister, goCheckout }) {
         dispatch(setUser(response.data));
         if (goCheckout) router.push("/checkout");
         closeModal();
+        console.log(response.data);
       }
     } catch (error) {
       swal(error.response.data.Error.Message);
@@ -120,7 +145,7 @@ export default function LoginModal({ closeModal, goRegister, goCheckout }) {
                   <span className="sub_heading">
                     Войдите с вашим номером телефона и паролем
                   </span>
-                  <form onSubmit={handleSubmit(onSubmit)}>
+                  <form onSubmit={handleSubmit(isLogin ? onSubmit : checkUser)}>
                     <input
                       ref={register({
                         maxLength: 13,
@@ -134,37 +159,57 @@ export default function LoginModal({ closeModal, goRegister, goCheckout }) {
                     {errors.phoneNumber && (
                       <p>Phone number should be 13 characters long</p>
                     )}
+                    {errorText.length !== 0 && !isLogin ? (
+                      <p>{errorText}</p>
+                    ) : (
+                      ""
+                    )}
                     <input
                       ref={register}
-                      type="password"
+                      type={!isLogin ? "hidden" : "password"}
                       name="password"
                       placeholder="Пароль"
                       required
                     />
-                    <button type="submit" className="btn btn_submit">
-                      Войти
+                    <button
+                      type={errorText ? "button" : "submit"}
+                      className="btn btn_submit"
+                      onClick={errorText && !isLogin ? goRegister : ""}
+                    >
+                      {errorText && !isLogin ? "Регистрация" : "Войти"}
                     </button>
                   </form>
+
                   <p className="auth_form-offer">
-                    <span>У вас нет аккаунта? </span>
-                    <button className="btn" onClick={goRegister}>
-                      {" "}
-                      Регистрация
-                    </button>
+                    {!errorText ? (
+                      <div>
+                        <span>У вас нет аккаунта? </span>
+                        <button className="btn" onClick={goRegister}>
+                          {" "}
+                          Регистрация
+                        </button>
+                      </div>
+                    ) : (
+                      ""
+                    )}
                   </p>
                 </div>
-                <div className="auth_form-offer-section">
-                  <p className="auth_form-offer">
-                    <span>Забыли пароль? </span>
-                    <button
-                      className="btn"
-                      onClick={() => setResetPassword(true)}
-                    >
-                      {" "}
-                      Сбросить
-                    </button>
-                  </p>
-                </div>
+                {isLogin ? (
+                  <div className="auth_form-offer-section">
+                    <p className="auth_form-offer">
+                      <span>Забыли пароль? </span>
+                      <button
+                        className="btn"
+                        onClick={() => setResetPassword(true)}
+                      >
+                        {" "}
+                        Сбросить
+                      </button>
+                    </p>
+                  </div>
+                ) : (
+                  ""
+                )}
               </>
             )}
           </div>
