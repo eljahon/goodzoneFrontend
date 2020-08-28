@@ -344,13 +344,13 @@ function Product({ product: data, t, shops }) {
                       ></textarea>
                     </div>
                   </div>
-                  <button type="submit" className="btn btn_submit">
+                  <button type="submit" className="btn btn_submit" style={{marginTop: "1rem"}}>
                     {loading ? (
                       <Spinner animation="border" role="status">
                         <span className="sr-only">Loading...</span>
                       </Spinner>
                     ) : (
-                      "Comment"
+                      t("comment")
                     )}
                   </button>
                 </form>
