@@ -8,16 +8,16 @@ import ifetch from "isomorphic-fetch";
 // you should be careful when destructuring the returned value
 
 export const fetchMultipleUrls = async (urls) => {
-    let data;
-    try {
-        data = await Promise.all(
-            urls.map(async (url) => {
-                const response = await ifetch(url);
-                return response.json();
-            })
-        );
-    } catch (error) {
-        console.error(error);
-    }
-    return data;
+  let data;
+  try {
+    data = await Promise.all(
+      urls.map(async (url) => {
+        const response = await ifetch(url);
+        return response.json();
+      })
+    );
+  } catch (error) {
+    console.error(error);
+  }
+  return data;
 };
