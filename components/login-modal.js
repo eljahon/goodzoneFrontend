@@ -39,11 +39,10 @@ export default function LoginModal({ closeModal, goRegister, goCheckout }) {
           data.phoneNumber.substring(1, data.phoneNumber.length)
         }`
       );
-      if (Object.keys(response.data).length !== 0) {
-        if (response.data.exists) {
-          setIsLogin(true);
-          setErrorText("");
-        }
+
+      if (response.data.exists) {
+        setIsLogin(true);
+        setErrorText("");
       } else {
         setErrorText("Вы еще не зарегистрированы в сети");
       }
