@@ -55,7 +55,7 @@ export default function LoginModal({ closeModal, goRegister, goCheckout }) {
   const onSubmit = async (data) => {
     try {
       const response = await axios.post(
-        `https://thingproxy.freeboard.io/fetch/` + process.env.LOGIN_API_URL,
+        `https://cors-anywhere.herokuapp.com/` + process.env.LOGIN_API_URL,
         {
           password: data.password,
           phone: data.phoneNumber,
