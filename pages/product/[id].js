@@ -248,37 +248,34 @@ function Product({ product: data, t, shops }) {
                                 ) : (
                                     ""
                                 )}
-                                <div className="details_wrapper">
-                                    <p>
-                                        <strong>
-                                            {t("general-characteristics")}
-                                        </strong>
-                                    </p>
-                                    {data.properties.length
-                                        ? data.properties.map((prop) => {
-                                              console.log("prop :>> ", prop);
-                                              return (
-                                                  prop.value && (
-                                                      <div
-                                                          className="property_wrapper"
-                                                          key={prop.property.id}
-                                                      >
-                                                          <span className="property_name">
-                                                              {
-                                                                  prop.property
-                                                                      .name
-                                                              }
-                                                          </span>
-                                                          <div className="border"></div>
-                                                          <span className="property_value">
-                                                              {prop.value}
-                                                          </span>
-                                                      </div>
-                                                  )
-                                              );
-                                          })
-                                        : null}
-                                </div>
+
+                                {data.properties ? (
+                                    <div className="details_wrapper">
+                                        <p>
+                                            <strong>
+                                                {t("general-characteristics")}
+                                            </strong>
+                                        </p>
+                                        {data.properties.map((prop) => {
+                                            return (
+                                                prop.value && (
+                                                    <div
+                                                        className="property_wrapper"
+                                                        key={prop.property.id}
+                                                    >
+                                                        <span className="property_name">
+                                                            {prop.property.name}
+                                                        </span>
+                                                        <div className="border"></div>
+                                                        <span className="property_value">
+                                                            {prop.value}
+                                                        </span>
+                                                    </div>
+                                                )
+                                            );
+                                        })}
+                                    </div>
+                                ) : null}
                             </Tab>
                             <Tab
                                 eventKey="store"
@@ -399,7 +396,7 @@ function Product({ product: data, t, shops }) {
                                                 id="comment"
                                                 cols="30"
                                                 rows="10"
-                                                placeholder={t("leave-comment")}
+                                                placeholder={t("comment")}
                                             ></textarea>
                                         </div>
                                     </div>
@@ -472,7 +469,14 @@ function Product({ product: data, t, shops }) {
                                         </div>
                                     ))}
                                 {loading && (
-                                    <Spinner animation="border" role="status">
+                                    <Spinner
+                                        style={{
+                                            display: "block",
+                                            margin: "auto",
+                                        }}
+                                        animation="border"
+                                        role="status"
+                                    >
                                         <span className="sr-only">
                                             Loading...
                                         </span>
@@ -480,6 +484,10 @@ function Product({ product: data, t, shops }) {
                                 )}
                                 {(limit <= count) & !loading ? (
                                     <button
+                                        style={{
+                                            display: "block",
+                                            margin: "auto",
+                                        }}
                                         className="btn btn_submit"
                                         onClick={() => {
                                             setLimit((l) => l + 10);
