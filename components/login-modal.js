@@ -7,6 +7,7 @@ import { setLocalStorage } from "../libs/localStorage";
 import swal from "sweetalert";
 import { setUser } from "../redux/actions/authActions/authActions";
 import { useDispatch } from "react-redux";
+import ResetPasswordModal from "./reset-password-modal";
 
 export default function LoginModal({ closeModal, goRegister, goCheckout }) {
   const dispatch = useDispatch();
@@ -15,7 +16,16 @@ export default function LoginModal({ closeModal, goRegister, goCheckout }) {
 
   const router = useRouter();
   const [load, setLoad] = useState(false);
+  const [userInfo, setUserInfo] = useState({
+    name: "",
+    lastname: "",
+    authToken: "",
+  });
   const [isLogin, setIsLogin] = useState(false);
+  const [isCheck, setIsCheck] = useState(false);
+  const [disabled, setDisabled] = useState(false);
+  const [isSend, setIsSend] = useState(false);
+  const [phone, setPhone] = useState("");
   const [errorText, setErrorText] = useState("");
   const [resetPassword, setResetPassword] = useState(false);
   useEffect(() => {
@@ -30,6 +40,7 @@ export default function LoginModal({ closeModal, goRegister, goCheckout }) {
   const { register, handleSubmit, errors } = useForm();
 
   const checkUser = async (data) => {
+    setDisabled(true);
     console.log(process.env.CHECK_USER_API_URL);
     try {
       const response = await axios.get(
@@ -41,17 +52,57 @@ export default function LoginModal({ closeModal, goRegister, goCheckout }) {
       );
 
       if (response.data.exists) {
+        setDisabled(false);
         setIsLogin(true);
         setErrorText("");
       } else {
         setErrorText("Вы еще не зарегистрированы в сети");
       }
     } catch (error) {
-      swal(error.response.data);
+      swal(error.response.data.Error.Message);
+    }
+  };
+  const resPassword = async (data) => {
+    setDisabled(true);
+    console.log(isSend);
+    try {
+      if (!isSend) {
+        const response = await axios.get(
+          `${
+            process.env.RESER_PASSWORD_API_URL +
+            `?phone=%2B` +
+            data.phoneNumber.substring(1, data.phoneNumber.length)
+          }`
+        );
+        if (response.status === 200) {
+          setDisabled(false);
+          setIsSend(true);
+          setPhone(data.phoneNumber);
+        }
+      } else {
+        const response = await axios.post(process.env.CHECK_CODE_API_URL, {
+          code: data.code,
+          phone: phone,
+        });
+        if (response.status === 200) {
+          setDisabled(false);
+          setIsCheck(true);
+          setUserInfo((old) => {
+            old.name = response.data.name;
+            old.lastname = response.data.lastname;
+            old.authToken = response.data.access_token;
+            return old;
+          });
+          console.log(userInfo);
+        }
+      }
+    } catch (error) {
+      swal(error.response.data.Error.Message);
     }
   };
 
   const onSubmit = async (data) => {
+    setDisabled(true);
     try {
       const response = await axios.post(
         `https://cors-anywhere.herokuapp.com/` + process.env.LOGIN_API_URL,
@@ -66,6 +117,7 @@ export default function LoginModal({ closeModal, goRegister, goCheckout }) {
       } = response;
 
       if (response.status === 200) {
+        setDisabled(false);
         setLocalStorage("access_token", access_token);
         dispatch(setUser(response.data));
         if (goCheckout) router.push("/checkout");
@@ -111,21 +163,50 @@ export default function LoginModal({ closeModal, goRegister, goCheckout }) {
           <div className="auth_form">
             {resetPassword ? (
               <div className="auth_form-container">
-                <h3>Забыли пароль</h3>
-                <span className="sub_heading">
-                  Мы вышлем вам код для сброса пароля
-                </span>
-                <form>
-                  <input
-                    type="tel"
-                    name="phone_number"
-                    placeholder="Номер телефона"
-                    required
+                <h3>{!isCheck ? "Забыли пароль" : "Сброс пароля"}</h3>
+                {!isCheck ? (
+                  <span className="sub_heading">
+                    {isSend
+                      ? "Код был отправлен на ваш номер телефона. Пожалуйста, введите его, чтобы сбросить пароль"
+                      : "Мы вышлем вам код для сброса пароля"}
+                  </span>
+                ) : (
+                  <span className="sub_heading"></span>
+                )}
+                {!isCheck ? (
+                  <form onSubmit={handleSubmit(resPassword)}>
+                    <input
+                      ref={register({
+                        maxLength: 13,
+                        minLength: 13,
+                      })}
+                      type={!isSend ? "tel" : "hidden"}
+                      name="phone_number"
+                      placeholder="Номер телефона"
+                    />
+                    <input
+                      ref={register}
+                      type={!isSend ? "hidden" : "text"}
+                      name="code"
+                      placeholder="Введите код"
+                    />
+
+                    <button
+                      type="submit"
+                      disabled={disabled}
+                      className="btn btn_submit"
+                    >
+                      {!isSend ? "Сброс пароля" : "Отправить"}
+                    </button>
+                  </form>
+                ) : (
+                  <ResetPasswordModal
+                    userInfo={userInfo}
+                    setUserInfo={setUserInfo}
+                    resetPassword={resetPassword}
+                    setResetPassword={setResetPassword}
                   />
-                  <button type="submit" className="btn btn_submit">
-                    Сброс пароля
-                  </button>
-                </form>
+                )}
                 <p className="auth_form-offer">
                   <span>Вернуться к </span>
                   <button
@@ -174,6 +255,7 @@ export default function LoginModal({ closeModal, goRegister, goCheckout }) {
                       type={errorText ? "button" : "submit"}
                       className="btn btn_submit"
                       onClick={errorText && !isLogin ? goRegister : ""}
+                      disabled={disabled}
                     >
                       {errorText && !isLogin ? "Регистрация" : "Войти"}
                     </button>
