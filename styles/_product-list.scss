@@ -35,7 +35,7 @@ main {
         padding-right: 0.5rem;
         color: $link-color;
         content: "›";
-    }
+      }
     }
     @include sm {
       width: 100%;
@@ -124,7 +124,7 @@ main {
           border: none;
           border-radius: 6px;
           background-color: $bg-color;
-          transition: all .2s ease-in-out;
+          transition: all 0.2s ease-in-out;
           &:last-child {
             margin-right: 0;
           }
@@ -140,7 +140,9 @@ main {
               fill: $link-color;
             }
           }
-          &:hover, &:focus, &.active {
+          &:hover,
+          &:focus,
+          &.active {
             background-color: $primary-color;
             outline: none;
             .btn_icon {
@@ -168,7 +170,7 @@ main {
             border: 1px solid $border-color;
             border-radius: 6px;
             font-size: 15px;
-            transition: all .2s;
+            transition: all 0.2s;
             background-color: #fff;
             outline: none;
             -webkit-appearance: none;
@@ -217,7 +219,7 @@ main {
         width: 100%;
         height: auto;
         min-height: 0;
-        padding-bottom: 100px;  
+        padding-bottom: 100px;
         @include sm {
           overflow: scroll;
           max-height: 100vh;
@@ -254,7 +256,8 @@ main {
             }
             .filter_group {
               margin-bottom: 15px;
-              .input-range__label--value, .input-range__label-container {
+              .input-range__label--value,
+              .input-range__label-container {
                 display: none;
               }
               .filter_price {
@@ -323,7 +326,7 @@ main {
           }
         }
       }
-    }  
+    }
   }
 }
 .products_row {
@@ -494,7 +497,7 @@ main {
                 line-height: 0;
                 &::after {
                   display: block;
-                  content: 'Добавить';
+                  content: "Добавить";
                   color: $primary-color;
                   text-indent: 0;
                   line-height: initial;
@@ -586,7 +589,7 @@ main {
             display: block;
             max-height: 100%;
             object-fit: cover;
-          -o-object-fit: cover;
+            -o-object-fit: cover;
           }
         }
         .product_info {
@@ -636,15 +639,15 @@ main {
 
 @keyframes shakeCart {
   25% {
-    transform:translateX(6px)
+    transform: translateX(6px);
   }
   50% {
-    transform:translateX(-4px);
+    transform: translateX(-4px);
   }
   75% {
-    transform:translateX(2px);
+    transform: translateX(2px);
   }
   100% {
-    transform:translateX(0);
+    transform: translateX(0);
   }
 }
