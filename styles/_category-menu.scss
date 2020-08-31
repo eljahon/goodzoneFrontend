@@ -210,23 +210,8 @@ nav.departments_menu {
   left: 100%;
 }
 
+ul.nav-list > li:nth-last-child(2) .sub-menu,
 ul.nav-list > li:last-child .sub-menu {
-  .sub-menu {
-    right: calc(100% + 1px);
-    left: auto;
-  }
-
-  li a {
-    padding: 12px 30px;
-    svg {
-      font-size: 15px;
-      position: absolute;
-      left: 8px;
-    }
-  }
-}
-
-ul.nav-list > li:nth-last-child(2) .sub-menu {
   .sub-menu {
     right: calc(100% + 1px);
     left: auto;
@@ -374,6 +359,7 @@ ul.nav-list > li:nth-last-child(2) .sub-menu {
     }
   }
 }
+
 @media (max-width: 920px) {
   body {
     nav.departments_menu {
@@ -389,7 +375,7 @@ ul.nav-list > li:nth-last-child(2) .sub-menu {
       font-size: 10px;
     }
     .sub-menu {
-      min-width: 190px;
+      min-width: 180px;
     }
   }
 }
