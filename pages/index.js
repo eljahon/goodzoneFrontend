@@ -27,6 +27,7 @@ function Home({
     // dispatch(getProductsFromAPI(recommended_products.products));
     // dispatch(getProductsFromAPI(popular_products.products));
   }, []);
+
   useEffect(() => {
     if (getLocalStorage("access_token")) {
       axiosAuth
@@ -61,7 +62,7 @@ export async function getServerSideProps({ req }) {
     `${process.env.PRODUCT_API_URL}?lang=${req.i18n.language}`,
     `${process.env.PRODUCT_API_URL}?lang=${req.i18n.language}&popular=true`,
     `${process.env.PRODUCT_API_URL}?lang=${req.i18n.language}&recommended=true`,
-    `${process.env.BANNER_API_URL}?position=website-home-slider`,
+    `${process.env.BANNER_API_URL}?position=website-home-slider&active=true`,
   ];
 
   const [

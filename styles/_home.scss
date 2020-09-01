@@ -1,97 +1,103 @@
 .home_splash {
+  @include sm {
+    .carousel-indicators,
+    .carousel-control-prev,
+    .carousel-control-next {
+      display: none;
+    }
+  }
+
+  img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    -o-object-fit: cover;
     @include sm {
-        .carousel-indicators,
-        .carousel-control-prev,
-        .carousel-control-next {
-            display: none;
-        }
+      height: auto;
     }
-    img {
-        width: 100%;
-        height: auto;
-        object-fit: cover;
-        -o-object-fit: cover;
-        @include sm {
-            height: auto;
-        }
-    }
+  }
+}
+
+.link_disabled {
+  color: gray;
+  pointer-events: none;
 }
 
 .section_container {
-    padding: 60px 4% 0;
-    background-color: $bg-color;
-    &:last-of-type {
-        padding-bottom: 60px;
+  padding: 60px 4% 0;
+  background-color: $bg-color;
+  &:last-of-type {
+    padding-bottom: 60px;
+  }
+  h2 {
+    font-family: $head-font;
+    font-size: 21px;
+    font-weight: 700;
+    color: $link-color;
+    line-height: 1.2;
+    margin-bottom: 15px;
+  }
+  .products_row {
+    margin-top: 30px;
+    &.react-multi-carousel-list {
+      margin-left: -15px;
+      margin-right: -15px;
+      padding-bottom: 30px;
     }
-    h2 {
-        font-family: $head-font;
-        font-size: 21px;
-        font-weight: 700;
-        color: $link-color;
-        line-height: 1.2;
-        margin-bottom: 15px;
-    }
-    .products_row {
-        margin-top: 30px;
-        &.react-multi-carousel-list {
-            margin-left: -15px;
-            margin-right: -15px;
-            padding-bottom: 30px;
-        }
-        .products_col {
-            flex: 0 0 20%;
-            max-width: 20%;
-            margin-bottom: 0;
-            &.carousel_col {
-                flex: none;
-                max-width: 100%;
-            }
-        }
-        .banner {
-            margin-bottom: 30px;
-            img {
-                width: 100%;
-                height: 100%;
-                border-radius: 6px;
-            }
-        }
-    }
-    @include sm {
-        padding: 0;
-        padding-top: 30px;
-        .products_row {
-            margin-left: -7.5px;
-            margin-right: -7.5px;
-            margin-top: 15px;
-            &.react-multi-carousel-list {
-                margin-left: -7.5px;
-                margin-right: -7.5px;
-                padding-bottom: 15px;
-            }
-            .products_col {
-                flex: 0 0 50%;
-                max-width: 50%;
-                padding-left: 7.5px;
-                padding-right: 7.5px;
-                margin-bottom: 15px;
-            }
-            .banner {
-                margin-bottom: 15px;
-                &:last-child {
-                    margin-bottom: 30px;
-                }
-                img {
-                    width: 100%;
-                    height: 100%;
-                    border-radius: 6px;
-                }
-            }
-        }
-    }
-}
-.products_col {
-    &.carousel_col {
+    .products_col {
+      flex: 0 0 20%;
+      max-width: 20%;
+      margin-bottom: 0;
+      &.carousel_col {
         flex: none;
         max-width: 100%;
+      }
     }
+    .banner {
+      margin-bottom: 30px;
+      img {
+        width: 100%;
+        height: 100%;
+        border-radius: 6px;
+      }
+    }
+  }
+  @include sm {
+    padding: 0;
+    padding-top: 30px;
+    .products_row {
+      margin-left: -7.5px;
+      margin-right: -7.5px;
+      margin-top: 15px;
+      &.react-multi-carousel-list {
+        margin-left: -7.5px;
+        margin-right: -7.5px;
+        padding-bottom: 15px;
+      }
+      .products_col {
+        flex: 0 0 50%;
+        max-width: 50%;
+        padding-left: 7.5px;
+        padding-right: 7.5px;
+        margin-bottom: 15px;
+      }
+      .banner {
+        margin-bottom: 15px;
+        &:last-child {
+          margin-bottom: 30px;
+        }
+        img {
+          width: 100%;
+          height: 100%;
+          border-radius: 6px;
+        }
+      }
+    }
+  }
+}
+.products_col {
+  &.carousel_col {
+    flex: none;
+    max-width: 100%;
+  }
 }

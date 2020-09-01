@@ -8,8 +8,9 @@ import swal from "sweetalert";
 import { setUser } from "../redux/actions/authActions/authActions";
 import { useDispatch } from "react-redux";
 import ResetPasswordModal from "./reset-password-modal";
+import { withTranslation } from "../i18n";
 
-export default function LoginModal({ closeModal, goRegister, goCheckout }) {
+function LoginModal({ closeModal, goRegister, goCheckout, t }) {
   const dispatch = useDispatch();
   // changed register to goRegister because I used register from useForm (react-hook-form)
   // to avoid duplicate variables
@@ -25,6 +26,7 @@ export default function LoginModal({ closeModal, goRegister, goCheckout }) {
   const [isCheck, setIsCheck] = useState(false);
   const [disabled, setDisabled] = useState(false);
   const [isSend, setIsSend] = useState(false);
+
   const [phone, setPhone] = useState("");
   const [errorText, setErrorText] = useState("");
   const [resetPassword, setResetPassword] = useState(false);
@@ -103,14 +105,11 @@ export default function LoginModal({ closeModal, goRegister, goCheckout }) {
 
   const onSubmit = async (data) => {
     setDisabled(true);
+    let formData = new FormData();
+    formData.append("phone", data.phoneNumber);
+    formData.append("password", data.password);
     try {
-      const response = await axios.post(
-        `https://cors-anywhere.herokuapp.com/` + process.env.LOGIN_API_URL,
-        {
-          password: data.password,
-          phone: data.phoneNumber,
-        }
-      );
+      const response = await axios.post(process.env.LOGIN_API_URL, formData);
 
       const {
         data: { access_token },
@@ -163,12 +162,10 @@ export default function LoginModal({ closeModal, goRegister, goCheckout }) {
           <div className="auth_form">
             {resetPassword ? (
               <div className="auth_form-container">
-                <h3>{!isCheck ? "Забыли пароль" : "Сброс пароля"}</h3>
+                <h3>{!isCheck ? t("forget-password") : t("reset-password")}</h3>
                 {!isCheck ? (
                   <span className="sub_heading">
-                    {isSend
-                      ? "Код был отправлен на ваш номер телефона. Пожалуйста, введите его, чтобы сбросить пароль"
-                      : "Мы вышлем вам код для сброса пароля"}
+                    {isSend ? t("send-code-phone") : t("send-code")}
                   </span>
                 ) : (
                   <span className="sub_heading"></span>
@@ -196,7 +193,7 @@ export default function LoginModal({ closeModal, goRegister, goCheckout }) {
                       disabled={disabled}
                       className="btn btn_submit"
                     >
-                      {!isSend ? "Сброс пароля" : "Отправить"}
+                      {!isSend ? "Отправить код" : "Отправить"}
                     </button>
                   </form>
                 ) : (
@@ -299,3 +296,4 @@ export default function LoginModal({ closeModal, goRegister, goCheckout }) {
     </div>
   );
 }
+export default withTranslation("common")(LoginModal);
