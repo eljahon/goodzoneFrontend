@@ -6,6 +6,7 @@ import { setLocalStorage } from "../libs/localStorage";
 import { setUser } from "../redux/actions/authActions/authActions";
 import { useDispatch } from "react-redux";
 import RegisterConfirm from "./register-confirm";
+import { createFormData } from "../libs/createFormData";
 
 export default function RegisterModal({ closeModal, login, goCheckout }) {
   const dispatch = useDispatch();
@@ -31,15 +32,13 @@ export default function RegisterModal({ closeModal, login, goCheckout }) {
     }
 
     try {
-      const response = await axios.post(
-        `https://cors-anywhere.herokuapp.com/` + process.env.REGISTER_API_URL,
-        {
-          lastname: data.lastName,
-          name: data.firstName,
-          password: data.password,
-          phone: data.phoneNumber,
-        }
-      );
+      let formData = createFormData({
+        lastname: data.lastName,
+        name: data.firstName,
+        password: data.password,
+        phone: data.phoneNumber,
+      });
+      const response = await axios.post(process.env.REGISTER_API_URL, formData);
 
       const {
         data: { access_token },

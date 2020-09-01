@@ -9,6 +9,7 @@ import { setUser } from "../redux/actions/authActions/authActions";
 import { useDispatch } from "react-redux";
 import ResetPasswordModal from "./reset-password-modal";
 import { withTranslation } from "../i18n";
+import { createFormData } from "../libs/createFormData";
 
 function LoginModal({ closeModal, goRegister, goCheckout, t }) {
   const dispatch = useDispatch();
@@ -105,11 +106,23 @@ function LoginModal({ closeModal, goRegister, goCheckout, t }) {
 
   const onSubmit = async (data) => {
     setDisabled(true);
-    let formData = new FormData();
-    formData.append("phone", data.phoneNumber);
-    formData.append("password", data.password);
+    let formData = createFormData({
+      phone: data.phoneNumber,
+      password: data.password,
+    });
+
     try {
-      const response = await axios.post(process.env.LOGIN_API_URL, formData);
+      const response = await axios.post(
+        process.env.LOGIN_API_URL,
+
+        formData,
+
+        {
+          headres: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
 
       const {
         data: { access_token },
@@ -260,13 +273,13 @@ function LoginModal({ closeModal, goRegister, goCheckout, t }) {
 
                   <p className="auth_form-offer">
                     {!errorText ? (
-                      <div>
+                      <>
                         <span>У вас нет аккаунта? </span>
                         <button className="btn" onClick={goRegister}>
                           {" "}
                           Регистрация
                         </button>
-                      </div>
+                      </>
                     ) : (
                       ""
                     )}

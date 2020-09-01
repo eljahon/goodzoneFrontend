@@ -7,6 +7,7 @@ import { getProductsFromAPI } from "../../redux/actions/productsActions/products
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { fetchMultipleUrls } from "../../libs/fetchMultipleUrls";
+import { createFormData } from "../../libs/createFormData";
 import {
   clearFilters,
   getPrices,
@@ -123,26 +124,14 @@ export default function Category({ products, categoryId, query }) {
       page: "1",
       price_from: filterPriceRange.length ? filterPriceRange[0] : "0",
       price_till: filterPriceRange.length ? filterPriceRange[1] : "0",
-      properties: filterProperties,
+      //properties: filterProperties,
       search: "",
       sort: selectDropdownFilter ? `price|${selectDropdownFilter}` : "",
     };
+    let formData = createFormData(filterData);
     console.log(filterData);
-    axios.defaults.withCredentials = true;
     axios
-      .post(`${process.env.PRODUCT_FILTER_API_URL}`, filterData, {
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Request-Headers": "*",
-          "Access-Control-Allow-Headers": "Origin, Content-Type",
-          "Access-Control-Request-Method": "POST",
-          "Access-Control-Allow-Headers": "x-auth-token, x-requested-with",
-        },
-        proxy: {
-          host: "http://localhost",
-          port: 3000,
-        },
-      })
+      .post(`${process.env.PRODUCT_FILTER_API_URL}`, formData)
       .then((data) => {
         const { products } = data.data;
         setFilteredProducts(products);
