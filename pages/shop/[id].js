@@ -124,7 +124,7 @@ export default function Category({ products, categoryId, query }) {
       page: "1",
       price_from: filterPriceRange.length ? filterPriceRange[0] : "0",
       price_till: filterPriceRange.length ? filterPriceRange[1] : "0",
-      //properties: filterProperties,
+      properties: { filter: filterProperties },
       search: "",
       sort: selectDropdownFilter ? `price|${selectDropdownFilter}` : "",
     };

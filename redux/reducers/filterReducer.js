@@ -63,6 +63,7 @@ function toggleFilterProperties(productProperties, property) {
     return productProperties.filter(
       (productProperty) => productProperty.value !== property.value
     );
+
   return [...productProperties, property];
 }
 
