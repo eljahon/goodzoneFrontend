@@ -114,6 +114,26 @@ export default function Category({ products, categoryId, query }) {
 
   useEffect(() => {
     setLoading(true);
+    let prop = [];
+    for (let value of productProperty) {
+      {
+        let filterProperty = {
+          property_id: "",
+          value: "",
+        };
+        let isHave = false;
+        for (let item of filterProperties) {
+          if (value.id === item.property_id) {
+            filterProperty.value += item.value + ",";
+            filterProperty.property_id = item.property_id;
+            isHave = true;
+          }
+        }
+        if (isHave) {
+          prop.push(filterProperty);
+        }
+      }
+    }
     const filterData = {
       active: true,
       brand: filterBrands.join(","),
@@ -124,12 +144,11 @@ export default function Category({ products, categoryId, query }) {
       page: "1",
       price_from: filterPriceRange.length ? filterPriceRange[0] : "0",
       price_till: filterPriceRange.length ? filterPriceRange[1] : "0",
-      properties: { filter: filterProperties },
+      properties: JSON.stringify(prop),
       search: "",
       sort: selectDropdownFilter ? `price|${selectDropdownFilter}` : "",
     };
     let formData = createFormData(filterData);
-    console.log(filterData);
     axios
       .post(`${process.env.PRODUCT_FILTER_API_URL}`, formData)
       .then((data) => {
