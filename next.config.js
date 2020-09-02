@@ -22,8 +22,7 @@ module.exports = {
     MY_ORDERS_API_URL: "https://dev.goodzone.uz/v1/my-orders",
     SHOPS_API_URL: "https://dev.goodzone.uz/v1/shop",
     BANNER_API_URL: "https://dev.goodzone.uz/v1/banner",
-    PROFILE_API_URL:
-      "https://cors-anywhere.herokuapp.com/https://dev.goodzone.uz/v1/customer/profile",
+    PROFILE_API_URL: "https://dev.goodzone.uz/v1/customer/profile",
     PRODUCT_FILTER_API_URL: "https://dev.goodzone.uz/v1/product/filter",
     FEEDBACK_API_URL: "https://dev.goodzone.uz/v1/feedback",
   },
