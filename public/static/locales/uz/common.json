@@ -49,5 +49,20 @@
   "reset-password": "Parolni tiklash",
   "forget-password": "Parolni tiklash",
   "send-code": "Sizga parolni tiklash kodini yuboramiz",
-  "send-code-phone": "Telefon raqamingizga kod yuborildi. Parolingizni tiklash uchun uni kiriting"
+  "send-code-phone": "Telefon raqamingizga kod yuborildi. Parolingizni tiklash uchun uni kiriting",
+  "welcome": "Xush kelibsiz",
+  "sign-in-with-phone": "Telefon raqamingiz va parolingiz bilan kiring",
+  "register": "Ro'yxatdan o'tish",
+  "reset": "Parolni tiklash",
+  "is-have-account": "Ro'yxatdan o'tmaganmisiz ? ",
+  "send": "Jonatish",
+  "sended-code": "Kodni jonatish",
+  "password": "Parolni kiriting",
+  "phone-number": "Telefon raqamingizni kiriting",
+  "code": "Kodni kiriting",
+  "name": "Ismingizni kiriting",
+  "lastName": "Familiyangizni kiriting",
+  "new-password": "Yangi parolni kiriting",
+  "confirm-password": "Parolni tasdiqlash",
+  "confirmed-password": "Parolni tasdiqlang"
 }

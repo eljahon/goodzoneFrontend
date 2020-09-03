@@ -2,6 +2,7 @@ import SEO from "../components/seo";
 import Footer from "../components/footer";
 import ProfileNav from "../components/profile-nav";
 import { axiosAuth } from "../libs/axios/axios-instances";
+import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { withTranslation } from "../i18n";
@@ -9,6 +10,7 @@ import { createFormData } from "../libs/createFormData";
 import swal from "sweetalert";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import { setLocalStorage } from "../libs/localStorage";
 
 function Profile({ t }) {
   const [changePasswordStatus, setChangePasswordStatus] = useState(false);
@@ -41,6 +43,7 @@ function Profile({ t }) {
       const response = await axios.put(
         process.env.PROFILE_API_URL,
         createFormData({
+          address: "Tashkent",
           name: data.firstName,
           lastname: data.lastName,
           password: data.password ? data.password : "",
@@ -52,12 +55,9 @@ function Profile({ t }) {
         }
       );
 
-      const {
-        data: { access_token },
-      } = response;
-
       if (response.status === 200) {
-        setLocalStorage("access_token", access_token);
+        swal("Данные обновлены");
+        setLocalStorage(response.data.customer.access_token);
       }
     } catch (error) {
       swal(error.response.data.Error.Message);
@@ -110,6 +110,7 @@ function Profile({ t }) {
                       name="phone"
                       id="phone"
                       required
+                      disabled
                     />
                   </div>
                   <div className="btn_wrapper">

@@ -1,56 +1,126 @@
 import SEO from "../components/seo";
 import Footer from "../components/footer";
 import ProfileNav from "../components/profile-nav";
-import { withTranslation } from "../i18n"
+import { withTranslation } from "../i18n";
 import { FaPencilAlt, FaTimes, FaPlus } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import AddressModal from "../components/address-modal";
+import { useSelector } from "react-redux";
+import { axiosAuth } from "../libs/axios/axios-instances";
+import { useForm } from "react-hook-form";
+import { getLocalStorage } from "../libs/localStorage";
+import axios from "axios";
 
 function Address({ t }) {
-    const [addressModal, editAddressModal] = useState(false)
-    return (
-        <>
-            <SEO />
-            <div className="profile_wrapper">
-                <ProfileNav activeTab="address" />
-                <div className="order_box">
-                    <div className="order_list-wrapper">
-                        <div className="address_header">
-                            <h3>{t("my-addresses")}</h3>
-                            <button className="btn add_btn">
-                                <FaPlus />
-                                <span className="btn_text">{t('add-address')}</span>
-                            </button>
-                        </div>
-                        <div className="order_content-wrapper">
-                            <div className="order_content">
-                                <div className="order_list">
-                                    <div className="order_card address_card">
-                                        <div className="card_header">
-                                            <span>Home</span>
-                                        </div>
-                                        <div className="card_body">
-                                            <span>27 Street, 2569 Heritage Road Visalia, CA 93291</span>
-                                        </div>
-                                        <div className="actions">
-                                            <button className="btn action_btn btn-primary" onClick={() => editAddressModal(true)}>
-                                                <FaPencilAlt />
-                                            </button>
-                                            <button className="btn action_btn btn-danger">
-                                                <FaTimes />
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+  const [addressModal, editAddressModal] = useState(false);
+  const [address, setAddress] = useState("");
+  const [removeAddress, setRemoveAddress] = useState(false);
+  const { handleSubmit } = useForm();
+  useEffect(() => {
+    axiosAuth
+      .get("/profile")
+      .then((response) => {
+        setAddress(response.data.customer.address);
+      })
+      .catch((error) => console.error(error));
+  }, []);
+
+  const onSubmit = async (data) => {
+    try {
+      const response = await axios.put(
+        process.env.PROFILE_API_URL,
+        {
+          address: Object.keys(data).length === 0 ? "" : data.address,
+        },
+        {
+          headers: {
+            Authorization: getLocalStorage("access_token"),
+          },
+        }
+      );
+
+      if (response.status === 200 && Object.keys(data).length !== 0) {
+        editAddressModal(false);
+        setAddress(response.data.customer.address);
+      } else {
+        setAddress("");
+        editAddressModal(false);
+      }
+    } catch (error) {
+      swal(error.response.data.Error.Message);
+    }
+  };
+  return (
+    <>
+      <SEO />
+      <div className="profile_wrapper">
+        <ProfileNav activeTab="address" />
+
+        <div className="order_box">
+          <div className="order_list-wrapper">
+            <div className="address_header">
+              <h3>{address ? t("my-addresses") : ""}</h3>
+              {!address ? (
+                <button
+                  className="btn add_btn"
+                  onClick={() => {
+                    editAddressModal(true);
+                  }}
+                >
+                  <FaPlus />
+                  <span className="btn_text">{t("add-address")}</span>
+                </button>
+              ) : (
+                ""
+              )}
             </div>
-            {addressModal && <AddressModal closeModal={() => editAddressModal(false)} />}
-            <Footer />
-        </>
-    );
+
+            {address ? (
+              <div className="order_content-wrapper">
+                <div className="order_content">
+                  <div className="order_list">
+                    <div className="order_card address_card">
+                      <div className="card_header">
+                        <span>Home</span>
+                      </div>
+                      <div className="card_body">
+                        <span>{address}</span>
+                      </div>
+                      <div className="actions">
+                        <button
+                          className="btn action_btn btn-primary"
+                          onClick={() => editAddressModal(true)}
+                        >
+                          <FaPencilAlt />
+                        </button>
+                        <button
+                          type="submit"
+                          className="btn action_btn btn-danger"
+                          onClick={handleSubmit(onSubmit)}
+                        >
+                          <FaTimes />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              ""
+            )}
+          </div>
+        </div>
+      </div>
+      {addressModal && (
+        <AddressModal
+          closeModal={() => editAddressModal(false)}
+          address={address}
+          onSubmit={onSubmit}
+        />
+      )}
+      <Footer />
+    </>
+  );
 }
 
-export default withTranslation('checkout')(Address)
+export default withTranslation("checkout")(Address);

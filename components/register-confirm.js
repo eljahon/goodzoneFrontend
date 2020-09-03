@@ -3,8 +3,9 @@ import { useForm } from "react-hook-form";
 import { axiosAuth } from "../libs/axios/axios-instances";
 import { useRouter } from "next/router";
 import { createFormData } from "../libs/createFormData";
+import { withTranslation } from "../i18n";
 
-const RegisterConfirm = ({ phoneNumber, goCheckout }) => {
+const RegisterConfirm = ({ phoneNumber, goCheckout, t }) => {
   const { register, handleSubmit, errors } = useForm();
   const router = useRouter();
 
@@ -31,16 +32,16 @@ const RegisterConfirm = ({ phoneNumber, goCheckout }) => {
   };
   return (
     <div className="auth_form-container">
-      <h3>Подтвердить пароль</h3>
+      <h3>{t("confirmed-password")}</h3>
       <span className="sub_heading"></span>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <input ref={register} name="code" placeholder="Код" required />
+        <input ref={register} name="code" placeholder={t("code")} required />
         <input type="tel" name="phone" defaultValue={phoneNumber} disabled />
-        <input type="submit" className="btn btn_submit" value="Отправить" />
+        <input type="submit" className="btn btn_submit" value={t("send")} />
       </form>
       <p className="auth_form-offer"></p>
     </div>
   );
 };
 
-export default RegisterConfirm;
+export default withTranslation("common")(RegisterConfirm);

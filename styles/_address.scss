@@ -1,89 +1,89 @@
 .address_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .add_btn {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    .add_btn {
-        display: flex;
-        align-items: center;
-        padding: 0;
-        color: $primary-color;
-        svg {
-            font-size: 15px;
-        }
-        .btn_text {
-            padding: 0 6px;
-        }
-    } 
+    padding: 0;
+    color: $primary-color;
+    svg {
+      font-size: 15px;
+    }
+    .btn_text {
+      padding: 0 6px;
+    }
+  }
 }
 .address_card {
-    position: relative;
-    border: none !important;
-    .card_body {
-        span {
-            font-size: 15px;
-            font-weight: 400;
-            color: rgb(66, 69, 97);
-        }
+  position: relative;
+  border: none !important;
+  .card_body {
+    span {
+      font-size: 15px;
+      font-weight: 400;
+      color: rgb(66, 69, 97);
     }
-    .actions {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        display: flex;
-        -webkit-box-align: center;
-        align-items: center;
-        transition: all 0.2s ease-in-out 0s;
-        .action_btn {
-            display: flex;
-            -webkit-box-align: center;
-            align-items: center;
-            -webkit-box-pack: center;
-            justify-content: center;
-            width: 25px;
-            height: 25px;
-            margin-left: 5px;
-            color: rgb(255, 255, 255);
-            border-radius: 50%;
-            overflow: hidden;
-            outline: 0;
-            padding: 0;
-            box-shadow: none;
-            svg {
-                font-size: 12px;
-            }
-        }
+  }
+  .actions {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    transition: all 0.2s ease-in-out 0s;
+    .action_btn {
+      display: flex;
+      -webkit-box-align: center;
+      align-items: center;
+      -webkit-box-pack: center;
+      justify-content: center;
+      width: 25px;
+      height: 25px;
+      margin-left: 5px;
+      color: rgb(255, 255, 255);
+      border-radius: 50%;
+      overflow: hidden;
+      outline: 0;
+      padding: 0;
+      box-shadow: none;
+      svg {
+        font-size: 12px;
+      }
     }
+  }
 }
 .address_form {
-    .auth_form-container {
-        padding: 40px 60px !important;
-        form {
-            textarea {
-                display: block;
-                width: 100%;
-                height: auto;
-                min-height: 171px;
-                padding: 0 18px;
-                padding-top: 15px;
-                margin-bottom: 10px;
-                resize: none;
-                appearance: none;
-                font-family: $base_font;
-                font-size: 15px;
-                line-height: inherit;
-                background-color: $bg-color;
-                color: $link-color;
-                border-width: 1px;
-                border-style: solid;
-                border-image: initial;
-                border-color: $border-color;
-                border-radius: 6px;
-                transition: all 0.25s ease 0s;
-                &:focus {
-                    outline: none;
-                    border-color: $primary-color;
-                }
-            }
+  .auth_form-container {
+    padding: 40px 60px !important;
+    form {
+      textarea {
+        display: block;
+        width: 100%;
+        height: auto;
+        min-height: 171px;
+        padding: 0 18px;
+        padding-top: 15px;
+        margin-bottom: 10px;
+        resize: none;
+        appearance: none;
+        font-family: $base_font;
+        font-size: 15px;
+        line-height: inherit;
+        background-color: $bg-color;
+        color: $link-color;
+        border-width: 1px;
+        border-style: solid;
+        border-image: initial;
+        border-color: $border-color;
+        border-radius: 6px;
+        transition: all 0.25s ease 0s;
+        &:focus {
+          outline: none;
+          border-color: $primary-color;
         }
+      }
     }
+  }
 }

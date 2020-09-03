@@ -1,18 +1,13 @@
-import React, { useEffect, useState, useRef } from "react";
-import { FaTimes } from "react-icons/fa";
-import { useForm } from "react-hook-form";
-import { useRouter } from "next/router";
-import axios from "axios";
-import { setLocalStorage } from "../libs/localStorage";
-import swal from "sweetalert";
-import { setUser } from "../redux/actions/authActions/authActions";
-import { useDispatch } from "react-redux";
+import React, { useState } from "react";
 
-export default function ResetPasswordModal({
-  userInfo,
-  setUserInfo,
-  setResetPassword,
-}) {
+import { useForm } from "react-hook-form";
+
+import axios from "axios";
+import { createFormData } from "../libs/createFormData";
+import swal from "sweetalert";
+import { withTranslation } from "../i18n";
+
+function ResetPasswordModal({ userInfo, setUserInfo, setResetPassword, t }) {
   const { register, handleSubmit } = useForm();
   const [disabled, setDisabled] = useState(false);
   const updatePassword = async (data) => {
@@ -24,11 +19,11 @@ export default function ResetPasswordModal({
     try {
       const response = await axios.put(
         process.env.PROFILE_API_URL,
-        {
+        createFormData({
           lastname: userInfo.lastname,
           name: userInfo.name,
           password: data.password,
-        },
+        }),
         {
           headers: {
             Authorization: userInfo.authToken,
@@ -51,7 +46,7 @@ export default function ResetPasswordModal({
         name="name"
         defaultValue={userInfo.name}
         onChange={setUserInfo}
-        placeholder="Имя"
+        placeholder={t("name")}
         required
       />
       <input
@@ -59,26 +54,27 @@ export default function ResetPasswordModal({
         name="lastName"
         defaultValue={userInfo.lastname}
         onChange={setUserInfo}
-        placeholder="Фамилия"
+        placeholder={t("lastName")}
         required
       />
       <input
         ref={register}
         type="password"
         name="password"
-        placeholder="Введите новый пароль"
+        placeholder={t("new-password")}
         required
       />
       <input
         ref={register}
         type="password"
         name="passwordConfirmation"
-        placeholder="Подтверждение пароля"
+        placeholder={t("confirm-password")}
         required
       />
       <button disabled={disabled} type="submit" className="btn btn_submit">
-        Отправить
+        {t("send")}
       </button>
     </form>
   );
 }
+export default withTranslation("common")(ResetPasswordModal);

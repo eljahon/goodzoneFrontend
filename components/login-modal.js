@@ -83,10 +83,13 @@ function LoginModal({ closeModal, goRegister, goCheckout, t }) {
           setPhone(data.phoneNumber);
         }
       } else {
-        const response = await axios.post(process.env.CHECK_CODE_API_URL, {
-          code: data.code,
-          phone: phone,
-        });
+        const response = await axios.post(
+          process.env.CHECK_CODE_API_URL,
+          createFormData({
+            code: data.code,
+            phone: phone,
+          })
+        );
         if (response.status === 200) {
           setDisabled(false);
           setIsCheck(true);
@@ -186,13 +189,13 @@ function LoginModal({ closeModal, goRegister, goCheckout, t }) {
                       })}
                       type={!isSend ? "tel" : "hidden"}
                       name="phone_number"
-                      placeholder="Номер телефона"
+                      placeholder={t("phone-number")}
                     />
                     <input
                       ref={register}
                       type={!isSend ? "hidden" : "text"}
                       name="code"
-                      placeholder="Введите код"
+                      placeholder={t("code")}
                     />
 
                     <button
@@ -200,7 +203,7 @@ function LoginModal({ closeModal, goRegister, goCheckout, t }) {
                       disabled={disabled}
                       className="btn btn_submit"
                     >
-                      {!isSend ? "Отправить код" : "Отправить"}
+                      {!isSend ? t("sended-code") : t("send")}
                     </button>
                   </form>
                 ) : (
@@ -212,23 +215,20 @@ function LoginModal({ closeModal, goRegister, goCheckout, t }) {
                   />
                 )}
                 <p className="auth_form-offer">
-                  <span>Вернуться к </span>
                   <button
                     className="btn"
                     onClick={() => setResetPassword(false)}
                   >
                     {" "}
-                    Авторизации
+                    {t("register")}
                   </button>
                 </p>
               </div>
             ) : (
               <>
                 <div className="auth_form-container">
-                  <h3>Добро пожаловать</h3>
-                  <span className="sub_heading">
-                    Войдите с вашим номером телефона и паролем
-                  </span>
+                  <h3>{t("welcome")}</h3>
+                  <span className="sub_heading">{t("sign-in-with-phone")}</span>
                   <form onSubmit={handleSubmit(isLogin ? onSubmit : checkUser)}>
                     <input
                       ref={register({
@@ -238,6 +238,7 @@ function LoginModal({ closeModal, goRegister, goCheckout, t }) {
                       type="tel"
                       name="phoneNumber"
                       defaultValue="+998"
+                      placeholder={t("phone-number")}
                       required
                     />
                     {errors.phoneNumber && (
@@ -252,7 +253,7 @@ function LoginModal({ closeModal, goRegister, goCheckout, t }) {
                       ref={register}
                       type={!isLogin ? "hidden" : "password"}
                       name="password"
-                      placeholder="Пароль"
+                      placeholder={t("password")}
                       required
                     />
                     <button
@@ -261,34 +262,34 @@ function LoginModal({ closeModal, goRegister, goCheckout, t }) {
                       onClick={errorText && !isLogin ? goRegister : ""}
                       disabled={disabled}
                     >
-                      {errorText && !isLogin ? "Регистрация" : "Войти"}
+                      {errorText && !isLogin ? t("register") : t("login")}
                     </button>
                   </form>
 
-                  <p className="auth_form-offer">
-                    {!errorText ? (
-                      <>
-                        <span>У вас нет аккаунта? </span>
-                        <button className="btn" onClick={goRegister}>
-                          {" "}
-                          Регистрация
-                        </button>
-                      </>
-                    ) : (
-                      ""
-                    )}
-                  </p>
+                  {!errorText ? (
+                    <p className="auth_form-offer">
+                      <span>{t("is-have-account")}</span>
+                      <button className="btn" onClick={goRegister}>
+                        {" "}
+                        {t("register")}
+                      </button>
+                    </p>
+                  ) : (
+                    ""
+                  )}
                 </div>
                 {isLogin ? (
-                  <div className="auth_form-offer-section">
+                  <div className="auth_form-offer-section pb-4 bg-white">
                     <p className="auth_form-offer">
-                      <span>Забыли пароль? </span>
+                      <span className="text-dark">
+                        {t("forget-password")}?{" "}
+                      </span>
                       <button
                         className="btn"
                         onClick={() => setResetPassword(true)}
                       >
                         {" "}
-                        Сбросить
+                        {t("reset")}
                       </button>
                     </p>
                   </div>

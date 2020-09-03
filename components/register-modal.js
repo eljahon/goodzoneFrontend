@@ -7,8 +7,9 @@ import { setUser } from "../redux/actions/authActions/authActions";
 import { useDispatch } from "react-redux";
 import RegisterConfirm from "./register-confirm";
 import { createFormData } from "../libs/createFormData";
+import { withTranslation } from "../i18n";
 
-export default function RegisterModal({ closeModal, login, goCheckout }) {
+function RegisterModal({ closeModal, login, goCheckout, t }) {
   const dispatch = useDispatch();
   const [load, setLoad] = useState(false);
   const [registerConfirm, setRegisterConfirm] = useState(false);
@@ -94,19 +95,19 @@ export default function RegisterModal({ closeModal, login, goCheckout }) {
               />
             ) : (
               <div className="auth_form-container">
-                <h3>Регистрация</h3>
+                <h3>{t("register")}</h3>
                 <span className="sub_heading"></span>
                 <form onSubmit={handleSubmit(onSubmit)}>
                   <input
                     ref={register}
                     name="firstName"
-                    placeholder="Имя"
+                    placeholder={t("name")}
                     required
                   />
                   <input
                     ref={register}
                     name="lastName"
-                    placeholder="Фамилия"
+                    placeholder={t("lastName")}
                     required
                   />
                   <input
@@ -117,7 +118,7 @@ export default function RegisterModal({ closeModal, login, goCheckout }) {
                     defaultValue="+998"
                     type="tel"
                     name="phoneNumber"
-                    placeholder="Номер телефона"
+                    placeholder={t("phone-number")}
                     required
                   />
                   {errors.phoneNumber && (
@@ -127,25 +128,25 @@ export default function RegisterModal({ closeModal, login, goCheckout }) {
                     ref={register}
                     type="password"
                     name="password"
-                    placeholder="Пароль"
+                    placeholder={t("password")}
                     required
                   />
                   <input
                     ref={register}
                     type="password"
                     name="passwordConfirmation"
-                    placeholder="Подтверждение пароля"
+                    placeholder={t("confirm-password")}
                     required
                   />
                   <button type="submit" className="btn btn_submit">
-                    Регистрация
+                    {t("register")}
                   </button>
                 </form>
                 <p className="auth_form-offer">
-                  <span>Уже есть аккаунт? </span>
+                  <span>{t("is-have-account")} </span>
                   <button className="btn" onClick={login}>
                     {" "}
-                    Войти
+                    {t("login")}
                   </button>
                 </p>
               </div>
@@ -156,3 +157,5 @@ export default function RegisterModal({ closeModal, login, goCheckout }) {
     </div>
   );
 }
+
+export default withTranslation("common")(RegisterModal);
