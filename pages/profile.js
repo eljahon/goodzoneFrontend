@@ -5,11 +5,16 @@ import { axiosAuth } from "../libs/axios/axios-instances";
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { withTranslation } from "../i18n";
+import { createFormData } from "../libs/createFormData";
+import swal from "sweetalert";
+import axios from "axios";
+import { useSelector } from "react-redux";
 
 function Profile({ t }) {
   const [changePasswordStatus, setChangePasswordStatus] = useState(false);
   const { register, handleSubmit, errors } = useForm();
   const [userData, setUserData] = useState(null);
+  const user = useSelector((state) => state.auth.user);
   useEffect(() => {
     axiosAuth
       .get("/profile")
@@ -22,14 +27,40 @@ function Profile({ t }) {
       .catch((error) => console.error(error));
   }, []);
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     const { password, confirmPassword } = data;
-
     if (password && confirmPassword) {
       if (password !== confirmPassword) {
         alert("Passwords don't match");
         return;
       }
+    }
+
+    try {
+      console.log(data);
+      const response = await axios.put(
+        process.env.PROFILE_API_URL,
+        createFormData({
+          name: data.firstName,
+          lastname: data.lastName,
+          password: data.password ? data.password : "",
+        }),
+        {
+          headers: {
+            Authorization: user.access_token,
+          },
+        }
+      );
+
+      const {
+        data: { access_token },
+      } = response;
+
+      if (response.status === 200) {
+        setLocalStorage("access_token", access_token);
+      }
+    } catch (error) {
+      swal(error.response.data.Error.Message);
     }
 
     console.log("data", data);

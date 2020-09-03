@@ -115,15 +115,16 @@ export default function Category({ products, categoryId, query }) {
   useEffect(() => {
     setLoading(true);
     let prop = [];
-    for (let value of productProperty) {
-      {
+    let isCheck = [];
+    for (let value of filterProperties) {
+      if (!isCheck.includes(value.property_id)) {
         let filterProperty = {
           property_id: "",
           value: "",
         };
         let isHave = false;
         for (let item of filterProperties) {
-          if (value.id === item.property_id) {
+          if (value.property_id === item.property_id) {
             filterProperty.value += item.value + ",";
             filterProperty.property_id = item.property_id;
             isHave = true;
@@ -132,6 +133,9 @@ export default function Category({ products, categoryId, query }) {
         if (isHave) {
           prop.push(filterProperty);
         }
+        isCheck.push(value.property_id);
+      } else {
+        continue;
       }
     }
     const filterData = {

@@ -7,88 +7,82 @@ import { calcTotalPrice } from "../libs/calcTotalPrice";
 import Link from "next/link";
 
 const statusDict = {
-    "in-process": "В обработке",
-    cancelled: "Отменен",
-    finished: "Завершено",
+  "in-process": "В обработке",
+  cancelled: "Отменен",
+  finished: "Завершено",
 };
 
 function OrderList({ t }) {
-    const [order, setOrder] = useState(null);
-    const user = useSelector((state) => state.auth.user, shallowEqual);
+  const [order, setOrder] = useState(null);
+  const user = useSelector((state) => state.auth.user, shallowEqual);
 
-    useEffect(() => {
-        axios
-            .get(process.env.MY_ORDERS_API_URL, {
-                headers: { Authorization: user.access_token },
-            })
-            .then((response) => {
-                setOrder(response.data);
-                console.log(response.data);
-            })
-            .catch((error) => {
-                console.log("error " + error);
-            });
-    }, []);
+  useEffect(() => {
+    axios
+      .get(process.env.MY_ORDERS_API_URL, {
+        headers: { Authorization: user.access_token },
+      })
+      .then((response) => {
+        setOrder(response.data);
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log("error " + error);
+      });
+  }, []);
 
-    return order ? (
-        <div className="order_list-wrapper">
-            <h3>{t("my-orders")}</h3>
-            {console.log("order", order)}
-            <div className="order_content-wrapper">
-                <div className="order_content">
-                    <div className="order_list">
-                        {order.orders ? (
-                            order.orders.map((order) => (
-                                <Link
-                                    href={`${
-                                        i18n.language === "ru" ? "" : "/uz"
-                                    }/order-history/[id]`}
-                                    as={`${
-                                        i18n.language === "ru" ? "" : "/uz"
-                                    }/order-history/${order.number}`}
-                                    key={order.id}
-                                >
-                                    <a className="order_card">
-                                        <div className="card_header">
-                                            <span>
-                                                {t("order")} #{order.number}
-                                            </span>
-                                        </div>
-                                        <div className="card_body">
-                                            <div className="card_meta">
-                                                <span>{t("date")}:</span>
-                                                <span>{order.created_at}</span>
-                                            </div>
-                                            <div className="card_meta">
-                                                <span>{t("status")}:</span>
-                                                <span>
-                                                    {statusDict[order.status]}
-                                                </span>
-                                            </div>
-                                            <div className="card_meta">
-                                                <span>{t("total")}:</span>
-                                                <span>
-                                                    {numberToPrice(
-                                                        calcTotalPrice(
-                                                            order.items
-                                                        )
-                                                    )}
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </Link>
-                            ))
-                        ) : (
-                            <p>{t("you-havent-ordered-yet")}</p>
-                        )}
+  return order ? (
+    <div className="order_list-wrapper">
+      <h3>{t("my-orders")}</h3>
+      {console.log("order", order)}
+      <div className="order_content-wrapper">
+        <div className="order_content">
+          <div className="order_list">
+            {order.orders ? (
+              order.orders.map((order) => (
+                <Link
+                  href={`${
+                    i18n.language === "ru" ? "" : "/uz"
+                  }/order-history/[id]`}
+                  as={`${i18n.language === "ru" ? "" : "/uz"}/order-history/${
+                    order.number
+                  }`}
+                  key={order.id}
+                >
+                  <a className="order_card">
+                    <div className="card_header">
+                      <span>
+                        {t("order")} #{order.number}
+                      </span>
                     </div>
-                </div>
-            </div>
+                    <div className="card_body">
+                      <div className="card_meta">
+                        <span>{t("date")}:</span>
+                        <span>{order.created_at}</span>
+                      </div>
+                      <div className="card_meta">
+                        <span>{t("status")}:</span>
+                        <span>{statusDict[order.status]}</span>
+                      </div>
+                      <div className="card_meta">
+                        <span>{t("total")}:</span>
+                        <span>
+                          {numberToPrice(calcTotalPrice(order.items))}
+                        </span>
+                      </div>
+                    </div>
+                  </a>
+                </Link>
+              ))
+            ) : (
+              <p>{t("you-havent-ordered-yet")}</p>
+            )}
+          </div>
         </div>
-    ) : (
-        ""
-    );
+      </div>
+    </div>
+  ) : (
+    ""
+  );
 }
 
 export default withTranslation("checkout")(OrderList);

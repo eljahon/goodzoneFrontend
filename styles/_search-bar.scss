@@ -78,7 +78,7 @@
     display: flex;
     width: 100%;
     min-height: 70px;
-    //padding: 0 20px;
+    padding: 0 10px;
     border-bottom: 1px solid $border-color;
     text-decoration: none;
     &:hover {
@@ -102,11 +102,11 @@
       }
     }
     .product_info {
-      flex-grow: 1;
-      padding: 20px 25px 30px;
+      padding: 20px 0px 15px 15px;
+      width: 70%;
       h3 {
         font-family: $base-font;
-        font-size: 15px;
+        font-size: 13px;
         font-weight: 700;
         color: $link-color;
         width: 100%;
@@ -115,7 +115,7 @@
         overflow: hidden;
       }
       .price {
-        font-size: 15px;
+        font-size: 13px;
         font-weight: 700;
         color: $primary-color;
       }

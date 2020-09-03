@@ -115,13 +115,7 @@ function LoginModal({ closeModal, goRegister, goCheckout, t }) {
       const response = await axios.post(
         process.env.LOGIN_API_URL,
 
-        formData,
-
-        {
-          headres: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
+        formData
       );
 
       const {

@@ -9,10 +9,12 @@ import {
 import { i18n } from "../i18n";
 import { useRouter } from "next/router";
 import { withTranslation } from "../i18n";
+import { useDispatch } from "react-redux";
+import { clearFilters } from "../redux/actions/filterActions/filterActions";
 
 function DepartmentsMenu({ categories, closeMenu, t }) {
   const vw = window.innerWidth;
-
+  const dispatch = useDispatch();
   const router = useRouter();
   const hasDynamicRouting = router.query.id;
 
@@ -81,6 +83,7 @@ function DepartmentsMenu({ categories, closeMenu, t }) {
                                   e.preventDefault();
                                 } else {
                                   handleClose();
+                                  dispatch(clearFilters());
                                 }
                               }}
                             >
@@ -105,7 +108,12 @@ function DepartmentsMenu({ categories, closeMenu, t }) {
                                       i18n.language === "ru" ? "" : "/uz"
                                     }/shop/${sub.slug}`}
                                   >
-                                    <a onClick={() => handleClose()}>
+                                    <a
+                                      onClick={() => {
+                                        handleClose();
+                                        dispatch(clearFilters());
+                                      }}
+                                    >
                                       {sub.name}
                                     </a>
                                   </Link>

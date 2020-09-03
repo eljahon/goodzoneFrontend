@@ -9,6 +9,12 @@ axiosAuth.interceptors.request.use(
     const token = getLocalStorage("access_token");
     if (token) {
       config.headers.common["Authorization"] = token;
+      config.headers.common["Access-Control-Allow-Origin"] = "*";
+      config.headers.common["Access-Control-Allow-Credentials"] = "true";
+      config.headers.common["Access-Control-Max-Age"] = "1800";
+      config.headers.common["Access-Control-Allow-Headers"] = "content-type";
+      config.headers.common["Access-Control-Allow-Methods"] =
+        "PUT, POST, GET, DELETE, PATCH, OPTIONS";
     }
     return config;
   },

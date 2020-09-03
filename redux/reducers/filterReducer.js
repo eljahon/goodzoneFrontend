@@ -38,6 +38,15 @@ const filterReducer = (state = inititalState, action) => {
         ...state,
         filterPriceRange: payload,
       };
+    case filterActionTypes.CLEAR:
+      return {
+        priceRange: [1, 100],
+        filterPriceRange: [],
+        brands: [],
+        selectDropdownFilter: "",
+        properties: [],
+        searchValue: "",
+      };
     case filterActionTypes.SELECT_DROPDOWN_CHANGE:
       if (payload === "newness") {
         return {

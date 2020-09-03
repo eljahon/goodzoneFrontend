@@ -175,7 +175,14 @@ function OrderDetails({ t, data }) {
                       <td>
                         <span className="item_wrapper">
                           <span className="image_wrapper">
-                            <img src="images/product_1.png" alt="need image" />
+                            <img
+                              src={
+                                item.image
+                                  ? item.image
+                                  : "https://sdn.delever.uz/goodzone/6bc0bc84-57a7-4c32-8dd7-421006f5965c"
+                              }
+                              alt="need image"
+                            />
                           </span>
                           <span className="item_details">
                             <span className="item_name">
