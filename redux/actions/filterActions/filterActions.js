@@ -31,4 +31,4 @@ export const toggleProperty = (propertyId) => ({
   payload: propertyId,
 });
 
-export const clearFilters = () => ({ type: filterActionTypes.CLEAR });
+export const clearFilters = () => ({ type: filterActionTypes.CLEAR_FILTERS });

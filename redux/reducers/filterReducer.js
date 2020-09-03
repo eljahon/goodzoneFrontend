@@ -6,7 +6,6 @@ const inititalState = {
   brands: [],
   selectDropdownFilter: "",
   properties: [],
-  searchValue: "",
 };
 
 const filterReducer = (state = inititalState, action) => {
@@ -17,6 +16,8 @@ const filterReducer = (state = inititalState, action) => {
         ...state,
         filterPriceRange: [],
         brands: [],
+        selectDropdownFilter: "",
+        properties: [],
       };
     case filterActionTypes.ADD_BRAND_FOR_FILTER:
       return {
@@ -37,15 +38,6 @@ const filterReducer = (state = inititalState, action) => {
       return {
         ...state,
         filterPriceRange: payload,
-      };
-    case filterActionTypes.CLEAR:
-      return {
-        priceRange: [1, 100],
-        filterPriceRange: [],
-        brands: [],
-        selectDropdownFilter: "",
-        properties: [],
-        searchValue: "",
       };
     case filterActionTypes.SELECT_DROPDOWN_CHANGE:
       if (payload === "newness") {
