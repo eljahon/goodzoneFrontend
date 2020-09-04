@@ -41,7 +41,7 @@ function Profile({ t }) {
     try {
       console.log(data);
       const response = await axios.put(
-        process.env.PROFILE_API_URL,
+        "https://cors-anywhere.herokuapp.com/" + process.env.PROFILE_API_URL,
         createFormData({
           address: "Tashkent",
           name: data.firstName,

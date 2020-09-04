@@ -66,5 +66,7 @@
   "confirm-password": "Parolni tasdiqlash",
   "confirmed-password": "Parolni tasdiqlang",
   "save-address": "Manzilni saqlash",
-  "edit-address": "Manzilni o'zgartirish"
+  "edit-address": "Manzilni o'zgartirish",
+  "home": "Asosiy manzil",
+  "my-address": "Mening manzilim"
 }

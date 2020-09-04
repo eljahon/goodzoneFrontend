@@ -67,5 +67,7 @@
   "confirm-password": "Подтверждение пароля",
   "confirmed-password": "Подтвердить пароль",
   "save-address": "Сохранить адрес",
-  "edit-address": "Изменить адрес"
+  "edit-address": "Изменить адрес",
+  "home": "Главный адрес",
+  "my-address": "Мой адрес"
 }

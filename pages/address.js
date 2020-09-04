@@ -15,13 +15,22 @@ import { createFormData } from "../libs/createFormData";
 function Address({ t }) {
   const [addressModal, editAddressModal] = useState(false);
   const [address, setAddress] = useState("");
-  const [removeAddress, setRemoveAddress] = useState(false);
+  const [userInfo, setUserInfo] = useState({
+    name: "",
+    lastname: "",
+  });
   const { handleSubmit } = useForm();
   useEffect(() => {
     axiosAuth
       .get("/profile")
       .then((response) => {
         setAddress(response.data.customer.address);
+        setUserInfo((old) => {
+          old.name = response.data.customer.name;
+          old.lastname = response.data.customer.lastname;
+
+          return old;
+        });
       })
       .catch((error) => console.error(error));
   }, []);
@@ -29,9 +38,11 @@ function Address({ t }) {
   const onSubmit = async (data) => {
     try {
       const response = await axios.put(
-        process.env.PROFILE_API_URL,
+        "https://cors-anywhere.herokuapp.com/" + process.env.PROFILE_API_URL,
         createFormData({
           address: Object.keys(data).length === 0 ? "" : data.address,
+          name: userInfo.name,
+          lastname: userInfo.lastname,
         }),
         {
           headers: {
@@ -82,7 +93,7 @@ function Address({ t }) {
                   <div className="order_list">
                     <div className="order_card address_card">
                       <div className="card_header">
-                        <span>Home</span>
+                        <span>{t("home")}</span>
                       </div>
                       <div className="card_body">
                         <span>{address}</span>
