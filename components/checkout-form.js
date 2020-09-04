@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   FaCreditCard,
   FaRegCreditCard,
@@ -20,10 +20,10 @@ function CheckoutForm({ t, setUnired, unired }) {
   const dispatch = useDispatch();
   const { register, handleSubmit, errors, watch } = useForm();
   const router = useRouter();
-
+  const [isUnired, setIsUnired] = useState(false);
   const cartItems = useSelector((state) => state.cart.cartItems, shallowEqual);
   const user = useSelector((state) => state.auth.user);
-
+  console.log(cartItems);
   const onSubmit = async (data) => {
     // router.push('/order-received');
     const orderItems = [...cartItems];
