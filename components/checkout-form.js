@@ -142,7 +142,7 @@ function CheckoutForm({ t, setUnired, unired }) {
             <input
               type="radio"
               name="payment_method"
-              value="terminal"
+              value="card"
               id="terminal"
               ref={register}
             />
@@ -239,7 +239,7 @@ function CheckoutForm({ t, setUnired, unired }) {
             <input
               type="radio"
               name="delivery_method"
-              value="deliver"
+              value="delivery"
               id="deliver"
               ref={register}
             />

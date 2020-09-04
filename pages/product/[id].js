@@ -111,6 +111,7 @@ function Product({ product: data, t, shops }) {
       );
 
       setReviewsAdded((prev) => prev + 1);
+
       // reviewForm.current.style.display = "none";
       reviewForm.current.reset();
     } catch (error) {
