@@ -25,8 +25,16 @@ export default function BranchInfo({ data, closeInfo }) {
               </span>
               <span className="text">Адрес:</span>
             </span>
-            <span className="desc">{data.address}</span>
-            <span className="desc">Ориентир: {data.address2}</span>
+            <span
+              dangerouslySetInnerHTML={{
+                __html: data.address,
+              }}
+            ></span>
+            <span
+              dangerouslySetInnerHTML={{
+                __html: data.address2,
+              }}
+            ></span>
           </div>
           <div className="info_block">
             <span className="title">
