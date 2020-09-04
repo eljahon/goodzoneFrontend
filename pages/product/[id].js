@@ -27,6 +27,7 @@ import { getLocaleDate } from "../../libs/getLocaleDate";
 import Rating from "@material-ui/lab/Rating";
 import UserAvatar from "react-user-avatar";
 import { useForm } from "react-hook-form";
+import { createFormData } from "../../libs/createFormData";
 
 function Product({ product: data, t, shops }) {
   console.log("DATA:>> ", data);
@@ -98,15 +99,15 @@ function Product({ product: data, t, shops }) {
     try {
       const response = await axios.post(
         `${process.env.FEEDBACK_API_URL}/${data.slug}`,
-        {
+        createFormData({
           active: true,
           comment: formData.comment || "",
           customer_name: user
             ? `${user.name} ${user.lastname}`
             : formData.username,
           customer_id: user ? user.id : "",
-          rate: rating || 5,
-        }
+          rate: rating,
+        })
       );
 
       setReviewsAdded((prev) => prev + 1);
@@ -372,6 +373,7 @@ function Product({ product: data, t, shops }) {
                   </div>
                   <button
                     type="submit"
+                    disabled={rating === 0}
                     className="btn btn_submit"
                     style={{ marginTop: "1rem" }}
                   >
