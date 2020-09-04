@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { axiosAuth } from "../libs/axios/axios-instances";
 import { useRouter } from "next/router";
@@ -9,8 +9,10 @@ import swal from "sweetalert";
 const RegisterConfirm = ({ phoneNumber, goCheckout, closeModal, t }) => {
   const { register, handleSubmit, errors } = useForm();
   const router = useRouter();
+  const [clickRegister, setClick] = useState(false);
 
   const onSubmit = (data) => {
+    setClick(true);
     let formData = createFormData({
       code: data.code,
       phone: phoneNumber,
@@ -24,6 +26,7 @@ const RegisterConfirm = ({ phoneNumber, goCheckout, closeModal, t }) => {
           } else {
             router.push("/profile");
           }
+          setClick(false);
           closeModal();
           console.log(response);
         }
@@ -39,7 +42,12 @@ const RegisterConfirm = ({ phoneNumber, goCheckout, closeModal, t }) => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <input ref={register} name="code" placeholder={t("code")} required />
         <input type="tel" name="phone" defaultValue={phoneNumber} disabled />
-        <input type="submit" className="btn btn_submit" value={t("send")} />
+        <input
+          type="submit"
+          className="btn btn_submit"
+          disabled={clickRegister}
+          value={t("send")}
+        />
       </form>
       <p className="auth_form-offer"></p>
     </div>

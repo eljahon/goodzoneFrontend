@@ -14,6 +14,7 @@ function RegisterModal({ closeModal, login, goCheckout, t }) {
   const [load, setLoad] = useState(false);
   const [registerConfirm, setRegisterConfirm] = useState(false);
   const [userPassword, setUserPassword] = useState(null);
+  const [clickRegister, setClick] = useState(false);
 
   useEffect(() => {
     setLoad(true);
@@ -27,6 +28,7 @@ function RegisterModal({ closeModal, login, goCheckout, t }) {
   const { register, handleSubmit, errors } = useForm();
 
   const onSubmit = async (data) => {
+    setClick(true);
     if (data.password !== data.passwordConfirmation) {
       alert("Passwords don't match");
       return;
@@ -46,6 +48,7 @@ function RegisterModal({ closeModal, login, goCheckout, t }) {
       } = response;
 
       if (response.status === 200) {
+        setClick(false);
         setLocalStorage("access_token", access_token);
         setUserPassword(response.data.phone);
         setRegisterConfirm(true);
@@ -139,7 +142,11 @@ function RegisterModal({ closeModal, login, goCheckout, t }) {
                     placeholder={t("confirm-password")}
                     required
                   />
-                  <button type="submit" className="btn btn_submit">
+                  <button
+                    disabled={clickRegister}
+                    type="submit"
+                    className="btn btn_submit"
+                  >
                     {t("register")}
                   </button>
                 </form>
