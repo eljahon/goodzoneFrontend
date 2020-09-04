@@ -97,7 +97,7 @@ function CheckoutForm({ t, setUnired, unired }) {
             id="address"
             required
             ref={register}
-            defaultValue={user ? `${user.address} ${user.address}` : ""}
+            defaultValue={user ? `${user.address}` : ""}
             placeholder={t("write-address")}
           />
         </div>

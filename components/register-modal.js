@@ -144,7 +144,7 @@ function RegisterModal({ closeModal, login, goCheckout, t }) {
                   </button>
                 </form>
                 <p className="auth_form-offer">
-                  <span>{t("is-have-account")} </span>
+                  <span>{t("is-have-not-account")} </span>
                   <button className="btn" onClick={login}>
                     {" "}
                     {t("login")}

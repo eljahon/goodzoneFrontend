@@ -60,13 +60,14 @@
   "password": "Parolni kiriting",
   "phone-number": "Telefon raqamingizni kiriting",
   "code": "Kodni kiriting",
-  "name": "Ismingizni kiriting",
-  "lastName": "Familiyangizni kiriting",
+  "name": "Ism",
+  "lastName": "Familiya",
   "new-password": "Yangi parolni kiriting",
   "confirm-password": "Parolni tasdiqlash",
   "confirmed-password": "Parolni tasdiqlang",
   "save-address": "Manzilni saqlash",
   "edit-address": "Manzilni o'zgartirish",
   "home": "Asosiy manzil",
-  "my-address": "Mening manzilim"
+  "my-address": "Mening manzilim",
+  "is-have-not-account": "Ro'yxatdan o'tganmisiz ?"
 }
