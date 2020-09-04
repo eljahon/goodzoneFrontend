@@ -138,7 +138,7 @@ function Product({ product: data, t, shops }) {
             </Breadcrumb.Item>
             <Breadcrumb.Item
               onClick={() =>
-                router.push(`/category/[id]`, `/category/${data.category.slug}`)
+                router.push(`/shop/[id]`, `/shop/${data.category.slug}`)
               }
             >
               {data.category.name}
@@ -164,7 +164,10 @@ function Product({ product: data, t, shops }) {
                       __html: data.preview_text,
                     }}
                   ></p>
-                ) : data.brand.image ? (
+                ) : (
+                  ""
+                )}{" "}
+                {data.brand.image ? (
                   <img
                     src={data.brand.image}
                     alt={data.name}

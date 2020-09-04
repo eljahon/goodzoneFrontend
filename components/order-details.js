@@ -166,7 +166,7 @@ function OrderDetails({ t, data }) {
                   <tr>
                     <th>{t("products")}</th>
                     <th>{t("quantity")}</th>
-                    <th>{t("amount")}</th>
+                    <th class="text-center">{t("amount")}</th>
                   </tr>
                 </thead>
                 <tbody>

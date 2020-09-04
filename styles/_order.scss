@@ -352,6 +352,10 @@
         }
         tbody {
           tr {
+            td:nth-child(1) {
+              padding-right: 0;
+              width: 65%;
+            }
             td {
               font-family: $base-font;
               font-size: 15px;
@@ -407,9 +411,6 @@
               &.price {
                 text-align: right;
               }
-            }
-            td:nth-child(1) {
-              padding-right: 0;
             }
           }
         }
