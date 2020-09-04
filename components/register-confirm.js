@@ -4,8 +4,9 @@ import { axiosAuth } from "../libs/axios/axios-instances";
 import { useRouter } from "next/router";
 import { createFormData } from "../libs/createFormData";
 import { withTranslation } from "../i18n";
+import swal from "sweetalert";
 
-const RegisterConfirm = ({ phoneNumber, goCheckout, t }) => {
+const RegisterConfirm = ({ phoneNumber, goCheckout, closeModal, t }) => {
   const { register, handleSubmit, errors } = useForm();
   const router = useRouter();
 
@@ -23,11 +24,12 @@ const RegisterConfirm = ({ phoneNumber, goCheckout, t }) => {
           } else {
             router.push("/profile");
           }
+          closeModal();
           console.log(response);
         }
       })
       .catch((error) => {
-        console.log(error);
+        swal(error.response.data.Error.Message);
       });
   };
   return (

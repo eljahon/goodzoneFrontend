@@ -105,7 +105,7 @@ export default function Shops() {
     console.log("branch_name", branch_name);
     console.log("branches", branches);
     setMapInfo(data);
-    setMapState({ center: [data.loc.long, data.loc.lat] });
+    setMapState({ center: [data.loc.lat, data.loc.long] });
     router.push("/shops#map");
   };
   return (

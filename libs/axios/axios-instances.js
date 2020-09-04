@@ -2,7 +2,8 @@ import axios from "axios";
 import { getLocalStorage } from "../localStorage";
 
 export const axiosAuth = axios.create({
-  baseURL: process.env.AUTHORIZE_API_URL,
+  baseURL:
+    "https://cors-anywhere.herokuapp.com/" + process.env.AUTHORIZE_API_URL,
 });
 axiosAuth.interceptors.request.use(
   (config) => {

@@ -17,6 +17,7 @@ export default function Search({ searchResult, searchTerm, query }) {
   const dispatch = useDispatch();
   const products = searchResult.products;
   const [loading, setLoading] = useState(false);
+  const [search, setSearch] = useState(true);
   const [brands, setBrands] = useState([]);
   const [productLimit, setProductLimit] = useState(20);
   useEffect(() => {
@@ -141,6 +142,7 @@ export default function Search({ searchResult, searchTerm, query }) {
     <>
       <SEO />
       <ProductList
+        search={search}
         products={filteredProducts}
         brands={brands}
         searchResult={searchTerm}

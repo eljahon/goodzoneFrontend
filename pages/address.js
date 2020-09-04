@@ -10,6 +10,7 @@ import { axiosAuth } from "../libs/axios/axios-instances";
 import { useForm } from "react-hook-form";
 import { getLocalStorage } from "../libs/localStorage";
 import axios from "axios";
+import { createFormData } from "../libs/createFormData";
 
 function Address({ t }) {
   const [addressModal, editAddressModal] = useState(false);
@@ -29,9 +30,9 @@ function Address({ t }) {
     try {
       const response = await axios.put(
         process.env.PROFILE_API_URL,
-        {
+        createFormData({
           address: Object.keys(data).length === 0 ? "" : data.address,
-        },
+        }),
         {
           headers: {
             Authorization: getLocalStorage("access_token"),

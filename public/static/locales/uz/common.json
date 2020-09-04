@@ -64,5 +64,7 @@
   "lastName": "Familiyangizni kiriting",
   "new-password": "Yangi parolni kiriting",
   "confirm-password": "Parolni tasdiqlash",
-  "confirmed-password": "Parolni tasdiqlang"
+  "confirmed-password": "Parolni tasdiqlang",
+  "save-address": "Manzilni saqlash",
+  "edit-address": "Manzilni o'zgartirish"
 }

@@ -32,7 +32,7 @@ export default function BranchMap({ mapState, branches, openInfo }) {
                 options={{ iconColor: "#f5363e" }}
                 geometry={{
                   type: "Point",
-                  coordinates: [branch.loc.long, branch.loc.lat],
+                  coordinates: [branch.loc.lat, branch.loc.long],
                 }}
                 properties={{ hintContent: branch.name }}
                 modules={["geoObject.addon.hint"]}

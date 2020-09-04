@@ -18,9 +18,12 @@ function OrderList({ t }) {
 
   useEffect(() => {
     axios
-      .get(process.env.MY_ORDERS_API_URL, {
-        headers: { Authorization: user.access_token },
-      })
+      .get(
+        "https://cors-anywhere.herokuapp.com/" + process.env.MY_ORDERS_API_URL,
+        {
+          headers: { Authorization: user.access_token },
+        }
+      )
       .then((response) => {
         setOrder(response.data);
         console.log(response.data);

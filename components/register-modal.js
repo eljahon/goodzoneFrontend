@@ -52,7 +52,7 @@ function RegisterModal({ closeModal, login, goCheckout, t }) {
         dispatch(setUser(response.data));
       }
     } catch (error) {
-      console.log(error);
+      swal(error.response.data.Error.Message);
     }
   };
 
@@ -92,6 +92,7 @@ function RegisterModal({ closeModal, login, goCheckout, t }) {
               <RegisterConfirm
                 phoneNumber={userPassword}
                 goCheckout={goCheckout}
+                closeModal={closeModal}
               />
             ) : (
               <div className="auth_form-container">

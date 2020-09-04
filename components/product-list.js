@@ -15,6 +15,7 @@ function ProductList({
   searchResult,
   loading,
   productProperty,
+  search,
   setProperties,
   properties,
 }) {
@@ -45,13 +46,17 @@ function ProductList({
 
   return (
     <main>
-      <ProductListFilter
-        brands={brands}
-        isOpenPopup={filterPopup}
-        productProperty={productProperty}
-        closePopup={() => setFilterPopup(false)}
-      />
-      <div className="content">
+      {!search ? (
+        <ProductListFilter
+          brands={brands}
+          isOpenPopup={filterPopup}
+          productProperty={productProperty}
+          closePopup={() => setFilterPopup(false)}
+        />
+      ) : (
+        ""
+      )}
+      <div className={`content ${search ? "w-100" : ""}`}>
         <Breadcrumb>
           <Breadcrumb.Item onClick={() => router.push("/")}>
             {t("main")}

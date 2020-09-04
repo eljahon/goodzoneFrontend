@@ -65,5 +65,7 @@
   "lastName": "Фамилия",
   "new-password": "Введите новый пароль",
   "confirm-password": "Подтверждение пароля",
-  "confirmed-password": "Подтвердить пароль"
+  "confirmed-password": "Подтвердить пароль",
+  "save-address": "Сохранить адрес",
+  "edit-address": "Изменить адрес"
 }
