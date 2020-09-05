@@ -239,4 +239,13 @@
   .profile_wrapper {
     padding: 40px 20px;
   }
+  .order_details
+    .order_table-wrapper
+    .order_details-table
+    table.order_table
+    tbody
+    tr
+    td {
+    white-space: nowrap !important;
+  }
 }
