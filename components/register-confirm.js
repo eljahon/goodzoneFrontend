@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { axiosAuth } from "../libs/axios/axios-instances";
+import axios from "axios";
 import { useRouter } from "next/router";
 import { createFormData } from "../libs/createFormData";
 import { withTranslation } from "../i18n";
 import { setUser } from "../redux/actions/authActions/authActions";
 import { useDispatch } from "react-redux";
+import { setLocalStorage } from "../libs/localStorage";
 import swal from "sweetalert";
 
 const RegisterConfirm = ({
@@ -26,8 +28,16 @@ const RegisterConfirm = ({
       code: data.code,
       phone: phoneNumber,
     });
-    axiosAuth
-      .post(`${process.env.AUTHORIZE_API_URL}/verify-phone`, formData)
+    axios
+      .post(
+        `https://cors-anywhere.herokuapp.com/${process.env.AUTHORIZE_API_URL}/verify-phone`,
+        formData,
+        {
+          headers: {
+            Authorization: userInfo.access_token,
+          },
+        }
+      )
       .then((response) => {
         if (response.status === 200) {
           if (goCheckout) {
@@ -36,6 +46,7 @@ const RegisterConfirm = ({
             router.push("/profile");
           }
           dispatch(setUser(userInfo));
+          setLocalStorage("access_token", userInfo.access_token);
           setClick(false);
           closeModal();
           console.log(response);

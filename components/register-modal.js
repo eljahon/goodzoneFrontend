@@ -50,7 +50,7 @@ function RegisterModal({ closeModal, login, goCheckout, t }) {
 
       if (response.status === 200) {
         setClick(false);
-        setLocalStorage("access_token", access_token);
+
         setUserPassword(response.data.phone);
         setRegisterConfirm(true);
         setUserInfo(response.data);
