@@ -1,134 +1,137 @@
 .delivery_splash {
-    position: relative;
+  position: relative;
+  width: 100%;
+  img {
     width: 100%;
-    img {
-        width: 100%;
-        height: auto;
-        max-height: auto;
-        object-fit: cover;
-        -o-object-fit: cover;
-        @include xl {
-            height: calc(100vh - 132px);
-            max-height: calc(100vh - 132px);
-        }
-    }
+    height: auto;
+    max-height: auto;
+    object-fit: cover;
+    -o-object-fit: cover;
+  }
 }
 .delivery_content {
-    width: 100%;
-    @include sm {
-        padding: 0 15px;
-    }
-    .promo_status {
-        .status {
-            display: flex;
-            padding: 10px 0;
-            .title {
-                width: 300px;
-                font-size: 16px;
-                font-weight: 700;
-                @include sm {
-                    width: 100%;
-                }
-            }
-            .desc {
-                flex-grow: 1;
-                font-size: 16px;
-                font-weight: 400;
-            }
-        }
-    }
-    h1 {
-        font-family: $head-font;
-        font-size: 26px;
+  width: 100%;
+  @include sm {
+    padding: 0 15px;
+  }
+  .promo_status {
+    .status {
+      display: flex;
+      padding: 10px 0;
+      .title {
+        width: 300px;
+        font-size: 16px;
         font-weight: 700;
-        color: #000000;
-        line-height: 1.8;
-        margin-bottom: 20px;
         @include sm {
-            font-size: 22px;
+          width: 100%;
         }
+      }
+      .desc {
+        flex-grow: 1;
+        font-size: 16px;
+        font-weight: 400;
+      }
     }
-    .subtitle {
-        font-family: $base-font;
+  }
+  h1 {
+    font-family: $head-font;
+    font-size: 26px;
+    font-weight: 700;
+    color: #000000;
+    line-height: 1.8;
+    margin-bottom: 20px;
+    @include sm {
+      font-size: 22px;
+    }
+  }
+  .subtitle {
+    font-family: $base-font;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.8;
+    color: #000000;
+    margin-bottom: 40px;
+  }
+  .content_block {
+    padding-bottom: 50px;
+    .payment_plan-link {
+      font-size: 16px;
+      font-weight: 700;
+      color: $link-color;
+      text-decoration: underline;
+      &:hover {
+        text-decoration: none;
+      }
+    }
+    .numeric_list {
+      list-style-type: decimal;
+    }
+    h2 {
+      font-family: $head-font;
+      font-size: 24px;
+      font-weight: 700;
+      line-height: 1.8;
+      color: #000000;
+      margin-bottom: 20px;
+      @include sm {
         font-size: 18px;
-        font-weight: 500;
-        line-height: 1.8;
-        color: #000000;
-        margin-bottom: 40px;
+      }
     }
-    .content_block {
-        padding-bottom: 50px;
-        .payment_plan-link {
-            font-size: 16px;
-            font-weight: 700;
-            color: $link-color;
-            text-decoration: underline;
-            &:hover {
-                text-decoration: none;
-            }
-        }
-        .numeric_list {
-            list-style-type: decimal;
-        }
-        h2 {
-            font-family: $head-font;
-            font-size: 24px;
-            font-weight: 700;
-            line-height: 1.8;
-            color: #000000;
-            margin-bottom: 20px;
-            @include sm {
-                font-size: 18px;
-            }
-        }
-        p {
-            font-family: $base-font;
-            font-size: 16px;
-            font-weight: 400;
-            line-height: 1.8;
-            color: #000000;
-            margin-bottom: 10px;
-        }
-        h3 {
-            font-family: $head-font;
-            font-size: 20px;
-            font-weight: 700;
-            line-height: 1.8;
-            color: #000000;
-            margin-bottom: 10px;
-            margin-top: 20px;
-            a {
-                text-decoration: none;
-                transition: all 0.15s ease-in-out 0s;
-                color: $link-color;
-                &:hover {
-                    color: $primary-color;
-                }
-            }
-        }
+    p {
+      font-family: $base-font;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 1.8;
+      color: #000000;
+      margin-bottom: 10px;
     }
-    .date {
-        margin-top: -10px;
-        font-size: 14px;
-        font-weight: 700;
+    h3 {
+      font-family: $head-font;
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 1.8;
+      color: #000000;
+      margin-bottom: 10px;
+      margin-top: 20px;
+      a {
+        text-decoration: none;
+        transition: all 0.15s ease-in-out 0s;
         color: $link-color;
-    }
-    .img_wrapper {
-        width: 100%;
-        margin: 30px 0;
-        img {
-            width: 100%;
+        &:hover {
+          color: $primary-color;
         }
+      }
     }
-    &.payment_plan-rules {
-        .content_block {
-            ul {
-                list-style-type: none;
-                padding: 0;
-                li {
-                    margin-bottom: 15px;
-                }
-            }
+  }
+  .date {
+    margin-top: -10px;
+    font-size: 14px;
+    font-weight: 700;
+    color: $link-color;
+  }
+  .img_wrapper {
+    width: 100%;
+    margin: 30px 0;
+    img {
+      width: 100%;
+    }
+  }
+  &.payment_plan-rules {
+    .content_block {
+      ul {
+        list-style-type: none;
+        padding: 0;
+        li {
+          margin-bottom: 15px;
         }
+      }
     }
+  }
+}
+
+@media (min-width: 1250px) {
+  .delivery_splash img {
+    height: calc(100vh - 132px);
+    max-height: calc(100vh - 132px);
+  }
 }
