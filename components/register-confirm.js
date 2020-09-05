@@ -4,11 +4,20 @@ import { axiosAuth } from "../libs/axios/axios-instances";
 import { useRouter } from "next/router";
 import { createFormData } from "../libs/createFormData";
 import { withTranslation } from "../i18n";
+import { setUser } from "../redux/actions/authActions/authActions";
+import { useDispatch } from "react-redux";
 import swal from "sweetalert";
 
-const RegisterConfirm = ({ phoneNumber, goCheckout, closeModal, t }) => {
+const RegisterConfirm = ({
+  phoneNumber,
+  goCheckout,
+  closeModal,
+  t,
+  userInfo,
+}) => {
   const { register, handleSubmit, errors } = useForm();
   const router = useRouter();
+  const dispatch = useDispatch();
   const [clickRegister, setClick] = useState(false);
 
   const onSubmit = (data) => {
@@ -26,6 +35,7 @@ const RegisterConfirm = ({ phoneNumber, goCheckout, closeModal, t }) => {
           } else {
             router.push("/profile");
           }
+          dispatch(setUser(userInfo));
           setClick(false);
           closeModal();
           console.log(response);

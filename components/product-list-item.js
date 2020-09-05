@@ -46,7 +46,7 @@ const ProductListItem = ({ product, view, carousel, t }) => {
       sm={6}
       lg={view === "row" ? "12" : "3"}
       className={`products_col ${view === "col" ? "mobile" : ""} ${
-        carousel ? "carousel_col" : ""
+        carousel ? "carousel_col h-100" : ""
       }`}
       id="mob_col"
     >

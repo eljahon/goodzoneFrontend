@@ -68,6 +68,15 @@ function CheckoutForm({ t, setUnired, unired }) {
   const paymentMethod = watch("payment_method");
   console.log("paymentMethod", paymentMethod);
   useEffect(() => {
+    cartItems.map((item) => {
+      item.prices.map((val) => {
+        if (val.type !== "1") {
+          console.log("val", val);
+          setIsUnired(false);
+          return;
+        }
+      });
+    });
     if (paymentMethod === "unired") setUnired(true);
     else setUnired(false);
   }, [paymentMethod]);

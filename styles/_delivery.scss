@@ -7,6 +7,10 @@
     max-height: auto;
     object-fit: cover;
     -o-object-fit: cover;
+    //@include xl {
+    //height: calc(100vh - 132px);
+    // max-height: calc(100vh - 132px);
+    //}
   }
 }
 .delivery_content {

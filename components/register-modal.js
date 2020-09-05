@@ -13,6 +13,7 @@ function RegisterModal({ closeModal, login, goCheckout, t }) {
   const dispatch = useDispatch();
   const [load, setLoad] = useState(false);
   const [registerConfirm, setRegisterConfirm] = useState(false);
+  const [userInfo, setUserInfo] = useState(false);
   const [userPassword, setUserPassword] = useState(null);
   const [clickRegister, setClick] = useState(false);
 
@@ -52,7 +53,7 @@ function RegisterModal({ closeModal, login, goCheckout, t }) {
         setLocalStorage("access_token", access_token);
         setUserPassword(response.data.phone);
         setRegisterConfirm(true);
-        dispatch(setUser(response.data));
+        setUserInfo(response.data);
       }
     } catch (error) {
       swal(error.response.data.Error.Message);
@@ -96,6 +97,7 @@ function RegisterModal({ closeModal, login, goCheckout, t }) {
                 phoneNumber={userPassword}
                 goCheckout={goCheckout}
                 closeModal={closeModal}
+                userInfo={userInfo}
               />
             ) : (
               <div className="auth_form-container">
