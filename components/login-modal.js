@@ -67,7 +67,6 @@ function LoginModal({ closeModal, goRegister, goCheckout, t }) {
   };
   const resPassword = async (data) => {
     setDisabled(true);
-    console.log(isSend);
     try {
       if (!isSend) {
         const response = await axios.get(
@@ -115,11 +114,7 @@ function LoginModal({ closeModal, goRegister, goCheckout, t }) {
     });
 
     try {
-      const response = await axios.post(
-        process.env.LOGIN_API_URL,
-
-        formData
-      );
+      const response = await axios.post(process.env.LOGIN_API_URL, formData);
 
       const {
         data: { access_token },
@@ -266,17 +261,13 @@ function LoginModal({ closeModal, goRegister, goCheckout, t }) {
                     </button>
                   </form>
 
-                  {!errorText ? (
-                    <p className="auth_form-offer">
-                      <span>{t("is-have-account")}</span>
-                      <button className="btn" onClick={goRegister}>
-                        {" "}
-                        {t("register")}
-                      </button>
-                    </p>
-                  ) : (
-                    ""
-                  )}
+                  <p className="auth_form-offer">
+                    <span>{t("is-have-account")}</span>
+                    <button className="btn" onClick={goRegister}>
+                      {" "}
+                      {t("register")}
+                    </button>
+                  </p>
                 </div>
                 {isLogin ? (
                   <div className="auth_form-offer-section pb-4 bg-white">

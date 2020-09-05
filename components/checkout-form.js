@@ -20,10 +20,10 @@ function CheckoutForm({ t, setUnired, unired }) {
   const dispatch = useDispatch();
   const { register, handleSubmit, errors, watch } = useForm();
   const router = useRouter();
-  const [isUnired, setIsUnired] = useState(false);
+  const [isUnired, setIsUnired] = useState(true);
   const cartItems = useSelector((state) => state.cart.cartItems, shallowEqual);
   const user = useSelector((state) => state.auth.user);
-  console.log(cartItems);
+
   const onSubmit = async (data) => {
     // router.push('/order-received');
     const orderItems = [...cartItems];
@@ -97,7 +97,9 @@ function CheckoutForm({ t, setUnired, unired }) {
             id="address"
             required
             ref={register}
-            defaultValue={user ? `${user.address}` : ""}
+            defaultValue={
+              user["address"] !== undefined ? `${user.address}` : ""
+            }
             placeholder={t("write-address")}
           />
         </div>
@@ -202,6 +204,7 @@ function CheckoutForm({ t, setUnired, unired }) {
               name="payment_method"
               value="unired"
               id="unired"
+              disabled={isUnired}
               ref={register}
             />
             <label htmlFor="unired">

@@ -12,36 +12,15 @@ const statusDict = {
   finished: "Завершено",
 };
 
-function OrderList({ t }) {
-  const [order, setOrder] = useState(null);
-  const user = useSelector((state) => state.auth.user, shallowEqual);
-
-  useEffect(() => {
-    axios
-      .get(
-        "https://cors-anywhere.herokuapp.com/" + process.env.MY_ORDERS_API_URL,
-        {
-          headers: { Authorization: user.access_token },
-        }
-      )
-      .then((response) => {
-        setOrder(response.data);
-        console.log(response.data);
-      })
-      .catch((error) => {
-        console.log("error " + error);
-      });
-  }, []);
-
-  return order ? (
+function OrderList({ t, orders }) {
+  return orders ? (
     <div className="order_list-wrapper">
       <h3>{t("my-orders")}</h3>
-      {console.log("order", order)}
       <div className="order_content-wrapper">
         <div className="order_content">
           <div className="order_list">
-            {order.orders ? (
-              order.orders.map((order) => (
+            {orders ? (
+              orders.map((order) => (
                 <Link
                   href={`${
                     i18n.language === "ru" ? "" : "/uz"
@@ -60,7 +39,7 @@ function OrderList({ t }) {
                     <div className="card_body">
                       <div className="card_meta">
                         <span>{t("date")}:</span>
-                        <span>{order.created_at}</span>
+                        <span> {order.created_at}</span>
                       </div>
                       <div className="card_meta">
                         <span>{t("status")}:</span>

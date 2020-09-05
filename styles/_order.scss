@@ -84,7 +84,7 @@
 .order_card {
   display: flex;
   flex-direction: column;
-  width: 32%;
+  width: 28%;
   margin-right: 15px;
   padding: 0;
   background-color: #ffffff;
@@ -159,7 +159,6 @@
   background-color: #fff;
   box-shadow: rgba(0, 0, 0, 0.16) 0 0 6px;
   @include sm {
-    display: none;
     min-height: auto;
   }
   .header {
@@ -179,7 +178,7 @@
         padding: 0;
         margin-left: 0;
         &.title {
-          display: none;
+          margin-left: 10px;
         }
       }
     }
@@ -416,5 +415,28 @@
         }
       }
     }
+  }
+}
+
+@media (max-width: 1225px) {
+  .order_card {
+    width: 35%;
+  }
+}
+
+@media (max-width: 1101px) {
+  .order_card {
+    width: 40%;
+  }
+}
+@media (max-width: 997px) {
+  .order_card {
+    width: 100%;
+  }
+}
+
+@media (max-width: 590px) {
+  .delivery_info {
+    display: inline-block !important;
   }
 }
