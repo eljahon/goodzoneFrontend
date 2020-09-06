@@ -13,9 +13,6 @@
     flex-shrink: 0;
     margin-right: 30px;
     border: none;
-    @include sm {
-      display: none;
-    }
     h3 {
       font-family: $head-font;
       font-size: 21px;
