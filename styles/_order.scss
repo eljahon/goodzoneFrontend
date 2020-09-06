@@ -430,6 +430,12 @@
   }
 }
 
+@media (max-width: 710px) {
+  .order_card {
+    width: 100%;
+  }
+}
+
 @media (max-width: 590px) {
   .delivery_info {
     display: inline-block !important;

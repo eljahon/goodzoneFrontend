@@ -48,7 +48,7 @@ function AddressModal({ closeModal, address, onSubmit, t }) {
         </button>
         <div className="inner_block">
           <div className="auth_form address_form">
-            <div className="auth_form-container">
+            <div className="auth_form-container address_container">
               <h3>{t("edit-address")}</h3>
               <form onSubmit={handleSubmit(onSubmit)}>
                 <input
