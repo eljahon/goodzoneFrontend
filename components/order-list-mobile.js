@@ -20,7 +20,7 @@ function OrderListMobile({ t, orders }) {
       <h3>{t("my-orders")}</h3>
       <Accordion defaultActiveKey="0">
         {orders
-          ? orders.map((order, i) => (
+          ? orders.map((order, i) => order.items && (
               <Link
                 href={`${
                   i18n.language === "ru" ? "" : "/uz"

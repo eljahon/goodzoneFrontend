@@ -20,14 +20,14 @@ function OrderList({ t, orders }) {
         <div className="order_content">
           <div className="order_list">
             {orders ? (
-              orders.map((order) => (
+              orders.map((order) => order.items && (
                 <Link
                   href={`${
                     i18n.language === "ru" ? "" : "/uz"
-                  }/order-history/[id]`}
+                    }/order-history/[id]`}
                   as={`${i18n.language === "ru" ? "" : "/uz"}/order-history/${
                     order.number
-                  }`}
+                    }`}
                   key={order.id}
                 >
                   <a className="order_card">
@@ -56,15 +56,15 @@ function OrderList({ t, orders }) {
                 </Link>
               ))
             ) : (
-              <p>{t("you-havent-ordered-yet")}</p>
-            )}
+                <p>{t("you-havent-ordered-yet")}</p>
+              )}
           </div>
         </div>
       </div>
     </div>
   ) : (
-    ""
-  );
+      ""
+    );
 }
 
 export default withTranslation("checkout")(OrderList);

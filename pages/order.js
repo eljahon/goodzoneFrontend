@@ -21,6 +21,7 @@ export default function Order() {
       )
       .then((response) => {
         setOrders(response.data.orders);
+        console.log("orders", orders);
       })
       .catch((error) => {
         console.log("error " + error);

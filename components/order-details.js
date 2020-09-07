@@ -9,6 +9,7 @@ import axios from "axios";
 import swal from "sweetalert";
 import AlertDialog from "./dialog";
 
+
 function OrderDetails({ t, data }) {
   const router = useRouter();
   const [editable, setEditable] = useState(() => {
@@ -32,6 +33,11 @@ function OrderDetails({ t, data }) {
     setDisabled(false);
     setTimeout(() => inputRef.current.focus(), 100);
     console.log("inputRef.current", inputRef.current);
+  };
+  const handleSubmit = async (payment, number, totalPrice) => {
+    console.log(payment, totalPrice, number);
+    window.location.href = `${process.env.PAYMENT_API_URL}?payment=${payment}&order_id=${number}&secret_key=b52ca358473ddbbc3a3a3cf374fc4f0c&amount=${totalPrice}`;
+    console.log("submit");
   };
 
   const saveChanges = async () => {
@@ -117,8 +123,8 @@ function OrderDetails({ t, data }) {
                 disabled={disabled}
               />
             ) : (
-              <span>{data.address}</span>
-            )}
+                <span>{data.address}</span>
+              )}
             {editable && (
               <EditIcon className="edit_order" onClick={handleEdit} />
             )}
@@ -150,11 +156,30 @@ function OrderDetails({ t, data }) {
             <span className="price">{t("free")}</span>
           </div>
           <div className="price_row">
+            <span>{t("payment-method")}</span>
+            {data.payment_method === "payme" || data.payment_method === "click" ? (
+              <span span className="d-flex align-items-center">
+                <span className="mr-1">
+                  {data.payment_method.charAt(0).toUpperCase() + data.payment_method.slice(1)}
+                </span>
+                <button
+                  className="btn px-2 text-white"
+                  style={{ backgroundColor: "#f5363e", fontSize: "14px" }}
+                  onClick={() => handleSubmit(data.payment_method, data.number, calcTotalPrice(data.items))}
+                >
+                  {t("pay-now")}
+                </button></span>)
+              : <span className="mr-1">
+                {t(data.payment_method)}
+              </span>}
+          </div>
+          <div className="price_row">
             <span>{t("total-amount")}</span>
             <span className="price">
               {numberToPrice(calcTotalPrice(data.items))}
             </span>
           </div>
+
         </div>
       </div>
       <div className="order_table-wrapper">
@@ -206,10 +231,10 @@ function OrderDetails({ t, data }) {
           </div>
         </div>
       </div>
-    </div>
+    </div >
   ) : (
-    ""
-  );
+      ""
+    );
 }
 
 export default withTranslation("checkout")(OrderDetails);
