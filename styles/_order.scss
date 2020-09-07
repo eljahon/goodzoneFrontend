@@ -13,6 +13,9 @@
     flex-shrink: 0;
     margin-right: 30px;
     border: none;
+    @include sm {
+      display: none;
+    }
     h3 {
       font-family: $head-font;
       font-size: 21px;
@@ -51,6 +54,9 @@
     display: block;
     width: 100%;
     padding: 0px 20px;
+    .order_list-wrapper{
+      display: none;
+    }
   }
   h3 {
     font-family: $head-font;
