@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 export default function Order() {
-  const [orders, setOrder] = useState(null);
+  const [orders, setOrders] = useState(null);
   const user = useSelector((state) => state.auth.user, shallowEqual);
 
   useEffect(() => {
@@ -20,14 +20,13 @@ export default function Order() {
         }
       )
       .then((response) => {
-        setOrder(response.data.orders);
-        console.log(order);
+        setOrders(response.data.orders);
       })
       .catch((error) => {
         console.log("error " + error);
       });
   }, []);
-  return order && (
+  return orders && (
     <>
       <SEO />
       <div className="profile_wrapper">
