@@ -56,7 +56,12 @@ function RegisterModal({ closeModal, login, goCheckout, t }) {
         setUserInfo(response.data);
       }
     } catch (error) {
-      swal(error.response.data.Error);
+      swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Something went wrong!',
+        footer: '<a href>Why do I have this issue?</a>'
+      })
     }
   };
 
