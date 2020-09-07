@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { FaTimes } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import axios from "axios";
+import swal from "sweetalert";
 import { setLocalStorage } from "../libs/localStorage";
 import { setUser } from "../redux/actions/authActions/authActions";
 import { useDispatch } from "react-redux";
@@ -50,13 +51,12 @@ function RegisterModal({ closeModal, login, goCheckout, t }) {
 
       if (response.status === 200) {
         setClick(false);
-
         setUserPassword(response.data.phone);
         setRegisterConfirm(true);
         setUserInfo(response.data);
       }
     } catch (error) {
-      swal(error.response.data.Error.Message);
+      swal(error.response.data.Error);
     }
   };
 
@@ -100,67 +100,67 @@ function RegisterModal({ closeModal, login, goCheckout, t }) {
                 userInfo={userInfo}
               />
             ) : (
-              <div className="auth_form-container">
-                <h3>{t("register")}</h3>
-                <span className="sub_heading"></span>
-                <form onSubmit={handleSubmit(onSubmit)}>
-                  <input
-                    ref={register}
-                    name="firstName"
-                    placeholder={t("name")}
-                    required
-                  />
-                  <input
-                    ref={register}
-                    name="lastName"
-                    placeholder={t("lastName")}
-                    required
-                  />
-                  <input
-                    ref={register({
-                      maxLength: 13,
-                      minLength: 13,
-                    })}
-                    defaultValue="+998"
-                    type="tel"
-                    name="phoneNumber"
-                    placeholder={t("phone-number")}
-                    required
-                  />
-                  {errors.phoneNumber && (
-                    <p>Phone number should be 13 characters long</p>
-                  )}
-                  <input
-                    ref={register}
-                    type="password"
-                    name="password"
-                    placeholder={t("password")}
-                    required
-                  />
-                  <input
-                    ref={register}
-                    type="password"
-                    name="passwordConfirmation"
-                    placeholder={t("confirm-password")}
-                    required
-                  />
-                  <button
-                    disabled={clickRegister}
-                    type="submit"
-                    className="btn btn_submit"
-                  >
-                    {t("register")}
-                  </button>
-                </form>
-                <p className="auth_form-offer">
-                  <span>{t("is-have-not-account")} </span>
-                  <button className="btn" onClick={login}>
-                    {" "}
-                    {t("login")}
-                  </button>
-                </p>
-              </div>
-            )}
+                <div className="auth_form-container">
+                  <h3>{t("register")}</h3>
+                  <span className="sub_heading"></span>
+                  <form onSubmit={handleSubmit(onSubmit)}>
+                    <input
+                      ref={register}
+                      name="firstName"
+                      placeholder={t("name")}
+                      required
+                    />
+                    <input
+                      ref={register}
+                      name="lastName"
+                      placeholder={t("lastName")}
+                      required
+                    />
+                    <input
+                      ref={register({
+                        maxLength: 13,
+                        minLength: 13,
+                      })}
+                      defaultValue="+998"
+                      type="tel"
+                      name="phoneNumber"
+                      placeholder={t("phone-number")}
+                      required
+                    />
+                    {errors.phoneNumber && (
+                      <p>Phone number should be 13 characters long</p>
+                    )}
+                    <input
+                      ref={register}
+                      type="password"
+                      name="password"
+                      placeholder={t("password")}
+                      required
+                    />
+                    <input
+                      ref={register}
+                      type="password"
+                      name="passwordConfirmation"
+                      placeholder={t("confirm-password")}
+                      required
+                    />
+                    <button
+                      disabled={clickRegister}
+                      type="submit"
+                      className="btn btn_submit"
+                    >
+                      {t("register")}
+                    </button>
+                  </form>
+                  <p className="auth_form-offer">
+                    <span>{t("is-have-not-account")} </span>
+                    <button className="btn" onClick={login}>
+                      {" "}
+                      {t("login")}
+                    </button>
+                  </p>
+                </div>
+              )}
           </div>
         </div>
       </div>

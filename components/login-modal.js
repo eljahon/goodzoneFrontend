@@ -48,19 +48,18 @@ function LoginModal({ closeModal, goRegister, goCheckout, t }) {
     try {
       const response = await axios.get(
         `${
-          process.env.CHECK_USER_API_URL +
-          `?phone=%2B` +
-          data.phoneNumber.substring(1, data.phoneNumber.length)
+        process.env.CHECK_USER_API_URL +
+        `?phone=%2B` +
+        data.phoneNumber.substring(1, data.phoneNumber.length)
         }`
       );
-
       if (response.data.exists) {
-        setDisabled(false);
         setIsLogin(true);
         setErrorText("");
       } else {
         setErrorText("Вы еще не зарегистрированы в сети");
       }
+      setDisabled(false);
     } catch (error) {
       swal(error.response.data.Error.Message);
     }
@@ -71,9 +70,9 @@ function LoginModal({ closeModal, goRegister, goCheckout, t }) {
       if (!isSend) {
         const response = await axios.get(
           `${
-            process.env.RESER_PASSWORD_API_URL +
-            `?phone=%2B` +
-            data.phoneNumber.substring(1, data.phoneNumber.length)
+          process.env.RESER_PASSWORD_API_URL +
+          `?phone=%2B` +
+          data.phoneNumber.substring(1, data.phoneNumber.length)
           }`
         );
         if (response.status === 200) {
@@ -173,8 +172,8 @@ function LoginModal({ closeModal, goRegister, goCheckout, t }) {
                     {isSend ? t("send-code-phone") : t("send-code")}
                   </span>
                 ) : (
-                  <span className="sub_heading"></span>
-                )}
+                    <span className="sub_heading"></span>
+                  )}
                 {!isCheck ? (
                   <form onSubmit={handleSubmit(resPassword)}>
                     <input
@@ -202,13 +201,13 @@ function LoginModal({ closeModal, goRegister, goCheckout, t }) {
                     </button>
                   </form>
                 ) : (
-                  <ResetPasswordModal
-                    userInfo={userInfo}
-                    setUserInfo={setUserInfo}
-                    resetPassword={resetPassword}
-                    setResetPassword={setResetPassword}
-                  />
-                )}
+                    <ResetPasswordModal
+                      userInfo={userInfo}
+                      setUserInfo={setUserInfo}
+                      resetPassword={resetPassword}
+                      setResetPassword={setResetPassword}
+                    />
+                  )}
                 <p className="auth_form-offer">
                   <button
                     className="btn"
@@ -220,75 +219,75 @@ function LoginModal({ closeModal, goRegister, goCheckout, t }) {
                 </p>
               </div>
             ) : (
-              <>
-                <div className="auth_form-container">
-                  <h3>{t("welcome")}</h3>
-                  <span className="sub_heading">{t("sign-in-with-phone")}</span>
-                  <form onSubmit={handleSubmit(isLogin ? onSubmit : checkUser)}>
-                    <input
-                      ref={register({
-                        maxLength: 13,
-                        minLength: 13,
-                      })}
-                      type="tel"
-                      name="phoneNumber"
-                      defaultValue="+998"
-                      placeholder={t("phone-number")}
-                      required
-                    />
-                    {errors.phoneNumber && (
-                      <p>Phone number should be 13 characters long</p>
-                    )}
-                    {errorText.length !== 0 && !isLogin ? (
-                      <p>{errorText}</p>
-                    ) : (
-                      ""
-                    )}
-                    <input
-                      ref={register}
-                      type={!isLogin ? "hidden" : "password"}
-                      name="password"
-                      placeholder={t("password")}
-                      required
-                    />
-                    <button
-                      type={errorText ? "button" : "submit"}
-                      className="btn btn_submit"
-                      onClick={errorText && !isLogin ? goRegister : ""}
-                      disabled={disabled}
-                    >
-                      {errorText && !isLogin ? t("register") : t("login")}
-                    </button>
-                  </form>
-
-                  <p className="auth_form-offer">
-                    <span>{t("is-have-account")}</span>
-                    <button className="btn" onClick={goRegister}>
-                      {" "}
-                      {t("register")}
-                    </button>
-                  </p>
-                </div>
-                {isLogin ? (
-                  <div className="auth_form-offer-section pb-4 bg-white">
-                    <p className="auth_form-offer">
-                      <span className="text-dark">
-                        {t("forget-password")}?{" "}
-                      </span>
+                <>
+                  <div className="auth_form-container">
+                    <h3>{t("welcome")}</h3>
+                    <span className="sub_heading">{t("sign-in-with-phone")}</span>
+                    <form onSubmit={handleSubmit(isLogin ? onSubmit : checkUser)}>
+                      <input
+                        ref={register({
+                          maxLength: 13,
+                          minLength: 13,
+                        })}
+                        type="tel"
+                        name="phoneNumber"
+                        defaultValue="+998"
+                        placeholder={t("phone-number")}
+                        required
+                      />
+                      {errors.phoneNumber && (
+                        <p>Phone number should be 13 characters long</p>
+                      )}
+                      {errorText.length !== 0 && !isLogin ? (
+                        <p>{errorText}</p>
+                      ) : (
+                          ""
+                        )}
+                      <input
+                        ref={register}
+                        type={!isLogin ? "hidden" : "password"}
+                        name="password"
+                        placeholder={t("password")}
+                        required
+                      />
                       <button
-                        className="btn"
-                        onClick={() => setResetPassword(true)}
+                        type={errorText ? "button" : "submit"}
+                        className="btn btn_submit"
+                        onClick={errorText && !isLogin ? goRegister : ""}
+                        disabled={disabled}
                       >
+                        {errorText && !isLogin ? t("register") : t("login")}
+                      </button>
+                    </form>
+
+                    <p className="auth_form-offer">
+                      <span>{t("is-have-account")}</span>
+                      <button className="btn" onClick={goRegister}>
                         {" "}
-                        {t("reset")}
+                        {t("register")}
                       </button>
                     </p>
                   </div>
-                ) : (
-                  ""
-                )}
-              </>
-            )}
+                  {isLogin ? (
+                    <div className="auth_form-offer-section pb-4 bg-white">
+                      <p className="auth_form-offer">
+                        <span className="text-dark">
+                          {t("forget-password")}?{" "}
+                        </span>
+                        <button
+                          className="btn"
+                          onClick={() => setResetPassword(true)}
+                        >
+                          {" "}
+                          {t("reset")}
+                        </button>
+                      </p>
+                    </div>
+                  ) : (
+                      ""
+                    )}
+                </>
+              )}
           </div>
         </div>
       </div>
