@@ -67,9 +67,8 @@ function Address({ t }) {
       <SEO />
       <div className="profile_wrapper">
         <ProfileNav activeTab="address" />
-
         <div className="order_box">
-          <div className="order_list-wrapper">
+          <div className="order_list-wrapper d-block">
             <div className="address_header">
               <h3>{address ? t("my-addresses") : ""}</h3>
               {!address ? (
@@ -83,8 +82,8 @@ function Address({ t }) {
                   <span className="btn_text">{t("add-address")}</span>
                 </button>
               ) : (
-                ""
-              )}
+                  ""
+                )}
             </div>
 
             {address ? (
@@ -118,8 +117,8 @@ function Address({ t }) {
                 </div>
               </div>
             ) : (
-              ""
-            )}
+                ""
+              )}
           </div>
         </div>
       </div>
