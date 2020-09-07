@@ -14,7 +14,7 @@ export default function Order() {
   useEffect(() => {
     axios
       .get(
-        "https://cors-anywhere.herokuapp.com/" + process.env.MY_ORDERS_API_URL,
+        `https://cors-anywhere.herokuapp.com/${process.env.MY_ORDERS_API_URL}`,
         {
           headers: { Authorization: user.access_token },
         }
@@ -27,7 +27,7 @@ export default function Order() {
         console.log("error " + error);
       });
   }, []);
-  return (
+  return order && (
     <>
       <SEO />
       <div className="profile_wrapper">

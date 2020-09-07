@@ -98,7 +98,7 @@
   @include sm {
     width: 100%;
     margin-right: 0;
-    margin-bottom: 0;
+    margin-bottom: 20px;
   }
   &.active,
   &:focus,
@@ -424,6 +424,7 @@
     width: 40%;
   }
 }
+
 @media (max-width: 997px) {
   .order_card {
     width: 32%;
