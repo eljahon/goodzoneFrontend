@@ -21,7 +21,7 @@ function ResetPasswordModal({ userInfo, setResetPassword, t }) {
     }
     try {
       const response = await axios.put(
-        "https://cors-anywhere.herokuapp.com/" + process.env.PROFILE_API_URL,
+        process.env.PROFILE_API_URL,
         createFormData({
           lastname: data.lastName,
           name: data.name,

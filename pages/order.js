@@ -14,7 +14,7 @@ export default function Order() {
   useEffect(() => {
     axios
       .get(
-        `https://cors-anywhere.herokuapp.com/${process.env.MY_ORDERS_API_URL}`,
+        process.env.MY_ORDERS_API_URL,
         {
           headers: { Authorization: user.access_token },
         }

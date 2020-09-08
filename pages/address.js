@@ -28,7 +28,6 @@ function Address({ t }) {
         setUserInfo((old) => {
           old.name = response.data.customer.name;
           old.lastname = response.data.customer.lastname;
-
           return old;
         });
       })
@@ -38,7 +37,7 @@ function Address({ t }) {
   const onSubmit = async (data) => {
     try {
       const response = await axios.put(
-        "https://cors-anywhere.herokuapp.com/" + process.env.PROFILE_API_URL,
+        process.env.PROFILE_API_URL,
         createFormData({
           address: Object.keys(data).length === 0 ? "" : data.address,
           name: userInfo.name,
