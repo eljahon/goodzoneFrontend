@@ -70,5 +70,6 @@
   "edit-address": "Изменить адрес",
   "home": "Главный адрес",
   "my-address": "Мой адрес",
-  "is-have-not-account": "У вас есть аккаунт?"
+  "is-have-not-account": "У вас есть аккаунт?",
+  "again-send-password": "Отправить код еще раз"
 }

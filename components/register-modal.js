@@ -47,7 +47,7 @@ function RegisterModal({ closeModal, login, goCheckout, t }) {
       });
       const response = await axios.post(process.env.REGISTER_API_URL, formData);
       if (response.status === 200) {
-        setUserPassword(response.data.phone);
+        setUserPassword(data.password);
         setRegisterConfirm(true);
         setUserInfo(response.data);
       }
@@ -92,10 +92,10 @@ function RegisterModal({ closeModal, login, goCheckout, t }) {
           <div className="auth_form">
             {registerConfirm ? (
               <RegisterConfirm
-                phoneNumber={userPassword}
                 goCheckout={goCheckout}
                 closeModal={closeModal}
                 userInfo={userInfo}
+                setRegisterConfirm={setRegisterConfirm}
               />
             ) : (
                 <div className="auth_form-container">
@@ -111,12 +111,14 @@ function RegisterModal({ closeModal, login, goCheckout, t }) {
                       ref={register}
                       name="firstName"
                       placeholder={t("name")}
+                      defaultValue={userInfo ? userInfo.name : ""}
                       required
                     />
                     <input
                       ref={register}
                       name="lastName"
                       placeholder={t("lastName")}
+                      defaultValue={userInfo ? userInfo.lastname : ""}
                       required
                     />
                     <input
@@ -127,6 +129,7 @@ function RegisterModal({ closeModal, login, goCheckout, t }) {
                       defaultValue="+998"
                       type="tel"
                       name="phoneNumber"
+                      defaultValue={userInfo ? userInfo.phone : ""}
                       placeholder={t("phone-number")}
                       required
                     />
@@ -138,6 +141,7 @@ function RegisterModal({ closeModal, login, goCheckout, t }) {
                       type="password"
                       name="password"
                       placeholder={t("password")}
+                      defaultValue={userPassword ? userPassword : ""}
                       style={{ borderColor: errorText && errorText.Code === "BAD_REQUEST" ? "red" : "" }}
                       required
                     />
@@ -151,6 +155,7 @@ function RegisterModal({ closeModal, login, goCheckout, t }) {
                       type="password"
                       name="passwordConfirmation"
                       placeholder={t("confirm-password")}
+                      defaultValue={userPassword ? userPassword : ""}
                       required
                     />
                     <button

@@ -16,6 +16,7 @@ const RegisterConfirm = ({
   closeModal,
   t,
   userInfo,
+  setRegisterConfirm
 }) => {
   const { register, handleSubmit, errors } = useForm();
   const router = useRouter();
@@ -69,13 +70,19 @@ const RegisterConfirm = ({
         ) : (
             ""
           )}
-        <input type="tel" name="phone" defaultValue={phoneNumber} disabled />
+        <input type="tel" name="phone" defaultValue={userInfo.phone} disabled />
         <input
           type="submit"
           className="btn btn_submit"
           disabled={clickRegister}
           value={t("send")}
         />
+        <p className="auth_form-offer">
+          <button className="btn" onClick={() => { setRegisterConfirm(false) }}>
+            {" "}
+            {t("again-send-password")}
+          </button>
+        </p>
 
       </form>
       <p className="auth_form-offer"></p>
