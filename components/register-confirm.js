@@ -21,17 +21,17 @@ const RegisterConfirm = ({
   const router = useRouter();
   const dispatch = useDispatch();
   const [clickRegister, setClick] = useState(false);
+  const [errorText, setErrorText] = useState('');
 
   const onSubmit = (data) => {
     setClick(true);
-    let formData = createFormData({
-      code: data.code,
-      phone: phoneNumber,
-    });
     axios
       .post(
-        `https://cors-anywhere.herokuapp.com/${process.env.AUTHORIZE_API_URL}/verify-phone`,
-        formData,
+        `${process.env.AUTHORIZE_API_URL}/verify-phone`,
+        createFormData({
+          code: data.code,
+          phone: phoneNumber,
+        }),
         {
           headers: {
             Authorization: userInfo.access_token,
@@ -47,15 +47,16 @@ const RegisterConfirm = ({
           }
           dispatch(setUser(userInfo));
           setLocalStorage("access_token", userInfo.access_token);
-
+          setClick(false);
           closeModal();
           console.log(response);
         }
       })
       .catch((error) => {
-        swal(error.response.data.Error.Message);
-      });
-    setClick(false);
+        setErrorText(error.response.data.Error);
+        setClick(false);
+      })
+
   };
   return (
     <div className="auth_form-container">
@@ -63,6 +64,11 @@ const RegisterConfirm = ({
       <span className="sub_heading"></span>
       <form onSubmit={handleSubmit(onSubmit)}>
         <input ref={register} name="code" placeholder={t("code")} required />
+        {errorText && errorText.Code === "BAD_REQUEST" ? (
+          <small className="text-danger">{errorText.Message}</small>
+        ) : (
+            ""
+          )}
         <input type="tel" name="phone" defaultValue={phoneNumber} disabled />
         <input
           type="submit"
@@ -70,6 +76,7 @@ const RegisterConfirm = ({
           disabled={clickRegister}
           value={t("send")}
         />
+
       </form>
       <p className="auth_form-offer"></p>
     </div>

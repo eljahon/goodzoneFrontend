@@ -60,8 +60,9 @@ function LoginModal({ closeModal, goRegister, goCheckout, t }) {
       }
     } catch (error) {
       setErrorText(error.response.data.Error.Message);
+    } finally {
+      setDisabled(false);
     }
-    setDisabled(false);
   };
 
   const resPassword = async (data) => {
@@ -101,8 +102,9 @@ function LoginModal({ closeModal, goRegister, goCheckout, t }) {
 
     } catch (error) {
       setErrorText(error.response.data.Error.Message);
+    } finally {
+      setDisabled(false);
     }
-    setDisabled(false);
   };
 
   const onSubmit = async (data) => {
@@ -129,8 +131,9 @@ function LoginModal({ closeModal, goRegister, goCheckout, t }) {
 
     } catch (error) {
       setErrorText(error.response.data.Error.Message);
+    } finally {
+      setDisabled(false);
     }
-    setDisabled(false);
   };
 
   const wrapperRef = useRef(null);

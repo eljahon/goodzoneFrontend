@@ -38,8 +38,9 @@ function ResetPasswordModal({ userInfo, setResetPassword, t }) {
       }
     } catch (error) {
       setErrorText(error.response.data.Error);
+    } finally {
+      setDisabled(false);
     }
-    setDisabled(false);
   };
 
   return (

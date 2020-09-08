@@ -46,8 +46,6 @@ function RegisterModal({ closeModal, login, goCheckout, t }) {
         phone: data.phoneNumber,
       });
       const response = await axios.post(process.env.REGISTER_API_URL, formData);
-
-
       if (response.status === 200) {
         setUserPassword(response.data.phone);
         setRegisterConfirm(true);
@@ -55,8 +53,9 @@ function RegisterModal({ closeModal, login, goCheckout, t }) {
       }
     } catch (error) {
       setErrorText(error.response.data.Error);
+    } finally {
+      setClick(false);
     }
-    setClick(false);
   };
 
   const wrapperRef = useRef(null);
