@@ -43,7 +43,6 @@ function Profile({ t }) {
       const response = await axios.put(
         process.env.PROFILE_API_URL,
         createFormData({
-          address: "Tashkent",
           name: data.firstName,
           lastname: data.lastName,
           password: data.password ? data.password : "",
@@ -67,102 +66,102 @@ function Profile({ t }) {
   };
 
   return (
-    userData && (
-      <>
-        <SEO title={t("personal-area")} />
-        <div className="profile_wrapper">
-          <ProfileNav activeTab="profile" />
-          <div className="profile_content">
-            <div className="settings_form">
-              <div className="settings_form-content">
-                <div className="heading">
-                  <h3>{t("personal-area")}</h3>
-                </div>
-                <form onSubmit={handleSubmit(onSubmit)}>
-                  <div className="input_wrapper">
-                    <label htmlFor="firstName">{t("first-name")}</label>
-                    <input
-                      ref={register}
-                      defaultValue={userData.name}
-                      type="text"
-                      name="firstName"
-                      id="firstName"
-                      required
-                    />
-                  </div>
-                  <div className="input_wrapper">
-                    <label htmlFor="lastName">{t("last-name")}</label>
-                    <input
-                      ref={register}
-                      defaultValue={userData.lastname}
-                      type="text"
-                      name="lastName"
-                      id="lastName"
-                      required
-                    />
-                  </div>
-                  <div className="input_wrapper">
-                    <label htmlFor="phone">{t("phone")}</label>
-                    <input
-                      ref={register}
-                      defaultValue={userData.phone}
-                      type="tel"
-                      name="phone"
-                      id="phone"
-                      required
-                      disabled
-                    />
-                  </div>
-                  <div className="btn_wrapper">
-                    <button
-                      type="button"
-                      className="btn btn_submit"
-                      onClick={() =>
-                        setChangePasswordStatus(!changePasswordStatus)
-                      }
-                    >
-                      {t("change-password")}
-                    </button>
-                  </div>
-                  {changePasswordStatus ? (
-                    <>
-                      <div className="input_wrapper">
-                        <label htmlFor="password">{t("password")}</label>
-                        <input
-                          ref={register}
-                          type="password"
-                          name="password"
-                          id="password"
-                        />
-                      </div>
-                      <div className="input_wrapper">
-                        <label htmlFor="passwordConfirm">
-                          {t("confirm-password")}
-                        </label>
-                        <input
-                          ref={register}
-                          type="password"
-                          name="passwordConfirm"
-                          id="passwordConfirm"
-                        />
-                      </div>
-                    </>
-                  ) : null}
-                  <div className="btn_wrapper">
-                    <input
-                      type="submit"
-                      className="btn btn_submit"
-                      value={t("refresh")}
-                    />
-                  </div>
-                </form>
+
+    <>
+      <SEO title={t("personal-area")} />
+      <div className="profile_wrapper">
+        <ProfileNav activeTab="profile" />
+        <div className="profile_content">
+          <div className="settings_form">
+            <div className="settings_form-content">
+              <div className="heading">
+                <h3>{t("personal-area")}</h3>
               </div>
+              {userData ? (<form onSubmit={handleSubmit(onSubmit)}>
+                <div className="input_wrapper">
+                  <label htmlFor="firstName">{t("first-name")}</label>
+                  <input
+                    ref={register}
+                    defaultValue={userData.name}
+                    type="text"
+                    name="firstName"
+                    id="firstName"
+                    required
+                  />
+                </div>
+                <div className="input_wrapper">
+                  <label htmlFor="lastName">{t("last-name")}</label>
+                  <input
+                    ref={register}
+                    defaultValue={userData.lastname}
+                    type="text"
+                    name="lastName"
+                    id="lastName"
+                    required
+                  />
+                </div>
+                <div className="input_wrapper">
+                  <label htmlFor="phone">{t("phone")}</label>
+                  <input
+                    ref={register}
+                    defaultValue={userData.phone}
+                    type="tel"
+                    name="phone"
+                    id="phone"
+                    required
+                    disabled
+                  />
+                </div>
+                <div className="btn_wrapper">
+                  <button
+                    type="button"
+                    className="btn btn_submit"
+                    onClick={() =>
+                      setChangePasswordStatus(!changePasswordStatus)
+                    }
+                  >
+                    {t("change-password")}
+                  </button>
+                </div>
+                {changePasswordStatus ? (
+                  <>
+                    <div className="input_wrapper">
+                      <label htmlFor="password">{t("password")}</label>
+                      <input
+                        ref={register}
+                        type="password"
+                        name="password"
+                        id="password"
+                      />
+                    </div>
+                    <div className="input_wrapper">
+                      <label htmlFor="passwordConfirm">
+                        {t("confirm-password")}
+                      </label>
+                      <input
+                        ref={register}
+                        type="password"
+                        name="passwordConfirm"
+                        id="passwordConfirm"
+                      />
+                    </div>
+                  </>
+                ) : null}
+                <div className="btn_wrapper">
+                  <input
+                    type="submit"
+                    className="btn btn_submit"
+                    value={t("refresh")}
+                  />
+                </div>
+              </form>) : <p>loading</p>}
             </div>
           </div>
         </div>
-        <Footer />
-      </>
-    )
+      </div>
+      <Footer />
+    </>
+
   );
 }
 
