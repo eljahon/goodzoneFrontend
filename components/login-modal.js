@@ -19,18 +19,18 @@ function LoginModal({ closeModal, goRegister, goCheckout, t }) {
   const router = useRouter();
   const [load, setLoad] = useState(false);
   const [userInfo, setUserInfo] = useState({
-    name: "",
-    lastname: "",
-    authToken: "",
+    name: '',
+    lastname: '',
+    access_token: ''
   });
   const [isLogin, setIsLogin] = useState(false);
   const [isCheck, setIsCheck] = useState(false);
   const [disabled, setDisabled] = useState(false);
   const [isSend, setIsSend] = useState(false);
-
   const [phone, setPhone] = useState("");
   const [errorText, setErrorText] = useState("");
   const [resetPassword, setResetPassword] = useState(false);
+
   useEffect(() => {
     setLoad(true);
     document.body.classList.add("overflow");
@@ -44,7 +44,6 @@ function LoginModal({ closeModal, goRegister, goCheckout, t }) {
 
   const checkUser = async (data) => {
     setDisabled(true);
-    console.log(process.env.CHECK_USER_API_URL);
     try {
       const response = await axios.get(
         `${
@@ -54,16 +53,18 @@ function LoginModal({ closeModal, goRegister, goCheckout, t }) {
         }`
       );
       if (response.data.exists) {
+        setPhone(data.phoneNumber);
         setIsLogin(true);
         setErrorText("");
       } else {
         setErrorText("Вы еще не зарегистрированы в сети");
       }
-      setDisabled(false);
     } catch (error) {
-      swal(error.response.data.Error.Message);
+      setErrorText(error.response.data.Error.Message);
     }
+    setDisabled(false);
   };
+
   const resPassword = async (data) => {
     setDisabled(true);
     try {
@@ -76,7 +77,6 @@ function LoginModal({ closeModal, goRegister, goCheckout, t }) {
           }`
         );
         if (response.status === 200) {
-          setDisabled(false);
           setIsSend(true);
           setPhone(data.phoneNumber);
         }
@@ -89,20 +89,20 @@ function LoginModal({ closeModal, goRegister, goCheckout, t }) {
           })
         );
         if (response.status === 200) {
-          setDisabled(false);
           setIsCheck(true);
           setUserInfo((old) => {
-            old.name = response.data.name;
-            old.lastname = response.data.lastname;
-            old.authToken = response.data.access_token;
+            old.name = response.data.name,
+              old.lastname = response.data.lastname,
+              old.access_token = response.data.access_token
             return old;
           });
-          console.log(userInfo);
         }
       }
+
     } catch (error) {
-      swal(error.response.data.Error.Message);
+      setErrorText(error.response.data.Error.Message);
     }
+    setDisabled(false);
   };
 
   const onSubmit = async (data) => {
@@ -120,16 +120,17 @@ function LoginModal({ closeModal, goRegister, goCheckout, t }) {
       } = response;
 
       if (response.status === 200) {
-        setDisabled(false);
         setLocalStorage("access_token", access_token);
         dispatch(setUser(response.data));
         if (goCheckout) router.push("/checkout");
         closeModal();
         console.log(response.data);
       }
+
     } catch (error) {
-      swal(error.response.data.Error.Message);
+      setErrorText(error.response.data.Error.Message);
     }
+    setDisabled(false);
   };
 
   const wrapperRef = useRef(null);
@@ -176,6 +177,11 @@ function LoginModal({ closeModal, goRegister, goCheckout, t }) {
                   )}
                 {!isCheck ? (
                   <form onSubmit={handleSubmit(resPassword)}>
+                    {errorText ? (
+                      <p className="text-danger">{errorText}</p>
+                    ) : (
+                        ""
+                      )}
                     <input
                       ref={register({
                         maxLength: 13,
@@ -183,6 +189,7 @@ function LoginModal({ closeModal, goRegister, goCheckout, t }) {
                       })}
                       type={!isSend ? "tel" : "hidden"}
                       name="phone_number"
+                      defaultValue={phone}
                       placeholder={t("phone-number")}
                     />
                     <input
@@ -224,6 +231,11 @@ function LoginModal({ closeModal, goRegister, goCheckout, t }) {
                     <h3>{t("welcome")}</h3>
                     <span className="sub_heading">{t("sign-in-with-phone")}</span>
                     <form onSubmit={handleSubmit(isLogin ? onSubmit : checkUser)}>
+                      {errorText ? (
+                        <p className="text-danger">{errorText}</p>
+                      ) : (
+                          ""
+                        )}
                       <input
                         ref={register({
                           maxLength: 13,
@@ -238,11 +250,7 @@ function LoginModal({ closeModal, goRegister, goCheckout, t }) {
                       {errors.phoneNumber && (
                         <p>Phone number should be 13 characters long</p>
                       )}
-                      {errorText.length !== 0 && !isLogin ? (
-                        <p>{errorText}</p>
-                      ) : (
-                          ""
-                        )}
+
                       <input
                         ref={register}
                         type={!isLogin ? "hidden" : "password"}
@@ -250,10 +258,11 @@ function LoginModal({ closeModal, goRegister, goCheckout, t }) {
                         placeholder={t("password")}
                         required
                       />
+
                       <button
                         type={errorText ? "button" : "submit"}
                         className="btn btn_submit"
-                        onClick={errorText && !isLogin ? goRegister : ""}
+                        onClick={errorText && !isLogin ? goRegister : () => { }}
                         disabled={disabled}
                       >
                         {errorText && !isLogin ? t("register") : t("login")}

@@ -10,6 +10,7 @@ import { withTranslation } from "../i18n";
 function ResetPasswordModal({ userInfo, setUserInfo, setResetPassword, t }) {
   const { register, handleSubmit } = useForm();
   const [disabled, setDisabled] = useState(false);
+  const [errorText, setErrorText] = useState("");
   const updatePassword = async (data) => {
     setDisabled(true);
     if (data.password !== data.passwordConfirmation) {
@@ -26,21 +27,26 @@ function ResetPasswordModal({ userInfo, setUserInfo, setResetPassword, t }) {
         }),
         {
           headers: {
-            Authorization: userInfo.authToken,
+            Authorization: userInfo.access_token,
           },
         }
       );
       if (response.status === 200) {
-        setDisabled(false);
         setResetPassword(false);
       }
     } catch (error) {
-      swal(error.response.data.Error.Message);
+      setErrorText(error.response.data.Error);
     }
+    setDisabled(false);
   };
 
   return (
     <form onSubmit={handleSubmit(updatePassword)}>
+      {errorText ? (
+        <p className="text-danger">{errorText}</p>
+      ) : (
+          ""
+        )}
       <input
         ref={register}
         name="name"

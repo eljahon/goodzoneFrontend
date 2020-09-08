@@ -27,15 +27,15 @@ export default function Order() {
         console.log("error " + error);
       });
   }, []);
-  return orders && (
+  return (
     <>
       <SEO />
       <div className="profile_wrapper">
         <ProfileNav activeTab="order" />
-        <div className="order_box">
+        {orders && <div className="order_box">
           <OrderList orders={orders} />
           <OrderListMobile orders={orders} />
-        </div>
+        </div>}
       </div>
       <Footer />
     </>

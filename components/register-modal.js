@@ -17,6 +17,7 @@ function RegisterModal({ closeModal, login, goCheckout, t }) {
   const [userInfo, setUserInfo] = useState(false);
   const [userPassword, setUserPassword] = useState(null);
   const [clickRegister, setClick] = useState(false);
+  const [errorText, setErrorText] = useState('');
 
   useEffect(() => {
     setLoad(true);
@@ -50,19 +51,14 @@ function RegisterModal({ closeModal, login, goCheckout, t }) {
       } = response;
 
       if (response.status === 200) {
-        setClick(false);
         setUserPassword(response.data.phone);
         setRegisterConfirm(true);
         setUserInfo(response.data);
       }
     } catch (error) {
-      swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Something went wrong!',
-        footer: '<a href>Why do I have this issue?</a>'
-      })
+      setErrorText(error.response.data.Error);
     }
+    setClick(false);
   };
 
   const wrapperRef = useRef(null);
@@ -109,6 +105,7 @@ function RegisterModal({ closeModal, login, goCheckout, t }) {
                   <h3>{t("register")}</h3>
                   <span className="sub_heading"></span>
                   <form onSubmit={handleSubmit(onSubmit)}>
+
                     <input
                       ref={register}
                       name="firstName"
@@ -133,7 +130,7 @@ function RegisterModal({ closeModal, login, goCheckout, t }) {
                       required
                     />
                     {errors.phoneNumber && (
-                      <p>Phone number should be 13 characters long</p>
+                      <p className="text-danger">Phone number should be 13 characters long</p>
                     )}
                     <input
                       ref={register}
@@ -142,6 +139,11 @@ function RegisterModal({ closeModal, login, goCheckout, t }) {
                       placeholder={t("password")}
                       required
                     />
+                    {errorText ? (
+                      <p className="text-danger">{errorText}</p>
+                    ) : (
+                        ""
+                      )}
                     <input
                       ref={register}
                       type="password"
