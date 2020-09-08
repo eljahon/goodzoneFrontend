@@ -47,7 +47,7 @@ const RegisterConfirm = ({
           }
           dispatch(setUser(userInfo));
           setLocalStorage("access_token", userInfo.access_token);
-          setClick(false);
+
           closeModal();
           console.log(response);
         }
@@ -55,6 +55,7 @@ const RegisterConfirm = ({
       .catch((error) => {
         swal(error.response.data.Error.Message);
       });
+    setClick(false);
   };
   return (
     <div className="auth_form-container">

@@ -7,10 +7,12 @@ import { createFormData } from "../libs/createFormData";
 import swal from "sweetalert";
 import { withTranslation } from "../i18n";
 
-function ResetPasswordModal({ userInfo, setUserInfo, setResetPassword, t }) {
+function ResetPasswordModal({ userInfo, setResetPassword, t }) {
   const { register, handleSubmit } = useForm();
   const [disabled, setDisabled] = useState(false);
   const [errorText, setErrorText] = useState("");
+
+
   const updatePassword = async (data) => {
     setDisabled(true);
     if (data.password !== data.passwordConfirmation) {
@@ -21,8 +23,8 @@ function ResetPasswordModal({ userInfo, setUserInfo, setResetPassword, t }) {
       const response = await axios.put(
         "https://cors-anywhere.herokuapp.com/" + process.env.PROFILE_API_URL,
         createFormData({
-          lastname: userInfo.lastname,
-          name: userInfo.name,
+          lastname: data.lastName,
+          name: data.name,
           password: data.password,
         }),
         {
@@ -42,16 +44,11 @@ function ResetPasswordModal({ userInfo, setUserInfo, setResetPassword, t }) {
 
   return (
     <form onSubmit={handleSubmit(updatePassword)}>
-      {errorText ? (
-        <p className="text-danger">{errorText}</p>
-      ) : (
-          ""
-        )}
+
       <input
         ref={register}
         name="name"
         defaultValue={userInfo.name}
-        onChange={setUserInfo}
         placeholder={t("name")}
         required
       />
@@ -59,7 +56,6 @@ function ResetPasswordModal({ userInfo, setUserInfo, setResetPassword, t }) {
         ref={register}
         name="lastName"
         defaultValue={userInfo.lastname}
-        onChange={setUserInfo}
         placeholder={t("lastName")}
         required
       />
@@ -68,8 +64,14 @@ function ResetPasswordModal({ userInfo, setUserInfo, setResetPassword, t }) {
         type="password"
         name="password"
         placeholder={t("new-password")}
+        style={{ borderColor: errorText ? "red" : "" }}
         required
       />
+      {errorText ? (
+        <small className="text-danger">{errorText}</small>
+      ) : (
+          ""
+        )}
       <input
         ref={register}
         type="password"

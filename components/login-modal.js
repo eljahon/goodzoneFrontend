@@ -55,7 +55,6 @@ function LoginModal({ closeModal, goRegister, goCheckout, t }) {
       if (response.data.exists) {
         setPhone(data.phoneNumber);
         setIsLogin(true);
-        setErrorText("");
       } else {
         setErrorText("Вы еще не зарегистрированы в сети");
       }
@@ -66,6 +65,7 @@ function LoginModal({ closeModal, goRegister, goCheckout, t }) {
   };
 
   const resPassword = async (data) => {
+
     setDisabled(true);
     try {
       if (!isSend) {
@@ -210,7 +210,6 @@ function LoginModal({ closeModal, goRegister, goCheckout, t }) {
                 ) : (
                     <ResetPasswordModal
                       userInfo={userInfo}
-                      setUserInfo={setUserInfo}
                       resetPassword={resetPassword}
                       setResetPassword={setResetPassword}
                     />
@@ -229,6 +228,7 @@ function LoginModal({ closeModal, goRegister, goCheckout, t }) {
                 <>
                   <div className="auth_form-container">
                     <h3>{t("welcome")}</h3>
+
                     <span className="sub_heading">{t("sign-in-with-phone")}</span>
                     <form onSubmit={handleSubmit(isLogin ? onSubmit : checkUser)}>
                       {errorText ? (
@@ -236,6 +236,7 @@ function LoginModal({ closeModal, goRegister, goCheckout, t }) {
                       ) : (
                           ""
                         )}
+
                       <input
                         ref={register({
                           maxLength: 13,
@@ -247,6 +248,7 @@ function LoginModal({ closeModal, goRegister, goCheckout, t }) {
                         placeholder={t("phone-number")}
                         required
                       />
+
                       {errors.phoneNumber && (
                         <p>Phone number should be 13 characters long</p>
                       )}
@@ -260,7 +262,7 @@ function LoginModal({ closeModal, goRegister, goCheckout, t }) {
                       />
 
                       <button
-                        type={errorText ? "button" : "submit"}
+                        type={errorText && !isLogin ? "button" : "submit"}
                         className="btn btn_submit"
                         onClick={errorText && !isLogin ? goRegister : () => { }}
                         disabled={disabled}

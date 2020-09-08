@@ -17,7 +17,7 @@ function RegisterModal({ closeModal, login, goCheckout, t }) {
   const [userInfo, setUserInfo] = useState(false);
   const [userPassword, setUserPassword] = useState(null);
   const [clickRegister, setClick] = useState(false);
-  const [errorText, setErrorText] = useState('');
+  const [errorText, setErrorText] = useState(null);
 
   useEffect(() => {
     setLoad(true);
@@ -34,6 +34,7 @@ function RegisterModal({ closeModal, login, goCheckout, t }) {
     setClick(true);
     if (data.password !== data.passwordConfirmation) {
       alert("Passwords don't match");
+      setClick(false);
       return;
     }
 
@@ -46,9 +47,6 @@ function RegisterModal({ closeModal, login, goCheckout, t }) {
       });
       const response = await axios.post(process.env.REGISTER_API_URL, formData);
 
-      const {
-        data: { access_token },
-      } = response;
 
       if (response.status === 200) {
         setUserPassword(response.data.phone);
@@ -105,7 +103,11 @@ function RegisterModal({ closeModal, login, goCheckout, t }) {
                   <h3>{t("register")}</h3>
                   <span className="sub_heading"></span>
                   <form onSubmit={handleSubmit(onSubmit)}>
-
+                    {errorText && errorText.Code === "ALREADY_EXISTS" ? (
+                      <p className="text-danger mb-2">{errorText.Message}</p>
+                    ) : (
+                        ""
+                      )}
                     <input
                       ref={register}
                       name="firstName"
@@ -137,10 +139,11 @@ function RegisterModal({ closeModal, login, goCheckout, t }) {
                       type="password"
                       name="password"
                       placeholder={t("password")}
+                      style={{ borderColor: errorText && errorText.Code === "BAD_REQUEST" ? "red" : "" }}
                       required
                     />
-                    {errorText ? (
-                      <p className="text-danger">{errorText}</p>
+                    {errorText && errorText.Code === "BAD_REQUEST" ? (
+                      <small className="text-danger">{errorText.Message}</small>
                     ) : (
                         ""
                       )}
