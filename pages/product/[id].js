@@ -194,7 +194,7 @@ function Product({ product: data, t, shops }) {
                           <CommentIcon />
                         </span>
                       </a>
-                    </Link>({reviews.reviews_count ? reviews.reviews_count : 0})
+                    </Link>(888)
                   </span>
                 </div>
                 <Link href="#details">
