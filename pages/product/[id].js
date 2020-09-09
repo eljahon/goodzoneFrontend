@@ -76,7 +76,7 @@ function Product({ product: data, t, shops }) {
   const [reviews, setReviews] = useState(null);
   const [limit, setLimit] = useState(10);
   const [count, setCount] = useState(0);
-  const [elements, setElement] = useState('');
+  const [elements, setElement] = useState("about");
   useEffect(() => {
     setLoading(true);
     axios
@@ -188,17 +188,17 @@ function Product({ product: data, t, shops }) {
                     size="large"
                   />
                   <span className="ml-3">
-                    <Link href="#details">
-                      <a className="logo">
-                        <span className="mr-1">
-                          <CommentIcon />
-                        </span>
-                      </a>
-                    </Link>(888)
+
+                    <a className="logo" href="#details" onClick={() => { setElement("reviews") }}>
+                      <span className="mr-1">
+                        <CommentIcon />
+                      </span>
+                    </a>
+                    (888)
                   </span>
                 </div>
                 <Link href="#details">
-                  <a className="product_desc-link">{t("about-product")}</a>
+                  <a className="product_desc-link" onClick={() => { setElement("about") }}>{t("about-product")}</a>
                 </Link>
               </div>
               <div className="product_cart-wrapper">
@@ -243,7 +243,7 @@ function Product({ product: data, t, shops }) {
             </div>
           </div>
           <div className="details_container" id="details">
-            <Tabs defaultActiveKey="about">
+            <Tabs activeKey={elements}>
               <Tab
                 eventKey="about"
                 title={
