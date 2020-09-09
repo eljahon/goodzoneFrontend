@@ -194,7 +194,7 @@ function Product({ product: data, t, shops }) {
                         <CommentIcon />
                       </span>
                     </a>
-                    ({data.reviews_count !== 0 ? data.reviews_count : t("comment-count")})
+                    <small className="text-secondary">({data.reviews_count ? t("comment-count") : data.reviews_count})</small>
                   </span>
                 </div>
                 <Link href="#details">
