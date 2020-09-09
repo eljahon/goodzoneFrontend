@@ -3,6 +3,7 @@ import { Tabs, Tab, Breadcrumb, Badge, Spinner } from "react-bootstrap";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
+import CommentIcon from '../../components/comment-icon';
 
 import {
   FaShoppingBag,
@@ -75,6 +76,7 @@ function Product({ product: data, t, shops }) {
   const [reviews, setReviews] = useState(null);
   const [limit, setLimit] = useState(10);
   const [count, setCount] = useState(0);
+  const [elements, setElement] = useState('');
   useEffect(() => {
     setLoading(true);
     axios
@@ -156,8 +158,8 @@ function Product({ product: data, t, shops }) {
                   {numberToPrice(data.price.old_price)}
                 </Badge>
               ) : (
-                ""
-              )}
+                  ""
+                )}
               <div className="product_desc-wrapper">
                 {data.preview_text ? (
                   <p
@@ -167,8 +169,8 @@ function Product({ product: data, t, shops }) {
                     }}
                   ></p>
                 ) : (
-                  ""
-                )}{" "}
+                    ""
+                  )}{" "}
                 {data.brand.image ? (
                   <img
                     src={data.brand.image}
@@ -176,8 +178,25 @@ function Product({ product: data, t, shops }) {
                     className="brand_image"
                   />
                 ) : (
-                  ""
-                )}
+                    ""
+                  )}
+                <div className="d-flex align-items-center mb-2">
+                  <Rating
+                    name="read-only"
+                    value={data.average_rate ? data.average_rate : 0}
+                    readOnly
+                    size="large"
+                  />
+                  <span className="ml-3">
+                    <Link href="#details">
+                      <a className="logo">
+                        <span className="mr-1">
+                          <CommentIcon />
+                        </span>
+                      </a>
+                    </Link>({reviews.reviews_count ? reviews.reviews_count : 0})
+                  </span>
+                </div>
                 <Link href="#details">
                   <a className="product_desc-link">{t("about-product")}</a>
                 </Link>
@@ -209,8 +228,8 @@ function Product({ product: data, t, shops }) {
                       </span>
                     </button>
                   ) : (
-                    ""
-                  )}
+                      ""
+                    )}
                 </div>
               </div>
               {uniredPopup ? (
@@ -219,8 +238,8 @@ function Product({ product: data, t, shops }) {
                   data={data}
                 />
               ) : (
-                ""
-              )}
+                  ""
+                )}
             </div>
           </div>
           <div className="details_container" id="details">
@@ -241,8 +260,8 @@ function Product({ product: data, t, shops }) {
                     }}
                   ></div>
                 ) : (
-                  ""
-                )}
+                    ""
+                  )}
 
                 {data.properties ? (
                   <div className="details_wrapper">
@@ -302,20 +321,20 @@ function Product({ product: data, t, shops }) {
                                 item.quantity == 0
                                   ? "secondary"
                                   : item.quantity < 6
-                                  ? "danger"
-                                  : item.quantity < 11
-                                  ? "warning"
-                                  : "success"
-                              }`}
+                                    ? "danger"
+                                    : item.quantity < 11
+                                      ? "warning"
+                                      : "success"
+                                }`}
                             >
                               <FaCircle />
                               {item.quantity == 0
                                 ? t("not")
                                 : item.quantity < 6
-                                ? t("few")
-                                : item.quantity < 11
-                                ? t("enough")
-                                : t("lot")}
+                                  ? t("few")
+                                  : item.quantity < 11
+                                    ? t("enough")
+                                    : t("lot")}
                             </span>
                           </td>
                         </tr>
@@ -332,6 +351,7 @@ function Product({ product: data, t, shops }) {
                     <FaCommentAlt /> {t("reviews")}
                   </span>
                 }
+
               >
                 <form
                   ref={reviewForm}
@@ -383,8 +403,8 @@ function Product({ product: data, t, shops }) {
                         <span className="sr-only">Loading...</span>
                       </Spinner>
                     ) : (
-                      t("comment")
-                    )}
+                        t("comment")
+                      )}
                   </button>
                 </form>
                 {reviews &&
@@ -401,7 +421,7 @@ function Product({ product: data, t, shops }) {
                                 review.customer_name
                                   .split(" ")[1]
                                   ?.toUpperCase() || ""
-                              }`}
+                                }`}
                             />
                           </div>
                           <div className="review_content">

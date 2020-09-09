@@ -21,13 +21,14 @@ function CheckoutForm({ t, setUnired, unired }) {
   const { register, handleSubmit, errors, watch } = useForm();
   const router = useRouter();
   const [isUnired, setIsUnired] = useState(true);
+  const [click, isClick] = useState(false);
   const cartItems = useSelector((state) => state.cart.cartItems, shallowEqual);
   const user = useSelector((state) => state.auth.user);
 
   const onSubmit = async (data) => {
     // router.push('/order-received');
     const orderItems = [...cartItems];
-
+    isClick(true);
     try {
       const response = await axios.post(
         process.env.ORDER_API_URL,
@@ -60,6 +61,7 @@ function CheckoutForm({ t, setUnired, unired }) {
       }
       console.log(response);
     } catch (error) {
+      isClick(false);
       swal(error);
       console.log(error);
     }
@@ -283,7 +285,7 @@ function CheckoutForm({ t, setUnired, unired }) {
           </a>
         </span>
         <div className="checkout_submit">
-          <button className="btn">
+          <button className="btn" disabled={click}>
             <span className="btn_text">{t("checkout")}</span>
           </button>
         </div>

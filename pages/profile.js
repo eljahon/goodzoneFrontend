@@ -154,7 +154,12 @@ function Profile({ t }) {
                     value={t("refresh")}
                   />
                 </div>
-              </form>) : <p>loading</p>}
+              </form>) : <div class="d-flex justify-content-center">
+                  <div class="spinner-border" role="status">
+                    <span class="sr-only">Loading...</span>
+                  </div>
+                </div>}
+
             </div>
           </div>
         </div>
