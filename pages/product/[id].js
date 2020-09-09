@@ -243,7 +243,7 @@ function Product({ product: data, t, shops }) {
             </div>
           </div>
           <div className="details_container" id="details">
-            <Tabs activeKey={elements}>
+            <Tabs activeKey={elements} onSelect={(k) => setElement(k)}>
               <Tab
                 eventKey="about"
                 title={
