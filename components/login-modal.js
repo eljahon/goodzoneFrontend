@@ -90,6 +90,7 @@ function LoginModal({ closeModal, goRegister, goCheckout, t }) {
           })
         );
         if (response.status === 200) {
+          setErrorText("");
           setIsCheck(true);
           setUserInfo((old) => {
             old.name = response.data.name,
@@ -291,7 +292,10 @@ function LoginModal({ closeModal, goRegister, goCheckout, t }) {
                         </span>
                         <button
                           className="btn"
-                          onClick={() => setResetPassword(true)}
+                          onClick={() => {
+                            setResetPassword(true);
+                            setErrorText("")
+                          }}
                         >
                           {" "}
                           {t("reset")}

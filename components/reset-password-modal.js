@@ -35,6 +35,7 @@ function ResetPasswordModal({ userInfo, setResetPassword, t }) {
       );
       if (response.status === 200) {
         setResetPassword(false);
+
       }
     } catch (error) {
       setErrorText(error.response.data.Error);
