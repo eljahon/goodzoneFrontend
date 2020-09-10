@@ -4,12 +4,12 @@ import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
 import axios from "axios";
 import { setLocalStorage } from "../libs/localStorage";
-import swal from "sweetalert";
 import { setUser } from "../redux/actions/authActions/authActions";
 import { useDispatch } from "react-redux";
 import ResetPasswordModal from "./reset-password-modal";
 import { withTranslation } from "../i18n";
 import { createFormData } from "../libs/createFormData";
+import { phoneAction } from "../redux/actions/authActions/authActions";
 
 function LoginModal({ closeModal, goRegister, goCheckout, t }) {
   const dispatch = useDispatch();
@@ -248,6 +248,7 @@ function LoginModal({ closeModal, goRegister, goCheckout, t }) {
                         type="tel"
                         name="phoneNumber"
                         defaultValue="+998"
+                        onChange={(e) => { dispatch(phoneAction(e.target.value)) }}
                         placeholder={t("phone-number")}
                         required
                       />

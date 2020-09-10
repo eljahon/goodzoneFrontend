@@ -3,6 +3,7 @@ import { authActionTypes } from "../actions/authActions/authActionTypes";
 const initialState = {
     user: null,
     isModalOpen: false,
+    phone: ""
 };
 
 const authReducer = (state = initialState, action) => {
@@ -18,6 +19,11 @@ const authReducer = (state = initialState, action) => {
                 ...state,
                 user: null,
             };
+        case authActionTypes.PHONE:
+            return {
+                ...state,
+                phone: payload
+            }
         // case authActionTypes.OPEN_MODAL:
         //     return {
         //         ...state,

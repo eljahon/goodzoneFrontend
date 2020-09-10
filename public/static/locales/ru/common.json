@@ -72,5 +72,6 @@
   "my-address": "Мой адрес",
   "is-have-not-account": "У вас есть аккаунт?",
   "again-send-password": "Отправить код еще раз",
-  "comment-count": "Нет отзывов"
+  "comment-count": "Нет отзывов",
+  "comment-condition": "Прежде чем комментировать пожалуйста оцените"
 }

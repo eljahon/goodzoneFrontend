@@ -5,7 +5,7 @@ import axios from "axios";
 import swal from "sweetalert";
 import { setLocalStorage } from "../libs/localStorage";
 import { setUser } from "../redux/actions/authActions/authActions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import RegisterConfirm from "./register-confirm";
 import { createFormData } from "../libs/createFormData";
 import { withTranslation } from "../i18n";
@@ -18,7 +18,7 @@ function RegisterModal({ closeModal, login, goCheckout, t }) {
   const [userPassword, setUserPassword] = useState(null);
   const [clickRegister, setClick] = useState(false);
   const [errorText, setErrorText] = useState(null);
-
+  const phone_num = useSelector((state) => state.auth.phone);
   useEffect(() => {
     setLoad(true);
     document.body.classList.add("overflow");
@@ -126,10 +126,9 @@ function RegisterModal({ closeModal, login, goCheckout, t }) {
                         maxLength: 13,
                         minLength: 13,
                       })}
-                      defaultValue="+998"
                       type="tel"
                       name="phoneNumber"
-                      defaultValue={userInfo ? userInfo.phone : ""}
+                      defaultValue={userInfo ? userInfo.phone : phone_num ? phone_num : "+998"}
                       placeholder={t("phone-number")}
                       required
                     />

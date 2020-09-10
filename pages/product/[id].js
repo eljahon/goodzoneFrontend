@@ -73,10 +73,12 @@ function Product({ product: data, t, shops }) {
   const reviewForm = useRef(null);
   const [reviewsAdded, setReviewsAdded] = useState(0);
   const [rating, setRating] = useState(0);
+  const [errorText, setErrorText] = useState("");
   const [reviews, setReviews] = useState(null);
   const [limit, setLimit] = useState(10);
   const [count, setCount] = useState(0);
   const [elements, setElement] = useState("about");
+
   useEffect(() => {
     setLoading(true);
     axios
@@ -97,6 +99,10 @@ function Product({ product: data, t, shops }) {
   const { register, handleSubmit, errors } = useForm();
 
   const onSubmit = async (formData) => {
+    if (rating == 0) {
+      setErrorText(t("comment-condition"));
+      return;
+    }
     setLoading(true);
     try {
       const response = await axios.post(
@@ -194,7 +200,7 @@ function Product({ product: data, t, shops }) {
                         <CommentIcon />
                       </span>
                     </a>
-                    <small className="text-secondary">({data.reviews_count ? t("comment-count") : data.reviews_count})</small>
+                    <small className="text-secondary">({data.reviews_count == 0 ? t("comment-count") : data.reviews_count})</small>
                   </span>
                 </div>
                 <Link href="#details">
@@ -366,13 +372,15 @@ function Product({ product: data, t, shops }) {
                       />
                     )}
                     <div className="form_inputs">
-                      <div>
+                      <div className="d-flex align-items-center">
                         <Rating
                           onChange={(e, newValue) => setRating(newValue)}
                           name="rating"
                           value={rating}
                         />
+                        <span className="text-danger ml-2">{rating === 0 ? errorText : ""}</span>
                       </div>
+
                       {user ? null : (
                         <input
                           ref={register}
@@ -394,7 +402,6 @@ function Product({ product: data, t, shops }) {
                   </div>
                   <button
                     type="submit"
-                    disabled={rating === 0}
                     className="btn btn_submit"
                     style={{ marginTop: "1rem" }}
                   >
