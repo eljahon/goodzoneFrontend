@@ -20,7 +20,7 @@ function CheckoutForm({ t, setUnired, unired }) {
   const dispatch = useDispatch();
   const { register, handleSubmit, errors, watch } = useForm();
   const router = useRouter();
-  const [isUnired, setIsUnired] = useState(true);
+  const [isUnired, setIsUnired] = useState(false);
   const [click, isClick] = useState(false);
   const cartItems = useSelector((state) => state.cart.cartItems, shallowEqual);
   const user = useSelector((state) => state.auth.user);
@@ -70,15 +70,6 @@ function CheckoutForm({ t, setUnired, unired }) {
   const paymentMethod = watch("payment_method");
   console.log("paymentMethod", paymentMethod);
   useEffect(() => {
-    cartItems.map((item) => {
-      item.prices.map((val) => {
-        if (val.type !== "1") {
-          console.log("val", val);
-          setIsUnired(false);
-          return;
-        }
-      });
-    });
     if (paymentMethod === "unired") setUnired(true);
     else setUnired(false);
   }, [paymentMethod]);
