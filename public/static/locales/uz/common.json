@@ -72,5 +72,7 @@
   "is-have-not-account": "Ro'yxatdan o'tganmisiz ?",
   "again-send-password": "Kodni qayta yuboring",
   "comment-count": "Sharhlar yo'q",
-  "comment-condition": "Izoh berishdan oldin, iltimos, baho bering"
+  "comment-condition": "Izoh berishdan oldin, iltimos, baho bering",
+  "reject-register": "Ro'yxatdan o'tishni rad etish",
+  "reject-text-register": "Ro'yxatdan o'tishni xohlamaysizmi?"
 }

@@ -8,7 +8,6 @@ import { withTranslation } from "../i18n";
 import { setUser } from "../redux/actions/authActions/authActions";
 import { useDispatch } from "react-redux";
 import { setLocalStorage } from "../libs/localStorage";
-import swal from "sweetalert";
 
 const RegisterConfirm = ({
   phoneNumber,
@@ -16,7 +15,8 @@ const RegisterConfirm = ({
   closeModal,
   t,
   userInfo,
-  setRegisterConfirm
+  setRegisterConfirm,
+
 }) => {
   const { register, handleSubmit, errors } = useForm();
   const router = useRouter();
@@ -85,8 +85,10 @@ const RegisterConfirm = ({
         </p>
 
       </form>
+
       <p className="auth_form-offer"></p>
     </div>
+
   );
 };
 

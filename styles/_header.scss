@@ -1192,7 +1192,8 @@ header {
     color: rgb(34, 34, 34);
     border-radius: 15px;
     @include md {
-      display: none;
+      top:40px;
+      right: 0px;
     }
     svg {
       font-size: 32px;
