@@ -79,10 +79,6 @@ function RegisterModal({ closeModal, login, goCheckout, t }) {
     }, [ref]);
   }
 
-  const handleInputChange = (e) => setInput({
-    ...input,
-    [e.currentTarget.name]: e.currentTarget.value
-  })
 
   return (
 
