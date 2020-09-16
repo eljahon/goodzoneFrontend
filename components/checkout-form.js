@@ -67,12 +67,14 @@ function CheckoutForm({ t, setUnired, unired }) {
     }
   };
   useEffect(() => {
-    cartItems.map((item) => {
-      if (Array.isArray(item.prices))
-        item.prices.map(val => {
-          if (val.type == "1" && val.price == "0") { setIsUnired(true); return; }
-        })
-    })
+    if (Array.isArray(cartItems)) {
+      cartItems.map((item) => {
+        if (Array.isArray(item.prices))
+          item.prices.map(val => {
+            if (val.type == "1" && val.price == "0") { setIsUnired(true); return; }
+          })
+      })
+    }
   }, []);
 
   const paymentMethod = watch("payment_method");
@@ -214,10 +216,11 @@ function CheckoutForm({ t, setUnired, unired }) {
               name="payment_method"
               value="unired"
               id="unired"
+              className={isUnired ? "link_disabled" : ""}
               disabled={isUnired}
               ref={register}
             />
-            <label htmlFor="unired">
+            <label htmlFor="unired" className={isUnired ? "link_disabled" : ""}>
               <span className="card_title">Unired</span>
               <span className="card_content">
                 <img
