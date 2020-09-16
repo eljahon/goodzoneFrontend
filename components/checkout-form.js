@@ -66,6 +66,14 @@ function CheckoutForm({ t, setUnired, unired }) {
       console.log(error);
     }
   };
+  useEffect(() => {
+    cartItems.map((item) => {
+      if (Array.isArray(item.prices))
+        item.prices.map(val => {
+          if (val.type == "1" && val.price == "0") { setIsUnired(true); return; }
+        })
+    })
+  }, []);
 
   const paymentMethod = watch("payment_method");
   console.log("paymentMethod", paymentMethod);
