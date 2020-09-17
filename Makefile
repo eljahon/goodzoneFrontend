@@ -36,7 +36,5 @@ push-image:
 	docker push ${REGISTRY}/${IMG_NAME}:${TAG}
 	docker push ${REGISTRY}/${IMG_NAME}:${ENV_TAG}
 
-	swag init -g api/main.go -o api/docs
-
 .PHONY: build-image
 
