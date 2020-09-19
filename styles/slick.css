@@ -26,3 +26,30 @@
     padding-top: 20px;
   }
 }
+
+
+
+.notfound_not{
+  height: 120vh;
+}
+
+.notfound_home{
+  font-family: 'Montserrat', sans-serif;
+  text-transform: uppercase;
+}
+
+
+.notfound .notfound-404 h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 220px;
+  font-weight: 900;
+  margin: 0px;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 10px;
+}
+
+.notfound_text{
+  font-family: 'Montserrat', sans-serif;
+}
+
