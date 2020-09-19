@@ -37,4 +37,3 @@ push-image:
 	docker push ${REGISTRY}/${IMG_NAME}:${ENV_TAG}
 
 .PHONY: build-image
-

@@ -20,7 +20,6 @@ function OrderDetails({ order, t }) {
 
     const handleSubmit = async () => {
         window.location.href = `${process.env.PAYMENT_API_URL}?payment=${payment}&order_id=${order.number}&secret_key=b52ca358473ddbbc3a3a3cf374fc4f0c&amount=${totalPrice}`;
-        console.log("submit");
     };
     return (
         <>
