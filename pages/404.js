@@ -3,7 +3,7 @@ import { withTranslation } from "../i18n";
 function Page404({ t }) {
     return (<div className="container-fluid bg-danger notfound_not d-flex align-items-center justify-content-center">
         <div>
-            <div className="row notfound">
+            <div className="notfound">
                 <div className="notfound-404 col-md-12">
                     <h1 className="text-center">404</h1>
                 </div>

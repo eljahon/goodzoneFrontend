@@ -45,8 +45,9 @@ function ProductListFilter({
         <div className="sidebar_wrapper">
           <div className="outer_wrapper">
             <div className="inner_wrapper">
-              <button className="btn close_filter" onClick={closePopup}>
-                <FaTimes />
+              <button className="btn btn-danger close_filter" onClick={closePopup}>
+                {t('close-filter')}
+                {/* <FaTimes /> */}
               </button>
               <form>
                 <h3>{t("filter")}</h3>
@@ -58,41 +59,41 @@ function ProductListFilter({
                   <h5>{t("brands")}</h5>
                   {brands
                     ? brands.map((brand) => (
-                        <div key={brand.id} className="check_box">
-                          <input
-                            onChange={() => handleToggle(brand.id)}
-                            type="checkbox"
-                            name={brand.name}
-                            id={brand.name}
-                            checked={filterBrands.includes(brand.id)}
-                          />
-                          <label htmlFor={brand.name}>{brand.name}</label>
-                        </div>
-                      ))
+                      <div key={brand.id} className="check_box">
+                        <input
+                          onChange={() => handleToggle(brand.id)}
+                          type="checkbox"
+                          name={brand.name}
+                          id={brand.name}
+                          checked={filterBrands.includes(brand.id)}
+                        />
+                        <label htmlFor={brand.name}>{brand.name}</label>
+                      </div>
+                    ))
                     : null}
                 </div>
                 {productProperty
                   ? productProperty.map((property) => (
-                      <div className="filter_group" key={property.id}>
-                        <h5>{property.name}</h5>
-                        {property.options.map((item) => (
-                          <div key={item.name} className="check_box">
-                            <input
-                              onChange={() =>
-                                handleInput(property.id, item.value)
-                              }
-                              type="checkbox"
-                              name={item.value}
-                              id={item.value}
-                              checked={filterProperties.some(
-                                (prop) => prop.value === item.value
-                              )}
-                            />
-                            <label htmlFor={item.value}>{item.name}</label>
-                          </div>
-                        ))}
-                      </div>
-                    ))
+                    <div className="filter_group" key={property.id}>
+                      <h5>{property.name}</h5>
+                      {property.options.map((item) => (
+                        <div key={item.name} className="check_box">
+                          <input
+                            onChange={() =>
+                              handleInput(property.id, item.value)
+                            }
+                            type="checkbox"
+                            name={item.value}
+                            id={item.value}
+                            checked={filterProperties.some(
+                              (prop) => prop.value === item.value
+                            )}
+                          />
+                          <label htmlFor={item.value}>{item.name}</label>
+                        </div>
+                      ))}
+                    </div>
+                  ))
                   : null}
               </form>
             </div>
