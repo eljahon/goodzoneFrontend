@@ -127,7 +127,6 @@ function LoginModal({ closeModal, goRegister, goCheckout, t }) {
         dispatch(setUser(response.data));
         if (goCheckout) router.push("/checkout");
         closeModal();
-        console.log(response.data);
       }
 
     } catch (error) {

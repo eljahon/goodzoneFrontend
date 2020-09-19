@@ -41,7 +41,7 @@ export default function Category({products, categoryId, query}) {
                 setProductProperty(response.data.category.product_properties);
             })
             .catch((err) => {
-                console.log(err);
+                alert(err);
             });
     }, [categoryProducts]);
 
@@ -90,7 +90,6 @@ export default function Category({products, categoryId, query}) {
 
     /*    useEffect(() => {
             if (categoryProducts) {
-                console.log("cat", filteredProducts);
                 let sortedProductsByPrice=null;
                 if (filteredProducts)
                     sortedProductsByPrice = filteredProducts.sort(
@@ -99,7 +98,6 @@ export default function Category({products, categoryId, query}) {
                 else sortedProductsByPrice = categoryProducts.sort(
                     (a, b) => a.price.price - b.price.price
                 );
-                console.log("sort", sortedProductsByPrice);
                 const prices = [
                     +sortedProductsByPrice[0].price.price,
                     +sortedProductsByPrice[sortedProductsByPrice.length - 1].price.price,
@@ -163,16 +161,13 @@ export default function Category({products, categoryId, query}) {
         axios
             .post(`${process.env.PRODUCT_FILTER_API_URL}?active=true`, formData)
             .then((data) => {
-                console.log("limit",productLimit);
                 const {products} = data.data;
                 setFilteredProducts(products);
-                console.log('filterch', filterPriceRange);
 
                     if (filterPriceRange.length === 0) {
                         let sortedProductsByPrice = products.sort(
                             (a, b) => a.price.price - b.price.price
                         );
-                        console.log("sort", sortedProductsByPrice);
                         const prices = [
                             +sortedProductsByPrice[0].price.price,
                             +sortedProductsByPrice[sortedProductsByPrice.length - 1].price.price,
@@ -239,7 +234,6 @@ export async function getServerSideProps({query, req}) {
             }
         }
     });
-    console.log("categoryId :>> ", categoryId);
     const [products] = await fetchMultipleUrls([
         `${process.env.PRODUCT_API_URL}?category=${categoryId}&lang=${req.i18n.language}`,
     ]);

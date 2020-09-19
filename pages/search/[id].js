@@ -126,10 +126,8 @@ export default function Search({searchResult, searchTerm, query}) {
                 const {products} = data.data;
                 setFilteredProducts(products);
                 setLoading(false);
-                console.log("products", products);
             })
             .catch((error) => console.error("error", error));
-        console.log("selectDropdownFilter", selectDropdownFilter);
     }, [
         filterBrands,
         searchTerm,
@@ -160,10 +158,8 @@ export async function getServerSideProps({query, req}) {
         `${process.env.PRODUCT_API_URL}?search=${searchTerm}&lang=${req.i18n.language}`,
     ];
 
-    console.log(urls);
     const [searchResult] = await fetchMultipleUrls(urls);
 
-    console.log("SEARCHRESULT", searchResult);
     return {
         props: {
             searchResult,

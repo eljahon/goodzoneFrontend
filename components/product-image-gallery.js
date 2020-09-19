@@ -37,7 +37,6 @@ function ProductImageGallery({ data, t }) {
     const imageUrl = e.target.src;
 
     setImage(imageUrl);
-    console.log(e.target.src);
   };
   return (
     <div className="product_preview">
