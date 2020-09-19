@@ -26,7 +26,7 @@ function SEO({ t, title, description, image, keywords }) {
             <meta name="twitter:image" content={image ? image : 'images/carousel_1.jpg'} />
 
             <link rel="canonical" href={location.href} />
-            <link rel="icon" href="/goodzone.ico" />
+            <link rel="icon" href="/fav.ico" />
             <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400;1,700&family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet" />
         </Head>
     )
