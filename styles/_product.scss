@@ -502,8 +502,11 @@
         border-bottom: none;
         border-radius: 6px;
         @include sm {
-            display: flex !important;
+            display: block !important;
             justify-content: space-between;
+            .nav-link {
+                margin: 0!important;
+            }
         }
         .nav-link {
             position: relative;
