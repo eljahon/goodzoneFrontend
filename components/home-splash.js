@@ -1,7 +1,6 @@
 import { Carousel } from "react-bootstrap";
 
 export default function HomeSplash({ banners }) {
-  console.log(banners);
   return (
     <section className="home_splash">
       <Carousel>

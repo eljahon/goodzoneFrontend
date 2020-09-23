@@ -31,7 +31,6 @@ function RelatedProducts({ products, t }) {
     };
 
     const addToCartHandler = (product, event) => {
-        console.log("product", product);
         const button = event.target;
         const cartItem = button.querySelector(".cart-item");
         const pointCartItemX = cartItem.getBoundingClientRect().x;

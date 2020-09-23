@@ -17,7 +17,6 @@ const Layout = ({ children }) => {
             .catch((err) => console.error(err));
     }, [i18n.language]);
 
-    console.log("categories :>> ", categories);
 
     return categories ? (
         <>

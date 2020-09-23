@@ -47,7 +47,6 @@ const SearchBar = ({ t }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (debouncedSearchTerm) {
-      console.log(debouncedSearchTerm);
       localStorage.setItem("search", debouncedSearchTerm);
       router.push(`/search/${transliterate(debouncedSearchTerm)}`);
       setProducts([]);

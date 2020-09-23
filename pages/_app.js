@@ -6,7 +6,6 @@ import NProgress from "nprogress"; //nprogress module
 import "nprogress/nprogress.css"; //styles of nprogress
 import { Router } from "next/router";
 import "react-multi-carousel/lib/styles.css";
-
 import { PersistGate } from "redux-persist/integration/react";
 import { persistStore } from "redux-persist";
 import Layout from "../components/Layout";

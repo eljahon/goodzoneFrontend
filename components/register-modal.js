@@ -51,7 +51,6 @@ function RegisterModal({ closeModal, login, goCheckout, t }) {
       if (response.status === 200) {
         setUserInfo(response.data);
         setUserPassword(data.password);
-        console.log(userInfo);
         setRegisterConfirm(true);
       }
     } catch (error) {

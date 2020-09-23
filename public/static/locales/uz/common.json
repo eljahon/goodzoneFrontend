@@ -74,5 +74,8 @@
   "comment-count": "Sharhlar yo'q",
   "comment-condition": "Izoh berishdan oldin, iltimos, baho bering",
   "reject-register": "Ro'yxatdan o'tishni rad etish",
-  "reject-text-register": "Ro'yxatdan o'tishni xohlamaysizmi?"
+  "reject-text-register": "Ro'yxatdan o'tishni xohlamaysizmi?",
+  "not-found-text": "Sahifa topilmadi",
+  "go-home": "Bosh sahifaga",
+  "close-filter": "Qo'lash"
 }

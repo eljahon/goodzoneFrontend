@@ -13,7 +13,6 @@ function CheckoutItems({ t, unired }) {
         shallowEqual
     );
 
-    console.log("cartItems", cartItems);
 
     const totalPrice = useSelector(
         (state) => cartTotalPriceSelector(state),
