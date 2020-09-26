@@ -27,3 +27,9 @@ pipelines:
             - make push-image  TAG=$BITBUCKET_BUILD_NUMBER
             - source .build_info
             - ssh goodzone@$GOODZONE_PROD_HOST 'docker service update --with-registry-auth --image '$REGISTRY'/'$APP':'$BITBUCKET_BUILD_NUMBER' '$APP''
+
+definitions:
+  services:
+    docker:
+      memory: 3072
+
