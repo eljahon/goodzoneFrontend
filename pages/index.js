@@ -12,6 +12,8 @@ import { getLocalStorage } from "../libs/localStorage";
 import { axiosAuth } from "../libs/axios/axios-instances";
 import { setUser } from "../redux/actions/authActions/authActions";
 import { withTranslation } from "../i18n";
+import { Container, Row } from "react-bootstrap";
+import BannerContainer from "../components/bannerContainer";
 
 function Home({
     new_products,
@@ -42,12 +44,17 @@ function Home({
             <SEO />
             <HomeSplash banners={banners} />
             <Products title={t("new-arrivals")} data={new_products.products} />
-            <Banner double />
+            <BannerContainer>
+                <Banner size={9} name="banner-po-seredine-1300x260" />
+                <Banner size={3} name="malyi-nizhnii-banner-420x260" />
+            </BannerContainer>
             <Products
                 title={t("popular-items")}
                 data={popular_products.products}
             />
-            <Banner />
+            <BannerContainer>
+                <Banner size={12} name="pervyi-banner-1720x260" />
+            </BannerContainer>
             <Products
                 title={t("the-best-selection-for-you")}
                 data={recommended_products.products}
