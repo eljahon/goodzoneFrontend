@@ -3,7 +3,7 @@ import Footer from "../components/footer";
 import { i18n } from "../i18n";
 import useAxios from "../libs/hooks/useAxios";
 
-export default function Page({ slug, fallbackImg }) {
+export default function Page({ slug }) {
     const [pageInfo, error] = useAxios(
         `${process.env.PAGE_API_URL}/${slug}?lang=${i18n.language}`
     );

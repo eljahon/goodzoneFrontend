@@ -11,7 +11,6 @@ import {
     FaBoxOpen,
     FaStore,
     FaCommentAlt,
-    FaArrowDown,
 } from "react-icons/fa";
 import SEO from "../../components/seo";
 import Footer from "../../components/footer";
