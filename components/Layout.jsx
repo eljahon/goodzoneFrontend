@@ -3,6 +3,8 @@ import Header from "./header";
 import { useEffect } from "react";
 import axios from "axios";
 import { i18n } from "../i18n";
+import withYM from "next-ym";
+import { Router } from 'next/router'
 
 const Layout = ({ children }) => {
     const [categories, setCategories] = useState(null);
@@ -26,4 +28,4 @@ const Layout = ({ children }) => {
     ) : null;
 };
 
-export default Layout;
+export default withYM("67755550", Router)(Layout);
