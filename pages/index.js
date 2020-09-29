@@ -42,11 +42,11 @@ function Home({
 
     return (
         <>
-            {/* <SEO /> */}
-            <NextSeo
+            <SEO />
+            {/* <NextSeo
                 title="Goodzone online store"
                 description="Goodzone online store seo properties"
-            />
+            /> */}
             <HomeSplash banners={banners} />
             <Products title={t("new-arrivals")} data={new_products.products} />
             <BannerContainer>

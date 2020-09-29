@@ -131,7 +131,7 @@ function Product({ product: data, t, shops }) {
 
     return (
         <>
-            {/* <SEO
+            <SEO
                 title={data.meta.title || data.name}
                 description={
                     data.meta.description ||
@@ -139,8 +139,8 @@ function Product({ product: data, t, shops }) {
                 }
                 image={data.image}
                 keywords={data.meta.tags}
-            /> */}
-            <NextSeo
+            />
+            {/* <NextSeo
                 title={data.meta.title || data.name}
                 description={
                     data.meta.description ||
@@ -168,7 +168,7 @@ function Product({ product: data, t, shops }) {
                     site: '@site',
                     cardType: 'summary_large_image',
                 }}
-            />
+            /> */}
             <div className="product_wrapper">
                 <div className="product_container">
                     <Breadcrumb>
