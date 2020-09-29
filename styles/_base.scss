@@ -14,41 +14,41 @@ $screen-lg: 992px;
 $screen-xl: 1200px;
 
 @mixin sh {
-  @media (max-width: #{$screen-sh}) {
-    @content;
-  }
+    @media (max-width: #{$screen-sh}) {
+        @content;
+    }
 }
 @mixin sm {
-  @media (max-width: #{$screen-sm}) {
-    @content;
-  }
+    @media (max-width: #{$screen-sm}) {
+        @content;
+    }
 }
 @mixin md {
-  @media (max-width: #{$screen-md}) {
-    @content;
-  }
+    @media (max-width: #{$screen-md}) {
+        @content;
+    }
 }
 @mixin lg {
-  @media (max-width: #{$screen-lg}) {
-    @content;
-  }
+    @media (max-width: #{$screen-lg}) {
+        @content;
+    }
 }
 @mixin xl {
-  @media (min-width: #{$screen-xl}) {
-    @content;
-  }
+    @media (min-width: #{$screen-xl}) {
+        @content;
+    }
 }
 
 html {
-  scroll-behavior: smooth;
+    scroll-behavior: smooth;
 }
 body {
-  box-sizing: border-box;
-  font-family: $base-font;
-  overflow-x: hidden;
-  &.overflow {
-    overflow: hidden;
-  }
+    box-sizing: border-box;
+    font-family: $base-font;
+    overflow-x: hidden;
+    &.overflow {
+        overflow: hidden;
+    }
 }
 h1,
 h2,
@@ -56,28 +56,32 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: $head-font;
+    font-family: $head-font;
 }
 .container {
-  max-width: 1160px;
-  margin: 0 auto;
-  padding: 0 10px;
-  @include sm {
-    max-width: 347px;
-  }
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 0 10px;
+    @include sm {
+        max-width: 347px;
+    }
 }
 ul {
-  padding: 0;
-  list-style: none;
+    padding: 0;
+    list-style: none;
 }
 a {
-  text-decoration: none;
-  color: #000000;
+    text-decoration: none;
+    color: #000000;
 }
 .btn:focus {
-  box-shadow: 0 0 0 0.2rem rgba(245, 54, 62, 0.25);
+    box-shadow: 0 0 0 0.2rem rgba(245, 54, 62, 0.25);
 }
 
 #nprogress .spinner {
-  display: none !important;
+    display: none !important;
+}
+
+figure.image img {
+    width: 100%;
 }
