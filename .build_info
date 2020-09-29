@@ -1,2 +1,1 @@
-APP=gz_frontend
-REGISTRY=registry.udevs.io
+export APP=gz_frontend
