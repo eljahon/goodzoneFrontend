@@ -14,6 +14,7 @@ import { setUser } from "../redux/actions/authActions/authActions";
 import { withTranslation } from "../i18n";
 import { Container, Row } from "react-bootstrap";
 import BannerContainer from "../components/bannerContainer";
+import { NextSeo } from 'next-seo'
 
 function Home({
     new_products,
@@ -41,7 +42,11 @@ function Home({
 
     return (
         <>
-            <SEO />
+            {/* <SEO /> */}
+            <NextSeo
+                title="Goodzone online store"
+                description="Goodzone online store seo properties"
+            />
             <HomeSplash banners={banners} />
             <Products title={t("new-arrivals")} data={new_products.products} />
             <BannerContainer>

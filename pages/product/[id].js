@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import CommentIcon from "../../components/comment-icon";
-
+import { NextSeo } from 'next-seo'
 import {
     FaShoppingBag,
     FaCircle,
@@ -131,7 +131,7 @@ function Product({ product: data, t, shops }) {
 
     return (
         <>
-            <SEO
+            {/* <SEO
                 title={data.meta.title || data.name}
                 description={
                     data.meta.description ||
@@ -139,6 +139,35 @@ function Product({ product: data, t, shops }) {
                 }
                 image={data.image}
                 keywords={data.meta.tags}
+            /> */}
+            <NextSeo
+                title={data.meta.title || data.name}
+                description={
+                    data.meta.description ||
+                    data.preview_text.replace(/(<([^>]+)>)/gi, "")
+                }
+                canonical="https://www.canonical.ie/"
+                openGraph={{
+                    url: 'https://www.url.ie/a',
+                    title: data.meta.title || data.name,
+                    description: data.meta.description ||
+                        data.preview_text.replace(/(<([^>]+)>)/gi, ""),
+                    images: [
+                        {
+                            url: data.image,
+                            width: 800,
+                            height: 600,
+                            alt: 'Og Image Alt',
+                        },
+                        { url: data.image },
+                    ],
+                    site_name: 'Goodzone',
+                }}
+                twitter={{
+                    handle: '@handle',
+                    site: '@site',
+                    cardType: 'summary_large_image',
+                }}
             />
             <div className="product_wrapper">
                 <div className="product_container">
@@ -167,8 +196,8 @@ function Product({ product: data, t, shops }) {
                                     {numberToPrice(data.price.old_price)}
                                 </Badge>
                             ) : (
-                                ""
-                            )}
+                                    ""
+                                )}
                             <div className="product_desc-wrapper">
                                 {data.preview_text ? (
                                     <p
@@ -178,8 +207,8 @@ function Product({ product: data, t, shops }) {
                                         }}
                                     ></p>
                                 ) : (
-                                    ""
-                                )}{" "}
+                                        ""
+                                    )}{" "}
                                 {data.brand.image ? (
                                     <img
                                         src={data.brand.image}
@@ -187,8 +216,8 @@ function Product({ product: data, t, shops }) {
                                         className="brand_image"
                                     />
                                 ) : (
-                                    ""
-                                )}
+                                        ""
+                                    )}
                                 <div className="d-flex align-items-center mb-2">
                                     <Rating
                                         name="read-only"
@@ -264,8 +293,8 @@ function Product({ product: data, t, shops }) {
                                             </span>
                                         </button>
                                     ) : (
-                                        ""
-                                    )}
+                                            ""
+                                        )}
                                 </div>
                             </div>
                             {uniredPopup ? (
@@ -274,8 +303,8 @@ function Product({ product: data, t, shops }) {
                                     data={data}
                                 />
                             ) : (
-                                ""
-                            )}
+                                    ""
+                                )}
                         </div>
                     </div>
                     <div className="details_container" id="details">
@@ -299,8 +328,8 @@ function Product({ product: data, t, shops }) {
                                         }}
                                     ></div>
                                 ) : (
-                                    ""
-                                )}
+                                        ""
+                                    )}
 
                                 {data.properties ? (
                                     <div className="details_wrapper">
@@ -372,29 +401,28 @@ function Product({ product: data, t, shops }) {
                                                     </td>
                                                     <td>
                                                         <span
-                                                            className={`td_icon ${
-                                                                item.quantity ==
+                                                            className={`td_icon ${item.quantity ==
                                                                 0
-                                                                    ? "secondary"
-                                                                    : item.quantity <
-                                                                      6
+                                                                ? "secondary"
+                                                                : item.quantity <
+                                                                    6
                                                                     ? "danger"
                                                                     : item.quantity <
-                                                                      11
-                                                                    ? "warning"
-                                                                    : "success"
-                                                            }`}
+                                                                        11
+                                                                        ? "warning"
+                                                                        : "success"
+                                                                }`}
                                                         >
                                                             <FaCircle />
                                                             {item.quantity == 0
                                                                 ? t("not")
                                                                 : item.quantity <
-                                                                  6
-                                                                ? t("few")
-                                                                : item.quantity <
-                                                                  11
-                                                                ? t("enough")
-                                                                : t("lot")}
+                                                                    6
+                                                                    ? t("few")
+                                                                    : item.quantity <
+                                                                        11
+                                                                        ? t("enough")
+                                                                        : t("lot")}
                                                         </span>
                                                     </td>
                                                 </tr>
@@ -476,8 +504,8 @@ function Product({ product: data, t, shops }) {
                                                 </span>
                                             </Spinner>
                                         ) : (
-                                            t("comment")
-                                        )}
+                                                t("comment")
+                                            )}
                                     </button>
                                 </form>
                                 {reviews &&
@@ -490,14 +518,13 @@ function Product({ product: data, t, shops }) {
                                                             size="50"
                                                             name={`${review.customer_name
                                                                 .split(" ")[0]
-                                                                .toUpperCase()} ${
-                                                                review.customer_name
+                                                                .toUpperCase()} ${review.customer_name
                                                                     .split(
                                                                         " "
                                                                     )[1]
                                                                     ?.toUpperCase() ||
                                                                 ""
-                                                            }`}
+                                                                }`}
                                                         />
                                                     </div>
                                                     <div className="review_content">
