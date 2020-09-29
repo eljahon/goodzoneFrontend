@@ -41,8 +41,6 @@ const ProductListItem = ({ product, view, carousel, t }) => {
         }, 2000);
     };
 
-    const baseUrl = `/uz/product`;
-
     return (
         <Col
             sm={6}
@@ -54,8 +52,10 @@ const ProductListItem = ({ product, view, carousel, t }) => {
         >
             <div className={`product_card ${view === "row" ? "view_row" : ""}`}>
                 <Link
-                    href={`/uz/product/[id]`}
-                    as={`/uz/product/${product.slug}`}
+                    href={`${i18n.language === "ru" ? "" : "/uz"}/product/[id]`}
+                    as={`${i18n.language === "ru" ? "" : "/uz"}/product/${
+                        product.slug
+                    }`}
                 >
                     <a className="product_image">
                         <LazyImage
@@ -67,8 +67,12 @@ const ProductListItem = ({ product, view, carousel, t }) => {
                 </Link>
                 <div className="product_info">
                     <Link
-                        href={`${baseUrl}/[id]`}
-                        as={`${baseUrl}/${product.slug}`}
+                        href={`${
+                            i18n.language === "ru" ? "" : "/uz"
+                        }/product/[id]`}
+                        as={`${i18n.language === "ru" ? "" : "/uz"}/product/${
+                            product.slug
+                        }`}
                     >
                         <a>
                             <h3 className="product_title">{product.name}</h3>

@@ -19,14 +19,17 @@ function OrderHistory({ order }) {
     );
 }
 
-export default OrderHistory
+export default OrderHistory;
 
 export async function getServerSideProps({ params, req }) {
-    const urls = [`${process.env.ORDER_API_URL}/${params.id}?lang=${req.i18n.language}`];
+    const urls = [
+        `${process.env.ORDER_API_URL}/${params.id}?lang=${req.i18n.language}`,
+        `${process.env.CATEGORY_API_URL}?lang=${req.i18n.language}`,
+    ];
 
-    const [order] = await fetchMultipleUrls(urls);
+    const [order, category] = await fetchMultipleUrls(urls);
 
     return {
-        props: { order },
+        props: { order, category },
     };
 }

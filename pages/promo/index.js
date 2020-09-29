@@ -1,13 +1,13 @@
 import React from "react";
-import Link from 'next/link'
+import Link from "next/link";
 import SEO from "../../components/seo";
 import Footer from "../../components/footer";
 import { Row, Col } from "react-bootstrap";
 import { FaRegCalendarAlt } from "react-icons/fa";
 import { LazyImage } from "../../components/lazy-image";
-import { withTranslation, i18n } from '../../i18n'
+import { withTranslation, i18n } from "../../i18n";
 import { fetchMultipleUrls } from "../../libs/fetchMultipleUrls";
-import { getLocaleDate } from '../../libs/getLocaleDate'
+import { getLocaleDate } from "../../libs/getLocaleDate";
 import { timeDiffCalc } from "../../libs/timeDiffCalc";
 
 function Promo({ t, promos }) {
@@ -37,26 +37,52 @@ function Promo({ t, promos }) {
 
     return (
         <>
-            <SEO title={t('promo')} />
+            <SEO title={t("promo")} />
 
             <section className="promo_container">
                 <div className="promo_content">
-                    <h1>{t('promo')}</h1>
+                    <h1>{t("promo")}</h1>
                     <Row className="products_row">
-                        {promos.map(promo => (
-                            <Col key={promo.id} sm={6} lg={3} className="products_col">
+                        {promos.map((promo) => (
+                            <Col
+                                key={promo.id}
+                                sm={6}
+                                lg={3}
+                                className="products_col"
+                            >
                                 <div className="product_card">
-                                    <Link href={`${i18n.language === 'ru' ? '' : '/uz'}/promo/[id]`} as={`${i18n.language === 'ru' ? '' : '/uz'}/promo/${promo.slug}`}>
+                                    <Link
+                                        href={`${
+                                            i18n.language === "ru" ? "" : "/uz"
+                                        }/promo/[id]`}
+                                        as={`${
+                                            i18n.language === "ru" ? "" : "/uz"
+                                        }/promo/${promo.slug}`}
+                                    >
                                         <a className="product_image">
                                             <LazyImage
-                                                src={promo.preview_image || "images/card_zero.jpg"}
+                                                src={
+                                                    promo.preview_image ||
+                                                    "images/card_zero.jpg"
+                                                }
                                                 alt={promo.title}
                                                 className="img-fluid"
                                             />
                                         </a>
                                     </Link>
                                     <div className="product_info">
-                                        <Link href={`${i18n.language === 'ru' ? '' : '/uz'}/promo/[id]`} as={`${i18n.language === 'ru' ? '' : '/uz'}/promo/${promo.slug}`}>
+                                        <Link
+                                            href={`${
+                                                i18n.language === "ru"
+                                                    ? ""
+                                                    : "/uz"
+                                            }/promo/[id]`}
+                                            as={`${
+                                                i18n.language === "ru"
+                                                    ? ""
+                                                    : "/uz"
+                                            }/promo/${promo.slug}`}
+                                        >
                                             <a>
                                                 <h3 className="product_title">
                                                     {promo.title}
@@ -67,26 +93,38 @@ function Promo({ t, promos }) {
                                             <div className="offer_timer">
                                                 <div className="item">
                                                     <span className="date">
-                                                        {timeDiffCalc(promo.end_time).days}
+                                                        {
+                                                            timeDiffCalc(
+                                                                promo.end_time
+                                                            ).days
+                                                        }
                                                     </span>
                                                     <span className="title">
-                                                        {t('days')}
+                                                        {t("days")}
                                                     </span>
                                                 </div>
                                                 <div className="item">
                                                     <span className="date">
-                                                        {timeDiffCalc(promo.end_time).hours}
+                                                        {
+                                                            timeDiffCalc(
+                                                                promo.end_time
+                                                            ).hours
+                                                        }
                                                     </span>
                                                     <span className="title">
-                                                        {t('hours')}
+                                                        {t("hours")}
                                                     </span>
                                                 </div>
                                                 <div className="item">
                                                     <span className="date">
-                                                        {timeDiffCalc(promo.end_time).minutes}
+                                                        {
+                                                            timeDiffCalc(
+                                                                promo.end_time
+                                                            ).minutes
+                                                        }
                                                     </span>
                                                     <span className="title">
-                                                        {t('minutes')}
+                                                        {t("minutes")}
                                                     </span>
                                                 </div>
                                             </div>
@@ -95,22 +133,49 @@ function Promo({ t, promos }) {
                                                     <FaRegCalendarAlt />
                                                 </span>
                                                 <span className="start_date">
-                                                    {i18n.language === 'uz' ? '' : t('from')}
-                                                    <b>{getLocaleDate(promo.start_time)}</b>
-                                                    {i18n.language === 'uz' ? t('from') : ''}
+                                                    {i18n.language === "uz"
+                                                        ? ""
+                                                        : t("from")}
+                                                    <b>
+                                                        {getLocaleDate(
+                                                            promo.start_time
+                                                        )}
+                                                    </b>
+                                                    {i18n.language === "uz"
+                                                        ? t("from")
+                                                        : ""}
                                                 </span>
                                                 <span className="end_date">
-                                                    {i18n.language === 'uz' ? '' : t('to')}
-                                                    <b>{getLocaleDate(promo.end_time)}</b>
-                                                    {i18n.language === 'uz' ? t('to') : ''}
+                                                    {i18n.language === "uz"
+                                                        ? ""
+                                                        : t("to")}
+                                                    <b>
+                                                        {getLocaleDate(
+                                                            promo.end_time
+                                                        )}
+                                                    </b>
+                                                    {i18n.language === "uz"
+                                                        ? t("to")
+                                                        : ""}
                                                 </span>
                                             </div>
                                         </div>
                                         <div className="product_meta">
-                                            <Link href={`${i18n.language === 'ru' ? '' : '/uz'}/promo/[id]`} as={`${i18n.language === 'ru' ? '' : '/uz'}/promo/${promo.slug}`}>
+                                            <Link
+                                                href={`${
+                                                    i18n.language === "ru"
+                                                        ? ""
+                                                        : "/uz"
+                                                }/promo/[id]`}
+                                                as={`${
+                                                    i18n.language === "ru"
+                                                        ? ""
+                                                        : "/uz"
+                                                }/promo/${promo.slug}`}
+                                            >
                                                 <a className="btn product_btn">
                                                     <span className="btn_text">
-                                                        {t('know-more')}
+                                                        {t("know-more")}
                                                     </span>
                                                 </a>
                                             </Link>
@@ -128,15 +193,19 @@ function Promo({ t, promos }) {
     );
 }
 
-export default withTranslation('navigation')(Promo)
+export default withTranslation("navigation")(Promo);
 
 export async function getServerSideProps({ req }) {
-    const urls = [`${process.env.PROMO_API_URL}?lang=${req.i18n.language}`];
-    const [{ promos }] = await fetchMultipleUrls(urls);
+    const urls = [
+        `${process.env.PROMO_API_URL}?lang=${req.i18n.language}`,
+        `${process.env.CATEGORY_API_URL}?lang=${req.i18n.language}`,
+    ];
+    const [{ promos }, categories] = await fetchMultipleUrls(urls);
 
     return {
         props: {
             promos,
+            categories,
         },
     };
 }

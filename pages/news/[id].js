@@ -1,15 +1,18 @@
 import SEO from "../../components/seo";
 import Footer from "../../components/footer";
 import { fetchMultipleUrls } from "../../libs/fetchMultipleUrls";
-import { getLocaleDate } from '../../libs/getLocaleDate'
+import { getLocaleDate } from "../../libs/getLocaleDate";
 
 export default function NewSingle({ data }) {
-    console.log(data)
+    console.log(data);
     return (
         <>
-            <SEO 
+            <SEO
                 title={data.new.meta.title || data.new.title}
-                description={data.new.meta.description || data.new.description.replace(/(<([^>]+)>)/gi, "")}
+                description={
+                    data.new.meta.description ||
+                    data.new.description.replace(/(<([^>]+)>)/gi, "")
+                }
                 image={data.new.imageURL}
                 keywords={data.new.meta.tags}
             />
@@ -19,7 +22,9 @@ export default function NewSingle({ data }) {
                         <img src={data.new.imageURL} alt={data.new.title} />
                     </div>
                     <p className="date">{getLocaleDate(data.new.updated_at)}</p>
-                    <div dangerouslySetInnerHTML={{__html: data.new.full_text}} />
+                    <div
+                        dangerouslySetInnerHTML={{ __html: data.new.full_text }}
+                    />
                 </article>
             </section>
             <Footer />
@@ -28,12 +33,14 @@ export default function NewSingle({ data }) {
 }
 
 export async function getServerSideProps({ params, req }) {
+    const urls = [
+        `${process.env.NEWS_API_URL}/${params.id}?lang=${req.i18n.language}`,
+        `${process.env.CATEGORY_API_URL}?lang=${req.i18n.language}`,
+    ];
 
-    const urls = [`${process.env.NEWS_API_URL}/${params.id}?lang=${req.i18n.language}`];
-
-    const [data] = await fetchMultipleUrls(urls);
+    const [data, categories] = await fetchMultipleUrls(urls);
 
     return {
-        props: { data },
+        props: { data, categories },
     };
 }

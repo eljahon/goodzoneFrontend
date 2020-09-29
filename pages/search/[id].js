@@ -2,18 +2,18 @@ import SEO from "../../components/seo";
 import ProductList from "../../components/product-list";
 import CartPopup from "../../components/cart-popup";
 import Footer from "../../components/footer";
-import {useDispatch, shallowEqual, useSelector} from "react-redux";
-import {getProductsFromAPI} from "../../redux/actions/productsActions/productsActions";
-import {useEffect, useState} from "react";
+import { useDispatch, shallowEqual, useSelector } from "react-redux";
+import { getProductsFromAPI } from "../../redux/actions/productsActions/productsActions";
+import { useEffect, useState } from "react";
 import axios from "axios";
-import {fetchMultipleUrls} from "../../libs/fetchMultipleUrls";
+import { fetchMultipleUrls } from "../../libs/fetchMultipleUrls";
 import {
     clearFilters,
     getPrices,
 } from "../../redux/actions/filterActions/filterActions";
-import {i18n} from "../../i18n";
+import { i18n } from "../../i18n";
 
-export default function Search({searchResult, searchTerm, query}) {
+export default function Search({ searchResult, searchTerm, query }) {
     const dispatch = useDispatch();
     const products = searchResult.products;
     const [loading, setLoading] = useState(false);
@@ -40,7 +40,9 @@ export default function Search({searchResult, searchTerm, query}) {
                 .filter(
                     (brands, index, self) =>
                         index ===
-                        self.findIndex((t) => t.id === brands.id && t.name === brands.name)
+                        self.findIndex(
+                            (t) => t.id === brands.id && t.name === brands.name
+                        )
                 );
         setBrands(brands);
     }, [products]);
@@ -66,7 +68,8 @@ export default function Search({searchResult, searchTerm, query}) {
             );
             const prices = [
                 +sortedProductsByPrice[0].price.price,
-                +sortedProductsByPrice[sortedProductsByPrice.length - 1].price.price,
+                +sortedProductsByPrice[sortedProductsByPrice.length - 1].price
+                    .price,
             ];
 
             dispatch(getPrices(prices));
@@ -123,7 +126,7 @@ export default function Search({searchResult, searchTerm, query}) {
                 }&sort=price|${selectDropdownFilter}&limit=${productLimit}`
             )
             .then((data) => {
-                const {products} = data.data;
+                const { products } = data.data;
                 setFilteredProducts(products);
                 setLoading(false);
             })
@@ -138,7 +141,7 @@ export default function Search({searchResult, searchTerm, query}) {
 
     return (
         <>
-            <SEO/>
+            <SEO />
             <ProductList
                 search={search}
                 products={filteredProducts}
@@ -146,25 +149,27 @@ export default function Search({searchResult, searchTerm, query}) {
                 searchResult={searchTerm}
                 loading={loading}
             />
-            <CartPopup/>
-            <Footer/>
+            <CartPopup />
+            <Footer />
         </>
     );
 }
 
-export async function getServerSideProps({query, req}) {
+export async function getServerSideProps({ query, req }) {
     const searchTerm = query.id;
     const urls = [
         `${process.env.PRODUCT_API_URL}?search=${searchTerm}&lang=${req.i18n.language}`,
+        `${process.env.CATEGORY_API_URL}?lang=${req.i18n.language}`,
     ];
 
-    const [searchResult] = await fetchMultipleUrls(urls);
+    const [searchResult, categories] = await fetchMultipleUrls(urls);
 
     return {
         props: {
             searchResult,
             searchTerm,
             query,
+            categories,
         },
     };
 }

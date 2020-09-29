@@ -14,6 +14,7 @@ import { setUser } from "../redux/actions/authActions/authActions";
 import { withTranslation } from "../i18n";
 import { Container, Row } from "react-bootstrap";
 import BannerContainer from "../components/bannerContainer";
+import { NextSeo } from "next-seo";
 
 function Home({
     new_products,
@@ -42,6 +43,10 @@ function Home({
     return (
         <>
             <SEO />
+            {/* <NextSeo
+                title="Goodzone online store"
+                description="Goodzone online store seo properties"
+            /> */}
             <HomeSplash banners={banners} />
             <Products title={t("new-arrivals")} data={new_products.products} />
             <BannerContainer>
@@ -73,6 +78,7 @@ export async function getServerSideProps({ req }) {
         `${process.env.PRODUCT_API_URL}?lang=${req.i18n.language}&popular=true`,
         `${process.env.PRODUCT_API_URL}?lang=${req.i18n.language}&recommended=true`,
         `${process.env.BANNER_API_URL}?position=website-home-slider&active=true`,
+        `${process.env.CATEGORY_API_URL}?lang=${req.i18n.language}`,
     ];
 
     const [
@@ -80,6 +86,7 @@ export async function getServerSideProps({ req }) {
         popular_products,
         recommended_products,
         banners,
+        categories,
     ] = await fetchMultipleUrls(urls);
 
     return {
@@ -88,6 +95,7 @@ export async function getServerSideProps({ req }) {
             popular_products,
             recommended_products,
             banners,
+            categories,
         },
     };
 }

@@ -575,14 +575,16 @@ export async function getServerSideProps({ params, req }) {
     const urls = [
         `${process.env.PRODUCT_API_URL}/${params.id}?lang=${req.i18n.language}`,
         `${process.env.PRODUCT_API_URL}/${params.id}/shops?lang=${req.i18n.language}`,
+        `${process.env.CATEGORY_API_URL}?lang=${req.i18n.language}`,
     ];
 
-    const [{ product }, { shops }] = await fetchMultipleUrls(urls);
+    const [{ product }, { shops }, categories] = await fetchMultipleUrls(urls);
 
     return {
         props: {
             product,
             shops,
+            categories,
         },
     };
 }

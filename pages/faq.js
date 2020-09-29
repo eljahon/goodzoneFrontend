@@ -2,6 +2,7 @@ import SEO from "../components/seo";
 import Footer from "../components/footer";
 import Link from "next/link";
 import { LazyImage } from "../components/lazy-image";
+import { fetchMultipleUrls } from "../libs/fetchMultipleUrls";
 
 export default function Faq() {
     return (
@@ -72,4 +73,15 @@ export default function Faq() {
             <Footer />
         </>
     );
+}
+export async function getServerSideProps({ req }) {
+    const urls = [`${process.env.CATEGORY_API_URL}?lang=${req.i18n.language}`];
+
+    const [categories] = await fetchMultipleUrls(urls);
+
+    return {
+        props: {
+            categories,
+        },
+    };
 }

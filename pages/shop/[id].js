@@ -2,19 +2,19 @@ import SEO from "../../components/seo";
 import ProductList from "../../components/product-list";
 import CartPopup from "../../components/cart-popup";
 import Footer from "../../components/footer";
-import {useDispatch, shallowEqual, useSelector} from "react-redux";
-import {getProductsFromAPI} from "../../redux/actions/productsActions/productsActions";
-import {useEffect, useState} from "react";
+import { useDispatch, shallowEqual, useSelector } from "react-redux";
+import { getProductsFromAPI } from "../../redux/actions/productsActions/productsActions";
+import { useEffect, useState } from "react";
 import axios from "axios";
-import {fetchMultipleUrls} from "../../libs/fetchMultipleUrls";
-import {createFormData} from "../../libs/createFormData";
+import { fetchMultipleUrls } from "../../libs/fetchMultipleUrls";
+import { createFormData } from "../../libs/createFormData";
 import {
     clearFilters,
     getPrices,
 } from "../../redux/actions/filterActions/filterActions";
-import {i18n} from "../../i18n";
+import { i18n } from "../../i18n";
 
-export default function Category({products, categoryId, query}) {
+export default function Category({ products, categoryId, query }) {
     const dispatch = useDispatch();
     const categoryProducts = products.products;
 
@@ -29,7 +29,7 @@ export default function Category({products, categoryId, query}) {
                 .get(`${process.env.BRAND_API_URL}?category=${categoryId}`)
                 .then((response) => {
                     const {
-                        data: {brands},
+                        data: { brands },
                     } = response;
                     setBrands(brands);
                 })
@@ -161,19 +161,20 @@ export default function Category({products, categoryId, query}) {
         axios
             .post(`${process.env.PRODUCT_FILTER_API_URL}?active=true`, formData)
             .then((data) => {
-                const {products} = data.data;
+                const { products } = data.data;
                 setFilteredProducts(products);
 
-                    if (filterPriceRange.length === 0) {
-                        let sortedProductsByPrice = products.sort(
-                            (a, b) => a.price.price - b.price.price
-                        );
-                        const prices = [
-                            +sortedProductsByPrice[0].price.price,
-                            +sortedProductsByPrice[sortedProductsByPrice.length - 1].price.price,
-                        ];
-                        dispatch(getPrices(prices));
-                    }
+                if (filterPriceRange.length === 0) {
+                    let sortedProductsByPrice = products.sort(
+                        (a, b) => a.price.price - b.price.price
+                    );
+                    const prices = [
+                        +sortedProductsByPrice[0].price.price,
+                        +sortedProductsByPrice[sortedProductsByPrice.length - 1]
+                            .price.price,
+                    ];
+                    dispatch(getPrices(prices));
+                }
 
                 setLoading(false);
             })
@@ -192,11 +193,17 @@ export default function Category({products, categoryId, query}) {
     return (
         <>
             <SEO
-                title={products.count > 0 ? categoryProducts[0].category.name : ""}
-                description={
-                    products.count > 0 ? categoryProducts[0].category.description : ""
+                title={
+                    products.count > 0 ? categoryProducts[0].category.name : ""
                 }
-                image={products.count > 0 ? categoryProducts[0].category.image : ""}
+                description={
+                    products.count > 0
+                        ? categoryProducts[0].category.description
+                        : ""
+                }
+                image={
+                    products.count > 0 ? categoryProducts[0].category.image : ""
+                }
             />
             <ProductList
                 products={filteredProducts}
@@ -204,23 +211,25 @@ export default function Category({products, categoryId, query}) {
                 loading={loading}
                 productProperty={productProperty}
             />
-            <CartPopup/>
-            <Footer/>
+            <CartPopup />
+            <Footer />
         </>
     );
 }
 
-export async function getServerSideProps({query, req}) {
+export async function getServerSideProps({ query, req }) {
     const urls = [process.env.CATEGORY_API_URL];
 
-    const [{categories}] = await fetchMultipleUrls(urls);
+    const [categories] = await fetchMultipleUrls(urls);
 
     let categoryId = null;
     let foundChildCategory = null;
-    categories.forEach((category) => {
+    categories.categories.forEach((category) => {
         let foundCategory;
         if (category.children) {
-            foundCategory = category.children.find((ctg) => ctg.slug === query.id);
+            foundCategory = category.children.find(
+                (ctg) => ctg.slug === query.id
+            );
             if (foundCategory) categoryId = foundCategory.id;
             if (!foundCategory) {
                 category.children.forEach((childCategory) => {
@@ -228,7 +237,8 @@ export async function getServerSideProps({query, req}) {
                         foundChildCategory = childCategory.children.find(
                             (item) => item.slug === query.id
                         );
-                        if (foundChildCategory) categoryId = foundChildCategory.id;
+                        if (foundChildCategory)
+                            categoryId = foundChildCategory.id;
                     }
                 });
             }
