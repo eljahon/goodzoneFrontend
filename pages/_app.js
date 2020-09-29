@@ -36,13 +36,21 @@ function App({ Component, pageProps }) {
 
   return (
     <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
-      </PersistGate>
+      {
+        typeof window !== 'undefined' ? (
+          <PersistGate loading={null} persistor={persistor}>
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
+          </PersistGate>
+        ) : (
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
+          )
+      }
     </Provider>
   );
 }
 
-export default appWithTranslation(App);
+export default appWithTranslation(App)

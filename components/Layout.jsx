@@ -20,12 +20,12 @@ const Layout = ({ children }) => {
     }, [i18n.language]);
 
 
-    return categories ? (
+    return (
         <>
-            <Header categories={categories} />
+            {categories && <Header categories={categories} />}
             {children}
         </>
-    ) : null;
+    )
 };
 
 export default withYM("67755550", Router)(Layout);

@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import CommentIcon from "../../components/comment-icon";
-import { NextSeo } from 'next-seo'
+
 import {
     FaShoppingBag,
     FaCircle,
@@ -140,35 +140,6 @@ function Product({ product: data, t, shops }) {
                 image={data.image}
                 keywords={data.meta.tags}
             />
-            {/* <NextSeo
-                title={data.meta.title || data.name}
-                description={
-                    data.meta.description ||
-                    data.preview_text.replace(/(<([^>]+)>)/gi, "")
-                }
-                canonical="https://www.canonical.ie/"
-                openGraph={{
-                    url: 'https://www.url.ie/a',
-                    title: data.meta.title || data.name,
-                    description: data.meta.description ||
-                        data.preview_text.replace(/(<([^>]+)>)/gi, ""),
-                    images: [
-                        {
-                            url: data.image,
-                            width: 800,
-                            height: 600,
-                            alt: 'Og Image Alt',
-                        },
-                        { url: data.image },
-                    ],
-                    site_name: 'Goodzone',
-                }}
-                twitter={{
-                    handle: '@handle',
-                    site: '@site',
-                    cardType: 'summary_large_image',
-                }}
-            /> */}
             <div className="product_wrapper">
                 <div className="product_container">
                     <Breadcrumb>
