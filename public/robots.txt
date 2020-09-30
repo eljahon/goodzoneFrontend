@@ -1,0 +1,6 @@
+Sitemap: https://goodzone.uz/api/posts-sitemap
+
+User-agent: *
+Allow: /*
+
+Disallow: /api/*
