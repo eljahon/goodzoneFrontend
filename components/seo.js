@@ -25,6 +25,8 @@ function SEO({ t, title, description, image, keywords }) {
             <meta name="twitter:creator" content="Udevs" />
             <meta name="twitter:image" content={image ? image : 'https://cdn.delever.uz/goodzone/3af8b7fb-f64a-4680-913e-f6c5187e3d6e'} />
 
+            <meta name="yandex-verification" content="18730a3f373659fa" />
+
             {/* <link rel="canonical" href="https://goodzone.uz/" /> */}
             <link rel="icon" href="/fav.ico" />
             <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400;1,700&family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet" />
