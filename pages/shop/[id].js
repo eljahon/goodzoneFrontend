@@ -64,7 +64,9 @@ export default function Category({ products, categoryId, query, category }) {
 
             if (pageOffset > lastProductLoadedOffset) {
                 if (products.count > productLimit) {
-                    setProductLimit(productLimit + 20);
+                    if (!loading) {
+                        setProductLimit(productLimit + 20);
+                    }
                 }
             }
         }
@@ -92,6 +94,7 @@ export default function Category({ products, categoryId, query, category }) {
         if (categoryProducts) {
             dispatch(getProductsFromAPI(categoryProducts));
         }
+        setProductLimit(20)
     }, [categoryProducts]);
 
     useEffect(() => {
