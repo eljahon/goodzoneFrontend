@@ -14,7 +14,7 @@ import {
 } from "../../redux/actions/filterActions/filterActions";
 import { i18n } from "../../i18n";
 
-export default function Category({ products, categoryId, query }) {
+export default function Category({ products, categoryId, query, category }) {
     const dispatch = useDispatch();
     const categoryProducts = products.products;
 
@@ -86,26 +86,7 @@ export default function Category({ products, categoryId, query }) {
     const filterProperties = useSelector(
         (state) => state.filters.properties,
         shallowEqual
-    );
-
-    /*    useEffect(() => {
-            if (categoryProducts) {
-                let sortedProductsByPrice=null;
-                if (filteredProducts)
-                    sortedProductsByPrice = filteredProducts.sort(
-                        (a, b) => a.price.price - b.price.price
-                    );
-                else sortedProductsByPrice = categoryProducts.sort(
-                    (a, b) => a.price.price - b.price.price
-                );
-                const prices = [
-                    +sortedProductsByPrice[0].price.price,
-                    +sortedProductsByPrice[sortedProductsByPrice.length - 1].price.price,
-                ];
-
-                dispatch(getPrices(prices));
-            }
-        }, [filteredProducts]);*/
+    )
 
     useEffect(() => {
         if (categoryProducts) {
@@ -193,17 +174,13 @@ export default function Category({ products, categoryId, query }) {
     return (
         <>
             <SEO
-                title={
-                    products.count > 0 ? categoryProducts[0].category.name : ""
-                }
+                title={category.meta.title || category.name}
                 description={
-                    products.count > 0
-                        ? categoryProducts[0].category.description
-                        : ""
+                    category.meta.description ||
+                    category.description
                 }
-                image={
-                    products.count > 0 ? categoryProducts[0].category.image : ""
-                }
+                image={category.image}
+                keywords={category.meta.tags}
             />
             <ProductList
                 products={filteredProducts}
@@ -244,8 +221,9 @@ export async function getServerSideProps({ query, req }) {
             }
         }
     });
-    const [products] = await fetchMultipleUrls([
+    const [products, { category }] = await fetchMultipleUrls([
         `${process.env.PRODUCT_API_URL}?category=${categoryId}&lang=${req.i18n.language}`,
+        `${process.env.CATEGORY_API_URL}/${query.id}?lang=${req.i18n.language}`
     ]);
 
     return {
@@ -254,6 +232,7 @@ export async function getServerSideProps({ query, req }) {
             categories,
             categoryId,
             query,
+            category
         },
     };
 }

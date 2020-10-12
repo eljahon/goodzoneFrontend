@@ -47,11 +47,11 @@ function App({ Component, pageProps }) {
                     </Layout>
                 </PersistGate>
             ) : (
-                <Layout>
-                    <Header categories={pageProps.categories.categories} />
-                    <Component {...pageProps} />
-                </Layout>
-            )}
+                    <Layout>
+                        <Header categories={pageProps.categories.categories} />
+                        <Component {...pageProps} />
+                    </Layout>
+                )}
         </Provider>
     );
 }

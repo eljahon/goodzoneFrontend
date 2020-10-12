@@ -23,6 +23,7 @@ function Header({ categories, t }) {
     const [loginPopup, setLoginPopup] = useState(false);
     const [registerPopup, setRegisterPopup] = useState(false);
     const [profilePopup, setProfilePopup] = useState(false);
+
     useEffect(() => {
         vw <= 850 ? setMenu(false) : setMenu(true);
     }, []);
@@ -85,43 +86,9 @@ function Header({ categories, t }) {
                                 />
                             </a>
                         </Link>
-                        {/* <div className="menu" ref={wrapperRef}>
-                            <div className="popover">
-                                <div className="popover_handler">
-                                    <button
-                                        className="btn selected_item"
-                                        onClick={() => setMenu(!menu)}
-                                    >
-                                        <span>
-                                            <span className="menu_icon">
-                                                <FaBars />
-                                            </span>
-                                            <span>{t("all-categories")}</span>
-                                        </span>
-                                        <span className="menu_arrow">
-                                            <FaSortDown />
-                                        </span>
-                                    </button>
-                                </div>
-                                {menu ? (
-                                    <DepartmentsMenu
-                                        logo
-                                        categories={categories}
-                                        closeMenu={() => setMenu(false)}
-                                    />
-                                ) : (
-                                    ""
-                                )}
-                            </div>
-                        </div> */}
                     </div>
                     <SearchBar />
                     <div className="right_menu">
-                        {/* <div className="menu_item">
-                            <Link href="/promo">
-                                <a><FaRegHeart /></a>
-                            </Link>
-                        </div> */}
                         {user ? (
                             <div className="popover" ref={wrapperRef}>
                                 <div className="popover_handler">
@@ -147,20 +114,20 @@ function Header({ categories, t }) {
                                         closeMenu={() => setProfilePopup(false)}
                                     />
                                 ) : (
-                                    ""
-                                )}
+                                        ""
+                                    )}
                             </div>
                         ) : (
-                            <button
-                                className="btn join_btn"
-                                onClick={() => setLoginPopup(true)}
-                            >
-                                <span className="join_icon">
-                                    <FaSignInAlt />
-                                </span>
-                                <span className="btn-text">{t("login")}</span>
-                            </button>
-                        )}
+                                <button
+                                    className="btn join_btn"
+                                    onClick={() => setLoginPopup(true)}
+                                >
+                                    <span className="join_icon">
+                                        <FaSignInAlt />
+                                    </span>
+                                    <span className="btn-text">{t("login")}</span>
+                                </button>
+                            )}
                         <button
                             className="btn search_btn mobile"
                             onClick={() => setSearchPopup(true)}
@@ -183,24 +150,24 @@ function Header({ categories, t }) {
             {searchPopup ? (
                 <SearchModal closeModal={() => setSearchPopup(false)} />
             ) : (
-                ""
-            )}
+                    ""
+                )}
             {loginPopup ? (
                 <LoginModal
                     closeModal={() => setLoginPopup(false)}
                     goRegister={() => switchPopup()}
                 />
             ) : (
-                ""
-            )}
+                    ""
+                )}
             {registerPopup ? (
                 <RegisterModal
                     closeModal={() => setRegisterPopup(false)}
                     login={() => switchPopup()}
                 />
             ) : (
-                ""
-            )}
+                    ""
+                )}
         </>
     );
 }
