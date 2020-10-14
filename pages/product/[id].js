@@ -35,7 +35,7 @@ function Product({ product: data, t, shops }) {
   const router = useRouter();
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
-  const availabileInStore = !shops.reduce((acc, shop) => {
+  const availabileInStore = !!shops.reduce((acc, shop) => {
     acc += shop.quantity;
     return acc;
   }, 0);
