@@ -79,5 +79,7 @@
   "reject-text-register": "Вы действительно хотите отменить регистрацию?",
   "not-found-text": "Страница не найдена",
   "go-home": "На главную страницу",
-  "close-filter": "Применить"
+  "close-filter": "Применить",
+  "available": "Есть в наличии",
+  "not-available": "Нет в наличии"
 }
