@@ -27,7 +27,7 @@ const SearchBar = ({ t }) => {
         setIsFetching(true);
         axios
           .get(
-            `${process.env.PRODUCT_API_URL}?limit=3&search=${debouncedSearchTerm}`
+            `${process.env.PRODUCT_API_URL}?active=true&limit=3&search=${debouncedSearchTerm}`
           )
           .then((data) => {
             const {
