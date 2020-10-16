@@ -20,40 +20,40 @@ Router.events.on("routeChangeComplete", () => NProgress.done());
 Router.events.on("routeChangeError", () => NProgress.done());
 
 function App({ Component, pageProps }) {
-    const store = useStore(pageProps.initialReduxState);
-    const persistor = persistStore(store);
+  const store = useStore(pageProps.initialReduxState);
+  const persistor = persistStore(store);
 
-    typeof window !== "undefined" ? (window.pageProps = pageProps) : [];
+  typeof window !== "undefined" ? (window.pageProps = pageProps) : [];
 
-    const router = useRouter();
-    useEffect(() => {
-        const handleRouteChange = (url) => {
-            gtag.pageview(url);
-            gtag.pageview_udevs(url);
-        };
-        router.events.on("routeChangeComplete", handleRouteChange);
-        return () => {
-            router.events.off("routeChangeComplete", handleRouteChange);
-        };
-    }, [router.events]);
+  const router = useRouter();
+  useEffect(() => {
+    const handleRouteChange = (url) => {
+      gtag.pageview(url);
+      gtag.pageview_udevs(url);
+    };
+    router.events.on("routeChangeComplete", handleRouteChange);
+    return () => {
+      router.events.off("routeChangeComplete", handleRouteChange);
+    };
+  }, [router.events]);
 
-    return (
-        <Provider store={store}>
-            {typeof window !== "undefined" ? (
-                <PersistGate loading={null} persistor={persistor}>
-                    <Layout>
-                        <Header categories={pageProps.categories.categories} />
-                        <Component {...pageProps} />
-                    </Layout>
-                </PersistGate>
-            ) : (
-                    <Layout>
-                        <Header categories={pageProps.categories.categories} />
-                        <Component {...pageProps} />
-                    </Layout>
-                )}
-        </Provider>
-    );
+  return (
+    <Provider store={store}>
+      {typeof window !== "undefined" ? (
+        <PersistGate loading={null} persistor={persistor}>
+          <Layout>
+            <Header categories={pageProps.categories.categories} />
+            <Component {...pageProps} />
+          </Layout>
+        </PersistGate>
+      ) : (
+        <Layout>
+          <Header categories={pageProps.categories.categories} />
+          <Component {...pageProps} />
+        </Layout>
+      )}
+    </Provider>
+  );
 }
 
 export default appWithTranslation(App);
