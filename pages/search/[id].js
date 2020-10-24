@@ -3,7 +3,6 @@ import ProductList from "../../components/product-list";
 import CartPopup from "../../components/cart-popup";
 import Footer from "../../components/footer";
 import { useDispatch, shallowEqual, useSelector } from "react-redux";
-import { getProductsFromAPI } from "../../redux/actions/productsActions/productsActions";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { fetchMultipleUrls } from "../../libs/fetchMultipleUrls";
@@ -18,42 +17,8 @@ export default function Search({ searchResult, searchTerm, query }) {
   const products = searchResult.products;
   const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState(true);
-  const [brands, setBrands] = useState([]);
   const [productLimit, setProductLimit] = useState(20);
-  useEffect(() => {
-    // axios
-    //         .get(process.env.BRAND_API_URL)
-    //         .then((response) => {
-    //         const {
-    //             data: { brands },
-    //         } = response;
-    //         setBrands(brands);
-    //     })
-    //     .catch((error) => console.error(error));
-
-    const brands =
-      products &&
-      products
-        .map((item) => {
-          return item.brand;
-        })
-        .filter(
-          (brands, index, self) =>
-            index ===
-            self.findIndex((t) => t.id === brands.id && t.name === brands.name)
-        );
-    setBrands(brands);
-  }, [products]);
-
   const [filteredProducts, setFilteredProducts] = useState([]);
-
-  const filterPriceRange = useSelector(
-    (state) => state.filters.filterPriceRange
-  ); // after filtering
-  const filterBrands = useSelector(
-    (state) => state.filters.brands,
-    shallowEqual
-  );
   const selectDropdownFilter = useSelector(
     (state) => state.filters.selectDropdownFilter,
     shallowEqual
@@ -70,12 +35,6 @@ export default function Search({ searchResult, searchTerm, query }) {
       ];
 
       dispatch(getPrices(prices));
-    }
-  }, [products]);
-
-  useEffect(() => {
-    if (products) {
-      dispatch(getProductsFromAPI(products));
     }
   }, [products]);
 
@@ -112,15 +71,7 @@ export default function Search({ searchResult, searchTerm, query }) {
     setLoading(true);
     axios
       .get(
-        `${process.env.PRODUCT_API_URL}?active=true&lang=${
-          i18n.language
-        }&brand=${filterBrands.join(",")}&search=${localStorage.getItem(
-          "search"
-        )}${
-          filterPriceRange.length
-            ? `&price_from=${filterPriceRange[0]}&price_till=${filterPriceRange[1]}`
-            : ""
-        }&sort=price|${selectDropdownFilter}&limit=${productLimit}`
+        `${process.env.PRODUCT_API_URL}?active=true&lang=${i18n.language}&search=${searchTerm}&sort=price|${selectDropdownFilter}&limit=${productLimit}`
       )
       .then((data) => {
         const { products } = data.data;
@@ -128,13 +79,7 @@ export default function Search({ searchResult, searchTerm, query }) {
         setLoading(false);
       })
       .catch((error) => console.error("error", error));
-  }, [
-    filterBrands,
-    searchTerm,
-    filterPriceRange,
-    selectDropdownFilter,
-    productLimit,
-  ]);
+  }, [searchTerm, selectDropdownFilter, productLimit]);
 
   return (
     <>
@@ -142,7 +87,6 @@ export default function Search({ searchResult, searchTerm, query }) {
       <ProductList
         search={search}
         products={filteredProducts}
-        brands={brands}
         searchResult={searchTerm}
         loading={loading}
       />

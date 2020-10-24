@@ -18,6 +18,11 @@ export default function PromoSingle({ data }) {
     });
   }, []);
 
+  const promoStatus =
+    new Date(promo.end_time).getTime() > Date.now()
+      ? "Все еще продолжается"
+      : "Завершилось";
+
   return (
     <>
       <SEO
@@ -39,7 +44,7 @@ export default function PromoSingle({ data }) {
           <div className="promo_status">
             <div className="status">
               <span className="title">Статус на данный момент</span>
-              <span className="desc">Завершилась</span>
+              <span className="desc">{promoStatus}</span>
             </div>
             <div className="status">
               <span className="title">Период проведения</span>
