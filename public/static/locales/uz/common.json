@@ -24,6 +24,7 @@
   "main": "Bosh sahifa",
   "back": "Orqaga",
   "calculate-by-unired": "UNIRED tomonidan hisoblang",
+  "calculate-by-rassrochka": "Muddatli to'lov bo'yicha hisoblang",
   "login": "Kirish",
   "get-unired-card": "Unired kartasini olish",
   "per-month-unired": "oyiga Unired kartasi orqali sotib olinganda",
@@ -80,5 +81,17 @@
   "go-home": "Bosh sahifaga",
   "close-filter": "Qo'lash",
   "available": "Sotuvda mavjud",
-  "not-available": "Sotuvda mavjud emas"
+  "not-available": "Sotuvda mavjud emas",
+  "price": "Narxi",
+  "prepayment": "Birinchi to'lov",
+  "percent": "Foiz stavkasi",
+  "month": "Oy",
+  "calculate": "Hisoblang",
+  "currency": "so'm",
+  "prepayment-placeholder": "Birinchi to'lov miqdorini kiriting",
+  "initial-price": "Dastlabki narxi",
+  "monthly-payment": "Oylik to'lov",
+  "left-debt": "Qolgan qarz",
+  "required": "Ma'lumot kiriting",
+  "overall-paid": "Jami to'landi"
 }

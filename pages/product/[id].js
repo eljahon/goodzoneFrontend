@@ -28,10 +28,12 @@ import Rating from "@material-ui/lab/Rating";
 import UserAvatar from "react-user-avatar";
 import { useForm } from "react-hook-form";
 import { createFormData } from "../../libs/createFormData";
+import RassrochkaPopup from "../../components/rassrochka-popup";
 
 function Product({ product: data, t, shops }) {
   const user = useSelector((state) => state.auth.user, shallowEqual);
   const [uniredPopup, setUniredPopup] = useState(false);
+  const [rassrochkaPopup, setRassrochkaPopup] = useState(false);
   const router = useRouter();
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
@@ -39,8 +41,6 @@ function Product({ product: data, t, shops }) {
     acc += shop.quantity;
     return acc;
   }, 0);
-
-  console.log("availabileInStore", availabileInStore);
 
   const addToCartHandler = (event) => {
     const button = event.target;
@@ -123,7 +123,6 @@ function Product({ product: data, t, shops }) {
 
       setReviewsAdded((prev) => prev + 1);
 
-      // reviewForm.current.style.display = "none";
       reviewForm.current.reset();
     } catch (error) {
       console.error("error", error);
@@ -269,11 +268,31 @@ function Product({ product: data, t, shops }) {
                     ""
                   )}
                 </div>
+                <div className="product_cart-btn">
+                  <button
+                    disabled={!availabileInStore}
+                    className="btn cart_btn btn_rassrochka"
+                    onClick={() => setRassrochkaPopup(true)}
+                  >
+                    <span className="btn_text">
+                      {t("calculate-by-rassrochka")}
+                    </span>
+                  </button>
+                </div>
               </div>
               {uniredPopup ? (
                 <UniredPopup
                   closePopup={() => setUniredPopup(false)}
                   data={data}
+                />
+              ) : (
+                ""
+              )}
+              {rassrochkaPopup ? (
+                <RassrochkaPopup
+                  price={data.price.price}
+                  rassrochkaPopup={rassrochkaPopup}
+                  setRassrochkaPopup={setRassrochkaPopup}
                 />
               ) : (
                 ""

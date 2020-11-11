@@ -24,6 +24,7 @@
   "main": "Главная",
   "back": "Назад",
   "calculate-by-unired": "Рассчитать по UNIRED",
+  "calculate-by-rassrochka": "Рассчитать по рассрочку",
   "login": "Войти",
   "get-unired-card": "Получить карту Unired",
   "per-month-unired": "в месяц при покупке через Unired",
@@ -81,5 +82,17 @@
   "go-home": "На главную страницу",
   "close-filter": "Применить",
   "available": "Есть в наличии",
-  "not-available": "Нет в наличии"
+  "not-available": "Нет в наличии",
+  "price": "Цена",
+  "prepayment": "Предоплата",
+  "percent": "Процентная ставка",
+  "month": "Месяц",
+  "calculate": "Рассчитать",
+  "currency": "сум",
+  "prepayment-placeholder": "Введите сумму предоплаты",
+  "initial-price": "Начальная цена",
+  "monthly-payment": "Ежемесячный платеж",
+  "left-debt": "Оставленный долг",
+  "required": "Обязательное поле",
+  "overall-paid": "В целом оплачено"
 }
