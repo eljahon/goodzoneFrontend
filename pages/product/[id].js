@@ -131,6 +131,17 @@ function Product({ product: data, t, shops }) {
     }
   };
 
+  const ctaButtonsRef = useRef();
+  const ctaButtonsWidth =
+    ctaButtonsRef.current &&
+    [...ctaButtonsRef.current.childNodes].reduce(
+      (t, c) => t + c.offsetWidth,
+      0
+    );
+  const rassrochkaBtnStyle = {
+    width: `${ctaButtonsWidth + 15}px`,
+  };
+
   return (
     <>
       <SEO
@@ -240,7 +251,7 @@ function Product({ product: data, t, shops }) {
                     {t("not-available")}
                   </span>
                 )}
-                <div className="product_cart-btn">
+                <div ref={ctaButtonsRef} className="product_cart-btn">
                   <button
                     disabled={!availabileInStore}
                     className="btn cart_btn"
@@ -273,6 +284,7 @@ function Product({ product: data, t, shops }) {
                     disabled={!availabileInStore}
                     className="btn cart_btn btn_rassrochka"
                     onClick={() => setRassrochkaPopup(true)}
+                    style={rassrochkaBtnStyle}
                   >
                     <span className="btn_text">
                       {t("calculate-by-rassrochka")}

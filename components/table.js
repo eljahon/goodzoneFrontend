@@ -4,22 +4,32 @@ import { withTranslation } from "../i18n";
 import { calcRassrochka } from "../libs/calculateRassrochka";
 import { separateNumber } from "../libs/numberToPrice";
 
-const RassrochkaTable = ({ t, month, price, percent, prepayment }) => {
-  const [perMonthPayment, totalLeft, installmentPrice] = calcRassrochka({
-    percent,
+const RassrochkaTable = ({ t, month, price, prepayment }) => {
+  const {
+    rassrochkaPrice,
+    rassrochkaPriceAfterPrepayment,
+    monthlyPayment,
+    skidka,
+    totalPayment,
+  } = calcRassrochka({
     price,
     month,
     prepayment,
   });
 
   let tableData = [];
+  let leftAmount = rassrochkaPriceAfterPrepayment;
   for (let i = 1; i <= month; i++) {
+    if (i == 1) {
+      leftAmount = totalPayment - prepayment;
+    } else {
+      leftAmount -= monthlyPayment;
+    }
     const tableRowData = {
       month: i,
       price,
-      totalLeft:
-        (price - prepayment) * (1 + percent / 100) - i * perMonthPayment,
-      perMonthPayment,
+      leftAmount,
+      monthlyPayment,
     };
     tableData.push(tableRowData);
   }
@@ -27,7 +37,18 @@ const RassrochkaTable = ({ t, month, price, percent, prepayment }) => {
   return (
     <>
       <p>
-        {t("initial-price")}: {`${separateNumber(price)} ${t("currency")}`}
+        {t("initial-rassrochka-price")}:{" "}
+        {`${separateNumber(rassrochkaPrice)} ${t("currency")}`}
+      </p>
+      <p>
+        {t("prepayment-amount")}:{" "}
+        {`${separateNumber(prepayment)} ${t("currency")}`}
+      </p>
+      <p>
+        {t("skidka")}: {`${separateNumber(skidka)} ${t("currency")}`}
+      </p>
+      <p>
+        {t("overall-sum")}: {`${separateNumber(totalPayment)} ${t("currency")}`}
       </p>
       <Table responsive striped bordered hover>
         <thead>
@@ -44,23 +65,24 @@ const RassrochkaTable = ({ t, month, price, percent, prepayment }) => {
               <tr key={el.month}>
                 <td>{el.month}</td>
                 <td>
-                  {separateNumber(Number(el.perMonthPayment).toFixed(0))}{" "}
+                  {el.month == 1
+                    ? separateNumber(Number(prepayment).toFixed(0))
+                    : separateNumber(Number(el.monthlyPayment).toFixed(0))}{" "}
                   {t("currency")}
                 </td>
                 <td>
-                  {separateNumber(Number(el.totalLeft).toFixed(0))}{" "}
+                  {separateNumber(Number(el.leftAmount).toFixed(0))}{" "}
                   {t("currency")}
                 </td>
               </tr>
             );
           })}
           <br />
-          <tr key={month + 1}>
+          <tr>
             <td>{t("overall-paid")}</td>
             <td>
-              {separateNumber(Number(totalLeft).toFixed(0))} {t("currency")}
+              {separateNumber(Number(totalPayment).toFixed(0))} {t("currency")}
             </td>
-            <td></td>
           </tr>
         </tbody>
       </Table>

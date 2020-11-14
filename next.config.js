@@ -5,6 +5,7 @@ const localeSubpaths = {
 
 module.exports = {
   env: {
+    PERCENT: 20,
     PRODUCT_API_URL: "https://api.goodzone.uz/v1/product",
     CATEGORY_API_URL: "https://api.goodzone.uz/v1/category",
     BRAND_API_URL: "https://api.goodzone.uz/v1/brand",

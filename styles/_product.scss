@@ -269,7 +269,7 @@
         display: flex;
         -webkit-box-align: center;
         align-items: center;
-        @include sm {
+        @include lg {
           display: block;
         }
         .cart_btn {
@@ -295,7 +295,7 @@
           &:disabled {
             cursor: not-allowed;
           }
-          @include sm {
+          @include lg {
             display: flex;
             width: 100%;
           }
@@ -318,14 +318,16 @@
             margin-left: 15px;
             background-color: $border-color;
             color: $primary-color;
-            @include sm {
+            @include lg {
               margin-left: 0;
               margin-top: 15px;
             }
           }
           &.btn_rassrochka {
             margin-top: 15px;
-            width: 100%;
+            @include lg {
+              width: 100% !important;
+            }
           }
           .cart-item {
             position: absolute;

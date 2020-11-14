@@ -1,28 +1,25 @@
-export const calcRassrochka = ({ percent, price, month, prepayment }) => {
-  let totalLeft = (price - prepayment) * (1 + percent / 100);
-  // let totalLeft
+export const calcRassrochka = ({ price, month, prepayment }) => {
+  prepayment = Number(prepayment);
+  price = Number(price);
+  month = Number(month);
 
-  console.log("percent", percent);
-  console.log("price", price);
-  const installmentPrice = price * (percent / 100 + 1);
-  const threshold = installmentPrice / month;
-  console.log(threshold);
+  const rassrochkaPrice = price * (process.env.PERCENT / 100 + 1);
 
-  //   if (prepayment > threshold) {
-  //     totalLeft = (price - prepayment) * (1 + percent / 100);
-  //   } else {
-  //     totalLeft = installmentPrice - prepayment;
-  //   }
-  const perMonthPayment = totalLeft / month;
-  console.log("totalLeft", totalLeft);
+  let rassrochkaPriceAfterPrepayment =
+    (price - prepayment) * (1 + process.env.PERCENT / 100);
+  let totalPayment = rassrochkaPriceAfterPrepayment + prepayment;
+  let skidka = rassrochkaPrice - totalPayment;
+  let monthlyPayment = rassrochkaPriceAfterPrepayment / (month - 1);
+
+  console.log("rassrochkaPriceAfterPrepayment", rassrochkaPriceAfterPrepayment);
+  console.log("monthlyPayment", monthlyPayment);
   console.log("month", month);
 
-  return [perMonthPayment, totalLeft, installmentPrice];
+  return {
+    rassrochkaPrice,
+    rassrochkaPriceAfterPrepayment,
+    monthlyPayment,
+    skidka,
+    totalPayment,
+  };
 };
-
-// percent - foiz miqdori
-// totalLeft - umumiy narxdan birinchi to'lov ayirilgandan keyingi qolgan summa
-// installmentPrice - mahsulotning rassrochka narxi (price + percent)
-// threshold - birinchi to'lovning eng kam miqdori
-// month - to'lov muddati
-// perMonthPayment - to'lov muddati mobaynida oyiga to'lanishi kerak bo'lgan summa

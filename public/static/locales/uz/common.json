@@ -84,14 +84,17 @@
   "not-available": "Sotuvda mavjud emas",
   "price": "Narxi",
   "prepayment": "Birinchi to'lov",
+  "prepayment-amount": "Birinchi to'lov miqdori",
+  "prepayment-placeholder": "Birinchi to'lov miqdorini kiriting",
   "percent": "Foiz stavkasi",
   "month": "Oy",
   "calculate": "Hisoblang",
   "currency": "so'm",
-  "prepayment-placeholder": "Birinchi to'lov miqdorini kiriting",
-  "initial-price": "Dastlabki narxi",
+  "initial-rassrochka-price": "Muddatli to'lovning boshlang'ich narxi",
   "monthly-payment": "Oylik to'lov",
   "left-debt": "Qolgan qarz",
   "required": "Ma'lumot kiriting",
-  "overall-paid": "Jami to'landi"
+  "overall-paid": "Jami to'landi",
+  "overall-sum": "Jami to'lov",
+  "skidka": "Yutuq"
 }

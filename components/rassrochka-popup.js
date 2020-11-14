@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Button, Col, Container, Modal, Row } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { withTranslation } from "../i18n";
@@ -19,7 +19,13 @@ const RassrochkaPopup = ({ t, price, setRassrochkaPopup, rassrochkaPopup }) => {
     tableRef.current.scrollIntoView();
   };
 
-  const sliderValue = watch("month");
+  const monthValue = watch("month");
+
+  const [threshold, setThreshold] = useState(0);
+  useEffect(() => {
+    const thr = (price * (1 + process.env.PERCENT / 100)) / getValues("month");
+    setThreshold(thr);
+  }, [monthValue]);
 
   return (
     <div className="rassrochka-popup">
@@ -52,27 +58,14 @@ const RassrochkaPopup = ({ t, price, setRassrochkaPopup, rassrochkaPopup }) => {
                   </div>
                 </Col>
                 <Col xs={12} md={6}>
-                  <div className="input_wrapper--rassrochka">
-                    <Input
-                      register={register}
-                      defaultValue="20"
-                      name="percent"
-                      disabled
-                      required
-                      append="%"
-                      label={t("percent")}
-                    />
-                  </div>
-                </Col>
-                <Col xs={12} md={6}>
                   <div className="input_wrapper--rassrochka input_wrapper--slider">
                     <SliderInput
-                      textInputValue={sliderValue}
+                      textInputValue={monthValue}
                       register={register}
                       defaultValue="3"
                       name="month"
                       required
-                      append={t("month")}
+                      append={t("month").toLowerCase()}
                       label={t("month")}
                     />
                   </div>
@@ -80,15 +73,29 @@ const RassrochkaPopup = ({ t, price, setRassrochkaPopup, rassrochkaPopup }) => {
                 <Col xs={12} md={6}>
                   <div className="input_wrapper--rassrochka">
                     <Input
-                      register={register({ required: true })}
+                      register={register({
+                        required: true,
+                        min: threshold,
+                        max: price,
+                      })}
                       placeholder={t("prepayment-placeholder")}
                       name="prepayment"
                       type="number"
                       append={t("currency")}
                       label={t("prepayment")}
                     />
-                    {errors.prepayment && (
+                    {errors.prepayment?.type === "required" && (
                       <span className="required-error">{t("required")}</span>
+                    )}
+                    {errors.prepayment?.type === "min" && (
+                      <span className="required-error">{`Минимальная сумма предоплаты - ${separateNumber(
+                        threshold
+                      )} сум.`}</span>
+                    )}
+                    {errors.prepayment?.type === "max" && (
+                      <span className="required-error">{`Мaксимальная сумма предоплаты - ${separateNumber(
+                        price
+                      )} сум.`}</span>
                     )}
                   </div>
                 </Col>
@@ -108,14 +115,15 @@ const RassrochkaPopup = ({ t, price, setRassrochkaPopup, rassrochkaPopup }) => {
         <Modal.Body className="show-grid">
           <Container>
             <div ref={tableRef}>
-              {tableVisible ? (
-                <RassrochkaTable
-                  price={price}
-                  percent={getValues("percent")}
-                  month={getValues("month")}
-                  prepayment={getValues("prepayment")}
-                />
-              ) : null}
+              {tableVisible
+                ? !errors.prepayment && (
+                    <RassrochkaTable
+                      price={price}
+                      month={getValues("month")}
+                      prepayment={getValues("prepayment")}
+                    />
+                  )
+                : null}
             </div>
           </Container>
         </Modal.Body>
