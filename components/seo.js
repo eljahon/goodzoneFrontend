@@ -19,7 +19,7 @@ function SEO({ t, title, description, image, keywords }) {
       <meta property="og:type" content="website" />
       <meta
         property="og:title"
-        content={title ? `${title} | ${t("sitename")}` : `${t("sitename")}`}
+        content={title || t("sitename")}
         key="ogtitle"
       />
       <meta
