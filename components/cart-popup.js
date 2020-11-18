@@ -43,6 +43,13 @@ function CartPopup({ t }) {
         (state) => state.auth.user,
         shallowEqual
     );
+    const state = useSelector(
+        (state) => state,
+        shallowEqual
+    );
+
+    console.log('user', user)
+    console.log('state', state)
 
     const reduceCartItemQuantityHandler = (cartItem) => {
         if (cartItem.quantity === 1)

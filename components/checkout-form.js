@@ -70,10 +70,13 @@ function CheckoutForm({ t, setUnired, unired }) {
     if (Array.isArray(cartItems)) {
       cartItems.map((item) => {
         if (Array.isArray(item.prices))
-          item.prices.map(val => {
-            if (val.type == "1" && val.price == "0") { setIsUnired(true); return; }
-          })
-      })
+          item.prices.map((val) => {
+            if (val.type == "1" && val.price == "0") {
+              setIsUnired(true);
+              return;
+            }
+          });
+      });
     }
   }, []);
 
@@ -109,9 +112,7 @@ function CheckoutForm({ t, setUnired, unired }) {
             id="address"
             required
             ref={register}
-            defaultValue={
-              user["address"] !== undefined ? `${user.address}` : ""
-            }
+            defaultValue={user?.address || ""}
             placeholder={t("write-address")}
           />
         </div>
