@@ -1,2 +1,3 @@
-APP=gz_frontend
-REGISTRY=registry.udevs.io
+APP=goodzone_frontend
+REGISTRY=gitlab.udevs.io:5050
+PROJECT_NAME=goodzone
