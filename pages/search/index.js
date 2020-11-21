@@ -13,6 +13,8 @@ import {
 import { i18n } from "../../i18n";
 
 export default function Search({ searchResult, searchTerm, query }) {
+  console.log("searchResult", searchResult);
+  console.log("searchTerm", searchTerm);
   const dispatch = useDispatch();
   const products = searchResult.products;
   const [loading, setLoading] = useState(false);
@@ -97,7 +99,7 @@ export default function Search({ searchResult, searchTerm, query }) {
 }
 
 export async function getServerSideProps({ query, req }) {
-  const searchTerm = query.id;
+  const searchTerm = encodeURI(query.search);
   const urls = [
     `${process.env.PRODUCT_API_URL}?active=true&search=${searchTerm}&lang=${req.i18n.language}`,
     `${process.env.CATEGORY_API_URL}?lang=${req.i18n.language}`,

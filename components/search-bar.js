@@ -48,7 +48,11 @@ const SearchBar = ({ t }) => {
     event.preventDefault();
     if (debouncedSearchTerm) {
       localStorage.setItem("search", debouncedSearchTerm);
-      router.push(`/search/${transliterate(debouncedSearchTerm)}`);
+      router.push({
+        pathname: "/search",
+        query: { search: debouncedSearchTerm },
+        shallow: true,
+      });
       setProducts([]);
       document.getElementById("searchTerm").value = "";
     }
