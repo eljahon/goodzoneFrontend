@@ -12,6 +12,6 @@ prod:
       - make push-image TAG=$CI_JOB_ID REGISTRY=$REGISTRY
       - source .build_info
       - ssh -o StrictHostKeyChecking=no $GOODZONE_PROD_USER@$GOODZONE_PROD_HOST 'docker service update --with-registry-auth
-        --image '$REGISTRY'/'$APP':'$CI_JOB_ID' '$APP''
+        --image '$REGISTRY'/'$PROJECT_NAME'/'$APP'/'$APP':'$CI_JOB_ID' '$APP''
     only:
       - master
