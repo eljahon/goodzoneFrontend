@@ -9,12 +9,7 @@ function SEO({ t, title, description, image, keywords }) {
 
       <title>{title || `${t("sitename")}`}</title>
       <meta name="description" content={description || t("site-description")} />
-      <meta
-        name="keywords"
-        content={
-          keywords || "Goodzone, интернет магазин, телевизор, смартфон, телефон"
-        }
-      />
+      <meta name="keywords" content={keywords || t("keywords")} />
 
       <meta property="og:type" content="website" />
       <meta

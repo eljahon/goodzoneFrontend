@@ -63,7 +63,7 @@ export default function PromoSingle({ data }) {
 
 export async function getServerSideProps({ params, req }) {
   const urls = [
-    `${process.env.PROMO_API_URL}/${params.id}?lang=${req.i18n.language}`,
+    `${process.env.PROMO_API_URL}/${params.id}?lang=${req.i18n.language}&active=true`,
     `${process.env.CATEGORY_API_URL}?lang=${req.i18n.language}`,
   ];
 

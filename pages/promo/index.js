@@ -197,7 +197,7 @@ export default withTranslation("navigation")(Promo);
 
 export async function getServerSideProps({ req }) {
     const urls = [
-        `${process.env.PROMO_API_URL}?lang=${req.i18n.language}`,
+        `${process.env.PROMO_API_URL}?lang=${req.i18n.language}&active=true`,
         `${process.env.CATEGORY_API_URL}?lang=${req.i18n.language}`,
     ];
     const [{ promos }, categories] = await fetchMultipleUrls(urls);
