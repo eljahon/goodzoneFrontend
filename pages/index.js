@@ -2,8 +2,6 @@ import SEO from "../components/seo";
 import HomeSplash from "../components/home-splash";
 import CartPopup from "../components/cart-popup";
 import Footer from "../components/footer";
-import { useDispatch } from "react-redux";
-import { getProductsFromAPI } from "../redux/actions/productsActions/productsActions";
 import { useEffect } from "react";
 import Products from "../components/products";
 import Banner from "../components/banner";
@@ -12,9 +10,7 @@ import { getLocalStorage } from "../libs/localStorage";
 import { axiosAuth } from "../libs/axios/axios-instances";
 import { setUser } from "../redux/actions/authActions/authActions";
 import { withTranslation } from "../i18n";
-import { Container, Row } from "react-bootstrap";
 import BannerContainer from "../components/bannerContainer";
-import { NextSeo } from "next-seo";
 
 function Home({
   new_products,
@@ -23,14 +19,6 @@ function Home({
   t,
   banners,
 }) {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getProductsFromAPI(new_products.products));
-    // dispatch(getProductsFromAPI(recommended_products.products));
-    // dispatch(getProductsFromAPI(popular_products.products));
-  }, []);
-
   useEffect(() => {
     if (getLocalStorage("access_token")) {
       axiosAuth
@@ -43,10 +31,6 @@ function Home({
   return (
     <>
       <SEO />
-      {/* <NextSeo
-                title="Goodzone online store"
-                description="Goodzone online store seo properties"
-            /> */}
       <HomeSplash banners={banners} />
       <Products title={t("new-arrivals")} data={new_products.products} />
       <BannerContainer>

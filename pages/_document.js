@@ -42,7 +42,7 @@ export default class MyDocument extends Document {
           />
           <script
             async
-            charset="utf-8"
+            charSet="utf-8"
             src="//cdn.embedly.com/widgets/platform.js"
           ></script>
         </Head>
