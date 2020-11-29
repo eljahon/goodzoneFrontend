@@ -12,7 +12,6 @@ import { axiosAuth } from "../libs/axios/axios-instances";
 import { setUser } from "../redux/actions/authActions/authActions";
 import { withTranslation } from "../i18n";
 import BannerContainer from "../components/bannerContainer";
-import { NextSeo } from "next-seo";
 
 function Home({
   new_products,
@@ -36,7 +35,6 @@ function Home({
     <>
       <SEO />
       <HomeSplash banners={banners} />
-      <Products title={t("new-arrivals")} data={new_products.products} />
       <BannerContainer>
         <Banner size={9} name="banner-po-seredine-1300x260" />
         <Banner size={3} name="malyi-nizhnii-banner-420x260" />
