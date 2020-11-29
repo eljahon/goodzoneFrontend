@@ -35,6 +35,7 @@ function Home({
     <>
       <SEO />
       <HomeSplash banners={banners} />
+      <Products title={t("new-arrivals")} data={new_products.products} />
       <BannerContainer>
         <Banner size={9} name="banner-po-seredine-1300x260" />
         <Banner size={3} name="malyi-nizhnii-banner-420x260" />
