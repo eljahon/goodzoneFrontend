@@ -2,6 +2,7 @@ import SEO from "../components/seo";
 import HomeSplash from "../components/home-splash";
 import CartPopup from "../components/cart-popup";
 import Footer from "../components/footer";
+import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import Products from "../components/products";
 import Banner from "../components/banner";
@@ -11,6 +12,7 @@ import { axiosAuth } from "../libs/axios/axios-instances";
 import { setUser } from "../redux/actions/authActions/authActions";
 import { withTranslation } from "../i18n";
 import BannerContainer from "../components/bannerContainer";
+import { NextSeo } from "next-seo";
 
 function Home({
   new_products,
@@ -19,6 +21,8 @@ function Home({
   t,
   banners,
 }) {
+  const dispatch = useDispatch();
+
   useEffect(() => {
     if (getLocalStorage("access_token")) {
       axiosAuth
