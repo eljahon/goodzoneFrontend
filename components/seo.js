@@ -27,18 +27,14 @@ function SEO({ t, title, description, image, keywords }) {
       <meta
         property="og:image"
         content={
-          image
-            ? image
-            : "https://cdn.delever.uz/goodzone/3af8b7fb-f64a-4680-913e-f6c5187e3d6e"
+          image ||
+          "https://cdn.delever.uz/goodzone/3af8b7fb-f64a-4680-913e-f6c5187e3d6e"
         }
         key="ogimage"
       />
 
       <meta name="twitter:card" content="summary" />
-      <meta
-        name="twitter:title"
-        content={title ? `${title} | ${t("sitename")}` : `${t("sitename")}`}
-      />
+      <meta name="twitter:title" content={title || `${t("sitename")}`} />
       <meta
         name="twitter:description"
         content={description || t("site-description")}
@@ -48,9 +44,8 @@ function SEO({ t, title, description, image, keywords }) {
       <meta
         name="twitter:image"
         content={
-          image
-            ? image
-            : "https://cdn.delever.uz/goodzone/3af8b7fb-f64a-4680-913e-f6c5187e3d6e"
+          image ||
+          "https://cdn.delever.uz/goodzone/3af8b7fb-f64a-4680-913e-f6c5187e3d6e"
         }
       />
 
