@@ -3,7 +3,7 @@ import HomeSplash from "../components/home-splash";
 import CartPopup from "../components/cart-popup";
 import Footer from "../components/footer";
 import { useDispatch } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Products from "../components/products";
 import Banner from "../components/banner";
 import { fetchMultipleUrls } from "../libs/fetchMultipleUrls";
@@ -13,14 +13,9 @@ import { setUser } from "../redux/actions/authActions/authActions";
 import { withTranslation } from "../i18n";
 import BannerContainer from "../components/bannerContainer";
 
-function Home({
-  new_products,
-  recommended_products,
-  popular_products,
-  t,
-  banners,
-}) {
+function Home({ new_products, recommended_products, popular_products, t }) {
   const dispatch = useDispatch();
+  const [banners, setBanners] = useState(null);
 
   useEffect(() => {
     if (getLocalStorage("access_token")) {
@@ -29,6 +24,17 @@ function Home({
         .then(({ data: { customer: user } }) => dispatch(setUser(user)))
         .catch((error) => console.error(error));
     }
+  }, []);
+
+  useEffect(() => {
+    async function fetch() {
+      const [banners] = await fetchMultipleUrls(urls);
+      setBanners(banners);
+    }
+    const urls = [
+      `${process.env.BANNER_API_URL}?position=website-home-slider&active=true`,
+    ];
+    fetch();
   }, []);
 
   return (
@@ -61,7 +67,6 @@ export async function getServerSideProps({ req }) {
     `${process.env.PRODUCT_API_URL}?active=true&lang=${req.i18n.language}`,
     `${process.env.PRODUCT_API_URL}?active=true&lang=${req.i18n.language}&popular=true`,
     `${process.env.PRODUCT_API_URL}?active=true&lang=${req.i18n.language}&recommended=true`,
-    `${process.env.BANNER_API_URL}?position=website-home-slider&active=true`,
     `${process.env.CATEGORY_API_URL}?lang=${req.i18n.language}`,
   ];
 
@@ -69,7 +74,6 @@ export async function getServerSideProps({ req }) {
     new_products,
     popular_products,
     recommended_products,
-    banners,
     categories,
   ] = await fetchMultipleUrls(urls);
 
@@ -78,7 +82,6 @@ export async function getServerSideProps({ req }) {
       new_products,
       popular_products,
       recommended_products,
-      banners,
       categories,
     },
   };
