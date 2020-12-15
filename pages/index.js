@@ -1,66 +1,67 @@
-import SEO from "../components/seo";
-import HomeSplash from "../components/home-splash";
-import CartPopup from "../components/cart-popup";
-import Footer from "../components/footer";
-import { useDispatch } from "react-redux";
-import { useEffect, useState } from "react";
-import Products from "../components/products";
-import Banner from "../components/banner";
-import { fetchMultipleUrls } from "../libs/fetchMultipleUrls";
-import { getLocalStorage } from "../libs/localStorage";
-import { axiosAuth } from "../libs/axios/axios-instances";
-import { setUser } from "../redux/actions/authActions/authActions";
-import { withTranslation } from "../i18n";
-import BannerContainer from "../components/bannerContainer";
+import SEO from '../components/seo'
+import HomeSplash from '../components/home-splash'
+import CartPopup from '../components/cart-popup'
+import Footer from '../components/footer'
+import { useDispatch } from 'react-redux'
+import { useEffect, useState } from 'react'
+import Products from '../components/products'
+import Banner from '../components/banner'
+import { fetchMultipleUrls } from '../libs/fetchMultipleUrls'
+import { getLocalStorage } from '../libs/localStorage'
+import { axiosAuth } from '../libs/axios/axios-instances'
+import { setUser } from '../redux/actions/authActions/authActions'
+import { withTranslation } from '../i18n'
+import BannerContainer from '../components/bannerContainer'
 
 function Home({ new_products, recommended_products, popular_products, t }) {
-  const dispatch = useDispatch();
-  const [banners, setBanners] = useState(null);
+  const dispatch = useDispatch()
+
+  const [banners, setBanners] = useState(null)
 
   useEffect(() => {
-    if (getLocalStorage("access_token")) {
+    if (getLocalStorage('access_token')) {
       axiosAuth
-        .get("/profile")
+        .get('/profile')
         .then(({ data: { customer: user } }) => dispatch(setUser(user)))
-        .catch((error) => console.error(error));
+        .catch((error) => console.error(error))
     }
-  }, []);
+  }, [])
 
   useEffect(() => {
     async function fetch() {
-      const [banners] = await fetchMultipleUrls(urls);
-      setBanners(banners);
+      const [banners] = await fetchMultipleUrls(urls)
+      setBanners(banners)
     }
     const urls = [
       `${process.env.BANNER_API_URL}?position=website-home-slider&active=true`,
-    ];
-    fetch();
-  }, []);
+    ]
+    fetch()
+  }, [])
 
   return (
     <>
       <SEO />
       <HomeSplash banners={banners} />
-      <Products title={t("new-arrivals")} data={new_products.products} />
+      <Products title={t('new-arrivals')} data={new_products.products} />
       <BannerContainer>
-        <Banner size={9} name="banner-po-seredine-1300x260" />
-        <Banner size={3} name="malyi-nizhnii-banner-420x260" />
+        <Banner size={9} name='banner-po-seredine-1300x260' />
+        <Banner size={3} name='malyi-nizhnii-banner-420x260' />
       </BannerContainer>
-      <Products title={t("popular-items")} data={popular_products.products} />
+      <Products title={t('popular-items')} data={popular_products.products} />
       <BannerContainer>
-        <Banner size={12} name="pervyi-banner-1720x260" />
+        <Banner size={12} name='pervyi-banner-1720x260' />
       </BannerContainer>
       <Products
-        title={t("the-best-selection-for-you")}
+        title={t('the-best-selection-for-you')}
         data={recommended_products.products}
       />
       <CartPopup />
       <Footer />
     </>
-  );
+  )
 }
 
-export default withTranslation("common")(Home);
+export default withTranslation('common')(Home)
 
 export async function getServerSideProps({ req }) {
   const urls = [
@@ -68,14 +69,14 @@ export async function getServerSideProps({ req }) {
     `${process.env.PRODUCT_API_URL}?active=true&lang=${req.i18n.language}&popular=true`,
     `${process.env.PRODUCT_API_URL}?active=true&lang=${req.i18n.language}&recommended=true`,
     `${process.env.CATEGORY_API_URL}?lang=${req.i18n.language}`,
-  ];
+  ]
 
   const [
     new_products,
     popular_products,
     recommended_products,
     categories,
-  ] = await fetchMultipleUrls(urls);
+  ] = await fetchMultipleUrls(urls)
 
   return {
     props: {
@@ -84,5 +85,5 @@ export async function getServerSideProps({ req }) {
       recommended_products,
       categories,
     },
-  };
+  }
 }
