@@ -33,6 +33,7 @@
         "react-redux": "^7.2.0",
         "react-slick": "^0.27.10",
         "react-slider": "^1.0.8",
+        "react-snowfall": "^1.0.2",
         "react-user-avatar": "^1.10.0",
         "react-yandex-maps": "^4.4.0",
         "redux": "^4.0.5",
