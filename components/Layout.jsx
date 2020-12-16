@@ -1,12 +1,12 @@
 import React from 'react'
 import withYM from 'next-ym'
 import { Router } from 'next/router'
-import Snowfall from 'react-snowfall'
+// import Snowfall from 'react-snowfall'
 
 const Layout = ({ children }) => {
   return (
     <>
-      <Snowfall
+      {/* <Snowfall
         color='rgb(238, 238, 238)'
         style={{
           background: '#fff',
@@ -16,7 +16,7 @@ const Layout = ({ children }) => {
         }}
         // Controls the number of snowflakes that are created (default 150)
         snowflakeCount={80}
-      />
+      /> */}
       {children}
     </>
   )
