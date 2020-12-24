@@ -13,16 +13,27 @@ export default function Banner({ name, size }) {
   return (
     banner && (
       <Col lg={size} className='banner'>
-        <Link
-          href={banner.data.banners[0].url.replace('https://goodzone.uz', '')}
-        >
-          <a className='product_image'>
-            <img
-              src={banner.data.banners[0].image}
-              alt={banner.data.banners[0].title}
-            />
-          </a>
-        </Link>
+        {banner.data.banners[0].url ? (
+          <Link
+            href={
+              banner.data.banners[0].url &&
+              banner.data.banners[0].url.replace('https://goodzone.uz', '')
+            }
+            shallow
+          >
+            <a className='product_image'>
+              <img
+                src={banner.data.banners[0].image}
+                alt={banner.data.banners[0].title}
+              />
+            </a>
+          </Link>
+        ) : (
+          <img
+            src={banner.data.banners[0].image}
+            alt={banner.data.banners[0].title}
+          />
+        )}
       </Col>
     )
   )
