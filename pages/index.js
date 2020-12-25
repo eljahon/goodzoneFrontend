@@ -10,7 +10,7 @@ import { fetchMultipleUrls } from '../libs/fetchMultipleUrls'
 import { getLocalStorage } from '../libs/localStorage'
 import { axiosAuth } from '../libs/axios/axios-instances'
 import { setUser } from '../redux/actions/authActions/authActions'
-import { withTranslation } from '../i18n'
+import { Link, withTranslation } from '../i18n'
 import BannerContainer from '../components/bannerContainer'
 
 function Home({ new_products, recommended_products, popular_products, t }) {
@@ -45,6 +45,7 @@ function Home({ new_products, recommended_products, popular_products, t }) {
       <Products title={t('new-arrivals')} data={new_products.products} />
       <BannerContainer>
         <Banner size={9} name='banner-po-seredine-1300x260' />
+
         <Banner size={3} name='malyi-nizhnii-banner-420x260' />
       </BannerContainer>
       <Products title={t('popular-items')} data={popular_products.products} />
