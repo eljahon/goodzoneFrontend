@@ -1,11 +1,12 @@
 import React from "react";
 // import { separateNumber } from "../libs/numberToPrice";
 
+const sliderDisabledStyle = {};
+
 const SliderInput = ({
   defaultValue,
   textInputValue,
   register,
-  disabled,
   append,
   name,
   label,
@@ -18,7 +19,6 @@ const SliderInput = ({
         defaultValue={defaultValue}
         value={textInputValue}
         onChange={() => console.log("")}
-        disabled={disabled}
         name={name}
         type={type || "text"}
         ref={register}

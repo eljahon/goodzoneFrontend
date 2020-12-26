@@ -7,7 +7,13 @@ import Input from "./input";
 import SliderInput from "./slider-input";
 import RassrochkaTable from "./table";
 
-const RassrochkaPopup = ({ t, price, setRassrochkaPopup, rassrochkaPopup }) => {
+const RassrochkaPopup = ({
+  t,
+  price,
+  product,
+  setRassrochkaPopup,
+  rassrochkaPopup,
+}) => {
   const { register, handleSubmit, errors, watch, getValues } = useForm();
   const [tableVisible, setTableVisible] = useState(false);
   const tableRef = useRef();
@@ -44,7 +50,7 @@ const RassrochkaPopup = ({ t, price, setRassrochkaPopup, rassrochkaPopup }) => {
           <Container>
             <form style={{ width: "100%" }}>
               <Row>
-                <Col xs={12} md={6}>
+                <Col md={12}>
                   <div className="input_wrapper--rassrochka">
                     <Input
                       register={register}
@@ -57,20 +63,38 @@ const RassrochkaPopup = ({ t, price, setRassrochkaPopup, rassrochkaPopup }) => {
                     />
                   </div>
                 </Col>
-                <Col xs={12} md={6}>
-                  <div className="input_wrapper--rassrochka input_wrapper--slider">
-                    <SliderInput
-                      textInputValue={monthValue}
-                      register={register}
-                      defaultValue="3"
-                      name="month"
-                      required
-                      append={t("month").toLowerCase()}
-                      label={t("month")}
-                    />
-                  </div>
-                </Col>
-                <Col xs={12} md={6}>
+                {console.log("product", product)}
+                {product?.category?.slug === "smartfony" ? (
+                  <Col md={12}>
+                    <div className="input_wrapper--rassrochka input_wrapper--slider">
+                      <Input
+                        register={register}
+                        name="month"
+                        defaultValue="6"
+                        disabled
+                        required
+                        append={t("month").toLowerCase()}
+                        label={t("month")}
+                      />
+                    </div>
+                  </Col>
+                ) : (
+                  <Col md={12}>
+                    <div className="input_wrapper--rassrochka input_wrapper--slider">
+                      <SliderInput
+                        textInputValue={monthValue}
+                        register={register}
+                        defaultValue="3"
+                        name="month"
+                        required
+                        append={t("month").toLowerCase()}
+                        label={t("month")}
+                      />
+                    </div>
+                  </Col>
+                )}
+
+                <Col md={12}>
                   <div className="input_wrapper--rassrochka">
                     <Input
                       register={register({

@@ -279,18 +279,26 @@ function Product({ product: data, t, shops }) {
                     ""
                   )}
                 </div>
+                {/*  */}
+                {/*  */}
+                {/*  */}
+                {/*  */}
                 {/* <div className="product_cart-btn">
                   <button
                     disabled={!availabileInStore}
                     className="btn cart_btn btn_rassrochka"
                     onClick={() => setRassrochkaPopup(true)}
                     style={rassrochkaBtnStyle}
-                  >rassr
+                  >
                     <span className="btn_text">
                       {t("calculate-by-rassrochka")}
                     </span>
                   </button>
                 </div> */}
+                {/*  */}
+                {/*  */}
+                {/*  */}
+                {/*  */}
               </div>
               {uniredPopup ? (
                 <UniredPopup
@@ -302,6 +310,7 @@ function Product({ product: data, t, shops }) {
               )}
               {rassrochkaPopup ? (
                 <RassrochkaPopup
+                  product={data}
                   price={data.price.price}
                   rassrochkaPopup={rassrochkaPopup}
                   setRassrochkaPopup={setRassrochkaPopup}
