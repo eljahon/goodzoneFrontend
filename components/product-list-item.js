@@ -78,7 +78,7 @@ const ProductListItem = ({ product, view, carousel, t }) => {
             </a>
           </Link>
           <div className='product_meta'>
-            <button
+            {/* <button
               onClick={addToCart}
               disabled={!product.inStock.tashkent_city}
               className={`btn product_btn ${
@@ -97,6 +97,15 @@ const ProductListItem = ({ product, view, carousel, t }) => {
               ) : (
                 ''
               )}
+            </button> */}
+            <button onClick={addToCart} className={`btn product_btn `}>
+              <span className='btn_icon'>
+                <FaShoppingBasket />
+              </span>
+              <span className='btn_text'>{t('add-to-cart')}</span>
+              <span className='cart-item'>
+                <img src={product.image} alt={product.name} />
+              </span>
             </button>
           </div>
         </div>
