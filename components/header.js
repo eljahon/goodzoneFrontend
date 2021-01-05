@@ -133,14 +133,11 @@ function Header({ categories, t }) {
       <div className='base_header' />
       <BottomBar openLoginMenu={() => setLoginPopup(true)} />
 
-      {menu ? (
-        <DepartmentsMenu
-          categories={categories}
-          closeMenu={() => setMenu(false)}
-        />
-      ) : (
-        ''
-      )}
+      <DepartmentsMenu
+        categories={categories}
+        closeMenu={() => setMenu(false)}
+        menu={menu}
+      />
 
       {searchPopup ? (
         <SearchModal closeModal={() => setSearchPopup(false)} />

@@ -39,19 +39,12 @@ function App({ Component, pageProps }) {
 
   return (
     <Provider store={store}>
-      {typeof window !== 'undefined' ? (
-        <PersistGate loading={null} persistor={persistor}>
-          <Layout>
-            <Header categories={pageProps.categories.categories} />
-            <Component {...pageProps} />
-          </Layout>
-        </PersistGate>
-      ) : (
+      <PersistGate loading={null} persistor={persistor}>
         <Layout>
           <Header categories={pageProps.categories.categories} />
           <Component {...pageProps} />
         </Layout>
-      )}
+      </PersistGate>
     </Provider>
   )
 }

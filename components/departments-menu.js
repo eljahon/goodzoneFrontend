@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { FaTimes, FaArrowDown, FaArrowRight, FaArrowLeft } from 'react-icons/fa'
 import { i18n } from '../i18n'
@@ -7,19 +7,19 @@ import { withTranslation } from '../i18n'
 import { useDispatch } from 'react-redux'
 import { clearFilters } from '../redux/actions/filterActions/filterActions'
 
-function DepartmentsMenu({ categories, closeMenu, t }) {
+function DepartmentsMenu({ categories, closeMenu, menu = false, t }) {
   const vw = window.innerWidth
   const dispatch = useDispatch()
   const router = useRouter()
   const hasDynamicRouting = router.query.id
-
+  const [show, setShow] = useState(false)
   const handleClose = () => {
     if (vw <= 850) closeMenu()
   }
 
   return (
     <>
-      <nav className={`departments_menu`}>
+      <nav className={`departments_menu ${menu ? 'tab_menu' : ''}`}>
         <div className='drawer_header'>
           <button className='btn btn_close' onClick={closeMenu}>
             <span className='close_icon'>
