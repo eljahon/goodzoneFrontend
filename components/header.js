@@ -137,7 +137,6 @@ function Header({ categories, t }) {
         <DepartmentsMenu
           categories={categories}
           closeMenu={() => setMenu(false)}
-          menu={menu}
         />
       ) : (
         ''

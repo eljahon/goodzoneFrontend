@@ -7,7 +7,7 @@ import { withTranslation } from '../i18n'
 import { useDispatch } from 'react-redux'
 import { clearFilters } from '../redux/actions/filterActions/filterActions'
 
-function DepartmentsMenu({ categories, closeMenu, t, menu }) {
+function DepartmentsMenu({ categories, closeMenu, t }) {
   const vw = window.innerWidth
   const dispatch = useDispatch()
   const router = useRouter()
@@ -19,7 +19,7 @@ function DepartmentsMenu({ categories, closeMenu, t, menu }) {
 
   return (
     <>
-      <nav className={`departments_menu `}>
+      <nav className={`departments_menu`}>
         <div className='drawer_header'>
           <button className='btn btn_close' onClick={closeMenu}>
             <span className='close_icon'>
