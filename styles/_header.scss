@@ -205,7 +205,7 @@
         }
       }
       & + .list_item::before {
-        content: "|";
+        content: '|';
         color: #cad5d5;
         display: inline-block;
         margin: 0 15px;
@@ -443,7 +443,7 @@ header {
           }
         }
         &::before {
-          content: "";
+          content: '';
           position: absolute;
           width: 0;
           height: 0;
@@ -928,7 +928,7 @@ header {
       border-radius: 6px;
       transition: all 0.35s ease-in-out 0s;
       &::before {
-        content: "";
+        content: '';
         position: absolute;
         width: 0;
         height: 0;
@@ -996,7 +996,7 @@ header {
   border-radius: 6px;
   transition: all 0.35s ease-in-out 0s;
   &::before {
-    content: "";
+    content: '';
     position: absolute;
     width: 0;
     height: 0;
@@ -1192,8 +1192,9 @@ header {
     color: rgb(34, 34, 34);
     border-radius: 15px;
     @include md {
-      top:40px;
+      top: 40px;
       right: 0px;
+      display: none;
     }
     svg {
       font-size: 32px;
@@ -1266,9 +1267,9 @@ header {
             display: block;
           }
           form {
-            input[type="text"],
-            input[type="tel"],
-            input[type="password"] {
+            input[type='text'],
+            input[type='tel'],
+            input[type='password'] {
               -webkit-appearance: none;
             }
             input {
