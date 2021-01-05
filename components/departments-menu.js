@@ -57,7 +57,7 @@ function DepartmentsMenu({ categories, closeMenu, t }) {
                   href={`${i18n.language === "ru" ? "" : "/uz"}/shop/[id]`}
                   as={`${i18n.language === "ru" ? "" : "/uz"}/shop/${
                     item.slug
-                    }`}
+                  }`}
                 >
                   <a onClick={(e) => e.preventDefault()}>
                     <span>{item.name}</span>
@@ -72,10 +72,10 @@ function DepartmentsMenu({ categories, closeMenu, t }) {
                           <Link
                             href={`${
                               i18n.language === "ru" ? "" : "/uz"
-                              }/shop/[id]`}
+                            }/shop/[id]`}
                             as={`${i18n.language === "ru" ? "" : "/uz"}/shop/${
                               child.slug
-                              }`}
+                            }`}
                           >
                             <a
                               onClick={(e) => {
@@ -103,10 +103,10 @@ function DepartmentsMenu({ categories, closeMenu, t }) {
                                   <Link
                                     href={`${
                                       i18n.language === "ru" ? "" : "/uz"
-                                      }/shop/[id]`}
+                                    }/shop/[id]`}
                                     as={`${
                                       i18n.language === "ru" ? "" : "/uz"
-                                      }/shop/${sub.slug}`}
+                                    }/shop/${sub.slug}`}
                                   >
                                     <a
                                       onClick={() => {
