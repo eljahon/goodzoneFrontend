@@ -186,6 +186,7 @@
       height: auto;
       min-height: 0;
       max-height: 100vh;
+
       .cart_items-wrapper {
         position: relative;
         overflow: scroll;
@@ -194,6 +195,9 @@
         min-height: 17px;
         max-height: calc(100vh + 17px);
         margin-left: 0;
+        @include sm {
+          height: 82vh;
+        }
         .items_wrapper {
           width: 100%;
           height: auto;
@@ -425,9 +429,9 @@
         border-color: initial;
         border-image: initial;
         outline: 0;
-        // @include sm {
-        //   bottom: 100px;
-        // }
+        @include sm {
+          margin-bottom: 50px;
+        }
         .btn_text {
           width: 100%;
           display: flex;

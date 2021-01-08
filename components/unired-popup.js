@@ -1,91 +1,97 @@
-import React, { useEffect, useState, useRef } from "react";
-import { FaTimes, FaShoppingBag } from "react-icons/fa";
-import { withTranslation } from "../i18n";
-import { asyncAddToCartAction } from "../redux/actions/cartActions/cartActions";
-import { useDispatch } from "react-redux";
-import { numberToPrice } from "../libs/numberToPrice";
+import React, { useEffect, useState, useRef } from 'react'
+import { FaTimes, FaShoppingBag } from 'react-icons/fa'
+import { withTranslation } from '../i18n'
+import { asyncAddToCartAction } from '../redux/actions/cartActions/cartActions'
+import { useDispatch } from 'react-redux'
+import { numberToPrice } from '../libs/numberToPrice'
 
 function UniredPopup({ closePopup, t, data }) {
-  console.log("data", data);
+  console.log('data', data)
 
-  const [load, setLoad] = useState(false);
+  const [load, setLoad] = useState(false)
   useEffect(() => {
-    setLoad(true);
-    document.body.classList.add("overflow");
+    setLoad(true)
+    document.body.classList.add('overflow')
     return () => {
-      setLoad(false);
-      document.body.classList.remove("overflow");
-    };
-  }, []);
+      setLoad(false)
+      document.body.classList.remove('overflow')
+    }
+  }, [])
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
   const addToCartHandler = (cartItem) => {
-    dispatch(asyncAddToCartAction(cartItem));
-    closePopup();
-  };
+    dispatch(asyncAddToCartAction(cartItem))
+    closePopup()
+  }
 
-  const wrapperRef = useRef(null);
-  useOutsideCloseMenu(wrapperRef);
+  const wrapperRef = useRef(null)
+  useOutsideCloseMenu(wrapperRef)
 
   function useOutsideCloseMenu(ref) {
     useEffect(() => {
       function handleClickOutside(event) {
         if (ref.current && !ref.current.contains(event.target)) {
-          closePopup();
+          closePopup()
         }
       }
-      document.addEventListener("mousedown", handleClickOutside);
+      document.addEventListener('mousedown', handleClickOutside)
 
       return () => {
-        document.removeEventListener("mousedown", handleClickOutside);
-      };
-    }, [ref]);
+        document.removeEventListener('mousedown', handleClickOutside)
+      }
+    }, [ref])
   }
-
+  console.log('data', data)
   return (
-    <div className="login_modal-wrapper">
-      <button className="btn close_btn" onClick={closePopup}>
+    <div className='login_modal-wrapper'>
+      <button className='btn close_btn' onClick={closePopup}>
         <FaTimes />
       </button>
       <div
-        className={`login_modal-holder unired_wrapper ${load ? "show" : ""}`}
+        className={`login_modal-holder unired_wrapper ${load ? 'show' : ''}`}
         ref={wrapperRef}
       >
-        <button className="btn close_btn" onClick={closePopup}>
+        <button className='btn close_btn' onClick={closePopup}>
           <FaTimes />
         </button>
-        <div className="inner_block">
-          <div className="unired_banner">
-            <div className="img_wrapper">
-              <img src="../images/banner_unired.jpg" alt="Unired banner" />
+        <div className='inner_block'>
+          <div className='unired_banner'>
+            <div className='img_wrapper'>
+              <img src='../images/banner_unired.jpg' alt='Unired banner' />
             </div>
-            <div className="content">
+            <div className='content'>
               <h3>
                 <span>
-                  {numberToPrice(Math.round(data.prices[0].price / 12))}{" "}
+                  {data.category.slug === 'smartfony'
+                    ? numberToPrice(Math.round(data.prices[0].price / 6))
+                    : numberToPrice(Math.round(data.prices[0].price / 12))}
                 </span>
-                {t("per-month-unired")}
+                {t('per-month-unired')}
               </h3>
-              <div className="actions">
+              <div className='actions'>
                 <button
-                  className="btn cart_btn"
+                  className='btn cart_btn'
                   onClick={() => addToCartHandler(data)}
                 >
-                  <span className="cart_icon">
+                  <span className='cart_icon'>
                     <FaShoppingBag />
                   </span>
-                  <span className="btn-text">{t("add-to-cart")}</span>
+                  <span className='btn-text'>{t('add-to-cart')}</span>
                 </button>
-                <button className="btn">{t("get-unired-card")}</button>
+                <button className='btn'>{t('get-unired-card')}</button>
               </div>
-              <p>*{t("payment-plan-for")}</p>
+              <p>
+                *{t('payment-plan-for')}
+                {data.category.slug === 'smartfony' ? '6' : '12'}
+                {t('payment-plan')}
+              </p>
             </div>
           </div>
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export default withTranslation("common")(UniredPopup);
+export default withTranslation('common')(UniredPopup)

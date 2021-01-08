@@ -1,5 +1,7 @@
 .tab_menu {
-  transform: translateX(0) !important;
+  @include md {
+    transform: translateX(0) !important;
+  }
 }
 
 nav.departments_menu {
@@ -8,6 +10,7 @@ nav.departments_menu {
   width: 100%;
   padding: 15px 15px;
   border-bottom: 1px solid $border-color;
+
   .drawer_header {
     display: none;
   }

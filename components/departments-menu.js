@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import {
   FaTimes,
@@ -12,12 +12,12 @@ import { withTranslation } from "../i18n";
 import { useDispatch } from "react-redux";
 import { clearFilters } from "../redux/actions/filterActions/filterActions";
 
-function DepartmentsMenu({ categories, closeMenu, t, menu }) {
+function DepartmentsMenu({ categories, closeMenu, menu = false, t }) {
   const vw = window.innerWidth;
   const dispatch = useDispatch();
   const router = useRouter();
   const hasDynamicRouting = router.query.id;
-
+  const [show, setShow] = useState(false);
   const handleClose = () => {
     if (vw <= 850) closeMenu();
   };

@@ -80,9 +80,9 @@ const ProductListItem = ({ product, view, carousel, t }) => {
           <div className="product_meta">
             <button
               onClick={addToCart}
-              disabled={!product.inStock.tashkent_city}
+              disabled={!product.in_stock.tashkent_city}
               className={`btn product_btn ${
-                product.inStock.tashkent_city ? "" : "product_disabled"
+                product.in_stock.tashkent_city ? "" : "product_disabled"
               }`}
             >
               <span className="btn_icon">
@@ -92,7 +92,7 @@ const ProductListItem = ({ product, view, carousel, t }) => {
               <span className="cart-item">
                 <img src={product.image} alt={product.name} />
               </span>
-              {!product.inStock.tashkent_city ? (
+              {!product.in_stock.tashkent_city ? (
                 <span className="tooltiptext">{t("stock")}</span>
               ) : (
                 ""
