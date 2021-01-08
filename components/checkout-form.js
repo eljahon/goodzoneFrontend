@@ -15,16 +15,25 @@ import { withTranslation } from '../i18n'
 import { useEffect } from 'react'
 import { clearCartAction } from '../redux/actions/cartActions/cartActions'
 import { createFormData } from '../libs/createFormData'
+import {
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+} from '@material-ui/core'
 
 function CheckoutForm({ t, setUnired, unired }) {
   const dispatch = useDispatch()
   const { register, handleSubmit, errors, watch } = useForm()
   const router = useRouter()
   const [isUnired, setIsUnired] = useState(false)
+  const [close, setClose] = useState(false)
   const [click, isClick] = useState(false)
+  const [error, setError] = useState('')
   const cartItems = useSelector((state) => state.cart.cartItems, shallowEqual)
   const user = useSelector((state) => state.auth.user)
-
+  const handleClose = () => setClose(false)
   const onSubmit = async (data) => {
     // router.push('/order-received');
     const orderItems = [...cartItems]
@@ -59,8 +68,14 @@ function CheckoutForm({ t, setUnired, unired }) {
         dispatch(clearCartAction())
         router.push('/order/[id]', `/order/${response.data.number}`)
       }
+
       console.log(response)
     } catch (error) {
+      if (error.response.status === 406) {
+        console.log(error.response)
+        setError(error.response.data.Error.Message)
+        setClose(true)
+      }
       isClick(false)
       swal(error)
       console.log(error)
@@ -88,212 +103,235 @@ function CheckoutForm({ t, setUnired, unired }) {
   }, [paymentMethod])
 
   return (
-    <form className='checkout_form' onSubmit={handleSubmit(onSubmit)}>
-      <div className='checkout_form-box'>
-        <h3 className='form_heading'>{t('full-name')}</h3>
-        <div className='field_wrapper'>
-          <input
-            type='text'
-            name='customer_name'
-            id='name'
-            required
-            ref={register}
-            placeholder={t('write-name')}
-            defaultValue={user ? `${user.lastname} ${user.name}` : ''}
-          />
-        </div>
-      </div>
-      <div className='checkout_form-box'>
-        <h3 className='form_heading'>{t('address')}</h3>
-        <div className='field_wrapper'>
-          <textarea
-            type='text'
-            name='address'
-            id='address'
-            required
-            ref={register}
-            defaultValue={user?.address || ''}
-            placeholder={t('write-address')}
-          />
-        </div>
-      </div>
-      <div className='checkout_form-box'>
-        <h3 className='form_heading'>{t('phone-number')}</h3>
-        <div className='field_wrapper'>
-          <input
-            type='tel'
-            name='phone'
-            id='phone'
-            required
-            ref={register}
-            placeholder={t('write-phone-number')}
-            defaultValue={user ? user.phone : ''}
-          />
-        </div>
-      </div>
-      <div className='checkout_form-box'>
-        <h3 className='form_heading'>{t('select-payment-method')}</h3>
-        <div className='radio_wrapper'>
-          <div className='radio_card'>
+    <>
+      <form className='checkout_form' onSubmit={handleSubmit(onSubmit)}>
+        <div className='checkout_form-box'>
+          <h3 className='form_heading'>{t('full-name')}</h3>
+          <div className='field_wrapper'>
             <input
-              type='radio'
-              name='payment_method'
-              value='cash'
-              id='cash'
+              type='text'
+              name='customer_name'
+              id='name'
+              required
               ref={register}
-              defaultChecked
+              placeholder={t('write-name')}
+              defaultValue={user ? `${user.lastname} ${user.name}` : ''}
             />
-            <label htmlFor='cash'>
-              <span className='card_title'>{t('cash')}</span>
-              <span className='card_content'>
-                <img
-                  src='./images/payment_logo/banknote.svg'
-                  className='cash'
-                  alt='Cash'
-                />
-              </span>
-            </label>
-          </div>
-          <div className='radio_card'>
-            <input
-              type='radio'
-              name='payment_method'
-              value='card'
-              id='terminal'
-              ref={register}
-            />
-            <label htmlFor='terminal'>
-              <span className='card_title'>{t('terminal')}</span>
-              <span className='card_content'>
-                <img
-                  src='./images/payment_logo/credit-card.svg'
-                  className='credit-card'
-                  alt='Credit card'
-                />
-              </span>
-            </label>
-          </div>
-          <div className='radio_card'>
-            <input
-              type='radio'
-              name='payment_method'
-              value='click'
-              id='click'
-              ref={register}
-            />
-            <label htmlFor='click'>
-              <span className='card_title'>Click</span>
-              <span className='card_content'>
-                <img
-                  src='./images/payment_logo/click.svg'
-                  className='click'
-                  alt='Click'
-                />
-              </span>
-            </label>
-          </div>
-          <div className='radio_card'>
-            <input
-              type='radio'
-              name='payment_method'
-              value='payme'
-              id='payme'
-              ref={register}
-            />
-            <label htmlFor='payme'>
-              <span className='card_title'>Payme</span>
-              <span className='card_content'>
-                <img
-                  src='./images/payment_logo/payme.svg'
-                  className='payme'
-                  alt='Payme'
-                />
-              </span>
-            </label>
-          </div>
-          <div className='radio_card'>
-            <input
-              type='radio'
-              name='payment_method'
-              value='unired'
-              id='unired'
-              className={isUnired ? 'link_disabled' : ''}
-              disabled={isUnired}
-              ref={register}
-            />
-            <label htmlFor='unired' className={isUnired ? 'link_disabled' : ''}>
-              <span className='card_title'>Unired</span>
-              <span className='card_content'>
-                <img
-                  src='./images/payment_logo/unired.jpeg'
-                  className='unired'
-                  alt='Unired'
-                />
-              </span>
-            </label>
           </div>
         </div>
-      </div>
-      <div className='checkout_form-box'>
-        <h3 className='form_heading'>{t('select-delivery-method')}</h3>
-        <div className='radio_wrapper'>
-          <div className='radio_card'>
-            <input
-              type='radio'
-              name='delivery_method'
-              value='self'
-              id='pickup'
-              defaultChecked
+        <div className='checkout_form-box'>
+          <h3 className='form_heading'>{t('address')}</h3>
+          <div className='field_wrapper'>
+            <textarea
+              type='text'
+              name='address'
+              id='address'
+              required
               ref={register}
+              defaultValue={user?.address || ''}
+              placeholder={t('write-address')}
             />
-            <label htmlFor='pickup'>
-              <span className='card_title'>{t('pickup')}</span>
-              <span className='card_content'>
-                <FaBoxOpen />
-              </span>
-            </label>
-          </div>
-          <div className='radio_card'>
-            <input
-              type='radio'
-              name='delivery_method'
-              value='delivery'
-              id='deliver'
-              ref={register}
-            />
-            <label htmlFor='deliver'>
-              <span className='card_title'>{t('delivery-within-a-day')}</span>
-              <span className='card_content'>
-                <FaTruck />
-              </span>
-            </label>
           </div>
         </div>
-      </div>
-      <div className='checkout_form-box'>
-        <h3 className='form_heading'>{t('order-notes')}</h3>
-        <div className='field_wrapper'>
-          <textarea
-            type='tel'
-            name='note'
-            id='note'
-            placeholder={t('order-notes-example')}
-            ref={register}
-          />
+        <div className='checkout_form-box'>
+          <h3 className='form_heading'>{t('phone-number')}</h3>
+          <div className='field_wrapper'>
+            <input
+              type='tel'
+              name='phone'
+              id='phone'
+              required
+              ref={register}
+              placeholder={t('write-phone-number')}
+              defaultValue={user ? user.phone : ''}
+            />
+          </div>
         </div>
-        <span className='term_text'>
-          {t('by-making-purchase')}
-          <a href='/terms' target='_blank' rel='noopener noreferrer'>
-            {t('terms-and-conditions')}.
-          </a>
-        </span>
-        <div className='checkout_submit'>
-          <button className='btn' disabled={click}>
-            <span className='btn_text'>{t('checkout')}</span>
+        <div className='checkout_form-box'>
+          <h3 className='form_heading'>{t('select-payment-method')}</h3>
+          <div className='radio_wrapper'>
+            <div className='radio_card'>
+              <input
+                type='radio'
+                name='payment_method'
+                value='cash'
+                id='cash'
+                ref={register}
+                defaultChecked
+              />
+              <label htmlFor='cash'>
+                <span className='card_title'>{t('cash')}</span>
+                <span className='card_content'>
+                  <img
+                    src='./images/payment_logo/banknote.svg'
+                    className='cash'
+                    alt='Cash'
+                  />
+                </span>
+              </label>
+            </div>
+            <div className='radio_card'>
+              <input
+                type='radio'
+                name='payment_method'
+                value='card'
+                id='terminal'
+                ref={register}
+              />
+              <label htmlFor='terminal'>
+                <span className='card_title'>{t('terminal')}</span>
+                <span className='card_content'>
+                  <img
+                    src='./images/payment_logo/credit-card.svg'
+                    className='credit-card'
+                    alt='Credit card'
+                  />
+                </span>
+              </label>
+            </div>
+            <div className='radio_card'>
+              <input
+                type='radio'
+                name='payment_method'
+                value='click'
+                id='click'
+                ref={register}
+              />
+              <label htmlFor='click'>
+                <span className='card_title'>Click</span>
+                <span className='card_content'>
+                  <img
+                    src='./images/payment_logo/click.svg'
+                    className='click'
+                    alt='Click'
+                  />
+                </span>
+              </label>
+            </div>
+            <div className='radio_card'>
+              <input
+                type='radio'
+                name='payment_method'
+                value='payme'
+                id='payme'
+                ref={register}
+              />
+              <label htmlFor='payme'>
+                <span className='card_title'>Payme</span>
+                <span className='card_content'>
+                  <img
+                    src='./images/payment_logo/payme.svg'
+                    className='payme'
+                    alt='Payme'
+                  />
+                </span>
+              </label>
+            </div>
+            <div className='radio_card'>
+              <input
+                type='radio'
+                name='payment_method'
+                value='unired'
+                id='unired'
+                className={isUnired ? 'link_disabled' : ''}
+                disabled={isUnired}
+                ref={register}
+              />
+              <label
+                htmlFor='unired'
+                className={isUnired ? 'link_disabled' : ''}
+              >
+                <span className='card_title'>Unired</span>
+                <span className='card_content'>
+                  <img
+                    src='./images/payment_logo/unired.jpeg'
+                    className='unired'
+                    alt='Unired'
+                  />
+                </span>
+              </label>
+            </div>
+          </div>
+        </div>
+        <div className='checkout_form-box'>
+          <h3 className='form_heading'>{t('select-delivery-method')}</h3>
+          <div className='radio_wrapper'>
+            <div className='radio_card'>
+              <input
+                type='radio'
+                name='delivery_method'
+                value='self'
+                id='pickup'
+                defaultChecked
+                ref={register}
+              />
+              <label htmlFor='pickup'>
+                <span className='card_title'>{t('pickup')}</span>
+                <span className='card_content'>
+                  <FaBoxOpen />
+                </span>
+              </label>
+            </div>
+            <div className='radio_card'>
+              <input
+                type='radio'
+                name='delivery_method'
+                value='delivery'
+                id='deliver'
+                ref={register}
+              />
+              <label htmlFor='deliver'>
+                <span className='card_title'>{t('delivery-within-a-day')}</span>
+                <span className='card_content'>
+                  <FaTruck />
+                </span>
+              </label>
+            </div>
+          </div>
+        </div>
+        <div className='checkout_form-box'>
+          <h3 className='form_heading'>{t('order-notes')}</h3>
+          <div className='field_wrapper'>
+            <textarea
+              type='tel'
+              name='note'
+              id='note'
+              placeholder={t('order-notes-example')}
+              ref={register}
+            />
+          </div>
+          <span className='term_text'>
+            {t('by-making-purchase')}
+            <a href='/terms' target='_blank' rel='noopener noreferrer'>
+              {t('terms-and-conditions')}.
+            </a>
+          </span>
+          <div className='checkout_submit'>
+            <button className='btn' disabled={click}>
+              <span className='btn_text'>{t('checkout')}</span>
+            </button>
+          </div>
+        </div>
+      </form>
+      <Dialog
+        open={close}
+        aria-labelledby='alert-dialog-title'
+        aria-describedby='alert-dialog-description'
+      >
+        <DialogTitle id='alert-dialog-title'>{t('note')}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id='alert-dialog-description'>
+            {t('alert-stock')} <b>{error}</b>
+            {t('alert-text')}
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <button onClick={handleClose} className='btn btn-close-modal'>
+            {t('close-btn')}
           </button>
-        </div>
-      </div>
-    </form>
+        </DialogActions>
+      </Dialog>
+    </>
   )
 }
 

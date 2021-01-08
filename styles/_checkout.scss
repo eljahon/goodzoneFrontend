@@ -1,423 +1,443 @@
 .checkout_wrapper {
-    width: 100%;
+  width: 100%;
+  display: flex;
+  position: relative;
+  padding: 60px 60px 120px 60px;
+  background-color: $bg-color;
+  @include sm {
+    padding: 0;
+    padding-bottom: 60px;
+  }
+  .checkout_container {
     display: flex;
-    position: relative;
-    padding: 60px 60px 120px 60px;
-    background-color: $bg-color;
+    width: 1140px;
+    margin-left: auto;
+    margin-right: auto;
+    counter-reset: section-counter 0;
     @include sm {
-        padding: 0;
-        padding-bottom: 60px;
+      flex-direction: column;
     }
-    .checkout_container {
-        display: flex;
-        width: 1140px;
-        margin-left: auto;
-        margin-right: auto;
-        counter-reset: section-counter 0;
-        @include sm {
-            flex-direction: column;
-        }
-    }
+  }
 }
 form.checkout_form {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-right: 20px;
+  overflow: hidden;
+  padding: 20px;
+  @include sm {
+    order: 1;
+    margin-right: 0;
+  }
+  .checkout_form-box {
+    background-color: rgb(255, 255, 255);
     position: relative;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    margin-right: 20px;
-    overflow: hidden;
-    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: rgba(0, 0, 0, 0.08) 0 2px 16px 0;
+    padding: 30px 30px 20px;
     @include sm {
-        order: 1;
-        margin-right: 0;
+      padding: 20px;
     }
-    .checkout_form-box {
-        background-color: rgb(255, 255, 255);
-        position: relative;
-        margin-bottom: 20px;
-        box-shadow: rgba(0, 0, 0, 0.08) 0 2px 16px 0;
-        padding: 30px 30px 20px;
+    span.term_text {
+      display: block;
+      margin-top: 30px;
+      font-family: $base-font;
+      font-size: 13px;
+      font-weight: 400;
+      color: $span-color;
+      line-height: 1.5;
+      a {
+        font-family: $base-font;
+        font-size: 13px;
+        font-weight: 400;
+        color: $primary-color;
+        margin-left: 5px;
+        cursor: pointer;
+        line-height: 1.5;
+      }
+    }
+    .checkout_submit {
+      margin-top: 25px;
+      .btn {
+        cursor: pointer;
+        display: inline-flex;
+        -webkit-box-align: center;
+        align-items: center;
+        -webkit-box-pack: center;
+        justify-content: center;
+        background-color: $primary-color;
+        height: 48px;
+        width: 100%;
+        color: rgb(255, 255, 255);
+        font-size: 15px;
+        font-weight: 700;
+        padding-top: 0px;
+        padding-bottom: 0px;
+        padding-left: 30px;
+        padding-right: 30px;
+        border-radius: 6px;
+        text-decoration: none;
+        border-width: 0px;
+        border-style: initial;
+        border-color: initial;
+        border-image: initial;
+        transition: all 0.3s ease 0s;
+        .btn_text {
+          padding-left: 4px;
+          padding-right: 4px;
+          white-space: nowrap;
+        }
+      }
+    }
+    .form_heading {
+      font-family: $base-font;
+      font-size: 21px;
+      font-weight: 400;
+      color: $link-color;
+      line-height: 1.4;
+      margin-bottom: 35px;
+      position: relative;
+      width: calc(100% - 100px);
+      display: flex;
+      -webkit-box-align: center;
+      align-items: center;
+      @include sm {
+        width: 100%;
+        font-size: 19px;
+      }
+      &::before {
+        counter-increment: section-counter 1;
+        content: counter(section-counter);
+        font-family: $base-font;
+        font-size: 16px;
+        font-weight: 400;
+        color: rgb(255, 255, 255);
+        width: 35px;
+        height: 35px;
+        display: flex;
+        -webkit-box-align: center;
+        align-items: center;
+        -webkit-box-pack: center;
+        justify-content: center;
+        background-color: $primary-color;
+        margin-right: 15px;
+        border-radius: 50%;
         @include sm {
-            padding: 20px;
+          width: 30px;
+          height: 30px;
+          font-size: 14px;
         }
-        span.term_text {
-            display: block;
-            margin-top: 30px;
-            font-family: $base-font;
-            font-size: 13px;
-            font-weight: 400;
-            color: $span-color;
-            line-height: 1.5;
-            a {
-                font-family: $base-font;
-                font-size: 13px;
-                font-weight: 400;
-                color: $primary-color;
-                margin-left: 5px;
-                cursor: pointer;
-                line-height: 1.5;
-            }
-        }
-        .checkout_submit {
-            margin-top: 25px;
-            .btn {
-                cursor: pointer;
-                display: inline-flex;
-                -webkit-box-align: center;
-                align-items: center;
-                -webkit-box-pack: center;
-                justify-content: center;
-                background-color: $primary-color;
-                height: 48px;
-                width: 100%;
-                color: rgb(255, 255, 255);
-                font-size: 15px;
-                font-weight: 700;
-                padding-top: 0px;
-                padding-bottom: 0px;
-                padding-left: 30px;
-                padding-right: 30px;
-                border-radius: 6px;
-                text-decoration: none;
-                border-width: 0px;
-                border-style: initial;
-                border-color: initial;
-                border-image: initial;
-                transition: all 0.3s ease 0s;
-                .btn_text {
-                    padding-left: 4px;
-                    padding-right: 4px;
-                    white-space: nowrap;
-                }
-            }
-        }
-        .form_heading {
-            font-family: $base-font;
-            font-size: 21px;
-            font-weight: 400;
-            color: $link-color;
-            line-height: 1.4;
-            margin-bottom: 35px;
-            position: relative;
-            width: calc(100% - 100px);
-            display: flex;
-            -webkit-box-align: center;
-            align-items: center;
-            @include sm {
-                width: 100%;
-                font-size: 19px;
-            }
-            &::before {
-                counter-increment: section-counter 1;
-                content: counter(section-counter);
-                font-family: $base-font;
-                font-size: 16px;
-                font-weight: 400;
-                color: rgb(255, 255, 255);
-                width: 35px;
-                height: 35px;
-                display: flex;
-                -webkit-box-align: center;
-                align-items: center;
-                -webkit-box-pack: center;
-                justify-content: center;
-                background-color: $primary-color;
-                margin-right: 15px;
-                border-radius: 50%;
-                @include sm {
-                    width: 30px;
-                    height: 30px;
-                    font-size: 14px;
-                }
-            }
-        }
-        .field_wrapper {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            margin-bottom: 15px;
-            input[type=text], input[type=tel] {
-                -webkit-appearance: none;
-            }
-            input, textarea {
-                -webkit-appearance: none;
-                box-shadow: none !important;
-                width: 100%;
-                height: 54px;
-                font-family: $base-font;
-                color: $link-color;
-                font-size: 16px;
-                line-height: 19px;
-                font-weight: 400;
-                box-sizing: border-box;
-                border-radius: 6px;
-                border-width: 1px;
-                border-style: solid;
-                border-color: $border-color;
-                border-image: initial;
-                padding: 0 18px;
-                transition: border-color 0.25s ease 0s;
-                outline: 0;
-                &:focus {
-                    border-color: $primary-color;
-                }
-                @include sm {
-                    height: 48px;
-                }
-            }
-            textarea {
-                height: 130px;
-                padding: 18px;
-            }
-        }
-        .radio_wrapper {
-            display: flex;
-            flex-wrap: wrap;
-            -webkit-box-pack: start;
-            justify-content: flex-start;
-            .radio_card {
-                position: relative;
-                display: block;
-                width: calc(33.3333% - 10px);
-                max-width: calc(33.3333% - 10px);
-                height: 100%;
-                min-height: 92px;
-                margin-right: 15px;
-                margin-top: 0;
-                margin-bottom: 15px;
-                &:nth-of-type(3n) {
-                    margin-right: 0;
-                }
-                @include sm {
-                    width: 100%;
-                    max-width: 48%;
-                    flex: 1 1 50%;
-                    margin-right: 10px;    
-                    &:nth-of-type(2n) {
-                        margin-right: 0;
-                    }
-                    &:nth-of-type(3n) {
-                        margin-right: 10px;
-                    }
-                }
-                input[type="radio"] {
-                    visibility: hidden;
-                    width: 0;
-                    margin: 0;
-                    &:checked + label {
-                        background-color: rgb(255, 255, 255);
-                        border-width: 1px;
-                        border-style: solid;
-                        border-color: $primary-color;
-                        border-image: initial;
-                    }
-                }
-                label {
-                    position: absolute;
-                    display: inline-flex;
-                    flex-direction: column;
-                    align-items: flex-start;
-                    width: 100%;
-                    height: 100%;
-                    padding: 15px;
-                    border-width: 1px;
-                    border-radius: 6px;
-                    border-style: solid;
-                    border-image: initial;
-                    transition: all 0.25s ease 0s;
-                    text-align: left;
-                    font-family: $base-font;
-                    font-size: 15px;
-                    font-weight: 400;
-                    color: $link-color;
-                    line-height: 24px;
-                    cursor: pointer;
-                    border-color: $bg-color;
-                    background-color: $bg-color;
-                    .card_title {
-                        font-size: 13px;
-                        font-weight: 700;
-                        color: $link-color;
-                        line-height: 1.2;
-                        margin-bottom: 5px;
-                    }
-                    .card_content {
-                        font-size: 20px;
-                        font-weight: 400;
-                        color: rgb(66, 69, 97);
-                        svg {
-                            fill: rgb(66, 69, 97);
-                            font-size: 25px;
-                        }
-                        img {
-                            width: 30px;
-                            height: 30px;
-                            &.click {
-                                width: 60px;
-                            }
-                            &.unired {
-                                width: 60px;
-                                height: auto;
-                            }
-                        }
-                    }
-                }
-            }
-        }
+      }
     }
+    .field_wrapper {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 15px;
+      input[type='text'],
+      input[type='tel'] {
+        -webkit-appearance: none;
+      }
+      input,
+      textarea {
+        -webkit-appearance: none;
+        box-shadow: none !important;
+        width: 100%;
+        height: 54px;
+        font-family: $base-font;
+        color: $link-color;
+        font-size: 16px;
+        line-height: 19px;
+        font-weight: 400;
+        box-sizing: border-box;
+        border-radius: 6px;
+        border-width: 1px;
+        border-style: solid;
+        border-color: $border-color;
+        border-image: initial;
+        padding: 0 18px;
+        transition: border-color 0.25s ease 0s;
+        outline: 0;
+        &:focus {
+          border-color: $primary-color;
+        }
+        @include sm {
+          height: 48px;
+        }
+      }
+      textarea {
+        height: 130px;
+        padding: 18px;
+      }
+    }
+    .radio_wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      -webkit-box-pack: start;
+      justify-content: flex-start;
+      .radio_card {
+        position: relative;
+        display: block;
+        width: calc(33.3333% - 10px);
+        max-width: calc(33.3333% - 10px);
+        height: 100%;
+        min-height: 92px;
+        margin-right: 15px;
+        margin-top: 0;
+        margin-bottom: 15px;
+        &:nth-of-type(3n) {
+          margin-right: 0;
+        }
+        @include sm {
+          width: 100%;
+          max-width: 48%;
+          flex: 1 1 50%;
+          margin-right: 10px;
+          &:nth-of-type(2n) {
+            margin-right: 0;
+          }
+          &:nth-of-type(3n) {
+            margin-right: 10px;
+          }
+        }
+        input[type='radio'] {
+          visibility: hidden;
+          width: 0;
+          margin: 0;
+          &:checked + label {
+            background-color: rgb(255, 255, 255);
+            border-width: 1px;
+            border-style: solid;
+            border-color: $primary-color;
+            border-image: initial;
+          }
+        }
+        label {
+          position: absolute;
+          display: inline-flex;
+          flex-direction: column;
+          align-items: flex-start;
+          width: 100%;
+          height: 100%;
+          padding: 15px;
+          border-width: 1px;
+          border-radius: 6px;
+          border-style: solid;
+          border-image: initial;
+          transition: all 0.25s ease 0s;
+          text-align: left;
+          font-family: $base-font;
+          font-size: 15px;
+          font-weight: 400;
+          color: $link-color;
+          line-height: 24px;
+          cursor: pointer;
+          border-color: $bg-color;
+          background-color: $bg-color;
+          .card_title {
+            font-size: 13px;
+            font-weight: 700;
+            color: $link-color;
+            line-height: 1.2;
+            margin-bottom: 5px;
+          }
+          .card_content {
+            font-size: 20px;
+            font-weight: 400;
+            color: rgb(66, 69, 97);
+            svg {
+              fill: rgb(66, 69, 97);
+              font-size: 25px;
+            }
+            img {
+              width: 30px;
+              height: 30px;
+              &.click {
+                width: 60px;
+              }
+              &.unired {
+                width: 60px;
+                height: auto;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }
 
 .cart_wrapper {
-    width: 380px;
-    flex-shrink: 0;
-    padding-top: 20px;
-    @include sm {
-        order: 0;
+  width: 380px;
+  flex-shrink: 0;
+  padding-top: 20px;
+  @include sm {
+    order: 0;
+    width: 100%;
+    padding: 40px 20px 30px;
+    position: relative !important;
+  }
+  .sticky_outer-wrapper {
+    position: sticky;
+    top: 108px;
+    padding-bottom: 40px;
+    .sticky_inner-wrapper {
+      position: relative;
+      z-index: 999;
+      transform: translate3d(0px, 0px, 0px);
+      .order_info {
         width: 100%;
-        padding: 40px 20px 30px;
-        position: relative !important;
-    }
-    .sticky_outer-wrapper {
-        position: sticky;
-        top: 108px;
-        padding-bottom: 40px;
-        .sticky_inner-wrapper {
+        display: flex;
+        flex-direction: column;
+        background-color: white;
+        padding: 30px 30px 20px;
+        box-shadow: rgba(0, 0, 0, 0.08) 0 2px 16px 0;
+        @include sm {
+          padding: 20px 5px;
+          background-color: white;
+        }
+        h3 {
+          font-family: $base-font;
+          font-size: 15px;
+          font-weight: 700;
+          color: $link-color;
+          text-align: center;
+          margin-bottom: 40px;
+        }
+        .order_content-wrapper {
+          position: relative;
+          overflow: hidden;
+          width: 100%;
+          height: auto;
+          min-height: 0;
+          max-height: 390px;
+          .order_content {
             position: relative;
-            z-index: 999;
-            transform: translate3d(0px, 0px, 0px);
-            .order_info {
-                width: 100%;
-                display: flex;
-                flex-direction: column;
-                background-color: white;
-                padding: 30px 30px 20px;
-                box-shadow: rgba(0, 0, 0, 0.08) 0 2px 16px 0;
-                @include sm {
-                    padding: 20px 5px;
-                    background-color: white;
-                }
-                h3 {
-                    font-family: $base-font;
-                    font-size: 15px;
-                    font-weight: 700;
-                    color: $link-color;
-                    text-align: center;
-                    margin-bottom: 40px;
-                }
-                .order_content-wrapper {
-                    position: relative;
-                    overflow: hidden;
-                    width: 100%;
-                    height: auto;
-                    min-height: 0;
-                    max-height: 390px;
-                    .order_content {
-                        position: relative;
-                        overflow: scroll;
-                        margin-right: -17px;
-                        margin-bottom: -17px;
-                        min-height: 17px;
-                        max-height: 280px;
-                        margin-left: 0;
-                        padding-left: 0;
-                        padding-right: 17px;
-                        @include sm {
-                            position: relative;
-                            overflow: scroll;
-                            min-height: 0;
-                            max-height: calc(390px);
-                            padding-left: 0;
-                            padding-right: 15px;
-                            margin: 0;
-                        }
-                        .items_wrapper {
-                            display: flex;
-                            flex-direction: column;
-                            padding-left: 17px;
-                            .items {
-                                display: flex;
-                                width: 100%;
-                                align-items: flex-start;
-                                -webkit-box-pack: start;
-                                justify-content: flex-start;
-                                margin-bottom: 25px;
-                                .quantity {
-                                    font-size: 14px;
-                                    font-weight: 700;
-                                    color: $link-color;
-                                }
-                                .multi {
-                                    font-size: 14px;
-                                    font-weight: 400;
-                                    color: $span-color;
-                                    margin: 0 12px;
-                                }
-                                .item_info {
-                                    font-size: 14px;
-                                    font-weight: 400;
-                                    color: $span-color;
-                                    margin-right: 15px;
-                                }
-                                .price {
-                                    font-size: 14px;
-                                    font-weight: 400;
-                                    color: $span-color;
-                                    margin-left: auto;
-                                    white-space: nowrap;
-                                }
-                            }
-                        }
-                    }
-                }
-                .calculation_wrapper {
-                    margin-top: 20px;
-                    border-top: 1px solid rgb(230, 230, 230);
-                    padding: 20px 15px 0;
-                    .text_wrapper {
-                        display: flex;
-                        width: 100%;
-                        -webkit-box-pack: justify;
-                        justify-content: space-between;
-                        margin-bottom: 10px;
-                        span {
-                            font-size: 14px;
-                            font-weight: 400;
-                            color: $span-color;
-                        }
-                        &.total {
-                            margin-top: 20px;
-                            span {
-                                font-weight: 700;
-                                color: $link-color;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-    &.sticky {
-        .sticky_outer-wrapper {
-            height: 428px;
+            overflow: scroll;
+            margin-right: -17px;
+            margin-bottom: -17px;
+            min-height: 17px;
+            max-height: 280px;
+            margin-left: 0;
+            padding-left: 0;
+            padding-right: 17px;
             @include sm {
-                height: auto;
+              position: relative;
+              overflow: scroll;
+              min-height: 0;
+              max-height: calc(390px);
+              padding-left: 0;
+              padding-right: 15px;
+              margin: 0;
             }
-            .sticky_inner-wrapper {
-                position: fixed;
-                z-index: 999;
-                transform: translate3d(0, 106px, 0);
-                top: 0;
-                width: 380px;
-                @include sm {
-                    position: relative;
-                    z-index: 1;
-                    transform: none;
-                    width: 100%;
+            .items_wrapper {
+              display: flex;
+              flex-direction: column;
+              padding-left: 17px;
+              .items {
+                display: flex;
+                width: 100%;
+                align-items: flex-start;
+                -webkit-box-pack: start;
+                justify-content: flex-start;
+                margin-bottom: 25px;
+                .quantity {
+                  font-size: 14px;
+                  font-weight: 700;
+                  color: $link-color;
                 }
-                .order_info {
-                    box-shadow: rgba(0, 0, 0, 0.08) 0 2px 16px 0;
+                .multi {
+                  font-size: 14px;
+                  font-weight: 400;
+                  color: $span-color;
+                  margin: 0 12px;
                 }
+                .item_info {
+                  font-size: 14px;
+                  font-weight: 400;
+                  color: $span-color;
+                  margin-right: 15px;
+                }
+                .price {
+                  font-size: 14px;
+                  font-weight: 400;
+                  color: $span-color;
+                  margin-left: auto;
+                  white-space: nowrap;
+                }
+              }
             }
+          }
         }
+        .calculation_wrapper {
+          margin-top: 20px;
+          border-top: 1px solid rgb(230, 230, 230);
+          padding: 20px 15px 0;
+          .text_wrapper {
+            display: flex;
+            width: 100%;
+            -webkit-box-pack: justify;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            span {
+              font-size: 14px;
+              font-weight: 400;
+              color: $span-color;
+            }
+            &.total {
+              margin-top: 20px;
+              span {
+                font-weight: 700;
+                color: $link-color;
+              }
+            }
+          }
+        }
+      }
     }
+  }
+  &.sticky {
+    .sticky_outer-wrapper {
+      height: 428px;
+      @include sm {
+        height: auto;
+      }
+      .sticky_inner-wrapper {
+        position: fixed;
+        z-index: 999;
+        transform: translate3d(0, 106px, 0);
+        top: 0;
+        width: 380px;
+        @include sm {
+          position: relative;
+          z-index: 1;
+          transform: none;
+          width: 100%;
+        }
+        .order_info {
+          box-shadow: rgba(0, 0, 0, 0.08) 0 2px 16px 0;
+        }
+      }
+    }
+  }
+}
+
+.btn-close-modal {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f5363e;
+  color: #fff;
+  padding: 10px 15px;
+  font-weight: 700;
+  font-size: 15px;
+  text-decoration: none;
+  border: none;
+  transition: all 0.3s ease 0s;
+  border-radius: 6px;
+  &:hover {
+    color: #fff;
+  }
 }

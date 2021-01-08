@@ -57,5 +57,9 @@
   "cancel-order-alert-text": "Buyurtmani bekor qilishni xohlaysizmi?",
   "success": "Muvaffaqiyatli bajarildi",
   "fail": "Xatolik yuz berdi, iltimos yana urinib ko'ring",
-  "home": "Asosiy manzil"
+  "home": "Asosiy manzil",
+  "close-btn": "Yopish",
+  "alert-stock": "Siz tanlagan ",
+  "alert-text": " sotuvda mavjud emas",
+  "note": "Buyurtma qabul qilinmadi"
 }
