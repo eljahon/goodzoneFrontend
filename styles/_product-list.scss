@@ -34,7 +34,7 @@ main {
         display: inline-block;
         padding-right: 0.5rem;
         color: $link-color;
-        content: "›";
+        content: '›';
       }
     }
     @include sm {
@@ -498,7 +498,7 @@ main {
                 line-height: 0;
                 &::after {
                   display: block;
-                  content: "Добавить";
+                  content: 'Добавить';
                   color: $primary-color;
                   text-indent: 0;
                   line-height: initial;
@@ -651,4 +651,43 @@ main {
   100% {
     transform: translateX(0);
   }
+}
+.product_disabled {
+  position: relative;
+}
+
+.product_disabled .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -60px;
+}
+.product_disabled .tooltiptext::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: black transparent transparent transparent;
+}
+
+.product_disabled:hover .tooltiptext {
+  visibility: visible;
+}
+
+.product_disabled {
+  cursor: not-allowed !important;
+  color: #f5363e !important;
+  background-color: transparent !important;
+  border: none !important;
 }

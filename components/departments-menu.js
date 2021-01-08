@@ -12,7 +12,7 @@ import { withTranslation } from "../i18n";
 import { useDispatch } from "react-redux";
 import { clearFilters } from "../redux/actions/filterActions/filterActions";
 
-function DepartmentsMenu({ categories, closeMenu, t }) {
+function DepartmentsMenu({ categories, closeMenu, t, menu }) {
   const vw = window.innerWidth;
   const dispatch = useDispatch();
   const router = useRouter();
@@ -24,7 +24,7 @@ function DepartmentsMenu({ categories, closeMenu, t }) {
 
   return (
     <>
-      <nav className="departments_menu">
+      <nav className={`departments_menu`}>
         <div className="drawer_header">
           <button className="btn btn_close" onClick={closeMenu}>
             <span className="close_icon">
@@ -50,7 +50,7 @@ function DepartmentsMenu({ categories, closeMenu, t }) {
               </a>
             </Link>
           </li>
-          {categories.map((item, i) => {
+          {categories?.map((item, i) => {
             return (
               <li key={item.id}>
                 <Link
