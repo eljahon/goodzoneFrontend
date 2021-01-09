@@ -430,7 +430,8 @@
         border-image: initial;
         outline: 0;
         @include sm {
-          margin-bottom: 50px;
+          bottom: 80px;
+          // margin-bottom: 50px;
         }
         .btn_text {
           width: 100%;
