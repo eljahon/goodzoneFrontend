@@ -16,6 +16,8 @@ const RegisterConfirm = ({
   t,
   userInfo,
   setRegisterConfirm,
+  isArea,
+  setCustomer,
 }) => {
   const { register, handleSubmit, errors } = useForm()
   const router = useRouter()
@@ -40,6 +42,10 @@ const RegisterConfirm = ({
       )
       .then((response) => {
         if (response.status === 200) {
+          if (!response.data.area) {
+            isArea(true)
+            setCustomer(userInfo.id)
+          }
           if (goCheckout) {
             router.push('/checkout')
           } else {

@@ -61,5 +61,9 @@
   "close-btn": "Yopish",
   "alert-stock": "Siz tanlagan ",
   "alert-text": " sotuvda mavjud emas",
-  "note": "Buyurtma qabul qilinmadi"
+  "note": "Buyurtma qabul qilinmadi",
+  "area-title": "Mintaqani tanlang",
+  "area-tashkent": "Toshkent",
+  "area-samarkand": "Samarqand",
+  "submit": "Tasdiqlash"
 }

@@ -12,17 +12,27 @@ import { axiosAuth } from '../libs/axios/axios-instances'
 import { setUser } from '../redux/actions/authActions/authActions'
 import { Link, withTranslation } from '../i18n'
 import BannerContainer from '../components/bannerContainer'
+import AreaModal from '../components/area-modal'
 
 function Home({ new_products, recommended_products, popular_products, t }) {
   const dispatch = useDispatch()
 
   const [banners, setBanners] = useState(null)
+  const [area, isArea] = useState(false)
+  const [customer, setCustomer] = useState(null)
 
   useEffect(() => {
     if (getLocalStorage('access_token')) {
       axiosAuth
         .get('/profile')
-        .then(({ data: { customer: user } }) => dispatch(setUser(user)))
+        .then(({ data: { customer: user } }) => {
+          console.log(user)
+          if (user && !user.area) {
+            isArea(true)
+            setCustomer(user.id)
+          }
+          dispatch(setUser(user))
+        })
         .catch((error) => console.error(error))
     }
   }, [])
@@ -58,6 +68,7 @@ function Home({ new_products, recommended_products, popular_products, t }) {
       />
       <CartPopup />
       <Footer />
+      {area ? <AreaModal customer={customer} isArea={isArea} /> : ''}
     </>
   )
 }

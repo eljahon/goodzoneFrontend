@@ -21,7 +21,51 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
+  NativeSelect,
 } from '@material-ui/core'
+import { makeStyles, withStyles } from '@material-ui/core/styles'
+import InputBase from '@material-ui/core/InputBase'
+const useStyles = makeStyles((theme) => ({
+  margin: {
+    margin: theme.spacing(1),
+    width: '70%',
+  },
+}))
+const BootstrapInput = withStyles((theme) => ({
+  root: {
+    'label + &': {
+      marginTop: theme.spacing(3),
+    },
+  },
+  input: {
+    borderRadius: 4,
+    position: 'relative',
+    backgroundColor: '#fff',
+    border: '1px solid #ced4da',
+    fontSize: 16,
+    padding: '10px 26px 10px 12px',
+    transition: theme.transitions.create(['border-color', 'box-shadow']),
+    // Use the system font instead of the default Roboto font.
+    fontFamily: [
+      '-apple-system',
+      'BlinkMacSystemFont',
+      '"Segoe UI"',
+      'Roboto',
+      '"Helvetica Neue"',
+      'Arial',
+      'sans-serif',
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"',
+    ].join(','),
+    '&:focus': {
+      backgroundColor: '#fff',
+      borderRadius: 4,
+      borderColor: '#f5363e',
+      boxShadow: 'none',
+    },
+  },
+}))(InputBase)
 
 function CheckoutForm({ t, setUnired, unired }) {
   const dispatch = useDispatch()
@@ -101,7 +145,13 @@ function CheckoutForm({ t, setUnired, unired }) {
     if (paymentMethod === 'unired') setUnired(true)
     else setUnired(false)
   }, [paymentMethod])
+  const classes = useStyles()
+  const [city, setCity] = useState(t('area-tashkent'))
 
+  const handleChange = (event) => {
+    console.log(event.target.value)
+    setCity(event.target.value)
+  }
   return (
     <>
       <form className='checkout_form' onSubmit={handleSubmit(onSubmit)}>
@@ -147,6 +197,19 @@ function CheckoutForm({ t, setUnired, unired }) {
             />
           </div>
         </div>
+        {/* <div className='checkout_form-box'>
+          <h3 className='form_heading'>{t('area-title')}</h3>
+          <div className='field_wrapper'>
+            <NativeSelect
+              input={<BootstrapInput />}
+              defaultValue={city}
+              onChange={handleChange}
+            >
+              <option value={t('area-samarkand')}>{t('area-samarkand')}</option>
+              <option value={t('area-tashkent')}>{t('area-tashkent')}</option>
+            </NativeSelect>
+          </div>
+        </div> */}
         <div className='checkout_form-box'>
           <h3 className='form_heading'>{t('select-payment-method')}</h3>
           <div className='radio_wrapper'>

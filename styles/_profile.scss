@@ -182,10 +182,10 @@
             color: $link-color;
             line-height: 19px;
           }
-          input[type="text"],
-          input[type="email"],
-          input[type="tel"],
-          input[type="password"] {
+          input[type='text'],
+          input[type='email'],
+          input[type='tel'],
+          input[type='password'] {
             -webkit-appearance: none;
           }
           input {
@@ -247,5 +247,49 @@
     tr
     td {
     white-space: nowrap !important;
+  }
+}
+
+.select-menu {
+  margin-bottom: 10px;
+  .MuiNativeSelect-select {
+    padding: 16px 18px;
+  }
+}
+
+.dropdown-city {
+  position: relative;
+  z-index: 9999;
+
+  div {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    span {
+      &:first-child {
+        font-size: 18px;
+        line-height: 24px;
+        font-weight: 400;
+      }
+    }
+  }
+  ul {
+    background-color: #fff;
+    position: absolute;
+    border-radius: 6px;
+    min-width: 200px;
+    padding: 20px 0;
+    box-shadow: rgba(142, 142, 142, 0.14) 0 3px 20px;
+    right: 30px;
+    li {
+      padding: 12px 30px;
+      font-size: 15px;
+      line-height: 18px;
+      font-weight: 700;
+      cursor: pointer;
+      &:hover {
+        color: $primary-color;
+      }
+    }
   }
 }

@@ -9,7 +9,6 @@ import { withTranslation, i18n } from '../i18n'
 
 const ProductListItem = ({ product, view, carousel, t }) => {
   const dispatch = useDispatch()
-  console.log('product', product)
   const addToCart = (e) => {
     const button = e.target
     const cartItem = button.querySelector('.cart-item')

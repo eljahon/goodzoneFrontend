@@ -95,7 +95,7 @@
   position: fixed;
   bottom: 0;
   right: -550px;
-  z-index: 1010;
+  z-index: 99999;
   box-shadow: rgba(0, 0, 0, 0.16) 0 21px 36px;
   transition: all 0.35s ease-in-out 0s;
   &.show {

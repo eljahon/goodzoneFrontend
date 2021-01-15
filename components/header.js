@@ -14,6 +14,7 @@ import { Link, withTranslation } from '../i18n'
 import BottomBar from './bottom-bar'
 import IconUser from './icons/IconUser'
 import IconMenu from './icons/IconMenu'
+import AreaModal from './area-modal'
 
 function Header({ categories, t }) {
   const vw = typeof window !== 'undefined' ? window.innerWidth : 0
@@ -23,7 +24,9 @@ function Header({ categories, t }) {
   const [loginPopup, setLoginPopup] = useState(false)
   const [registerPopup, setRegisterPopup] = useState(false)
   const [profilePopup, setProfilePopup] = useState(false)
-
+  const [area, isArea] = useState(false)
+  const [customer, setCustomer] = useState(null)
+  const [regions, setRegion] = useState('')
   useEffect(() => {
     vw <= 850 ? setMenu(false) : setMenu(true)
   }, [])
@@ -32,6 +35,18 @@ function Header({ categories, t }) {
     setLoginPopup(!loginPopup)
     setRegisterPopup(!registerPopup)
   }
+  useEffect(() => {
+    const region = localStorage.getItem('region')
+    console.log('sadsadsad', region)
+    if (region) {
+      if (user && user.area) {
+        console.log('res')
+        localStorage.setItem('region', user.area)
+      }
+    } else {
+      localStorage.setItem('region', t('area-tashkent'))
+    }
+  }, [])
 
   const user = useSelector((state) => state.auth.user, shallowEqual)
 
@@ -64,6 +79,7 @@ function Header({ categories, t }) {
         closeMenu={() => setProfilePopup(false)}
         openLoginMenu={() => setLoginPopup(true)}
         hasDynamicRouting={hasDynamicRouting}
+        regions={regions}
       />
       <Headroom>
         <header>
@@ -152,6 +168,8 @@ function Header({ categories, t }) {
         <LoginModal
           closeModal={() => setLoginPopup(false)}
           goRegister={() => switchPopup()}
+          isArea={isArea}
+          setCustomer={setCustomer}
         />
       ) : (
         ''
@@ -160,7 +178,14 @@ function Header({ categories, t }) {
         <RegisterModal
           closeModal={() => setRegisterPopup(false)}
           login={() => switchPopup()}
+          isArea={isArea}
+          setCustomer={setCustomer}
         />
+      ) : (
+        ''
+      )}
+      {area ? (
+        <AreaModal customer={customer} setRegion={setRegion} isArea={isArea} />
       ) : (
         ''
       )}
