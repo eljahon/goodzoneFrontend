@@ -96,7 +96,6 @@ function AreaModal({ closeModal, goRegister, customer, t, isArea, setRegion }) {
       )
       if (response.status === 201) {
         isArea(false)
-        setRegion(city)
         localStorage.setItem('region', city)
       }
     } catch (error) {

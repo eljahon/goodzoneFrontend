@@ -38,7 +38,7 @@ function Header({ categories, t }) {
   useEffect(() => {
     const region = localStorage.getItem('region')
     console.log('sadsadsad', region)
-    if (region) {
+    if (region !== 'null') {
       if (user && user.area) {
         console.log('res')
         localStorage.setItem('region', user.area)
