@@ -147,7 +147,6 @@ export default function Category({ products, categoryId, query, category }) {
       .then((data) => {
         const { products } = data.data
 
-        console.log('products', products)
         setFilteredProducts([...products])
 
         if (filterPriceRange.length === 0) {

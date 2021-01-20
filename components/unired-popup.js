@@ -6,8 +6,6 @@ import { useDispatch } from 'react-redux'
 import { numberToPrice } from '../libs/numberToPrice'
 
 function UniredPopup({ closePopup, t, data }) {
-  console.log('data', data)
-
   const [load, setLoad] = useState(false)
   useEffect(() => {
     setLoad(true)
@@ -42,7 +40,7 @@ function UniredPopup({ closePopup, t, data }) {
       }
     }, [ref])
   }
-  console.log('data', data)
+
   return (
     <div className='login_modal-wrapper'>
       <button className='btn close_btn' onClick={closePopup}>

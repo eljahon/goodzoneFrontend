@@ -132,7 +132,6 @@ function LoginModal({
         dispatch(setUser(response.data))
         if (goCheckout) router.push('/checkout')
         closeModal()
-        console.log(response.data)
         if (!response.data.area) {
           isArea(true)
           setCustomer(response.data.id)

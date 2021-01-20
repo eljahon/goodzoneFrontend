@@ -37,6 +37,20 @@ function App({ Component, pageProps, t }) {
     }
   }, [router.events])
 
+  // useEffect(() => {
+  //   function checkUserData() {
+  //     const item = localStorage.getItem('region')
+  //     debugger
+
+  //   }
+
+  //   window.addEventListener('storage', checkUserData)
+
+  //   return () => {
+  //     window.removeEventListener('storage', checkUserData)
+  //   }
+  // }, [])
+
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>

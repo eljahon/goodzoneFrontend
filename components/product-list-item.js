@@ -6,9 +6,13 @@ import { asyncAddToCartAction } from '../redux/actions/cartActions/cartActions'
 import { numberToPrice } from '../libs/numberToPrice'
 import { LazyImage } from './lazy-image'
 import { withTranslation, i18n } from '../i18n'
+import { useSelector, shallowEqual } from 'react-redux'
+import { useEffect, useState } from 'react'
+import { checkRegion } from '../libs/checkRegion'
 
 const ProductListItem = ({ product, view, carousel, t }) => {
   const dispatch = useDispatch()
+  const [haved, isHaved] = useState(false)
   const addToCart = (e) => {
     const button = e.target
     const cartItem = button.querySelector('.cart-item')
@@ -39,6 +43,12 @@ const ProductListItem = ({ product, view, carousel, t }) => {
       button.style.pointerEvents = 'all'
     }, 2000)
   }
+
+  const user = useSelector((state) => state.auth.user)
+
+  useEffect(() => {
+    checkRegion(isHaved, user, product)
+  }, [])
 
   return (
     <Col
@@ -79,10 +89,10 @@ const ProductListItem = ({ product, view, carousel, t }) => {
           <div className='product_meta'>
             <button
               onClick={addToCart}
-              disabled={!product.in_stock.tashkent_city}
-              className={`btn product_btn ${
-                product.in_stock.tashkent_city ? '' : 'product_disabled'
-              }`}
+              disabled={!haved}
+              className={`btn product_btn 
+              ${haved ? '' : 'product_disabled'}
+              `}
             >
               <span className='btn_icon'>
                 <FaShoppingBasket />
@@ -91,11 +101,7 @@ const ProductListItem = ({ product, view, carousel, t }) => {
               <span className='cart-item'>
                 <img src={product.image} alt={product.name} />
               </span>
-              {!product.in_stock.tashkent_city ? (
-                <span className='tooltiptext'>{t('stock')}</span>
-              ) : (
-                ''
-              )}
+              {!haved ? <span className='tooltiptext'>{t('stock')}</span> : ''}
             </button>
             {/* <button onClick={addToCart} className={`btn product_btn `}>
               <span className='btn_icon'>

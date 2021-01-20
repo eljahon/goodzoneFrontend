@@ -25,12 +25,17 @@ import {
 } from '@material-ui/core'
 import { makeStyles, withStyles } from '@material-ui/core/styles'
 import InputBase from '@material-ui/core/InputBase'
+import { setUser } from '../redux/actions/authActions/authActions'
+import { setLocalStorage } from '../libs/localStorage'
+import Axios from 'axios'
+
 const useStyles = makeStyles((theme) => ({
   margin: {
     margin: theme.spacing(1),
     width: '70%',
   },
 }))
+
 const BootstrapInput = withStyles((theme) => ({
   root: {
     'label + &': {
@@ -43,21 +48,10 @@ const BootstrapInput = withStyles((theme) => ({
     backgroundColor: '#fff',
     border: '1px solid #ced4da',
     fontSize: 16,
-    padding: '10px 26px 10px 12px',
+
     transition: theme.transitions.create(['border-color', 'box-shadow']),
     // Use the system font instead of the default Roboto font.
-    fontFamily: [
-      '-apple-system',
-      'BlinkMacSystemFont',
-      '"Segoe UI"',
-      'Roboto',
-      '"Helvetica Neue"',
-      'Arial',
-      'sans-serif',
-      '"Apple Color Emoji"',
-      '"Segoe UI Emoji"',
-      '"Segoe UI Symbol"',
-    ].join(','),
+    padding: '15px 26px 15px 12px!important',
     '&:focus': {
       backgroundColor: '#fff',
       borderRadius: 4,
@@ -112,8 +106,6 @@ function CheckoutForm({ t, setUnired, unired }) {
         dispatch(clearCartAction())
         router.push('/order/[id]', `/order/${response.data.number}`)
       }
-
-      console.log(response)
     } catch (error) {
       if (error.response.status === 406) {
         console.log(error.response)
@@ -140,17 +132,37 @@ function CheckoutForm({ t, setUnired, unired }) {
   }, [])
 
   const paymentMethod = watch('payment_method')
-  console.log('paymentMethod', paymentMethod)
+
   useEffect(() => {
     if (paymentMethod === 'unired') setUnired(true)
     else setUnired(false)
   }, [paymentMethod])
   const classes = useStyles()
-  const [city, setCity] = useState(t('area-tashkent'))
+  const [city, setCity] = useState(user && user.area)
 
-  const handleChange = (event) => {
+  const handleChange = async (event) => {
     console.log(event.target.value)
-    setCity(event.target.value)
+
+    const region = event.target.value
+    if (user) {
+      try {
+        const response = await Axios.patch(
+          `${process.env.AREA_API_URL}/${user.id}`,
+          {
+            area: region,
+          }
+        )
+        if (response.status === 201) {
+          setLocalStorage('access_token', response.data.customer.access_token)
+          dispatch(setUser(response.data.customer))
+
+          window.localStorage.setItem('region', region)
+          setCity(region)
+        }
+      } catch (error) {
+        console.log('error')
+      }
+    }
   }
   return (
     <>
@@ -197,7 +209,7 @@ function CheckoutForm({ t, setUnired, unired }) {
             />
           </div>
         </div>
-        {/* <div className='checkout_form-box'>
+        <div className='checkout_form-box'>
           <h3 className='form_heading'>{t('area-title')}</h3>
           <div className='field_wrapper'>
             <NativeSelect
@@ -209,7 +221,7 @@ function CheckoutForm({ t, setUnired, unired }) {
               <option value={t('area-tashkent')}>{t('area-tashkent')}</option>
             </NativeSelect>
           </div>
-        </div> */}
+        </div>
         <div className='checkout_form-box'>
           <h3 className='form_heading'>{t('select-payment-method')}</h3>
           <div className='radio_wrapper'>

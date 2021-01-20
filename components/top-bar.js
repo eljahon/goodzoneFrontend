@@ -38,21 +38,10 @@ function TopBar({ openLoginMenu, t, regions }) {
     }, [ref])
   }
 
-  // useEffect(() => {
-  //   function checkUserData() {
-  //     console.log('checked')
-  //   }
-  //   window.addEventListener('storage', checkUserData)
-  //   return () => {
-  //     window.removeEventListener('storage', checkUserData)
-  //   }
-  // }, [])
-
   useEffect(() => {
     setProfileMenu(false)
-    console.log('city', city)
+
     localStorage.setItem('region', city)
-    console.log('changed')
   }, [city])
 
   const changeCity = async (item) => {
@@ -66,6 +55,7 @@ function TopBar({ openLoginMenu, t, regions }) {
           }
         )
         if (response.status === 201) {
+          location.reload()
           setLocalStorage('access_token', response.data.customer.access_token)
           dispatch(setUser(response.data.customer))
         }

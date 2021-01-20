@@ -70,7 +70,6 @@ function AreaModal({ closeModal, goRegister, customer, t, isArea, setRegion }) {
   const [submit, isSubmit] = useState(false)
 
   const handleChange = (event) => {
-    console.log(event.target.value)
     setCity(event.target.value)
   }
 
@@ -86,7 +85,7 @@ function AreaModal({ closeModal, goRegister, customer, t, isArea, setRegion }) {
   const handleSubmit = async (e) => {
     isSubmit(true)
     e.preventDefault()
-    console.log('sdasd')
+
     try {
       const response = await axios.patch(
         `${process.env.AREA_API_URL}/${customer}`,

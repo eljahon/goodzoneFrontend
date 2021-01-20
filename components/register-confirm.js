@@ -55,7 +55,6 @@ const RegisterConfirm = ({
           setLocalStorage('access_token', userInfo.access_token)
           setClick(false)
           closeModal()
-          console.log(response)
         }
       })
       .catch((error) => {
