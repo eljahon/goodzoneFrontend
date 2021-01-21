@@ -33,7 +33,7 @@
           display: inline-block;
           padding-right: 0.5rem;
           color: $link-color;
-          content: "›";
+          content: '›';
         }
         @include sm {
           display: none;
@@ -551,7 +551,7 @@
       &:not(:last-child) {
         margin-left: 15px;
         &::after {
-          content: "";
+          content: '';
           position: absolute;
           top: -10px;
           right: -25px;
@@ -834,5 +834,26 @@
         }
       }
     }
+  }
+}
+
+.price-old {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+  .price-percent {
+    padding: 3px 8px;
+    color: #fff;
+    font-weight: 700;
+    font-size: 10px;
+    border-radius: 6px;
+    background-color: $primary-color;
+    margin-right: 10px;
+  }
+
+  .price-strike {
+    color: #999999 !important;
+    font-size: 14px !important;
+    text-decoration: line-through;
   }
 }

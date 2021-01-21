@@ -1,11 +1,12 @@
 import '../styles/main.scss'
 import { useEffect } from 'react'
-import { Provider } from 'react-redux'
+
 import { useStore } from '../redux/store'
 import NProgress from 'nprogress' //nprogress module
 import 'nprogress/nprogress.css' //styles of nprogress
 import { Router, useRouter } from 'next/router'
 import 'react-multi-carousel/lib/styles.css'
+import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 import { persistStore } from 'redux-persist'
 import Layout from '../components/Layout'

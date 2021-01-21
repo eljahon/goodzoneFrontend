@@ -50,6 +50,8 @@ const ProductListItem = ({ product, view, carousel, t }) => {
     checkRegion(isHaved, user, product)
   }, [])
 
+  console.log(product)
+
   return (
     <Col
       sm={6}
@@ -81,7 +83,27 @@ const ProductListItem = ({ product, view, carousel, t }) => {
           >
             <a>
               <h3 className='product_title'>{product.name}</h3>
-              <span className='product_price'>
+              {product.price &&
+              product.price.old_price > product.price.price ? (
+                <span className='price-old'>
+                  <span className='price-percent'>
+                    -
+                    {Math.ceil(
+                      100 -
+                        (product.price.price * 100) / product.price.old_price
+                    )}
+                    %
+                  </span>
+                  <span className='price-strike product_price'>
+                    {product.price.old_price > product.price.price
+                      ? numberToPrice(product.price.old_price)
+                      : ''}
+                  </span>
+                </span>
+              ) : (
+                ''
+              )}
+              <span className='product_price '>
                 {numberToPrice(product.price.price)}
               </span>
             </a>
