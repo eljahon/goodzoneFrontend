@@ -279,6 +279,9 @@ function Product({ product: data, t, shops }) {
                     ''
                   )}
                 </div>
+                <div className='bottom-text-product'>
+                  {t('product-warning')}
+                </div>
                 {/*  */}
                 {/*  */}
                 {/*  */}
