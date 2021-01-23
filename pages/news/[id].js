@@ -5,7 +5,7 @@ import { getLocaleDate } from '../../libs/getLocaleDate'
 import { useEffect } from 'react'
 
 export default function NewSingle({ data }) {
-  console.log(data)
+  // console.log(data)
   useEffect(() => {
     document.querySelectorAll('oembed[url]').forEach((element) => {
       // Create the <a href="..." class="embedly-card"></a> element that Embedly uses

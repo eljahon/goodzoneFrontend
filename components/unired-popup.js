@@ -61,9 +61,7 @@ function UniredPopup({ closePopup, t, data }) {
             <div className='content'>
               <h3>
                 <span>
-                  {data.category.slug === 'smartfony'
-                    ? numberToPrice(Math.round(data.prices[0].price / 6))
-                    : numberToPrice(Math.round(data.prices[0].price / 12))}
+                  {numberToPrice(Math.round(data.prices[0].price / 12))}
                 </span>
                 {t('per-month-unired')}
               </h3>
@@ -81,7 +79,7 @@ function UniredPopup({ closePopup, t, data }) {
               </div>
               <p>
                 *{t('payment-plan-for')}
-                {data.category.slug === 'smartfony' ? '6' : '12'}
+                {'12'}
                 {t('payment-plan')}
               </p>
             </div>

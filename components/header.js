@@ -35,6 +35,7 @@ function Header({ categories, t }) {
     setLoginPopup(!loginPopup)
     setRegisterPopup(!registerPopup)
   }
+
   useEffect(() => {
     const region = localStorage.getItem('region')
 

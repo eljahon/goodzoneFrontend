@@ -1,19 +1,19 @@
 export const calcRassrochka = ({ price, month, prepayment }) => {
-  prepayment = Number(prepayment);
-  price = Number(price);
-  month = Number(month);
+  prepayment = Number(prepayment)
+  price = Number(price)
+  month = Number(month)
 
-  const rassrochkaPrice = price * (process.env.PERCENT / 100 + 1);
+  const rassrochkaPrice = price * (process.env.PERCENT / 100 + 1)
 
   let rassrochkaPriceAfterPrepayment =
-    (price - prepayment) * (1 + process.env.PERCENT / 100);
-  let totalPayment = rassrochkaPriceAfterPrepayment + prepayment;
-  let skidka = rassrochkaPrice - totalPayment;
-  let monthlyPayment = rassrochkaPriceAfterPrepayment / (month - 1);
+    (price - prepayment) * (1 + process.env.PERCENT / 100)
+  let totalPayment = rassrochkaPriceAfterPrepayment + prepayment
+  let skidka = rassrochkaPrice - totalPayment
+  let monthlyPayment = rassrochkaPriceAfterPrepayment / (month - 1)
 
-  console.log("rassrochkaPriceAfterPrepayment", rassrochkaPriceAfterPrepayment);
-  console.log("monthlyPayment", monthlyPayment);
-  console.log("month", month);
+  // console.log("rassrochkaPriceAfterPrepayment", rassrochkaPriceAfterPrepayment);
+  // console.log("monthlyPayment", monthlyPayment);
+  // console.log("month", month);
 
   return {
     rassrochkaPrice,
@@ -21,5 +21,5 @@ export const calcRassrochka = ({ price, month, prepayment }) => {
     monthlyPayment,
     skidka,
     totalPayment,
-  };
-};
+  }
+}

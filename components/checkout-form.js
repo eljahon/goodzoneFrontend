@@ -141,8 +141,6 @@ function CheckoutForm({ t, setUnired, unired }) {
   const [city, setCity] = useState(user && user.area)
 
   const handleChange = async (event) => {
-    console.log(event.target.value)
-
     const region = event.target.value
     if (user) {
       try {
