@@ -1,11 +1,5 @@
 import React, { useState } from 'react'
-import {
-  FaCreditCard,
-  FaRegCreditCard,
-  FaWallet,
-  FaBoxOpen,
-  FaTruck,
-} from 'react-icons/fa'
+import { FaBoxOpen, FaTruck } from 'react-icons/fa'
 import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form'
 import { useSelector, shallowEqual, useDispatch } from 'react-redux'
@@ -320,6 +314,25 @@ function CheckoutForm({ t, setUnired, unired }) {
                     src='./images/payment_logo/unired.jpeg'
                     className='unired'
                     alt='Unired'
+                  />
+                </span>
+              </label>
+            </div>
+            <div className='radio_card'>
+              <input
+                type='radio'
+                name='payment_method'
+                value='uzcard'
+                id='uzcard'
+                ref={register}
+              />
+              <label htmlFor='uzcard'>
+                <span className='card_title'>Uzcard</span>
+                <span className='card_content'>
+                  <img
+                    src='https://uzcard.uz/storage/app/media/uploaded-files/Uzcard_Logo_.png'
+                    className='uzcard'
+                    alt='Uzcard'
                   />
                 </span>
               </label>

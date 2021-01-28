@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { withTranslation, Link } from '../../i18n'
 import { fetchMultipleUrls } from '../../libs/fetchMultipleUrls'
 import { numberToPrice } from '../../libs/numberToPrice'
+import { Router } from '../../i18n'
 
 function OrderDetails({ order, t }) {
   const [payment, setPayment] = useState(() => order.payment_method)
@@ -21,6 +22,11 @@ function OrderDetails({ order, t }) {
   const handleSubmit = async () => {
     window.location.href = `${process.env.PAYMENT_API_URL}?payment=${payment}&order_id=${order.number}&secret_key=b52ca358473ddbbc3a3a3cf374fc4f0c&amount=${totalPrice}`
   }
+
+  const handleSubmitToUzcard = () => {
+    Router.push(`/uzcard/${order.number}`)
+  }
+
   return (
     <>
       <SEO title={t('application-accepted')} />
@@ -108,6 +114,7 @@ function OrderDetails({ order, t }) {
                   <option value='terminal'>{t('terminal')}</option>
                   <option value='click'>Click</option>
                   <option value='payme'>Payme</option>
+                  {/* <option value='uzcard'>Uzcard</option> */}
                   <option disabled={payment !== 'unired'} value='unired'>
                     Unired
                   </option>
@@ -122,6 +129,16 @@ function OrderDetails({ order, t }) {
                 ) : (
                   ''
                 )}
+                {/* {payment == 'uzcard' ? (
+                  <button
+                    className='btn btn_pay'
+                    onClick={() => handleSubmitToUzcard()}
+                  >
+                    {t('pay-now')}
+                  </button>
+                ) : (
+                  ''
+                )} */}
               </div>
             </div>
           </div>

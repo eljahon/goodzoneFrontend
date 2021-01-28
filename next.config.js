@@ -28,6 +28,9 @@ module.exports = {
     FEEDBACK_API_URL: 'https://api.goodzone.uz/v1/feedback',
     PAGE_API_URL: 'https://api.goodzone.uz/v1/page',
     AREA_API_URL: 'https://api.goodzone.uz/v1/customer/area',
+    UZCARD_REG_API_URL:
+      'https://pay.myuzcard.uz/api/payment/paymentWithoutRegistration',
+    UZCARD_CONF_API_URL: 'https://pay.myuzcard.uz/api/payment/confirmPayment',
   },
   publicRuntimeConfig: {
     localeSubpaths,
