@@ -8,6 +8,8 @@ import { Router } from '../../i18n'
 
 function OrderDetails({ order, t }) {
   const [payment, setPayment] = useState(() => order.payment_method)
+
+  console.log(order)
   const handleChange = (e) => {
     setPayment(e.target.value)
   }
@@ -107,14 +109,14 @@ function OrderDetails({ order, t }) {
                   disabled={payment === 'unired'}
                   name='payment'
                   id='payment'
-                  defaultValue='click'
+                  defaultValue={payment}
                   onChange={(e) => handleChange(e)}
                 >
                   <option value='cash'>{t('cash')}</option>
-                  <option value='terminal'>{t('terminal')}</option>
+                  <option value='card'>{t('terminal')}</option>
                   <option value='click'>Click</option>
                   <option value='payme'>Payme</option>
-                  {/* <option value='uzcard'>Uzcard</option> */}
+                  <option value='uzcard'>Uzcard</option>
                   <option disabled={payment !== 'unired'} value='unired'>
                     Unired
                   </option>
@@ -129,7 +131,7 @@ function OrderDetails({ order, t }) {
                 ) : (
                   ''
                 )}
-                {/* {payment == 'uzcard' ? (
+                {payment == 'uzcard' ? (
                   <button
                     className='btn btn_pay'
                     onClick={() => handleSubmitToUzcard()}
@@ -138,7 +140,7 @@ function OrderDetails({ order, t }) {
                   </button>
                 ) : (
                   ''
-                )} */}
+                )}
               </div>
             </div>
           </div>

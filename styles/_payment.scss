@@ -3,45 +3,18 @@
   align-items: center;
   justify-content: center;
   padding: 100px 0;
+  @include sm {
+    padding: 50px 20px;
+  }
   .payment-section {
     box-shadow: rgba(0, 0, 0, 0.08) 0 2px 16px 0;
     padding: 36px 24px;
     width: 40%;
+    @include sm {
+      width: 100%;
+    }
     .payment-content {
       form {
-        .payment-button {
-          margin-top: 15px;
-          button {
-            width: 100%;
-            padding-top: 0px;
-            padding-bottom: 0px;
-            font-size: 15px;
-            cursor: pointer;
-            -webkit-appearance: none;
-            display: flex;
-            -webkit-box-align: center;
-            align-items: center;
-            -webkit-box-pack: center;
-            justify-content: center;
-            flex-shrink: 0;
-            text-align: center;
-            font-family: inherit;
-            font-weight: 700;
-            box-sizing: border-box;
-            color: rgb(255, 255, 255);
-            background-color: $primary-color;
-            height: 48px;
-            padding-left: 30px;
-            padding-right: 30px;
-            text-decoration: none;
-            border-width: 0;
-            border-style: initial;
-            border-color: initial;
-            border-image: initial;
-            border-radius: 6px;
-            transition: all 0.35s ease 0s;
-          }
-        }
         .payment-date {
           display: flex;
           align-items: center;
@@ -101,9 +74,12 @@
       }
       .payment-header-text {
         display: flex;
-        width: 30%;
+        width: 50%;
         justify-content: space-between;
         padding: 15px 0;
+        @include sm {
+          width: 100%;
+        }
         span {
           font-size: 16px;
           line-height: 30px;
@@ -123,5 +99,42 @@
         }
       }
     }
+  }
+}
+
+.payment-button {
+  margin-top: 15px;
+  button {
+    &:focus {
+      outline: none;
+    }
+    width: 100%;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    font-size: 15px;
+    cursor: pointer;
+    -webkit-appearance: none;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    flex-shrink: 0;
+    text-align: center;
+    font-family: inherit;
+    font-weight: 700;
+    box-sizing: border-box;
+    color: rgb(255, 255, 255);
+    background-color: $primary-color;
+    height: 48px;
+    padding-left: 30px;
+    padding-right: 30px;
+    text-decoration: none;
+    border-width: 0;
+    border-style: initial;
+    border-color: initial;
+    border-image: initial;
+    border-radius: 6px;
+    transition: all 0.35s ease 0s;
   }
 }

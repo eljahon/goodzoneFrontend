@@ -65,5 +65,12 @@
   "area-title": "Выберите регион",
   "area-tashkent": "Ташкент",
   "area-samarkand": "Самарканд",
-  "submit": "Подтвердить"
+  "submit": "Подтвердить",
+  "month": "Месяц",
+  "year": "Год",
+  "next": "Продолжить",
+  "card_number": "Номер карты",
+  "error-text": "Ошибка сервера",
+  "confirmation-password": "Введите код подтверждения",
+  "uzcard-modal-title": "Код подтверждения отправлен на номер телефона"
 }

@@ -298,6 +298,25 @@ function CheckoutForm({ t, setUnired, unired }) {
               <input
                 type='radio'
                 name='payment_method'
+                value='uzcard'
+                id='uzcard'
+                ref={register}
+              />
+              <label htmlFor='uzcard'>
+                <span className='card_title'>Uzcard</span>
+                <span className='card_content'>
+                  <img
+                    src='https://uzcard.uz/storage/app/media/uploaded-files/Uzcard_Logo_.png'
+                    className='uzcard'
+                    alt='Uzcard'
+                  />
+                </span>
+              </label>
+            </div>
+            <div className='radio_card'>
+              <input
+                type='radio'
+                name='payment_method'
                 value='unired'
                 id='unired'
                 className={isUnired ? 'link_disabled' : ''}
@@ -314,25 +333,6 @@ function CheckoutForm({ t, setUnired, unired }) {
                     src='./images/payment_logo/unired.jpeg'
                     className='unired'
                     alt='Unired'
-                  />
-                </span>
-              </label>
-            </div>
-            <div className='radio_card'>
-              <input
-                type='radio'
-                name='payment_method'
-                value='uzcard'
-                id='uzcard'
-                ref={register}
-              />
-              <label htmlFor='uzcard'>
-                <span className='card_title'>Uzcard</span>
-                <span className='card_content'>
-                  <img
-                    src='https://uzcard.uz/storage/app/media/uploaded-files/Uzcard_Logo_.png'
-                    className='uzcard'
-                    alt='Uzcard'
                   />
                 </span>
               </label>

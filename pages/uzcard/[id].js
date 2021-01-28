@@ -1,45 +1,69 @@
 import React, { useState } from 'react'
-import Link from 'next/link'
-import SEO from '../../components/seo'
 import Footer from '../../components/footer'
-import { Row, Col } from 'react-bootstrap'
-import { FaLongArrowAltRight } from 'react-icons/fa'
-import { withTranslation, i18n } from '../../i18n'
+import { withTranslation } from '../../i18n'
 import { fetchMultipleUrls } from '../../libs/fetchMultipleUrls'
-import { getLocaleDate } from '../../libs/getLocaleDate'
 import { useForm, Controller } from 'react-hook-form'
 import InputMask from 'react-input-mask'
+import OtpModal from '../../components/otp-modal'
+import Axios from 'axios'
+import { numberToPrice } from '../../libs/numberToPrice'
 
-function UzCard({ t }) {
+function UzCard({ t, order }) {
   const { register, handleSubmit, control } = useForm()
   const [errorText, setErrorText] = useState('')
-  const onSubmit = async (data) => {
-    console.log(data)
-    const phone = getUnmaskedPhoneNumber(data.phone_number)
-    // try {
-    //   const response = await axios.post(process.env.UZCARD_REG_API_URL, {
-    //     cardNumber: data.card_number,
-    //     expireDate: `${data.year + data.month}`,
-    //     amount: '',
-    //     extraId: '',
-    //   })
-    //   console.log('response', response)
-    // } catch (error) {
-    //   console.log('error', error)
-    // }
-  }
+  const [otp, setOtp] = useState(false)
+  const [session, setSession] = useState('')
+  const [disabled, setDisabled] = useState(false)
 
-  const getUnmaskedPhoneNumber = (val) =>
-    val
-      .trim()
-      .replace(/_/g, '')
-      .replace(/\s/g, '')
-      .replace('(', '')
-      .replace(')', '')
-      .replaceAll('-', '')
+  const prices = order.items.map((item) => {
+    return item.price * item.quantity
+  })
+
+  const totalPrice = prices.reduce((a, b) => {
+    return Math.round(a + b)
+  })
+
+  const onSubmit = async (data) => {
+    setDisabled(true)
+    const card = data.card_number.replaceAll(' ', '')
+
+    const USERNAME = 'goodzone'
+    const PASSWORD = 'myuU3C@g00d30n!$'
+
+    const token = `${USERNAME}:${PASSWORD}`
+    const encodedToken = Buffer.from(token).toString('base64')
+    const headers = { Authorization: `Basic ${encodedToken}` }
+
+    try {
+      const response = await Axios.post(
+        process.env.UZCARD_REG_API_URL,
+        {
+          cardNumber: card,
+          expireDate: `${data.year + data.month}`,
+          amount: totalPrice,
+          extraId: '_' + Math.random().toString(36).substr(2, 10),
+        },
+        {
+          headers,
+        }
+      )
+      if (response.status === 200) {
+        setOtp(true)
+        setSession(response.data.result.session)
+        setErrorText('')
+        console.log(response)
+      }
+      console.log('response', response)
+    } catch (error) {
+      setErrorText(error.response.data.error.errorMessage)
+    } finally {
+      setDisabled(false)
+    }
+  }
 
   return (
     <>
+      {otp ? <OtpModal session={session} setOtp={setOtp} /> : ''}
       <section className='payment-container'>
         <div className='payment-section'>
           <div className='payment-header'>
@@ -47,25 +71,27 @@ function UzCard({ t }) {
               <img src='https://uzcard.uz/storage/app/media/uploaded-files/Uzcard_Logo_.png'></img>
             </div>
             <div className='payment-header-text'>
-              <span>Buyurtma</span>
-              <span>#112133</span>
+              <span>{t('order')}</span>
+              <span>№ {order.number}</span>
             </div>
             <div className='payment-border'></div>
             <div className='payment-header-text'>
-              <span>Jami</span>
-              <span>44 000 UZS</span>
+              <span>{t('total')}</span>
+              <span>{numberToPrice(totalPrice)}</span>
             </div>
           </div>
           <div className='payment-content'>
+            <p className='text-danger'>{errorText ? t('error-text') : ''}</p>
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className='payment-input'>
-                <p>Telefon raqami:</p>
+                <p>{t('phone-number')}:</p>
                 <Controller
                   as={InputMask}
                   control={control}
                   name='phone_number'
                   id='phone_number'
                   placeholder='+998 (XX) XXX-XX-XX'
+                  required
                   mask={[
                     '+',
                     '9',
@@ -89,13 +115,14 @@ function UzCard({ t }) {
                 />
               </div>
               <div className='payment-input'>
-                <p>PAN (kartaning so'nggi 6 raqami):</p>
+                <p>{t('card_number')}:</p>
                 <Controller
                   id='card_number'
                   as={InputMask}
                   control={control}
-                  name='cart_number'
+                  name='card_number'
                   placeholder='XXXX XXXX XXXX XXXX'
+                  required
                   mask={[
                     /\d/,
                     /\d/,
@@ -123,9 +150,10 @@ function UzCard({ t }) {
               </div>
               <div className='payment-date'>
                 <div className='payment-input'>
-                  <p>Oy:</p>
+                  <p>{t('month')}:</p>
                   <Controller
                     id='month'
+                    required
                     as={InputMask}
                     control={control}
                     name='month'
@@ -134,10 +162,12 @@ function UzCard({ t }) {
                     mask='99'
                   />
                 </div>
+
                 <div className='payment-input'>
-                  <p>Yil:</p>
+                  <p>{t('year')}:</p>
                   <Controller
                     id='month'
+                    required
                     as={InputMask}
                     control={control}
                     name='year'
@@ -148,7 +178,9 @@ function UzCard({ t }) {
                 </div>
               </div>
               <div className='payment-button'>
-                <button type='submit'>Davom eting</button>
+                <button disabled={disabled} type='submit'>
+                  {t('next')}
+                </button>
               </div>
             </form>
           </div>
@@ -159,19 +191,17 @@ function UzCard({ t }) {
   )
 }
 
-export default withTranslation('footer')(UzCard)
+export default withTranslation('checkout')(UzCard)
 
-export async function getServerSideProps({ req }) {
+export async function getServerSideProps({ params, req }) {
   const urls = [
-    `${process.env.NEWS_API_URL}?lang=${req.i18n.language}`,
+    `${process.env.ORDER_API_URL}/${params.id}?lang=${req.i18n.language}`,
     `${process.env.CATEGORY_API_URL}?lang=${req.i18n.language}`,
   ]
-  const [{ news }, categories] = await fetchMultipleUrls(urls)
+
+  const [order, categories] = await fetchMultipleUrls(urls)
 
   return {
-    props: {
-      news,
-      categories,
-    },
+    props: { order, categories },
   }
 }

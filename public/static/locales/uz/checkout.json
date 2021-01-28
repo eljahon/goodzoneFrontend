@@ -65,5 +65,12 @@
   "area-title": "Mintaqani tanlang",
   "area-tashkent": "Toshkent",
   "area-samarkand": "Samarqand",
-  "submit": "Tasdiqlash"
+  "submit": "Tasdiqlash",
+  "month": "Oy",
+  "year": "Yil",
+  "next": "Davom ettish",
+  "card_number": "Karta raqami",
+  "error-text": "Server xatosi",
+  "confirmation-password": "Tasdiqlash kodini kiriting",
+  "uzcard-modal-title": "Telefon raqamingizga tasdiqlash kodi yuborildi"
 }

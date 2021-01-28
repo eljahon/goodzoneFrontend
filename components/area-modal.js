@@ -1,22 +1,7 @@
-import React, { useEffect, useState, useRef } from 'react'
-import { FaTimes } from 'react-icons/fa'
-import { useForm } from 'react-hook-form'
-import { useRouter } from 'next/router'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import { setLocalStorage } from '../libs/localStorage'
-import { setUser } from '../redux/actions/authActions/authActions'
-import { useDispatch } from 'react-redux'
-import ResetPasswordModal from './reset-password-modal'
 import { withTranslation } from '../i18n'
-import { createFormData } from '../libs/createFormData'
-import { phoneAction } from '../redux/actions/authActions/authActions'
-import {
-  FormControl,
-  InputLabel,
-  NativeSelect,
-  Select,
-  TextField,
-} from '@material-ui/core'
+import { FormControl, NativeSelect } from '@material-ui/core'
 import { makeStyles, withStyles } from '@material-ui/core/styles'
 import InputBase from '@material-ui/core/InputBase'
 
@@ -112,7 +97,6 @@ function AreaModal({ closeModal, goRegister, customer, t, isArea, setRegion }) {
           <div className='auth_form'>
             <div className='auth_form-container pb-4'>
               <h3>{t('welcome')}</h3>
-
               <span className='sub_heading'>{t('area-title')}</span>
               <p className='text-danger'>{error}</p>
               <form>
