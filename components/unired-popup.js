@@ -4,6 +4,8 @@ import { withTranslation } from '../i18n'
 import { asyncAddToCartAction } from '../redux/actions/cartActions/cartActions'
 import { useDispatch } from 'react-redux'
 import { numberToPrice } from '../libs/numberToPrice'
+import { useRouter } from 'next/router'
+import Link from 'next/link'
 
 function UniredPopup({ closePopup, t, data }) {
   const [load, setLoad] = useState(false)
@@ -17,6 +19,8 @@ function UniredPopup({ closePopup, t, data }) {
   }, [])
 
   const dispatch = useDispatch()
+
+  const router = useRouter()
 
   const addToCartHandler = (cartItem) => {
     dispatch(asyncAddToCartAction(cartItem))
@@ -75,7 +79,14 @@ function UniredPopup({ closePopup, t, data }) {
                   </span>
                   <span className='btn-text'>{t('add-to-cart')}</span>
                 </button>
-                <button className='btn'>{t('get-unired-card')}</button>
+
+                <a
+                  className='btn'
+                  target='_blank'
+                  href='https://application.unired.uz'
+                >
+                  {t('get-unired-card')}
+                </a>
               </div>
               <p>
                 *{t('payment-plan-for')}

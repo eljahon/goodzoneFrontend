@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react'
 import withYM from 'next-ym'
 import { Router } from 'next/router'
-import dynamic from 'next/dynamic'
+// import dynamic from 'next/dynamic'
 import { getLocalStorage } from '../libs/localStorage'
 import { axiosAuth } from '../libs/axios/axios-instances'
 import { setUser } from '../redux/actions/authActions/authActions'
 
-const Snowfall = dynamic(() => import('react-snowfall'), { ssr: false })
+// const Snowfall = dynamic(() => import('react-snowfall'), { ssr: false })
 
 const Layout = ({ children }) => {
   // useEffect(() => {
@@ -29,7 +29,7 @@ const Layout = ({ children }) => {
   // }, [])
   return (
     <>
-      <Snowfall
+      {/* <Snowfall
         color='rgb(238, 238, 238)'
         style={{
           background: '#fff',
@@ -38,7 +38,7 @@ const Layout = ({ children }) => {
           background: 'transparent',
         }}
         snowflakeCount={80}
-      />
+      /> */}
       {children}
     </>
   )
