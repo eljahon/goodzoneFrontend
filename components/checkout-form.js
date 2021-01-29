@@ -306,7 +306,7 @@ function CheckoutForm({ t, setUnired, unired }) {
                 <span className='card_title'>Uzcard</span>
                 <span className='card_content'>
                   <img
-                    src='https://uzcard.uz/storage/app/media/uploaded-files/Uzcard_Logo_.png'
+                    src='./images/payment_logo/uzcard.svg'
                     className='uzcard'
                     alt='Uzcard'
                   />

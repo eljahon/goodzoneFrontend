@@ -51,9 +51,7 @@ function UzCard({ t, order }) {
         setOtp(true)
         setSession(response.data.result.session)
         setErrorText('')
-        console.log(response)
       }
-      console.log('response', response)
     } catch (error) {
       setErrorText(error.response.data.error.errorMessage)
     } finally {
@@ -68,7 +66,7 @@ function UzCard({ t, order }) {
         <div className='payment-section'>
           <div className='payment-header'>
             <div className='payment-img'>
-              <img src='https://uzcard.uz/storage/app/media/uploaded-files/Uzcard_Logo_.png'></img>
+              <img src='/images/payment_logo/uzcard.svg'></img>
             </div>
             <div className='payment-header-text'>
               <span>{t('order')}</span>
