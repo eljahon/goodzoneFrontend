@@ -303,7 +303,7 @@ function CheckoutForm({ t, setUnired, unired }) {
                 ref={register}
               />
               <label htmlFor='uzcard'>
-                <span className='card_title'>Uzcard</span>
+                <span className='card_title'>My Uzcard</span>
                 <span className='card_content'>
                   <img
                     src='./images/payment_logo/uzcard.svg'
