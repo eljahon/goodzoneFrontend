@@ -87,7 +87,7 @@ function Home({
         title={t('the-best-selection-for-you')}
         data={
           featured_lists.featured_lists.find(
-            (item) => item.slug === 'novye-postupleniya'
+            (item) => item.slug === 'luchshaya-podborka-dlya-vas'
           ).products
         }
       />
