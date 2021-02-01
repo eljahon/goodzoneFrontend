@@ -1,173 +1,182 @@
 footer {
-    position: relative;
-    width: 100%;
-    padding: 42px 0;
-    color: $border-color;
-    background-color: $link-color;
+  position: relative;
+  width: 100%;
+  padding: 42px 0;
+  color: $border-color;
+  background-color: $link-color;
+  @include sm {
+    padding: 42px 0 100px;
+  }
+  h3 {
+    color: #fff;
+    margin-bottom: 20px;
+    font-size: 18px;
+    font-weight: 500;
     @include sm {
-        padding: 42px 0 100px;
+      font-size: 16px;
+      margin-bottom: 15px;
     }
-    h3 {
-        color: #fff;
+  }
+  a {
+    display: block;
+    font-size: 14px;
+    color: #fff;
+    opacity: 0.4;
+    margin-bottom: 10px;
+    &:hover {
+      color: #bababa;
+      opacity: 1;
+      text-decoration: none;
+    }
+    @include sm {
+      &:last-child {
         margin-bottom: 20px;
-        font-size: 18px;
-        font-weight: 500;
-        @include sm {
-            font-size: 16px;
-            margin-bottom: 15px;
-        }
+      }
+    }
+  }
+  a.phone_number {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-size: 20px;
+    font-weight: 400;
+    color: #fff;
+    opacity: 1;
+    svg {
+      margin-right: 5px;
+    }
+    @include xl {
+      font-size: 25px;
+    }
+  }
+  .social_media {
+    a {
+      display: inline-block;
+      width: 16px;
+      height: 30px;
+      line-height: 30px;
+      margin-right: 10px;
+      color: #bababa;
+      opacity: 1;
+      svg {
+        font-size: 16px;
+      }
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+  .copyright {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    color: #bababa;
+    p {
+      display: inline-block;
+      margin: 0;
     }
     a {
-        display: block;
-        font-size: 14px;
-        color: #fff;
-        opacity: 0.4;
-        margin-bottom: 10px;
-        &:hover {
-            color: #bababa;
-            opacity: 1;
-            text-decoration: none;
-        }
-        @include sm {
-            &:last-child {
-                margin-bottom: 20px;
-            }
-        }
+      display: inline-block;
+      font-size: 16px;
+      margin: 0;
+      opacity: 1;
     }
-    a.phone_number {
+    @include sm {
+      flex-direction: column;
+      margin-top: 20px;
+      font-size: 14px;
+    }
+    .popover_wrapper {
+      position: relative;
+      @include sm {
         display: flex;
         flex-direction: column;
-        align-items: flex-start;
-        font-size: 20px;
-        font-weight: 400;
-        color: #fff;
-        opacity: 1;
-        svg {
-            margin-right: 5px;
-        }
-        @include xl {
-            font-size: 25px;
-        }
-    }
-    .social_media {
-        a {
-            display: inline-block;
-            width: 16px;
-            height: 30px;
-            line-height: 30px;
-            margin-right: 10px;
-            color: #bababa;
-            opacity: 1;
-            svg {
-                font-size: 16px;
-            }
-            &:last-child {
-                margin-right: 0;
-            }
-        }
-    }
-    .copyright {
-        display: flex;
-        justify-content: space-between;
-        margin-top: 30px;
-        color: #bababa;
         p {
-            display: inline-block;
-            margin: 0;
+          order: 1;
+          margin-bottom: 10px;
         }
-        a {
-            display: inline-block;
-            font-size: 16px;
-            margin: 0;
-            opacity: 1;
-        }
-        @include sm {
-            flex-direction: column;
-            margin-top: 20px;
-            font-size: 14px;
-        }
-        .popover_wrapper {
-            position: relative;
-            @include sm {
-                display: flex;
-                flex-direction: column;
-                p {
-                    order: 1;
-                    margin-bottom: 10px;
-                }
-            }
-        }
-        .popover_content {
-            min-width: 100px;
-            padding: 10px 0;
-            top: auto;
-            bottom: calc(100% + 15px);
-            @include sm {
-                right: auto;
-                left: 0;
-            }
-            &::before {
-                top: auto;
-                bottom: -8px;
-                border-color: transparent transparent white;
-                transform: rotate(180deg);
-                @include sm {
-                    right: auto;
-                    left: 15px;
-                }
-            }
-            .inner_wrap {
-                @include sm {
-                    padding: 0;
-                }
-                .menu_item {
-                    a {
-                        padding: 6px 15px;
-                        font-weight: normal;
-                        img {
-                            width: 15px;
-                        }
-                    }
-                }
-            }
-        }
-        .popover {
-            position: static;
-            display: inline-block;
-            width: 100px;
-            max-width: 100%;
-            margin-left: 15px;
-            border: none;
-            z-index: 900;
-            background-color: transparent;
-            @include sm {
-                margin-left: 0;
-                margin-bottom: 10px;
-            }
-        }
-        .join_btn {
-            display: flex;
-            align-items: center;
-            padding: 0;
-            border: none;
-            box-shadow: none;
-            .join_icon {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                font-size: 1rem;
-                img {
-                    margin-right: 6px;
-                    width: 15px;
-                }
-            }
-            .btn-text {
-                display: inline-block;
-                width: 100%;
-                padding: 0;
-                white-space: nowrap;
-                color: #bababa;
-            }
-        }
+      }
     }
+    .popover_content {
+      min-width: 100px;
+      padding: 10px 0;
+      top: auto;
+      bottom: calc(100% + 15px);
+      @include sm {
+        right: auto;
+        left: 0;
+      }
+      &::before {
+        top: auto;
+        bottom: -8px;
+        border-color: transparent transparent white;
+        transform: rotate(180deg);
+        @include sm {
+          right: auto;
+          left: 15px;
+        }
+      }
+      .inner_wrap {
+        @include sm {
+          padding: 0;
+        }
+        .menu_item {
+          a {
+            padding: 6px 15px;
+            font-weight: normal;
+            img {
+              width: 15px;
+            }
+          }
+        }
+      }
+    }
+    .popover {
+      position: static;
+      display: inline-block;
+      width: 100px;
+      max-width: 100%;
+      margin-left: 15px;
+      border: none;
+      z-index: 900;
+      background-color: transparent;
+      @include sm {
+        margin-left: 0;
+        margin-bottom: 10px;
+      }
+    }
+    .join_btn {
+      display: flex;
+      align-items: center;
+      padding: 0;
+      border: none;
+      box-shadow: none;
+      .join_icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1rem;
+        img {
+          margin-right: 6px;
+          width: 15px;
+        }
+      }
+      .btn-text {
+        display: inline-block;
+        width: 100%;
+        padding: 0;
+        white-space: nowrap;
+        color: #bababa;
+      }
+    }
+  }
+}
+
+.footer_phone {
+  display: flex;
+  flex-direction: row !important;
+  align-items: center !important;
+  span {
+    font-size: 18px;
+  }
 }

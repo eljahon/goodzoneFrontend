@@ -27,6 +27,7 @@ module.exports = {
     PRODUCT_FILTER_API_URL: 'https://api.goodzone.uz/v1/product/filter',
     FEEDBACK_API_URL: 'https://api.goodzone.uz/v1/feedback',
     PAGE_API_URL: 'https://api.goodzone.uz/v1/page',
+    HOME_CONTENT_API_URL: 'https://api.goodzone.uz/v1/home-content',
     AREA_API_URL: 'https://api.goodzone.uz/v1/customer/area',
     UZCARD_REG_API_URL:
       'https://pay.myuzcard.uz/api/payment/paymentWithoutRegistration',

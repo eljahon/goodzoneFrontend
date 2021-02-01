@@ -14,7 +14,14 @@ import { Link, withTranslation } from '../i18n'
 import BannerContainer from '../components/bannerContainer'
 import AreaModal from '../components/area-modal'
 
-function Home({ new_products, recommended_products, popular_products, t }) {
+function Home({
+  new_products,
+  recommended_products,
+  popular_products,
+  featured_lists,
+  t,
+}) {
+  console.log('dasdsa', featured_lists)
   const dispatch = useDispatch()
 
   const [banners, setBanners] = useState(null)
@@ -52,19 +59,37 @@ function Home({ new_products, recommended_products, popular_products, t }) {
     <>
       <SEO />
       <HomeSplash banners={banners} />
-      <Products title={t('new-arrivals')} data={new_products.products} />
+      <Products
+        title={t('new-arrivals')}
+        data={
+          featured_lists.featured_lists.find(
+            (item) => item.slug === 'novye-postupleniya'
+          ).products
+        }
+      />
       <BannerContainer>
         <Banner size={9} name='banner-po-seredine-1300x260' />
 
         <Banner size={3} name='malyi-nizhnii-banner-420x260' />
       </BannerContainer>
-      <Products title={t('popular-items')} data={popular_products.products} />
+      <Products
+        title={t('popular-items')}
+        data={
+          featured_lists.featured_lists.find(
+            (item) => item.slug === 'populyarnye-tovary'
+          ).products
+        }
+      />
       <BannerContainer>
         <Banner size={12} name='pervyi-banner-1720x260' />
       </BannerContainer>
       <Products
         title={t('the-best-selection-for-you')}
-        data={recommended_products.products}
+        data={
+          featured_lists.featured_lists.find(
+            (item) => item.slug === 'novye-postupleniya'
+          ).products
+        }
       />
       <CartPopup />
       <Footer />
@@ -81,6 +106,7 @@ export async function getServerSideProps({ req }) {
     `${process.env.PRODUCT_API_URL}?active=true&lang=${req.i18n.language}&popular=true`,
     `${process.env.PRODUCT_API_URL}?active=true&lang=${req.i18n.language}&recommended=true`,
     `${process.env.CATEGORY_API_URL}?lang=${req.i18n.language}`,
+    `${process.env.HOME_CONTENT_API_URL}?lang=${req.i18n.language}`,
   ]
 
   const [
@@ -88,6 +114,7 @@ export async function getServerSideProps({ req }) {
     popular_products,
     recommended_products,
     categories,
+    featured_lists,
   ] = await fetchMultipleUrls(urls)
 
   return {
@@ -96,6 +123,7 @@ export async function getServerSideProps({ req }) {
       popular_products,
       recommended_products,
       categories,
+      featured_lists,
     },
   }
 }
