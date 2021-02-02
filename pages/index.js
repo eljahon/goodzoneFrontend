@@ -13,15 +13,19 @@ import { setUser } from '../redux/actions/authActions/authActions'
 import { Link, withTranslation } from '../i18n'
 import BannerContainer from '../components/bannerContainer'
 import AreaModal from '../components/area-modal'
+import NewsList from '../components/news-list'
+import BrandList from '../components/brand-list'
 
 function Home({
-  new_products,
-  recommended_products,
-  popular_products,
+  // new_products,
+  // recommended_products,
+  // popular_products,
   featured_lists,
+  news,
+  brands,
   t,
 }) {
-  console.log('dasdsa', featured_lists)
+  console.log('dasdsa', news)
   const dispatch = useDispatch()
 
   const [banners, setBanners] = useState(null)
@@ -91,6 +95,8 @@ function Home({
           ).products
         }
       />
+      {/* <BrandList brands={brands} /> */}
+      <NewsList news={news} />
       <CartPopup />
       <Footer />
       {area ? <AreaModal customer={customer} isArea={isArea} /> : ''}
@@ -102,28 +108,34 @@ export default withTranslation('common')(Home)
 
 export async function getServerSideProps({ req }) {
   const urls = [
-    `${process.env.PRODUCT_API_URL}?active=true&lang=${req.i18n.language}`,
-    `${process.env.PRODUCT_API_URL}?active=true&lang=${req.i18n.language}&popular=true`,
-    `${process.env.PRODUCT_API_URL}?active=true&lang=${req.i18n.language}&recommended=true`,
+    // `${process.env.PRODUCT_API_URL}?active=true&lang=${req.i18n.language}`,
+    // `${process.env.PRODUCT_API_URL}?active=true&lang=${req.i18n.language}&popular=true`,
+    // `${process.env.PRODUCT_API_URL}?active=true&lang=${req.i18n.language}&recommended=true`,
     `${process.env.CATEGORY_API_URL}?lang=${req.i18n.language}`,
     `${process.env.HOME_CONTENT_API_URL}?lang=${req.i18n.language}`,
+    `${process.env.NEWS_API_URL}?lang=${req.i18n.language}`,
+    `${process.env.BRAND_API_URL}?lang=${req.i18n.language}`,
   ]
 
   const [
-    new_products,
-    popular_products,
-    recommended_products,
+    // new_products,
+    // popular_products,
+    // recommended_products,
     categories,
     featured_lists,
+    { news },
+    { brands },
   ] = await fetchMultipleUrls(urls)
 
   return {
     props: {
-      new_products,
-      popular_products,
-      recommended_products,
+      // new_products,
+      // popular_products,
+      // recommended_products,
       categories,
       featured_lists,
+      news,
+      brands,
     },
   }
 }
