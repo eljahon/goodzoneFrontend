@@ -9,51 +9,11 @@ import { FaLongArrowAltRight } from 'react-icons/fa'
 import { Col } from 'react-bootstrap'
 
 function NewsList({ title, news, t }) {
-  const responsive = {
-    desktop: {
-      breakpoint: { max: 3000, min: 1024 },
-      items: 4,
-      slidesToSlide: 4,
-    },
-    tablet: {
-      breakpoint: { max: 1024, min: 464 },
-      items: 3,
-      slidesToSlide: 3,
-    },
-    mobile: {
-      breakpoint: { max: 464, min: 0 },
-      items: 2,
-      slidesToSlide: 2,
-    },
-  }
-
   return news ? (
-    // <section className='section_container'>
-    //   <Container fluid>
-    //     <h2>{title}</h2>
-    //     {
-    //       <Carousel
-    //         className='products_row'
-    //         responsive={responsive}
-    //         showDots={true}
-    //         infinite={true}
-    //         // autoPlay={true}
-    //         // autoPlaySpeed={5000}
-    //         removeArrowOnDeviceType={['desktop', 'mobile', 'tablet']}
-    //         dotListClass='custom_dot-list'
-    //       >
-    //         {data.map((product) => {
-    //           return (
-    //             <ProductListItem key={product.id} product={product} carousel />
-    //           )
-    //         })}
-    //       </Carousel>
-    //     }
-    // </Container>
     <section className='news_container news-list'>
-      <div className='news_content'>
+      <div className='news_content news-block'>
         <h1>{t('news-blog')}</h1>
-        <Row className='products_row'>
+        <Row className='products_row news-row'>
           {news.slice(0, 3).map((news) => (
             <Col key={news.id} sm={12} lg={4} className='products_col'>
               <div className='product_card'>

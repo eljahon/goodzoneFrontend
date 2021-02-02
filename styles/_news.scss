@@ -80,6 +80,18 @@
   @include sm {
     padding-bottom: 20px;
   }
+  .news-block {
+    padding: 0 15px;
+    @include sm {
+      padding: 0;
+    }
+    .news-row {
+      padding: 0 5px;
+      @include sm {
+        padding: 0;
+      }
+    }
+  }
   .products_col {
     padding: 10px;
   }
