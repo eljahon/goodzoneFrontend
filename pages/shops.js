@@ -39,8 +39,8 @@ export default function Shops() {
   const goToMap = (e) => {
     const branch_name = e.target.name
     const data = branches.find((branch) => branch.name === branch_name)
-    console.log('branch_name', branch_name)
-    console.log('branches', branches)
+    // console.log('branch_name', branch_name)
+    // console.log('branches', branches)
     setMapInfo(data)
     setMapState({ center: [data.loc.lat, data.loc.long] })
     router.push('/shops#map')

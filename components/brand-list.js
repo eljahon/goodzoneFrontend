@@ -9,7 +9,6 @@ import { FaLongArrowAltRight } from 'react-icons/fa'
 import { Col } from 'react-bootstrap'
 
 function BrandList({ title, brands, t }) {
-  console.log(brands)
   return (
     <section className='news_container'>
       <div className='news_content'>

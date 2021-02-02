@@ -1,8 +1,8 @@
-import React from "react";
-import { Table } from "react-bootstrap";
-import { withTranslation } from "../i18n";
-import { calcRassrochka } from "../libs/calculateRassrochka";
-import { separateNumber } from "../libs/numberToPrice";
+import React from 'react'
+import { Table } from 'react-bootstrap'
+import { withTranslation } from '../i18n'
+import { calcRassrochka } from '../libs/calculateRassrochka'
+import { separateNumber } from '../libs/numberToPrice'
 
 const RassrochkaTable = ({ t, month, price, prepayment }) => {
   const {
@@ -15,79 +15,79 @@ const RassrochkaTable = ({ t, month, price, prepayment }) => {
     price,
     month,
     prepayment,
-  });
+  })
 
-  let tableData = [];
-  let leftAmount = rassrochkaPriceAfterPrepayment;
+  let tableData = []
+  let leftAmount = rassrochkaPriceAfterPrepayment
   for (let i = 1; i <= month; i++) {
     if (i == 1) {
-      leftAmount = totalPayment - prepayment;
+      leftAmount = totalPayment - prepayment
     } else {
-      leftAmount -= monthlyPayment;
+      leftAmount -= monthlyPayment
     }
     const tableRowData = {
       month: i,
       price,
       leftAmount,
       monthlyPayment,
-    };
-    tableData.push(tableRowData);
+    }
+    tableData.push(tableRowData)
   }
 
   return (
     <>
       <p>
-        {t("initial-rassrochka-price")}:{" "}
-        {`${separateNumber(rassrochkaPrice)} ${t("currency")}`}
+        {t('initial-rassrochka-price')}:{' '}
+        {`${separateNumber(rassrochkaPrice)} ${t('currency')}`}
       </p>
       <p>
-        {t("prepayment-amount")}:{" "}
-        {`${separateNumber(prepayment)} ${t("currency")}`}
+        {t('prepayment-amount')}:{' '}
+        {`${separateNumber(prepayment)} ${t('currency')}`}
       </p>
       <p>
-        {t("skidka")}: {`${separateNumber(skidka)} ${t("currency")}`}
+        {t('skidka')}: {`${separateNumber(skidka)} ${t('currency')}`}
       </p>
       <p>
-        {t("overall-sum")}: {`${separateNumber(totalPayment)} ${t("currency")}`}
+        {t('overall-sum')}: {`${separateNumber(totalPayment)} ${t('currency')}`}
       </p>
       <Table responsive striped bordered hover>
         <thead>
           <tr>
-            <th>{t("month")}</th>
-            <th>{t("monthly-payment")}</th>
-            <th>{t("left-debt")}</th>
+            <th>{t('month')}</th>
+            <th>{t('monthly-payment')}</th>
+            <th>{t('left-debt')}</th>
           </tr>
         </thead>
         <tbody>
           {tableData?.map((el) => {
-            console.log("el", el);
+            // console.log("el", el);
             return (
               <tr key={el.month}>
                 <td>{el.month}</td>
                 <td>
                   {el.month == 1
                     ? separateNumber(Number(prepayment).toFixed(0))
-                    : separateNumber(Number(el.monthlyPayment).toFixed(0))}{" "}
-                  {t("currency")}
+                    : separateNumber(Number(el.monthlyPayment).toFixed(0))}{' '}
+                  {t('currency')}
                 </td>
                 <td>
-                  {separateNumber(Number(el.leftAmount).toFixed(0))}{" "}
-                  {t("currency")}
+                  {separateNumber(Number(el.leftAmount).toFixed(0))}{' '}
+                  {t('currency')}
                 </td>
               </tr>
-            );
+            )
           })}
           <br />
           <tr>
-            <td>{t("overall-paid")}</td>
+            <td>{t('overall-paid')}</td>
             <td>
-              {separateNumber(Number(totalPayment).toFixed(0))} {t("currency")}
+              {separateNumber(Number(totalPayment).toFixed(0))} {t('currency')}
             </td>
           </tr>
         </tbody>
       </Table>
     </>
-  );
-};
+  )
+}
 
-export default withTranslation("common")(RassrochkaTable);
+export default withTranslation('common')(RassrochkaTable)

@@ -25,7 +25,6 @@ function Home({
   brands,
   t,
 }) {
-  console.log('dasdsa', news)
   const dispatch = useDispatch()
 
   const [banners, setBanners] = useState(null)
@@ -37,7 +36,7 @@ function Home({
       axiosAuth
         .get('/profile')
         .then(({ data: { customer: user } }) => {
-          console.log(user)
+          // console.log(user)
           if (user && !user.area) {
             isArea(true)
             setCustomer(user.id)
