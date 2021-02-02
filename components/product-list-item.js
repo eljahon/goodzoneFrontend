@@ -117,7 +117,9 @@ const ProductListItem = ({ product, view, carousel, t }) => {
               <span className='btn_icon'>
                 <FaShoppingBasket />
               </span>
-              <span className='btn_text'>{t('add-to-cart')}</span>
+              <span className='btn_text'>
+                {window.innerWidth >= 576 ? t('add-to-cart') : ''}
+              </span>
               <span className='cart-item'>
                 <img src={product.image} alt={product.name} />
               </span>
