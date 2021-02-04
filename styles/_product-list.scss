@@ -638,6 +638,12 @@ main {
   transform-style: flat !important;
 }
 
+.lazy-load-image-background {
+  @include sm {
+    display: contents !important;
+  }
+}
+
 @keyframes shakeCart {
   25% {
     transform: translateX(6px);
