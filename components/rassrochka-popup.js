@@ -63,7 +63,7 @@ const RassrochkaPopup = ({
                     />
                   </div>
                 </Col>
-                {console.log('product', product)}
+
                 {product?.category?.slug === 'smartfony' ? (
                   <Col md={12}>
                     <div className='input_wrapper--rassrochka input_wrapper--slider'>

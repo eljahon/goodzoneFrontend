@@ -58,6 +58,7 @@ nav.departments_menu {
       padding: 20px 0 100px;
       list-style-type: none;
       overflow-y: scroll;
+
       li {
         &:hover {
           & > a {
@@ -72,7 +73,8 @@ nav.departments_menu {
             padding-left: 15px;
           }
         }
-        a {
+        a,
+        p {
           font-size: 15px;
           font-weight: 700;
           color: $link-color;
@@ -104,6 +106,18 @@ nav.departments_menu {
   height: 100%;
   margin-bottom: 0;
   position: relative;
+  p {
+    width: 100%;
+    display: flex;
+    color: #0d1136;
+    padding: 0;
+    margin-right: 32px;
+    font-size: 15px;
+    font-weight: 700;
+    transition: all 0.15s ease-in-out 0s;
+    margin-bottom: 0;
+    cursor: pointer;
+  }
 }
 .nav-list li {
   position: relative;
@@ -153,7 +167,7 @@ nav.departments_menu {
     transition: all 0.15s ease-in-out 0s;
   }
 }
-.nav-list > li > a {
+.nav-list > li > p {
   svg {
     display: none;
     @include sm {
@@ -334,7 +348,8 @@ ul.nav-list > li:last-child .sub-menu {
 @media (max-width: 1230px) {
   body {
     nav.departments_menu {
-      .nav-list a {
+      .nav-list a,
+      p {
         font-size: 12px;
         .btn.btn_promo {
           font-size: 12px;
@@ -353,7 +368,8 @@ ul.nav-list > li:last-child .sub-menu {
 @media (max-width: 1037px) {
   body {
     nav.departments_menu {
-      .nav-list a {
+      .nav-list a,
+      p {
         font-size: 11px;
         btn.btn_promo {
           font-size: 11px;
@@ -373,7 +389,8 @@ ul.nav-list > li:last-child .sub-menu {
   body {
     nav.departments_menu {
       padding: 10px;
-      .nav-list a {
+      .nav-list a,
+      p {
         font-size: 10px;
         btn.btn_promo {
           font-size: 10px;

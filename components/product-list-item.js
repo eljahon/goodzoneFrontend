@@ -6,9 +6,13 @@ import { asyncAddToCartAction } from '../redux/actions/cartActions/cartActions'
 import { numberToPrice } from '../libs/numberToPrice'
 import { LazyImage } from './lazy-image'
 import { withTranslation, i18n } from '../i18n'
-import { useSelector, shallowEqual } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { checkRegion } from '../libs/checkRegion'
+import {
+  LazyLoadImage,
+  trackWindowScroll,
+} from 'react-lazy-load-image-component'
 
 const ProductListItem = ({ product, view, carousel, t }) => {
   const dispatch = useDispatch()
@@ -65,10 +69,11 @@ const ProductListItem = ({ product, view, carousel, t }) => {
           as={`${i18n.language === 'ru' ? '' : '/uz'}/product/${product.slug}`}
         >
           <a className='product_image'>
-            <LazyImage
+            <LazyLoadImage
               src={product.image}
               alt={product.name}
               className='img-fluid'
+              effect='blur'
             />
           </a>
         </Link>
@@ -141,4 +146,4 @@ const ProductListItem = ({ product, view, carousel, t }) => {
   )
 }
 
-export default withTranslation('common')(ProductListItem)
+export default trackWindowScroll(withTranslation('common')(ProductListItem))

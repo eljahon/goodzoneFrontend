@@ -6,10 +6,11 @@ import { useRouter } from 'next/router'
 import LangMenu from './lang-menu'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import Axios from 'axios'
-import { setLocalStorage, getLocalStorage } from '../libs/localStorage'
+import { setLocalStorage } from '../libs/localStorage'
 import { setUser } from '../redux/actions/authActions/authActions'
 import { useDispatch } from 'react-redux'
-function TopBar({ openLoginMenu, t, regions }) {
+
+function TopBar({ t }) {
   const [profileMenu, setProfileMenu] = useState(false)
   const dispatch = useDispatch()
   const user = useSelector((state) => state.auth.user, shallowEqual)

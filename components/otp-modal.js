@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Router, withTranslation } from '../i18n'
 import { useForm, Controller } from 'react-hook-form'
 import InputMask from 'react-input-mask'

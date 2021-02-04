@@ -5,9 +5,11 @@ import Link from 'next/link'
 import { getLocaleDate } from '../libs/getLocaleDate'
 import { FaLongArrowAltRight } from 'react-icons/fa'
 import { Col } from 'react-bootstrap'
-
+import {
+  LazyLoadImage,
+  trackWindowScroll,
+} from 'react-lazy-load-image-component'
 function NewsList({ news, t }) {
-  console.log('lang', i18n.language)
   return news ? (
     <section className='news_container news-list'>
       <div className='news_content news-block'>
@@ -23,10 +25,11 @@ function NewsList({ news, t }) {
                   }`}
                 >
                   <a className='news_image'>
-                    <img
+                    <LazyLoadImage
                       src={news.preview_image}
                       alt={news.title}
                       className='img-fluid'
+                      effect='blur'
                     />
                   </a>
                 </Link>
@@ -71,4 +74,4 @@ function NewsList({ news, t }) {
 
   null
 }
-export default withTranslation('footer')(NewsList)
+export default trackWindowScroll(withTranslation('footer')(NewsList))

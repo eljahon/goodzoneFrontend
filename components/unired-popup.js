@@ -5,7 +5,6 @@ import { asyncAddToCartAction } from '../redux/actions/cartActions/cartActions'
 import { useDispatch } from 'react-redux'
 import { numberToPrice } from '../libs/numberToPrice'
 import { useRouter } from 'next/router'
-import Link from 'next/link'
 
 function UniredPopup({ closePopup, t, data }) {
   const [load, setLoad] = useState(false)

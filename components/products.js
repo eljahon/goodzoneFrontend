@@ -2,8 +2,9 @@ import React from 'react'
 import { Container, Row } from 'react-bootstrap'
 import ProductListItem from './product-list-item'
 import Carousel from 'react-multi-carousel'
+import { trackWindowScroll } from 'react-lazy-load-image-component'
 
-export default function Products({ title, data }) {
+function Products({ title, data }) {
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
@@ -48,3 +49,5 @@ export default function Products({ title, data }) {
     </section>
   ) : null
 }
+
+export default trackWindowScroll(Products)

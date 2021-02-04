@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import withYM from 'next-ym'
 import { Router } from 'next/router'
 // import dynamic from 'next/dynamic'
-import { getLocalStorage } from '../libs/localStorage'
-import { axiosAuth } from '../libs/axios/axios-instances'
-import { setUser } from '../redux/actions/authActions/authActions'
+// import { getLocalStorage } from '../libs/localStorage'
+// import { axiosAuth } from '../libs/axios/axios-instances'
+// import { setUser } from '../redux/actions/authActions/authActions'
 
 // const Snowfall = dynamic(() => import('react-snowfall'), { ssr: false })
 

@@ -32,12 +32,10 @@ function OrderDetails({ t, data }) {
     setTimeout(() => inputRef.current.focus(), 100)
   }
   const handleSubmit = async (payment, number, totalPrice) => {
-    console.log(payment, totalPrice, number)
     window.location.href = `${process.env.PAYMENT_API_URL}?payment=${payment}&order_id=${number}&secret_key=b52ca358473ddbbc3a3a3cf374fc4f0c&amount=${totalPrice}`
   }
 
   const saveChanges = async () => {
-    console.log('saving :>> ')
     const {
       customer_name,
       delivery_method,
@@ -59,7 +57,6 @@ function OrderDetails({ t, data }) {
         status,
       })
       swal(t('success'))
-      console.log('saved :>> ')
     } catch (error) {
       swal(t('fail'))
       console.error(error)

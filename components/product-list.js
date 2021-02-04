@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Row, Breadcrumb, Col, Spinner } from 'react-bootstrap'
+import { Row, Breadcrumb, Spinner } from 'react-bootstrap'
 import ProductListItem from './product-list-item'
 import ProductListFilter from './product-list-filter'
 import { FaTh, FaBars, FaFilter } from 'react-icons/fa'
@@ -16,8 +16,6 @@ function ProductList({
   loading,
   productProperty,
   search,
-  setProperties,
-  properties,
 }) {
   const router = useRouter()
 

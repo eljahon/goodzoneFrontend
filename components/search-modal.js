@@ -1,7 +1,6 @@
 import React, { memo, useState, useRef, useEffect } from 'react'
 import { FaSearch, FaArrowLeft } from 'react-icons/fa'
 import { useRouter, Router } from 'next/router'
-import { transliterate } from '../libs/transliterate'
 import { withTranslation } from '../i18n'
 import useDebounce from '../libs/hooks/useDebounce'
 import axios from 'axios'

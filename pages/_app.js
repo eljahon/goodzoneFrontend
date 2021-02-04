@@ -12,6 +12,7 @@ import { persistStore } from 'redux-persist'
 import Layout from '../components/Layout'
 import { appWithTranslation } from '../i18n'
 import '../styles/slick.css'
+import 'react-lazy-load-image-component/src/effects/blur.css'
 import Header from '../components/header'
 import * as gtag from '../libs/gtag'
 

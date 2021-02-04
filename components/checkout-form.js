@@ -102,13 +102,11 @@ function CheckoutForm({ t, setUnired, unired }) {
       }
     } catch (error) {
       if (error.response.status === 406) {
-        console.log(error.response)
         setError(error.response.data.Error.Message)
         setClose(true)
       }
       isClick(false)
       swal(error)
-      console.log(error)
     }
   }
   useEffect(() => {

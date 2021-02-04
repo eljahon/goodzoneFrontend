@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Link from 'next/link'
-import { FaTimes, FaArrowDown, FaArrowRight, FaArrowLeft } from 'react-icons/fa'
+import { FaTimes, FaArrowRight, FaArrowLeft } from 'react-icons/fa'
 import { i18n } from '../i18n'
 import { useRouter } from 'next/router'
 import { withTranslation } from '../i18n'
@@ -48,17 +48,17 @@ function DepartmentsMenu({ categories, closeMenu, menu = false, t }) {
           {categories?.map((item, i) => {
             return (
               <li key={item.id}>
-                <Link
+                {/* <Link
                   href={`${i18n.language === 'ru' ? '' : '/uz'}/shop/[id]`}
                   as={`${i18n.language === 'ru' ? '' : '/uz'}/shop/${
                     item.slug
                   }`}
-                >
-                  <a onClick={(e) => e.preventDefault()}>
-                    <span>{item.name}</span>
-                    <FaArrowRight />
-                  </a>
-                </Link>
+                > */}
+                <p>
+                  <span>{item.name}</span>
+                  <FaArrowRight />
+                </p>
+                {/* </Link> */}
                 {item.children && (
                   <ul className='sub-menu'>
                     {item.children.map((child) => {

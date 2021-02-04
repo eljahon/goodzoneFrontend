@@ -1,11 +1,14 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Col } from 'react-bootstrap'
 import useAxios from '../libs/hooks/useAxios'
 import Link from 'next/link'
-import { i18n } from '../i18n'
-import { useRouter } from 'next/router'
 
-export default function Banner({ name, size }) {
+import {
+  LazyLoadImage,
+  trackWindowScroll,
+} from 'react-lazy-load-image-component'
+
+function Banner({ name, size }) {
   const [banner, error] = useAxios(
     `${process.env.BANNER_API_URL}?position=${name}&active=true`
   )
@@ -22,9 +25,10 @@ export default function Banner({ name, size }) {
             shallow
           >
             <a className='product_image'>
-              <img
+              <LazyLoadImage
                 src={banner.data.banners[0].image}
                 alt={banner.data.banners[0].title}
+                effect='blur'
               />
             </a>
           </Link>
@@ -38,3 +42,5 @@ export default function Banner({ name, size }) {
     )
   )
 }
+
+export default trackWindowScroll(Banner)
