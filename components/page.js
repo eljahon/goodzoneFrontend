@@ -3,7 +3,7 @@ import Footer from '../components/footer'
 import { i18n } from '../i18n'
 import useAxios from '../libs/hooks/useAxios'
 
-export default function Page({ slug }) {
+export default function Page({ slug, classes = '' }) {
   const [pageInfo, error] = useAxios(
     `${process.env.PAGE_API_URL}/${slug}?lang=${i18n.language}`
   )
@@ -29,7 +29,7 @@ export default function Page({ slug }) {
           <article className='delivery_content'>
             <div
               dangerouslySetInnerHTML={{ __html: content }}
-              className='content_block'
+              className={`content_block ${classes}`}
             ></div>
           </article>
         </section>
