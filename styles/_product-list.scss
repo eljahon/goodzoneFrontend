@@ -639,9 +639,7 @@ main {
 }
 
 .lazy-load-image-background {
-  @include sm {
-    display: contents !important;
-  }
+  display: contents !important;
 }
 
 @keyframes shakeCart {
