@@ -91,5 +91,8 @@ figure.image img {
 }
 
 .credit_component img {
-  width: 40% !important;
+  width: 20% !important;
+  @include sm {
+    width: 40% !important;
+  }
 }
