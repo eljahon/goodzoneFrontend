@@ -75,6 +75,9 @@ function Footer({ t }) {
             <Link href='/bonuses'>
               <a>{t('bonuses')}</a>
             </Link>
+            <Link href='/credit'>
+              <a>{t('type-payment-plan')}</a>
+            </Link>
           </Col>
           <Col lg={3}>
             <h3>{t('contact-us')}</h3>
