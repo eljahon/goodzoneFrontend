@@ -16,6 +16,8 @@ function ProductList({
   loading,
   productProperty,
   search,
+  isBrand = false,
+  brand,
 }) {
   const router = useRouter()
 
@@ -66,16 +68,23 @@ function ProductList({
             <Breadcrumb.Item active>{t('search-result')}</Breadcrumb.Item>
           ) : (
             <Breadcrumb.Item active>
-              {products ? products[0].category.name : null}
+              {products
+                ? isBrand
+                  ? products[0].brand.name
+                  : products[0].category.name
+                : null}
             </Breadcrumb.Item>
           )}
         </Breadcrumb>
+
         <div className='control_bar'>
           <h3>
             {searchResult
               ? t('search-result')
               : products
-              ? products[0].category.name
+              ? isBrand
+                ? products[0].brand.name
+                : products[0].category.name
               : t('products-not-found')}
           </h3>
           <div className='controls'>

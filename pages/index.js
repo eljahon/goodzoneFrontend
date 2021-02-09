@@ -94,7 +94,7 @@ function Home({
           ).products
         }
       />
-      {/* <BrandList brands={brands} /> */}
+      <BrandList brands={brands} />
       <NewsList news={news} />
       <CartPopup />
       <Footer />
@@ -113,7 +113,7 @@ export async function getServerSideProps({ req }) {
     `${process.env.CATEGORY_API_URL}?lang=${req.i18n.language}`,
     `${process.env.HOME_CONTENT_API_URL}?lang=${req.i18n.language}`,
     `${process.env.NEWS_API_URL}?lang=${req.i18n.language}`,
-    `${process.env.BRAND_API_URL}?lang=${req.i18n.language}`,
+    `${process.env.BRAND_API_URL}?lang=${req.i18n.language}&limit=12`,
   ]
 
   const [
