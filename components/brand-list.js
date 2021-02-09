@@ -6,7 +6,7 @@ import { Col, Container } from 'react-bootstrap'
 
 function BrandList({ brands, t }) {
   return (
-    <section className='news_container'>
+    <section className='news_container brand-items'>
       <Container fluid>
         <div className='news_content'>
           <h1>{t('popular-brand')}</h1>
