@@ -1,4 +1,4 @@
-Sitemap: https://goodzone.uz/api/posts-sitemap
+Sitemap: https://cdn.goodzone.uz/goodzone/sitemap/sitemap.xml
 
 User-agent: *
 Allow: /*
