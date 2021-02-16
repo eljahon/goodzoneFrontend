@@ -66,7 +66,7 @@ function Footer({ t }) {
           </Col>
           <Col lg={2}>
             <h3>{t('info')}</h3>
-            <Link href='/rassrochka'>
+            <Link href='/payment-plan'>
               <a>{t('payment-plan')}</a>
             </Link>
             <Link href='/delivery'>

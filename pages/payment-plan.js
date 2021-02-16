@@ -2,7 +2,7 @@ import SEO from '../components/seo'
 import Page from '../components/page'
 import { fetchMultipleUrls } from '../libs/fetchMultipleUrls'
 
-export default function Rassrochka() {
+export default function PaymentPlan() {
   return (
     <>
       <Page slug='rassrochka' />
