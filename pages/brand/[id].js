@@ -94,7 +94,7 @@ export default function Brands({ products, categories, query, brand }) {
           }
         }
         if (isHave) {
-          prop.push(filterProperty)
+          prop.push(JSON.parse(JSON.stringify(filterProperty)))
         }
         isCheck.push(value.property_id)
       } else {
@@ -111,7 +111,7 @@ export default function Brands({ products, categories, query, brand }) {
       page: '1',
       price_from: filterPriceRange.length ? filterPriceRange[0] : '0',
       price_till: filterPriceRange.length ? filterPriceRange[1] : '0',
-      properties: JSON.stringify(prop),
+      properties: prop,
       search: '',
       sort: selectDropdownFilter ? `price|${selectDropdownFilter}` : '',
     }
@@ -119,7 +119,7 @@ export default function Brands({ products, categories, query, brand }) {
     let formData = createFormData(filterData)
 
     axios
-      .post(`${process.env.PRODUCT_FILTER_API_URL}?active=true`, formData)
+      .post(`${process.env.PRODUCT_FILTER_API_URL}?active=true`, filterData)
       .then((data) => {
         const { products } = data.data
 

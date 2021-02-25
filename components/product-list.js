@@ -20,7 +20,6 @@ function ProductList({
   brand,
 }) {
   const router = useRouter()
-
   const dispatch = useDispatch()
   const [view, setView] = useState('col')
   const [filterPopup, setFilterPopup] = useState(false)

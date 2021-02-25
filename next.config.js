@@ -24,7 +24,7 @@ module.exports = {
     SHOPS_API_URL: 'https://api.goodzone.uz/v1/shop',
     BANNER_API_URL: 'https://api.goodzone.uz/v1/banner',
     PROFILE_API_URL: 'https://api.goodzone.uz/v1/customer/profile',
-    PRODUCT_FILTER_API_URL: 'https://api.goodzone.uz/v1/product/filter',
+    PRODUCT_FILTER_API_URL: 'https://api.goodzone.uz/v1/v2/product/filter',
     FEEDBACK_API_URL: 'https://api.goodzone.uz/v1/feedback',
     PAGE_API_URL: 'https://api.goodzone.uz/v1/page',
     HOME_CONTENT_API_URL: 'https://api.goodzone.uz/v1/home-content',
