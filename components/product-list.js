@@ -18,6 +18,7 @@ function ProductList({
   search,
   isBrand = false,
   brand,
+  desc,
 }) {
   const router = useRouter()
   const dispatch = useDispatch()
@@ -159,7 +160,14 @@ function ProductList({
             </Spinner>
           </div>
         ) : (
-          ''
+          desc && (
+            <div
+              className='category-desc'
+              dangerouslySetInnerHTML={{
+                __html: desc,
+              }}
+            ></div>
+          )
         )}
       </div>
     </main>

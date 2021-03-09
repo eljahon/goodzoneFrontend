@@ -175,6 +175,8 @@ export default function Category({ products, categoryId, query, category }) {
     filterProperties,
   ])
 
+  console.log(category)
+
   return (
     <>
       <SEO
@@ -188,6 +190,7 @@ export default function Category({ products, categoryId, query, category }) {
         brands={brands}
         loading={loading}
         productProperty={productProperty}
+        desc={category.description}
       />
       <CartPopup />
       <Footer />
