@@ -5,6 +5,7 @@ import { withTranslation, Link } from '../../i18n'
 import { fetchMultipleUrls } from '../../libs/fetchMultipleUrls'
 import { numberToPrice } from '../../libs/numberToPrice'
 import { Router } from '../../i18n'
+import { useSelector } from 'react-redux'
 
 function OrderDetails({ order, t }) {
   const [payment, setPayment] = useState(() => order.payment_method)
@@ -20,6 +21,8 @@ function OrderDetails({ order, t }) {
   const totalPrice = prices.reduce((a, b) => {
     return Math.round(a + b)
   })
+
+  const user = useSelector((state) => state.auth.user)
 
   const handleSubmit = async () => {
     window.location.href = `${process.env.PAYMENT_API_URL}?payment=${payment}&order_id=${order.number}&secret_key=b52ca358473ddbbc3a3a3cf374fc4f0c&amount=${totalPrice}`
@@ -135,6 +138,21 @@ function OrderDetails({ order, t }) {
                   <button
                     className='btn btn_pay'
                     onClick={() => handleSubmitToUzcard()}
+                  >
+                    {t('pay-now')}
+                  </button>
+                ) : (
+                  ''
+                )}
+                {payment == 'orange' ? (
+                  <button
+                    className='btn btn_pay'
+                    onClick={() => {
+                      window.open(
+                        `https://oplata.kapitalbank.uz?cash=6bed847ee9ac4d0581cb16d48f512d82&description=Оплата&amount=${totalPrice}&userId=${user.id}`,
+                        '_blank'
+                      )
+                    }}
                   >
                     {t('pay-now')}
                   </button>

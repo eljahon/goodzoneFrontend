@@ -315,6 +315,25 @@ function CheckoutForm({ t, setUnired, unired }) {
               <input
                 type='radio'
                 name='payment_method'
+                value='orange'
+                id='orange'
+                ref={register}
+              />
+              <label htmlFor='orange'>
+                <span className='card_title'>Apelsin</span>
+                <span className='card_content'>
+                  <img
+                    src='./images/payment_logo/apelsin.png'
+                    className='orange'
+                    alt='Orange'
+                  />
+                </span>
+              </label>
+            </div>
+            <div className='radio_card'>
+              <input
+                type='radio'
+                name='payment_method'
                 value='unired'
                 id='unired'
                 className={isUnired ? 'link_disabled' : ''}
