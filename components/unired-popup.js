@@ -79,13 +79,13 @@ function UniredPopup({ closePopup, t, data }) {
                   <span className='btn-text'>{t('add-to-cart')}</span>
                 </button>
 
-                <a
+                {/* <a
                   className='btn'
                   target='_blank'
                   href='https://application.unired.uz'
                 >
                   {t('get-unired-card')}
-                </a>
+                </a> */}
               </div>
               <p>
                 *{t('payment-plan-for')}
