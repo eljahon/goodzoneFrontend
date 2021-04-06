@@ -570,7 +570,7 @@ function Product({ product: data, t, shops }) {
 
 export default withTranslation('common')(Product)
 
-export async function getServerSideProps({ params, req }) {
+export async function getServerSideProps({ params, req, res }) {
   const urls = [
     `${process.env.PRODUCT_API_URL}/${params.id}?lang=${req.i18n.language}`,
     `${process.env.PRODUCT_API_URL}/${params.id}/shops?lang=${req.i18n.language}`,
@@ -578,6 +578,12 @@ export async function getServerSideProps({ params, req }) {
   ]
 
   const [{ product }, { shops }, categories] = await fetchMultipleUrls(urls)
+
+  if (!product || !product.active) {
+    res.writeHead(302, { Location: '/404' })
+    res.end()
+    return
+  }
 
   return {
     props: {

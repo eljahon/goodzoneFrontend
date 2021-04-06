@@ -57,7 +57,7 @@ function App({ Component, pageProps, t }) {
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <Layout>
-          <Header categories={pageProps.categories.categories} />
+          <Header categories={pageProps?.categories?.categories} />
           <Component {...pageProps} />
         </Layout>
       </PersistGate>
