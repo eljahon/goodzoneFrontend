@@ -24,7 +24,6 @@ function ProductList({
   const dispatch = useDispatch()
   const [view, setView] = useState('col')
   const [filterPopup, setFilterPopup] = useState(false)
-
   const [selectDropdownOptions] = useState([
     {
       value: 'newness',

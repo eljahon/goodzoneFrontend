@@ -1,12 +1,14 @@
-import SEO from "../components/seo";
-import Footer from "../components/footer";
-import { fetchMultipleUrls } from "../libs/fetchMultipleUrls";
+import SEO from '../components/seo'
+import Footer from '../components/footer'
+import { fetchMultipleUrls } from '../libs/fetchMultipleUrls'
+import Page from '../components/page'
 
 export default function PaymentPlanRules() {
-    return (
-        <>
-            <SEO />
-            <section className="section_container">
+  return (
+    <>
+      <SEO />
+      <Page slug='payment-plan-rules' />
+      {/* <section className="section_container">
                 <article className="delivery_content payment_plan-rules">
                     <h1>Публичная оферта по рассрочке</h1>
                     <p className="subtitle">
@@ -269,19 +271,18 @@ export default function PaymentPlanRules() {
                         </ul>
                     </div>
                 </article>
-            </section>
-            <Footer />
-        </>
-    );
+            </section> */}
+    </>
+  )
 }
 export async function getServerSideProps({ req }) {
-    const urls = [`${process.env.CATEGORY_API_URL}?lang=${req.i18n.language}`];
+  const urls = [`${process.env.CATEGORY_API_URL}?lang=${req.i18n.language}`]
 
-    const [categories] = await fetchMultipleUrls(urls);
+  const [categories] = await fetchMultipleUrls(urls)
 
-    return {
-        props: {
-            categories,
-        },
-    };
+  return {
+    props: {
+      categories,
+    },
+  }
 }

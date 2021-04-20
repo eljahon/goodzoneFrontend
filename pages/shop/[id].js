@@ -175,8 +175,6 @@ export default function Category({ products, categoryId, query, category }) {
     filterProperties,
   ])
 
-  console.log(category)
-
   return (
     <>
       <SEO
