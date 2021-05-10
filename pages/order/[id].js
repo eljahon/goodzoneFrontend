@@ -87,6 +87,28 @@ function OrderDetails({ order, t }) {
                 <p>{t(`${order.delivery_method}`)}</p>
               </div>
             </div>
+            {order.delivery_method === 'delivery' ? (
+              <>
+                <div className='list_item'>
+                  <div className='list_title'>
+                    <p>{t('delivery')}</p>
+                  </div>
+                  <div className='list_desc'>
+                    <p>{t('delivery-price')}</p>
+                  </div>
+                </div>
+                <div className='list_item'>
+                  <div className='list_title'>
+                    <p>{t('deliveryNote')}</p>
+                  </div>
+                  <div className='list_desc'>
+                    <p>{t('deliveryNoteText')}</p>
+                  </div>
+                </div>
+              </>
+            ) : (
+              ''
+            )}
             <div className='list_item'>
               <div className='list_title'>
                 <p>{t('payment-method')}</p>
