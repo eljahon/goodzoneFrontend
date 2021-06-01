@@ -62,9 +62,11 @@ function CheckoutForm({ t, setUnired, unired }) {
   const [isUnired, setIsUnired] = useState(false)
   const [close, setClose] = useState(false)
   const [click, isClick] = useState(false)
+
   const [error, setError] = useState('')
   const cartItems = useSelector((state) => state.cart.cartItems, shallowEqual)
   const user = useSelector((state) => state.auth.user)
+  const [phone, setPhone] = useState(user ? user.phone : phone)
   const handleClose = () => setClose(false)
   const onSubmit = async (data) => {
     // router.push('/order-received');
@@ -74,7 +76,7 @@ function CheckoutForm({ t, setUnired, unired }) {
       const response = await axios.post(
         process.env.ORDER_API_URL,
         createFormData({
-          address: data.address,
+          //address: data.address,
           customer_id: user ? user.id : '',
           customer_name: data.customer_name,
           delivery_method: data.delivery_method || 'deliver',
@@ -92,7 +94,7 @@ function CheckoutForm({ t, setUnired, unired }) {
           ),
           note: data.note,
           payment_method: data.payment_method || 'cash',
-          phone: data.phone,
+          phone,
         })
       )
 
@@ -154,6 +156,20 @@ function CheckoutForm({ t, setUnired, unired }) {
       }
     }
   }
+
+  const phoneRegEx = /^([0-9+]+)$/
+
+  const handleChangePhone = (event) => {
+    if (event.target.name === 'phone') {
+      if (
+        event.target.value.length === 0 ||
+        (event.target.value.length <= 13 && phoneRegEx.test(event.target.value))
+      ) {
+        setPhone(event.target.value)
+      }
+    }
+  }
+
   return (
     <>
       <form className='checkout_form' onSubmit={handleSubmit(onSubmit)}>
@@ -171,7 +187,7 @@ function CheckoutForm({ t, setUnired, unired }) {
             />
           </div>
         </div>
-        <div className='checkout_form-box'>
+        {/* <div className='checkout_form-box'>
           <h3 className='form_heading'>{t('address')}</h3>
           <div className='field_wrapper'>
             <textarea
@@ -184,7 +200,7 @@ function CheckoutForm({ t, setUnired, unired }) {
               placeholder={t('write-address')}
             />
           </div>
-        </div>
+        </div> */}
         <div className='checkout_form-box'>
           <h3 className='form_heading'>{t('phone-number')}</h3>
           <div className='field_wrapper'>
@@ -193,9 +209,10 @@ function CheckoutForm({ t, setUnired, unired }) {
               name='phone'
               id='phone'
               required
-              ref={register}
+              onChange={(e) => handleChangePhone(e)}
+              value={phone}
               placeholder={t('write-phone-number')}
-              defaultValue={user ? user.phone : ''}
+              // defaultValue={user ? user.phone : ''}
             />
           </div>
         </div>
