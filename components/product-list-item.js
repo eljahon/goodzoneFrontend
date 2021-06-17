@@ -106,9 +106,13 @@ const ProductListItem = ({ product, view, carousel, t }) => {
               ) : (
                 ''
               )}
-              <span className='product_price '>
-                {numberToPrice(product.price.price)}
-              </span>
+              {haved ? (
+                <span className='product_price '>
+                  {numberToPrice(product.price.price)}
+                </span>
+              ) : (
+                ''
+              )}
             </a>
           </Link>
           <div className='product_meta'>

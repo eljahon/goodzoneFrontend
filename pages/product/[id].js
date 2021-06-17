@@ -239,9 +239,14 @@ function Product({ product: data, t, shops }) {
                 </Link>
               </div>
               <div className='product_cart-wrapper'>
-                <span className='product_price'>
-                  {numberToPrice(data.price.price)}
-                </span>
+                {haved ? (
+                  <span className='product_price'>
+                    {numberToPrice(data.price.price)}
+                  </span>
+                ) : (
+                  ''
+                )}
+                {console.log(haved)}
                 {haved ? (
                   <span className='product_availability product_availability--true'>
                     {t('available')}
