@@ -92,6 +92,7 @@ function CartPopup({ t }) {
 
       return () => {
         document.removeEventListener('mousedown', handleClickOutside)
+        document.body.classList.remove('overflow')
       }
     }, [ref])
   }
