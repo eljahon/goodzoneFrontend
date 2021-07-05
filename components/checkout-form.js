@@ -215,6 +215,7 @@ function CheckoutForm({ t, setUnired, unired }) {
               id='phone'
               defaultValue={phone}
               placeholder={t('write-phone-number')}
+              required
             />
             {/* <input
               type='tel'
