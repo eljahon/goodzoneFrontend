@@ -54,7 +54,7 @@
     display: block;
     width: 100%;
     padding: 0px 20px;
-    .order_list-wrapper{
+    .order_list-wrapper {
       display: none;
     }
   }
@@ -209,10 +209,10 @@
           color: $link-color;
           line-height: 19px;
         }
-        input[type="text"],
-        input[type="email"],
-        input[type="tel"],
-        input[type="password"] {
+        input[type='text'],
+        input[type='email'],
+        input[type='tel'],
+        input[type='password'] {
           -webkit-appearance: none;
         }
         input {
@@ -417,6 +417,9 @@
       }
     }
   }
+}
+.dialog-title {
+  text-align: center;
 }
 
 @media (max-width: 1225px) {

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { FaBoxOpen, FaTruck } from 'react-icons/fa'
 import { useRouter } from 'next/router'
-import { useForm } from 'react-hook-form'
+import { Controller, useForm } from 'react-hook-form'
 import { useSelector, shallowEqual, useDispatch } from 'react-redux'
 import axios from 'axios'
 import swal from 'sweetalert'
@@ -9,6 +9,7 @@ import { withTranslation } from '../i18n'
 import { useEffect } from 'react'
 import { clearCartAction } from '../redux/actions/cartActions/cartActions'
 import { createFormData } from '../libs/createFormData'
+import InputMask from 'react-input-mask'
 import {
   Dialog,
   DialogActions,
@@ -22,6 +23,7 @@ import InputBase from '@material-ui/core/InputBase'
 import { setUser } from '../redux/actions/authActions/authActions'
 import { setLocalStorage } from '../libs/localStorage'
 import Axios from 'axios'
+import OrderConfirmSuccess from './order-confirm-success'
 
 const useStyles = makeStyles((theme) => ({
   margin: {
@@ -57,7 +59,7 @@ const BootstrapInput = withStyles((theme) => ({
 
 function CheckoutForm({ t, setUnired, unired }) {
   const dispatch = useDispatch()
-  const { register, handleSubmit, errors, watch } = useForm()
+  const { register, handleSubmit, errors, watch, control } = useForm()
   const router = useRouter()
   const [isUnired, setIsUnired] = useState(false)
   const [close, setClose] = useState(false)
@@ -72,6 +74,7 @@ function CheckoutForm({ t, setUnired, unired }) {
     // router.push('/order-received');
     const orderItems = [...cartItems]
     isClick(true)
+
     try {
       const response = await axios.post(
         process.env.ORDER_API_URL,
@@ -94,7 +97,7 @@ function CheckoutForm({ t, setUnired, unired }) {
           ),
           note: data.note,
           payment_method: data.payment_method || 'cash',
-          phone,
+          phone: data.phone.replaceAll(' ', ''),
         })
       )
 
@@ -204,7 +207,16 @@ function CheckoutForm({ t, setUnired, unired }) {
         <div className='checkout_form-box'>
           <h3 className='form_heading'>{t('phone-number')}</h3>
           <div className='field_wrapper'>
-            <input
+            <Controller
+              as={InputMask}
+              control={control}
+              mask='+\9\98 99 999 99 99'
+              name='phone'
+              id='phone'
+              defaultValue={phone}
+              placeholder={t('write-phone-number')}
+            />
+            {/* <input
               type='tel'
               name='phone'
               id='phone'
@@ -213,7 +225,7 @@ function CheckoutForm({ t, setUnired, unired }) {
               value={phone}
               placeholder={t('write-phone-number')}
               // defaultValue={user ? user.phone : ''}
-            />
+            /> */}
           </div>
         </div>
         <div className='checkout_form-box'>
@@ -451,6 +463,11 @@ function CheckoutForm({ t, setUnired, unired }) {
           </button>
         </DialogActions>
       </Dialog>
+      {/* <OrderConfirmSuccess
+        title={t('cancel-order')}
+        content={t('cancel-order-alert-text')}
+        //resolve={cancelOrder}
+      /> */}
     </>
   )
 }
