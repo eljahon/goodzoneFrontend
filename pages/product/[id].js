@@ -141,7 +141,7 @@ function Product({ product: data, t, shops }) {
   const rassrochkaBtnStyle = {
     width: `${ctaButtonsWidth + 15}px`,
   }
-
+  console.log(data)
   return (
     <>
       <SEO
@@ -246,7 +246,7 @@ function Product({ product: data, t, shops }) {
                 ) : (
                   ''
                 )}
-                {console.log(haved)}
+
                 {haved ? (
                   <span className='product_availability product_availability--true'>
                     {t('available')}

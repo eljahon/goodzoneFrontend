@@ -1,4 +1,8 @@
 export const checkRegion = (isHaved, user, product) => {
+  if (product.price.price == 0) {
+    isHaved(false)
+    return
+  }
   if (user) {
     if (
       product.in_stock.tashkent_city &&
