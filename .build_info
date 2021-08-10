@@ -1,4 +1,3 @@
 APP=goodzone_frontend
-SERVICE_NAME=gz_frontend
 REGISTRY=gitlab.udevs.io:5050
 PROJECT_NAME=goodzone
