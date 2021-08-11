@@ -79,7 +79,6 @@ function ProductListFilter({
                       (property) =>
                         property.type !== 'number' && (
                           <div className='filter_group' key={property.id}>
-                            {console.log(property)}
                             <h5>{property.name}</h5>
                             {property?.options?.map((item) => (
                               <div key={item.name} className='check_box'>
