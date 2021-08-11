@@ -78,7 +78,7 @@ function ProductListFilter({
                   ? productProperty.map((property) => (
                       <div className='filter_group' key={property.id}>
                         <h5>{property.name}</h5>
-                        {property.options.map((item) => (
+                        {property?.options?.map((item) => (
                           <div key={item.name} className='check_box'>
                             <input
                               onChange={() =>
