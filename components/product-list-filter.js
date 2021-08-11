@@ -75,27 +75,31 @@ function ProductListFilter({
                     : null}
                 </div>
                 {productProperty
-                  ? productProperty.map((property) => (
-                      <div className='filter_group' key={property.id}>
-                        <h5>{property.name}</h5>
-                        {property?.options?.map((item) => (
-                          <div key={item.name} className='check_box'>
-                            <input
-                              onChange={() =>
-                                handleInput(property.id, item.value)
-                              }
-                              type='checkbox'
-                              name={item.value}
-                              id={item.value}
-                              checked={filterProperties.some(
-                                (prop) => prop.value === item.value
-                              )}
-                            />
-                            <label htmlFor={item.value}>{item.name}</label>
+                  ? productProperty.map(
+                      (property) =>
+                        property.type !== 'number' && (
+                          <div className='filter_group' key={property.id}>
+                            {console.log(property)}
+                            <h5>{property.name}</h5>
+                            {property?.options?.map((item) => (
+                              <div key={item.name} className='check_box'>
+                                <input
+                                  onChange={() =>
+                                    handleInput(property.id, item.value)
+                                  }
+                                  type='checkbox'
+                                  name={item.value}
+                                  id={item.value}
+                                  checked={filterProperties.some(
+                                    (prop) => prop.value === item.value
+                                  )}
+                                />
+                                <label htmlFor={item.value}>{item.name}</label>
+                              </div>
+                            ))}
                           </div>
-                        ))}
-                      </div>
-                    ))
+                        )
+                    )
                   : null}
               </form>
             </div>
