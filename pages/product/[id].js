@@ -585,7 +585,7 @@ export async function getServerSideProps({ params, req, res }) {
   const [{ product }, { shops }, categories] = await fetchMultipleUrls(urls)
 
   if (!product || !product.active) {
-    res.writeHead(302, { Location: '/404' })
+    res.writeHead(302, { Location: '/' })
     res.end()
     return
   }

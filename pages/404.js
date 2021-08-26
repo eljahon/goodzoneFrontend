@@ -6,6 +6,7 @@ function Custom404() {
   const { t } = useTranslation()
   return (
     <>
+      <SEO />
       <div
         style={{ background: '#f5363e' }}
         className='container-fluid notfound_not d-flex align-items-center justify-content-center'

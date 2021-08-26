@@ -1,5 +1,5 @@
-@import "~slick-carousel/slick/slick.css";
-@import "~slick-carousel/slick/slick-theme.css";
+@import '~slick-carousel/slick/slick.css';
+@import '~slick-carousel/slick/slick-theme.css';
 
 .react-slick * {
   min-height: 0;
@@ -27,22 +27,17 @@
   }
 }
 
-
-
-.notfound_not{
-  height: 120vh;
+.notfound_not {
+  height: 80vh;
 }
 
-.notfound_home{
+.notfound_home {
   font-family: 'Montserrat', sans-serif;
 }
-
-
-
 
 .notfound .notfound-404 h1 {
   font-family: 'Montserrat', sans-serif;
-  font-size: 220px;
+  font-size: 180px;
   font-weight: 900;
   margin: 0px;
   color: #fff;
@@ -50,7 +45,6 @@
   letter-spacing: 10px;
 }
 
-.notfound_text{
+.notfound_text {
   font-family: 'Montserrat', sans-serif;
 }
-
