@@ -42,6 +42,7 @@ function Product({ product: data, t, shops }) {
     return acc
   }, 0)
 
+  console.log(data)
   const addToCartHandler = (event) => {
     const button = event.target
     const cartItem = button.querySelector('.cart-item')

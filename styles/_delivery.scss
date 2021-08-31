@@ -15,8 +15,13 @@
 }
 .delivery_content {
   width: 100%;
+
   @include sm {
     padding: 0 15px;
+    img {
+      width: 100%;
+      height: auto;
+    }
   }
   .promo_status {
     .status {

@@ -98,12 +98,14 @@
   "required": "Ma'lumot kiriting",
   "overall-paid": "Jami to'landi",
   "overall-sum": "Jami to'lov",
-  "skidka": "Yutuq",
+  "skidka": "Chegirma",
   "stock": "Mahsulot zaxirada yo'q",
   "area-title": "Mintaqani tanlang",
   "area-tashkent": "Toshkent",
   "area-samarkand": "Samarqand",
   "submit": "Tasdiqlash",
   "product-warning": "Veb-saytdagi narxlar bizning do'konimizdagi narxlardan farq qilishi mumkin. Tafsilotlar bizning call-markazimizda: +998712070307",
-  "popular-brand": "Mashhur brendlar"
+  "popular-brand": "Mashhur brendlar",
+  "free-delivery": "Bepul yetkazib berish",
+  "cashback": "Keshbek"
 }

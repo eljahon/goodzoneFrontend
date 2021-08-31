@@ -13,6 +13,7 @@ import {
   LazyLoadImage,
   trackWindowScroll,
 } from 'react-lazy-load-image-component'
+import ReactTooltip from 'react-tooltip'
 
 const ProductListItem = ({ product, view, carousel, t }) => {
   const dispatch = useDispatch()
@@ -75,6 +76,64 @@ const ProductListItem = ({ product, view, carousel, t }) => {
               className='img-fluid'
               effect='blur'
             />
+            <div className='sales-box'>
+              {product.rules && product.rules.discount !== '0' && (
+                <span
+                  className='product-sale'
+                  style={{ backgroundImage: 'url(/images/figure2.svg)' }}
+                  data-tip='tooltip'
+                  data-for='discount'
+                >
+                  <img src='/images/sale.svg' alt='free-delivery' />
+                  <span>-{product.rules.discount}%</span>
+                  <ReactTooltip
+                    className='sale-tooltip-text'
+                    place='bottom'
+                    effect='solid'
+                    id='discount'
+                  >
+                    {t('skidka')}
+                  </ReactTooltip>
+                </span>
+              )}
+              {product.rules && product.rules.cash_back !== '0' && (
+                <span
+                  className='product-sale'
+                  data-tip='tooltip'
+                  data-for='cashback'
+                  style={{ backgroundImage: 'url(/images/figure3.svg)' }}
+                >
+                  <img src='/images/cashback.svg' alt='cashback' />
+                  <span>{product.rules.cash_back}%</span>
+                  <ReactTooltip
+                    className='sale-tooltip-text'
+                    place='bottom'
+                    effect='solid'
+                    id='cashback'
+                  >
+                    {t('cashback')}
+                  </ReactTooltip>
+                </span>
+              )}
+              {product.rules && product.rules.free_delivery && (
+                <span
+                  className='product-sale'
+                  data-tip='tooltip'
+                  data-for='delivery'
+                >
+                  <img src='/images/free-delivery.svg' alt='free-delivery' />
+                  <span>Free</span>
+                  <ReactTooltip
+                    className='sale-tooltip-text'
+                    place='bottom'
+                    effect='solid'
+                    id='delivery'
+                  >
+                    {t('free-delivery')}
+                  </ReactTooltip>
+                </span>
+              )}
+            </div>
           </a>
         </Link>
         <div className='product_info'>
