@@ -15,6 +15,8 @@ import BannerContainer from '../components/bannerContainer'
 import AreaModal from '../components/area-modal'
 import NewsList from '../components/news-list'
 import BrandList from '../components/brand-list'
+import BannerBottom from '../components/bannerBottom'
+import MobileBanner from '../components/mobileBanner'
 
 function Home({
   // new_products,
@@ -94,9 +96,13 @@ function Home({
           ).products
         }
       />
+      <BannerContainer>
+        <BannerBottom size={12} name='pervyi-banner-1720x260' t={t} />
+      </BannerContainer>
       <BrandList brands={brands} />
       <NewsList news={news} />
       <CartPopup />
+      <MobileBanner t={t} />
       <Footer />
       {area ? <AreaModal customer={customer} isArea={isArea} /> : ''}
     </>
