@@ -11,13 +11,15 @@ import { createFormData } from '../../libs/createFormData'
 import {
   clearFilters,
   getPrices,
+  priceChange,
 } from '../../redux/actions/filterActions/filterActions'
 import { i18n } from '../../i18n'
+import { useRouter } from 'next/router'
 
 export default function Category({ products, categoryId, query, category }) {
   const dispatch = useDispatch()
   const categoryProducts = products.products
-
+  const router = useRouter()
   const [loading, setLoading] = useState(false)
   const [productLimit, setProductLimit] = useState(20)
   const [brands, setBrands] = useState([])
@@ -141,7 +143,7 @@ export default function Category({ products, categoryId, query, category }) {
       search: '',
       sort: selectDropdownFilter ? `price|${selectDropdownFilter}` : '',
     }
-    let formData = createFormData(filterData)
+
     axios
       .post(`${process.env.PRODUCT_FILTER_API_URL}?active=true`, filterData)
       .then((data) => {
@@ -159,8 +161,23 @@ export default function Category({ products, categoryId, query, category }) {
               .price,
           ]
           dispatch(getPrices(prices))
+          if (
+            router.query &&
+            router.query.price_min &&
+            router.query.price_max
+          ) {
+            dispatch(
+              priceChange([
+                Number(router.query.price_min),
+                Number(router.query.price_max),
+              ])
+            )
+          } else {
+            dispatch(priceChange(prices))
+          }
         }
 
+        // dispatch(getPrices())
         setLoading(false)
       })
       .catch((error) => {
