@@ -17,28 +17,35 @@ export default function RangeSlider() {
     (state) => state.filters.filterPriceRange,
     shallowEqual
   )
+
   const [inputRangeValue, setInputRangeValue] = useState(priceRange)
   useEffect(() => {
     setInputRangeValue(filterPriceRange)
   }, [filterPriceRange])
-  console.log(inputRangeValue)
-
-  //   useEffect(() => {
-  //     setInputRangeValue(priceRange)
-  //   }, [priceRange])
 
   const handleChange = (e, newValue) => setInputRangeValue(newValue)
   const handlePriceChange = (e, newValue) => {
     dispatch(priceChange(newValue))
+    const queryParam = {}
+    const { properties, brands } = router.query
+
+    if (brands) queryParam.brands = brands
+    if (newValue[0]) queryParam.price_min = newValue[0]
+    if (newValue[1]) queryParam.price_max = newValue[1]
+    if (properties) queryParam.properties = properties
+
     router.push(
       {
         pathname: router.pathname,
         query: {
-          price_min: newValue[0],
-          price_max: newValue[1],
+          ...queryParam,
         },
       },
-      `/shop/${router.query.id}?price_min=${newValue[0]}&price_max=${newValue[1]}`,
+      `/shop/${router.query.id}?price_min=${newValue[0]}&price_max=${
+        newValue[1]
+      }${brands ? `&brands=${brands}` : ''}${
+        properties ? `&properties=${properties}` : ''
+      }`,
       { shallow: true }
     )
   }

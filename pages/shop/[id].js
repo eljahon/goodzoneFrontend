@@ -12,6 +12,8 @@ import {
   clearFilters,
   getPrices,
   priceChange,
+  toggleBrand,
+  toggleProperty,
 } from '../../redux/actions/filterActions/filterActions'
 import { i18n } from '../../i18n'
 import { useRouter } from 'next/router'
@@ -83,6 +85,12 @@ export default function Category({ products, categoryId, query, category }) {
     (state) => state.filters.brands,
     shallowEqual
   )
+
+  const priceRange = useSelector(
+    (state) => state.filters.priceRange,
+    shallowEqual
+  )
+
   const selectDropdownFilter = useSelector(
     (state) => state.filters.selectDropdownFilter,
     shallowEqual
@@ -102,6 +110,75 @@ export default function Category({ products, categoryId, query, category }) {
   useEffect(() => {
     dispatch(clearFilters())
   }, [query])
+
+  useEffect(() => {
+    const { price_min, price_max, id, brands, properties } = router.query
+    const queryParam = {}
+    if (filterBrands.length) queryParam.brands = filterBrands.join(',')
+    if (price_min) queryParam.price_min = price_min
+    if (price_max) queryParam.price_max = price_max
+    if (properties) queryParam.properties = properties
+    if (filterBrands.length)
+      router.push(
+        {
+          pathname: router.pathname,
+          query: {
+            ...queryParam,
+          },
+        },
+        `/shop/${id}${
+          filterBrands.length ? `?brands=${filterBrands.join(',')}` : ''
+        }${price_min ? `&price_min=${price_min}` : ''}${
+          price_max ? `&price_max=${price_max}` : ''
+        }${properties ? `&properties=${properties}` : ''}`,
+        { shallow: true }
+      )
+
+    if (!filterBrands.length && brands) {
+      brands.split(',').map((item) => {
+        dispatch(toggleBrand(item))
+      })
+      dispatch(getPrices(priceRange))
+    }
+  }, [filterBrands])
+
+  useEffect(() => {
+    const { price_min, price_max, properties, brands, id } = router.query
+    const queryParam = {}
+    if (brands) queryParam.brands = brands
+    if (price_min) queryParam.price_min = price_min
+    if (price_max) queryParam.price_max = price_max
+    if (filterProperties.length)
+      queryParam.properties = JSON.stringify(filterProperties)
+    if (filterProperties.length)
+      router.push(
+        {
+          pathname: router.pathname,
+          query: {
+            ...queryParam,
+          },
+        },
+        `/shop/${id}${
+          filterProperties.length
+            ? `?properties=${JSON.stringify(filterProperties)}`
+            : ''
+        }${price_min ? `&price_min=${price_min}` : ''}${
+          price_max ? `&price_max=${price_max}` : ''
+        }${brands ? `&brands=${brands}` : ''}`,
+        { shallow: true }
+      )
+    if (!filterProperties.length && properties) {
+      JSON.parse(properties).map((item) => {
+        dispatch(
+          toggleProperty({
+            property_id: item.property_id,
+            value: item.value,
+          })
+        )
+      })
+      dispatch(getPrices(priceRange))
+    }
+  }, [filterProperties])
 
   useEffect(() => {
     setLoading(true)
@@ -160,7 +237,9 @@ export default function Category({ products, categoryId, query, category }) {
             +sortedProductsByPrice[sortedProductsByPrice.length - 1].price
               .price,
           ]
+
           dispatch(getPrices(prices))
+
           if (
             router.query &&
             router.query.price_min &&
@@ -177,7 +256,6 @@ export default function Category({ products, categoryId, query, category }) {
           }
         }
 
-        // dispatch(getPrices())
         setLoading(false)
       })
       .catch((error) => {
