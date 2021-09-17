@@ -13,10 +13,97 @@
     width: 1140px;
     margin-left: auto;
     margin-right: auto;
-    counter-reset: section-counter 0;
+    counter-reset: section;
     @include sm {
       flex-direction: column;
     }
+  }
+}
+.review__body {
+  counter-reset: section;
+  background-color: #f7f7f7;
+  padding-top: 48px;
+}
+.review__modal-header {
+  display: flex;
+  justify-content: center;
+  border: none;
+  padding: 0;
+}
+.review__img {
+  @include lg {
+    width: 150px;
+  }
+  @include lg {
+    width: 120px;
+  }
+}
+.review__modal-body {
+  border: none;
+  text-align: center;
+  font-size: 24px;
+  line-height: 32px;
+  color: #000;
+  padding: 0 0 32px;
+  font-weight: 500;
+  font-family: $base-font;
+  @include lg {
+    font-size: 18px;
+    padding: 0 0 24px;
+    line-height: 26px;
+  }
+  @include md {
+    font-size: 16px;
+    padding: 0 0 18px;
+    line-height: 24px;
+  }
+  &:nth-child(2) {
+    padding: 0 0 24px;
+    font-size: 36px;
+    line-height: 32px;
+    color: #f5363e;
+    font-family: $base-font;
+    font-weight: 800;
+    @include lg {
+      padding: 0 0 18px;
+      font-size: 26px;
+      line-height: 22px;
+    }
+    @include md {
+      padding: 0 0 15px;
+      font-size: 18px;
+      line-height: 16px;
+    }
+  }
+}
+.review__modal-btn {
+  background-color: #f5363e;
+  color: #fff;
+  border: none;
+  margin: 10px 67px 40px;
+  &:hover {
+    background-color: #f5363e;
+    border: none;
+  }
+}
+.review__box {
+  background-color: rgb(255, 255, 255);
+  box-shadow: rgba(0, 0, 0, 0.08) 0 2px 16px 0;
+  padding: 32px;
+  &-txt {
+    max-width: 564px;
+    width: 100%;
+    color: #828282;
+    font-size: 18px;
+    line-height: 28px;
+    font-weight: 500;
+    font-family: $base-font;
+  }
+  &-title {
+    font-size: 24px;
+    line-height: 32px;
+    color: #000;
+    font-family: $base-font;
   }
 }
 form.checkout_form {
@@ -108,8 +195,10 @@ form.checkout_form {
         font-size: 19px;
       }
       &::before {
-        counter-increment: section-counter 1;
-        content: counter(section-counter);
+        counter-increment: section;
+        content: counter(section) "";
+        // counter-increment: section-counter 1;
+        // content: counter(section-counter);
         font-family: $base-font;
         font-size: 16px;
         font-weight: 400;
@@ -136,8 +225,8 @@ form.checkout_form {
       display: flex;
       flex-direction: column;
       margin-bottom: 15px;
-      input[type='text'],
-      input[type='tel'] {
+      input[type="text"],
+      input[type="tel"] {
         -webkit-appearance: none;
       }
       input,
@@ -202,7 +291,7 @@ form.checkout_form {
             margin-right: 10px;
           }
         }
-        input[type='radio'] {
+        input[type="radio"] {
           visibility: hidden;
           width: 0;
           margin: 0;
