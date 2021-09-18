@@ -62,7 +62,6 @@
   "alert-stock": "Siz tanlagan ",
   "alert-text": " sotuvda mavjud emas",
   "note": "Buyurtma qabul qilinmadi",
-  "area-title": "Mintaqani tanlang",
   "area-tashkent": "Toshkent",
   "area-samarkand": "Samarqand",
   "submit": "Tasdiqlash",
@@ -76,6 +75,7 @@
   "delivery-price": "30 000 so'm",
   "delivery": "Yetkazib berish narxi",
   "offer": "Izoh qoldirish",
+  "goodzoneShop": "Internet-Do'kon GOODZONE",
   "deliveryNote": "Yetkazib berish to'g'risidagi eslatma",
   "deliveryNoteText": "Katta maishiy texnika etkazib berish bepul. Texnikani yuqori qavatlarga olib chiqish pullik (kelishiladigan narx)"
 }

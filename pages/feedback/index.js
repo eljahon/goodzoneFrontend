@@ -123,7 +123,6 @@ export default function Review({ shops, categories }) {
                 type="email"
                 name="email"
                 id="email"
-                required
                 placeholder={t("write-email-address")}
                 ref={register}
               />
@@ -158,8 +157,9 @@ export default function Review({ shops, categories }) {
                       });
                     },
                   }}
-                  defaultValue={shops.shops[0].name}
+                  defaultValue={t("goodzoneShop")}
                 >
+                  <option value={t("goodzoneShop")}>{t("goodzoneShop")}</option>
                   {shops.shops.map((item, i) => (
                     <option key={i} value={item.name}>
                       {item?.name.replaceAll("<p>", "").replaceAll("</p>", "")}
@@ -210,7 +210,7 @@ export default function Review({ shops, categories }) {
                 className="btn"
                 disabled={disabled}
                 onClick={handleClose}
-                onClick={(handleClose, handleShow)}
+                onClick={handleClose}
               >
                 <span className="btn_text">{t("send")}</span>
               </button>
