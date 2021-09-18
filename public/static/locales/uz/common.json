@@ -100,7 +100,7 @@
   "overall-sum": "Jami to'lov",
   "skidka": "Chegirma",
   "stock": "Mahsulot zaxirada yo'q",
-  "area-title": "Mintaqani tanlang",
+  "area-title": "Do'koni tanlang",
   "area-tashkent": "Toshkent",
   "area-samarkand": "Samarqand",
   "submit": "Tasdiqlash",
@@ -129,5 +129,6 @@
   "write-email-address": "Elektron manzilingizni kiriting",
   "gangra2": "Siz sharhni muvaffaqiyatli qoldirdingiz",
   "offer": "Izoh qoldirish",
+  "goodzoneShop": "Internet-Do'kon GOODZONE",
   "reviewTxt": "Onlayn do'konimizga tashrif buyurganingiz uchun tashakkur. Biz biz do'konlarimiz ishining barcha bosqichlarini diqqat bilan kuzatib boramiz   tarmoq va biz haqimizda sharh qoldirsangiz juda minnatdormiz ish"
 }
