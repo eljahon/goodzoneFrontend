@@ -33,7 +33,7 @@
           display: inline-block;
           padding-right: 0.5rem;
           color: $link-color;
-          content: '›';
+          content: "›";
         }
         @include sm {
           display: none;
@@ -403,6 +403,41 @@
     border-color: $primary-color;
   }
 }
+.scale_btn {
+  background-color: #f6f6f6;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  outline: none;
+  border: none;
+  z-index: 100;
+  &:focus {
+    outline: none;
+  }
+}
+
+.product_wrapper_btn {
+  background-color: #f6f6f6;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  position: absolute;
+  outline: none;
+  border: none;
+  z-index: 100;
+  &:focus {
+    outline: none;
+  }
+}
 
 .sales-box {
   position: absolute;
@@ -444,7 +479,7 @@
     display: flex;
 
     align-items: center;
-    background-image: url('/images/figure1.svg');
+    background-image: url("/images/figure1.svg");
     color: rgb(0, 0, 0);
     background-position: center center;
     background-repeat: no-repeat;
@@ -478,7 +513,7 @@
       margin-bottom: 0;
     }
     align-items: center;
-    background-image: url('/images/fig2.svg');
+    background-image: url("/images/fig2.svg");
     background-position: center center;
     background-repeat: no-repeat;
     background-size: contain;
@@ -671,7 +706,7 @@
       &:not(:last-child) {
         margin-left: 15px;
         &::after {
-          content: '';
+          content: "";
           position: absolute;
           top: -10px;
           right: -25px;

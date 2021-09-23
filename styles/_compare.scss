@@ -1,0 +1,133 @@
+.compare_body {
+  a {
+    text-decoration: none;
+  }
+  background-color: #f7f7f7;
+  padding: 72px;
+  .compare_container {
+    padding: 20px;
+    background: #fff;
+  }
+
+  .compare_rows {
+    overflow-x: scroll;
+    flex-wrap: nowrap;
+    &::-webkit-scrollbar {
+      height: 10px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: #e31e24;
+      border-radius: 8px;
+    }
+    &::-webkit-scrollbar-track {
+      background: #f3f3f3;
+      border-radius: 8px;
+      margin: 0 20px;
+    }
+  }
+  .compare_col:nth-of-type(1) {
+    margin-top: auto;
+  }
+  .compare_card-1 {
+    width: 100%;
+    background: #fff;
+    padding: 40px 35px;
+    .compare__img {
+      width: 100%;
+    }
+  }
+  .compare_card {
+    width: 100%;
+    background: #fff;
+    padding: 40px 35px;
+    border-left: 2px #f4f4f4 solid;
+    .compare__img {
+      width: 100%;
+    }
+  }
+  .compare_title {
+    font-size: 20px;
+    line-height: 24px;
+    font-weight: 500;
+    max-width: 250px;
+    width: 100%;
+    margin-top: 24px;
+    color: #000;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .no_compare_title {
+    margin: 0 auto;
+  }
+  .compare_btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #e31e24;
+    outline: none;
+    border: 0;
+    margin-top: 24px;
+    margin-bottom: 24px;
+    &:focus {
+      outline: none;
+    }
+  }
+  .compare_link {
+    font-size: 20px;
+    line-height: 20px;
+    color: #000;
+    text-decoration: none;
+  }
+  .compare_list {
+    .compare_item {
+      padding: 20px 0;
+      &:nth-of-type(1) a {
+        font-size: 24px;
+        font-weight: 600;
+      }
+    }
+  }
+  .campare_delete {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    margin-bottom: 64px;
+    &-txt {
+      margin: 0;
+      font-size: 20px;
+      line-height: 20px;
+      color: #e31e24;
+      margin-left: 10px;
+    }
+  }
+}
+.scale_img {
+  z-index: 99;
+}
+// .compare_customers {
+//   width: 100%;
+//   tr:nth-child(even) {
+//     background-color: #f2f2f2;
+//   }
+//   th {
+//     padding: 16px 0;
+//     font-size: 24px;
+//     font-weight: 600;
+//     padding-left: 16px;
+//   }
+//   td {
+//     padding: 16px 0;
+//     padding-left: 16px;
+//     font-size: 20px;
+//     line-height: 20px;
+//     color: #000;
+//     text-decoration: none;
+//   }
+//   tr {
+//     &:nth-of-type(2) {
+//       background: #fff;
+//     }
+//   }
+// }
