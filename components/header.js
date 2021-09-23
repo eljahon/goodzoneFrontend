@@ -1,74 +1,81 @@
-import React, { useState, useRef, useEffect } from 'react'
-import { FaSearch, FaSignInAlt } from 'react-icons/fa'
-import DepartmentsMenu from './departments-menu'
-import SearchModal from './search-modal'
-import LoginModal from './login-modal'
-import RegisterModal from './register-modal'
-import ProfileMenu from './profile-menu'
-import { useSelector, shallowEqual } from 'react-redux'
-import SearchBar from './search-bar'
-import { useRouter } from 'next/router'
-import TopBar from './top-bar'
-import Headroom from 'react-headroom'
-import { Link, withTranslation } from '../i18n'
-import BottomBar from './bottom-bar'
-import IconUser from './icons/IconUser'
-import IconMenu from './icons/IconMenu'
-import AreaModal from './area-modal'
+import React, { useState, useRef, useEffect } from "react";
+import { FaSearch, FaSignInAlt } from "react-icons/fa";
+import DepartmentsMenu from "./departments-menu";
+import SearchModal from "./search-modal";
+import LoginModal from "./login-modal";
+import RegisterModal from "./register-modal";
+import ProfileMenu from "./profile-menu";
+import { useSelector, shallowEqual } from "react-redux";
+import SearchBar from "./search-bar";
+import { useRouter } from "next/router";
+import TopBar from "./top-bar";
+import Headroom from "react-headroom";
+import { Link, withTranslation } from "../i18n";
+import BottomBar from "./bottom-bar";
+import IconUser from "./icons/IconUser";
+import IconMenu from "./icons/IconMenu";
+import AreaModal from "./area-modal";
+import { compareItemsTotalQuantitySelector } from "../redux/selectors/cartSelectors";
 
-function Header({ categories, t }) {
-  const vw = typeof window !== 'undefined' ? window.innerWidth : 0
+function Header({ categories, t, compareItem }) {
+  const vw = typeof window !== "undefined" ? window.innerWidth : 0;
 
-  const [menu, setMenu] = useState(false)
-  const [searchPopup, setSearchPopup] = useState(false)
-  const [loginPopup, setLoginPopup] = useState(false)
-  const [registerPopup, setRegisterPopup] = useState(false)
-  const [profilePopup, setProfilePopup] = useState(false)
-  const [area, isArea] = useState(false)
-  const [customer, setCustomer] = useState(null)
-  const [regions, setRegion] = useState('')
+  const [menu, setMenu] = useState(false);
+  const [searchPopup, setSearchPopup] = useState(false);
+  const [loginPopup, setLoginPopup] = useState(false);
+  const [registerPopup, setRegisterPopup] = useState(false);
+  const [profilePopup, setProfilePopup] = useState(false);
+  const [area, isArea] = useState(false);
+  const [customer, setCustomer] = useState(null);
+  const [regions, setRegion] = useState("");
   useEffect(() => {
-    vw <= 850 ? setMenu(false) : setMenu(true)
-  }, [])
+    vw <= 850 ? setMenu(false) : setMenu(true);
+  }, []);
 
   const switchPopup = () => {
-    setLoginPopup(!loginPopup)
-    setRegisterPopup(!registerPopup)
-  }
+    setLoginPopup(!loginPopup);
+    setRegisterPopup(!registerPopup);
+  };
 
   useEffect(() => {
-    const region = localStorage.getItem('region')
+    const region = localStorage.getItem("region");
 
-    if (region !== 'null') {
+    if (region !== "null") {
       if (user && user.area) {
-        localStorage.setItem('region', user.area)
+        localStorage.setItem("region", user.area);
       }
     } else {
-      localStorage.setItem('region', t('area-tashkent'))
+      localStorage.setItem("region", t("area-tashkent"));
     }
-  }, [])
+  }, []);
 
-  const user = useSelector((state) => state.auth.user, shallowEqual)
+  const user = useSelector((state) => state.auth.user, shallowEqual);
 
-  const router = useRouter()
-  const hasDynamicRouting = router.query.id
-
-  const wrapperRef = useRef(null)
-  useOutsideCloseMenu(wrapperRef)
+  const totalComQuantity = useSelector(
+    (state) => compareItemsTotalQuantitySelector(state),
+    shallowEqual
+  );
+  const router = useRouter();
+  const hasDynamicRouting = router.query.id;
+  const submitCompare = () => {
+    router.push("/compare");
+  };
+  const wrapperRef = useRef(null);
+  useOutsideCloseMenu(wrapperRef);
 
   function useOutsideCloseMenu(ref) {
     useEffect(() => {
       function handleClickOutside(event) {
         if (ref.current && !ref.current.contains(event.target)) {
-          setProfilePopup(false)
+          setProfilePopup(false);
         }
       }
-      document.addEventListener('mousedown', handleClickOutside)
+      document.addEventListener("mousedown", handleClickOutside);
 
       return () => {
-        document.removeEventListener('mousedown', handleClickOutside)
-      }
-    }, [ref])
+        document.removeEventListener("mousedown", handleClickOutside);
+      };
+    }, [ref]);
   }
 
   return (
@@ -83,36 +90,45 @@ function Header({ categories, t }) {
       />
       <Headroom>
         <header>
-          <div className='left_menu'>
+          <div className="left_menu">
             <button
-              className='btn hamburger_icon'
+              className="btn hamburger_icon"
               onClick={() => setMenu(true)}
             >
               <IconMenu />
             </button>
-            <Link href='/'>
-              <a className='logo'>
+            <Link href="/">
+              <a className="logo">
                 <img
-                  src={hasDynamicRouting ? '../logo.svg' : '/logo.svg'}
-                  alt='Goodzone'
+                  src={hasDynamicRouting ? "../logo.svg" : "/logo.svg"}
+                  alt="Goodzone"
                 />
               </a>
             </Link>
           </div>
           <SearchBar />
-          <div className='right_menu'>
+          <button className="btn scale_icon" onClick={submitCompare}>
+            <img src="../scale_icon.svg" alt="icon" />
+            <span className="scale_num">{totalComQuantity}</span>
+            <div className="dropdown-content">
+              <a href="#">Link 1</a>
+              <a href="#">Link 2</a>
+              <a href="#">Link 3</a>
+            </div>
+          </button>
+          <div className="right_menu">
             {user ? (
-              <div className='popover' ref={wrapperRef}>
-                <div className='popover_handler'>
+              <div className="popover" ref={wrapperRef}>
+                <div className="popover_handler">
                   <button
-                    className='btn join_btn'
+                    className="btn join_btn"
                     onClick={() => setProfilePopup(!profilePopup)}
                   >
                     <IconUser />
-                    <span className='btn-text'>{t('personal-area')}</span>
+                    <span className="btn-text">{t("personal-area")}</span>
                   </button>
-                  <Link href='/account'>
-                    <a className='btn join_btn mobile'>
+                  <Link href="/account">
+                    <a className="btn join_btn mobile">
                       <IconUser />
                     </a>
                   </Link>
@@ -120,25 +136,25 @@ function Header({ categories, t }) {
                 {profilePopup ? (
                   <ProfileMenu closeMenu={() => setProfilePopup(false)} />
                 ) : (
-                  ''
+                  ""
                 )}
               </div>
             ) : (
               <button
-                className='btn join_btn'
+                className="btn join_btn"
                 onClick={() => setLoginPopup(true)}
               >
-                <span className='join_icon'>
+                <span className="join_icon">
                   <FaSignInAlt />
                 </span>
-                <span className='btn-text'>{t('login')}</span>
+                <span className="btn-text">{t("login")}</span>
               </button>
             )}
             <button
-              className='btn search_btn mobile'
+              className="btn search_btn mobile"
               onClick={() => setSearchPopup(true)}
             >
-              <span className='search_icon'>
+              <span className="search_icon">
                 <FaSearch />
               </span>
             </button>
@@ -146,7 +162,7 @@ function Header({ categories, t }) {
         </header>
       </Headroom>
 
-      <div className='base_header' />
+      <div className="base_header" />
       <BottomBar openLoginMenu={() => setLoginPopup(true)} />
 
       {menu ? (
@@ -156,13 +172,13 @@ function Header({ categories, t }) {
           menu={menu}
         />
       ) : (
-        ''
+        ""
       )}
 
       {searchPopup ? (
         <SearchModal closeModal={() => setSearchPopup(false)} />
       ) : (
-        ''
+        ""
       )}
       {loginPopup ? (
         <LoginModal
@@ -172,7 +188,7 @@ function Header({ categories, t }) {
           setCustomer={setCustomer}
         />
       ) : (
-        ''
+        ""
       )}
       {registerPopup ? (
         <RegisterModal
@@ -182,15 +198,15 @@ function Header({ categories, t }) {
           setCustomer={setCustomer}
         />
       ) : (
-        ''
+        ""
       )}
       {area ? (
         <AreaModal customer={customer} setRegion={setRegion} isArea={isArea} />
       ) : (
-        ''
+        ""
       )}
     </>
-  )
+  );
 }
 
-export default withTranslation('common')(Header)
+export default withTranslation("common")(Header);
