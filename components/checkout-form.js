@@ -230,7 +230,7 @@ function CheckoutForm({ t, setUnired, unired }) {
           </div>
         </div>
         <div className='checkout_form-box'>
-          <h3 className='form_heading'>{t('area-title')}</h3>
+          <h3 className='form_heading'>{t('area-label')}</h3>
           <div className='field_wrapper'>
             <NativeSelect
               input={<BootstrapInput />}
