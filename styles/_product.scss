@@ -428,6 +428,39 @@
     outline: none;
   }
 }
+.scale_btn_item {
+  background-color: #f6f6f6;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  position: absolute;
+  left: 45%;
+  top: 10%;
+  outline: none;
+  border: none;
+  z-index: 100;
+  transition: 0.5s;
+  @include md {
+    left: 41%;
+    top: 8%;
+  }
+  @include sm {
+    top: 0;
+    left: 88%;
+  }
+  &:hover {
+    background-color: #000;
+  }
+  &:disabled {
+    background-color: #000;
+  }
+  &:focus {
+    outline: none;
+  }
+}
 
 .product_wrapper_btn {
   background-color: #f6f6f6;

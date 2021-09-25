@@ -101,7 +101,7 @@
   }
   .no_compare_card {
     margin: 0 auto;
-    min-height: 57vh;
+    min-height: 58vh;
     display: flex;
     align-items: center;
   }
@@ -133,7 +133,12 @@
     }
   }
   .compare_link {
-    font-size: 16px;
+    font-size: 18px;
+    text-transform: capitalize;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
     line-height: 20px;
     color: #000;
     text-decoration: none;
@@ -264,7 +269,7 @@
       line-height: 0;
       &::after {
         display: block;
-        content: 'Добавить';
+        content: "Добавить";
         color: $primary-color;
         text-indent: 0;
         line-height: initial;

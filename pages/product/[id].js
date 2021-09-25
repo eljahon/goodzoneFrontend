@@ -16,6 +16,7 @@ import SEO from "../../components/seo";
 import Footer from "../../components/footer";
 import CartPopup from "../../components/cart-popup";
 import { asyncAddToCartAction } from "../../redux/actions/cartActions/cartActions";
+import { asyncAddToCompareAction } from "../../redux/actions/compareActions/compareActions";
 import { numberToPrice } from "../../libs/numberToPrice";
 import { fetchMultipleUrls } from "../../libs/fetchMultipleUrls";
 import RelatedProducts from "../../components/related-products";
@@ -30,7 +31,7 @@ import { useForm } from "react-hook-form";
 import { createFormData } from "../../libs/createFormData";
 import RassrochkaPopup from "../../components/rassrochka-popup";
 import { checkRegion } from "../../libs/checkRegion";
-function Product({ product: data, t, shops }) {
+function Product({ product: data, t, shops, product }) {
   const user = useSelector((state) => state.auth.user, shallowEqual);
   const [uniredPopup, setUniredPopup] = useState(false);
   const [rassrochkaPopup, setRassrochkaPopup] = useState(false);
@@ -42,6 +43,20 @@ function Product({ product: data, t, shops }) {
     return acc;
   }, 0);
 
+  const [click, isClick] = useState(false);
+
+  const compareItems = useSelector(
+    (state) => state.compare.compareItems,
+    shallowEqual
+  );
+  const toCompare = () => {
+    // console.log("product==>", product);
+    dispatch(asyncAddToCompareAction(product));
+  };
+  useEffect(() => {
+    const isHas = compareItems.find((item) => item.id === product.id);
+    isClick(Boolean(isHas));
+  }, [compareItems]);
   console.log(data);
   const addToCartHandler = (event) => {
     const button = event.target;
@@ -174,6 +189,15 @@ function Product({ product: data, t, shops }) {
           </Breadcrumb>
           <div className="product_details-wrapper">
             <ProductImageGallery data={data} />
+            <button
+              className="scale_btn_item"
+              onClick={toCompare}
+              disabled={click}
+            >
+              <span>
+                <img src="../scales.svg" alt="scales" className="scale_img" />
+              </span>
+            </button>
             <div className="product_info">
               <h1>{data.name}</h1>
               {data.price.old_price > data.price.price ? (
