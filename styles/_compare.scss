@@ -167,7 +167,7 @@
         font-size: 24px;
         font-weight: 600;
         @include sm {
-          font-size: 22px;
+          font-size: 18px;
         }
         @include sh {
           font-size: 18px;
@@ -180,10 +180,10 @@
         padding: 7px;
       }
       @include sh {
-        width: 130px;
+        width: 175px;
       }
       @include sm {
-        width: 130px;
+        width: 175px;
       }
     }
   }
