@@ -34,7 +34,7 @@ main {
         display: inline-block;
         padding-right: 0.5rem;
         color: $link-color;
-        content: '›';
+        content: "›";
       }
     }
     @include sm {
@@ -447,92 +447,7 @@ main {
             min-height: 32px;
             margin-top: 15px;
           }
-          .product_btn {
-            height: 36px;
-            padding: 0 17px;
-            font-size: 13px;
-            font-weight: 700;
-            border-width: 2px;
-            border-style: solid;
-            border-color: $bg-color;
-            border-image: initial;
-            border-radius: 18px;
-            cursor: pointer;
-            display: inline-flex;
-            -webkit-box-align: center;
-            align-items: center;
-            -webkit-box-pack: center;
-            justify-content: center;
-            width: auto;
-            color: $primary-color;
-            background-color: transparent;
-            & > * {
-              pointer-events: none;
-            }
-            @include sm {
-              height: 32px;
-            }
-            &:hover {
-              color: #fff;
-              background-color: $primary-color;
-              border-color: $primary-color;
-              @include sm {
-                .btn_text::after {
-                  color: #fff;
-                }
-              }
-            }
-            .btn_icon {
-              display: flex;
-              justify-content: center;
-              align-items: center;
-              svg {
-                font-size: 14px;
-              }
-            }
-            .btn_text {
-              padding: 0 0 0 6px;
-              white-space: nowrap;
-              @include sm {
-                text-indent: -9999px;
-                line-height: 0;
-                &::after {
-                  display: block;
-                  content: 'Добавить';
-                  color: $primary-color;
-                  text-indent: 0;
-                  line-height: initial;
-                }
-              }
-            }
-            .cart-item {
-              position: absolute;
-              top: 0;
-              left: 0;
-              z-index: 9999;
-              width: 100px;
-              height: 100px;
-              padding: 10px;
-              border-radius: 50%;
-              visibility: hidden;
-              overflow: hidden;
-              background-color: #fff;
-              box-shadow: rgba(0, 0, 0, 0.16) 0 21px 36px;
-              transition: all 1s ease;
-              img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-              }
-            }
-            &.addtocart {
-              pointer-events: all;
-              .cart-item {
-                visibility: visible;
-                transform: translate(500px, -100px);
-              }
-            }
-          }
+
           .counter {
             display: flex;
             background-color: $primary-color;
@@ -675,7 +590,7 @@ main {
   margin-left: -60px;
 }
 .product_disabled .tooltiptext::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 100%;
   left: 50%;
@@ -703,5 +618,91 @@ main {
     font-size: 16px !important;
     line-height: 24px !important;
     margin-top: 20px;
+  }
+}
+.product_btn {
+  height: 36px;
+  padding: 0 17px;
+  font-size: 13px;
+  font-weight: 700;
+  border-width: 2px;
+  border-style: solid;
+  border-color: $bg-color;
+  border-image: initial;
+  border-radius: 18px;
+  cursor: pointer;
+  display: inline-flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  width: auto;
+  color: $primary-color;
+  background-color: transparent;
+  & > * {
+    pointer-events: none;
+  }
+  @include sm {
+    height: 32px;
+  }
+  &:hover {
+    color: #fff;
+    background-color: $primary-color;
+    border-color: $primary-color;
+    @include sm {
+      .btn_text::after {
+        color: #fff;
+      }
+    }
+  }
+  .btn_icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    svg {
+      font-size: 14px;
+    }
+  }
+  .btn_text {
+    padding: 0 0 0 6px;
+    white-space: nowrap;
+    @include sm {
+      text-indent: -9999px;
+      line-height: 0;
+      &::after {
+        display: block;
+        content: "Добавить";
+        color: $primary-color;
+        text-indent: 0;
+        line-height: initial;
+      }
+    }
+  }
+  .cart-item {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    width: 100px;
+    height: 100px;
+    padding: 10px;
+    border-radius: 50%;
+    visibility: hidden;
+    overflow: hidden;
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.16) 0 21px 36px;
+    transition: all 1s ease;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+  &.addtocart {
+    pointer-events: all;
+    .cart-item {
+      visibility: visible;
+      transform: translate(500px, -100px);
+    }
   }
 }

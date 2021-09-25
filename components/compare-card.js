@@ -1,113 +1,155 @@
 import React from "react";
 import Link from "next/link";
 import { Col } from "react-bootstrap";
+import { asyncAddToCartAction } from "../redux/actions/cartActions/cartActions";
 import { shallowEqual, useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { asyncRemoveFromCompareAction } from "../redux/actions/compareActions/compareActions";
+import { FaShoppingBasket } from "react-icons/fa";
+import { useTranslation } from "../i18n";
 
-export default function CompareCards() {
+export default function CompareCards({ categoryId, product }) {
   const compareItems = useSelector(
     (state) => state.compare.compareItems,
     shallowEqual
   );
+  const { t } = useTranslation();
+
+  // const [haved, isHaved] = useState(false);
+
   const removeFromCompareHandler = (compareItem) => {
     dispatch(asyncRemoveFromCompareAction(compareItem));
   };
   const dispatch = useDispatch();
+  const addToCart = (e, product) => {
+    const button = e.target;
+    const cartItem = button.querySelector(".cart-item");
+    const pointCartItemX = cartItem.getBoundingClientRect().x;
+    const pointCartItemY = cartItem.getBoundingClientRect().y;
+    const cartButton = document.getElementById("cartButton");
+    const pointCartButtonX = cartButton.getBoundingClientRect().x;
+    const pointCartButtonY = cartButton.getBoundingClientRect().y;
+    const translateX = pointCartButtonX - pointCartItemX + "px";
+    const translateY = pointCartButtonY - pointCartItemY + "px";
+    cartItem.style.visibility = "visible";
+    button.style.pointerEvents = "none";
+    setTimeout(() => {
+      cartItem.style.transform = `translate(${translateX}, ${translateY}) scale(0.3)`;
+      cartItem.style.opacity = "0.7";
+    }, 200);
+    setTimeout(() => {
+      dispatch(asyncAddToCartAction(product));
+      cartButton.classList.add("shake");
+      cartItem.style.visibility = "hidden";
+    }, 1000);
+    setTimeout(() => {
+      cartButton.classList.remove("shake");
+    }, 1500);
+    setTimeout(() => {
+      cartItem.style.transform = `translate(0, 0) scale(1)`;
+      cartItem.style.opacity = "1";
+      button.style.pointerEvents = "all";
+    }, 2000);
+  };
+  console.log(product);
 
   return (
     <>
-      {compareItems.map((compareItem) => {
-        return (
-          <Col sm={12} lg={3} className="compare_col">
-            <div key={compareItem.id} className="compare_card">
-              <Link href="#!">
-                <div className="compare_image">
-                  <img
-                    src={compareItem.image}
-                    alt={compareItem.name}
-                    className="compare__img"
-                  />
-                </div>
-              </Link>
-              <div className="compare_info">
+      {compareItems
+        .filter((item) => item.category.id == categoryId)
+        .map((compareItem) => {
+          return (
+            <Col sh={12} sm={6} md={6} lg={4} xl={3} className="compare_col">
+              <div key={compareItem.id} className="compare_card">
                 <Link href="#!">
-                  <a>
-                    <h3 className="compare_title">{compareItem.name}</h3>
-                  </a>
+                  <div className="compare_image">
+                    <img
+                      src={compareItem.image}
+                      alt={compareItem.name}
+                      className="compare__img"
+                    />
+                  </div>
                 </Link>
-                <Link href="#!">
-                  <button className="compare_btn">
-                    <img src="../compare_icon.svg" alt="compare_icon" />
+                <div className="compare_info">
+                  <h3 className="compare_title">{compareItem.name}</h3>
+                  <button
+                    onClick={(e) => addToCart(e, compareItem)}
+                    className={`btn product_compare_btn`}
+                  >
+                    <span className="btn_icon">
+                      <FaShoppingBasket />
+                    </span>
+                    <span className="btn_text">
+                      {window.innerWidth >= 576 ? t("add-to-cart") : ""}
+                    </span>
+                    <span className="cart-item">
+                      <img src={compareItem.image} alt={compareItem.name} />
+                    </span>
                   </button>
-                </Link>
-                <div className="campare_delete">
-                  <a
-                    href=""
-                    onClick={() => removeFromCompareHandler(compareItem)}
-                  >
-                    <img src="../Red_arrow.svg" alt="red_arrow" />
-                  </a>
-                  <a
-                    href=""
-                    className="campare_delete-txt"
-                    onClick={() => removeFromCompareHandler(compareItem)}
-                  >
-                    Удалить
-                  </a>
+                  <div className="campare_delete">
+                    <a onClick={() => removeFromCompareHandler(compareItem)}>
+                      <img src="../Red_arrow.svg" alt="red_arrow" />
+                    </a>
+                    <a
+                      className="campare_delete-txt"
+                      onClick={() => removeFromCompareHandler(compareItem)}
+                      href="#!"
+                    >
+                      {t("delete")}
+                    </a>
+                  </div>
+                  <ul className="compare_list">
+                    <li className="compare_item">
+                      <a href="#!" className="compare_link">
+                        {compareItem.price.price}
+                      </a>
+                    </li>
+                    <li className="compare_item">
+                      <a href="#!" className="compare_link">
+                        Есть
+                      </a>
+                    </li>
+                    <li className="compare_item">
+                      <a href="#!" className="compare_link">
+                        Есть
+                      </a>
+                    </li>
+                    <li className="compare_item">
+                      <a href="#!" className="compare_link">
+                        Есть
+                      </a>
+                    </li>
+                    <li className="compare_item">
+                      <a href="#!" className="compare_link">
+                        Есть
+                      </a>
+                    </li>
+                    <li className="compare_item">
+                      <a href="#!" className="compare_link">
+                        Есть
+                      </a>
+                    </li>
+                    <li className="compare_item">
+                      <a href="#!" className="compare_link">
+                        Есть
+                      </a>
+                    </li>
+                    <li className="compare_item">
+                      <a href="#!" className="compare_link">
+                        Есть
+                      </a>
+                    </li>
+                    <li className="compare_item">
+                      <a href="#!" className="compare_link">
+                        Есть
+                      </a>
+                    </li>
+                  </ul>
                 </div>
-                <ul className="compare_list">
-                  <li className="compare_item">
-                    <a href="#!" className="compare_link">
-                      {compareItem.price.price}
-                    </a>
-                  </li>
-                  <li className="compare_item">
-                    <a href="#!" className="compare_link">
-                      Есть
-                    </a>
-                  </li>
-                  <li className="compare_item">
-                    <a href="#!" className="compare_link">
-                      Есть
-                    </a>
-                  </li>
-                  <li className="compare_item">
-                    <a href="#!" className="compare_link">
-                      Есть
-                    </a>
-                  </li>
-                  <li className="compare_item">
-                    <a href="#!" className="compare_link">
-                      Есть
-                    </a>
-                  </li>
-                  <li className="compare_item">
-                    <a href="#!" className="compare_link">
-                      Есть
-                    </a>
-                  </li>
-                  <li className="compare_item">
-                    <a href="#!" className="compare_link">
-                      Есть
-                    </a>
-                  </li>
-                  <li className="compare_item">
-                    <a href="#!" className="compare_link">
-                      Есть
-                    </a>
-                  </li>
-                  <li className="compare_item">
-                    <a href="#!" className="compare_link">
-                      Есть
-                    </a>
-                  </li>
-                </ul>
               </div>
-            </div>
-          </Col>
-        );
-      })}
+            </Col>
+          );
+        })}
     </>
   );
 }

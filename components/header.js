@@ -17,7 +17,7 @@ import IconMenu from "./icons/IconMenu";
 import AreaModal from "./area-modal";
 import { compareItemsTotalQuantitySelector } from "../redux/selectors/cartSelectors";
 
-function Header({ categories, t, compareItem }) {
+function Header({ categories, t }) {
   const vw = typeof window !== "undefined" ? window.innerWidth : 0;
 
   const [menu, setMenu] = useState(false);
@@ -28,6 +28,7 @@ function Header({ categories, t, compareItem }) {
   const [area, isArea] = useState(false);
   const [customer, setCustomer] = useState(null);
   const [regions, setRegion] = useState("");
+  const [compareCategories, setCompareCategories] = useState([]);
   useEffect(() => {
     vw <= 850 ? setMenu(false) : setMenu(true);
   }, []);
@@ -36,6 +37,11 @@ function Header({ categories, t, compareItem }) {
     setLoginPopup(!loginPopup);
     setRegisterPopup(!registerPopup);
   };
+
+  const compareItems = useSelector(
+    (state) => state.compare.compareItems,
+    shallowEqual
+  );
 
   useEffect(() => {
     const region = localStorage.getItem("region");
@@ -49,17 +55,24 @@ function Header({ categories, t, compareItem }) {
     }
   }, []);
 
+  useEffect(() => {
+    let categories = new Map();
+    compareItems.map((value) => {
+      if (!categories.has(value.category.id)) {
+        categories.set(value.category.id, {
+          id: value.category.id,
+          name: value.category.name,
+        });
+      }
+    });
+    setCompareCategories(Array.from(categories.values()));
+  }, [compareItems]);
+
   const user = useSelector((state) => state.auth.user, shallowEqual);
 
-  const totalComQuantity = useSelector(
-    (state) => compareItemsTotalQuantitySelector(state),
-    shallowEqual
-  );
   const router = useRouter();
   const hasDynamicRouting = router.query.id;
-  const submitCompare = () => {
-    router.push("/compare");
-  };
+
   const wrapperRef = useRef(null);
   useOutsideCloseMenu(wrapperRef);
 
@@ -107,13 +120,15 @@ function Header({ categories, t, compareItem }) {
             </Link>
           </div>
           <SearchBar />
-          <button className="btn scale_icon" onClick={submitCompare}>
+          <button className="btn scale_icon">
             <img src="../scale_icon.svg" alt="icon" />
-            <span className="scale_num">{totalComQuantity}</span>
-            <div className="dropdown-content">
-              <a href="#">Link 1</a>
-              <a href="#">Link 2</a>
-              <a href="#">Link 3</a>
+            <span className="scale_num">{compareItems.length}</span>
+            <div className="dropdown-compare">
+              {compareCategories.map((item) => (
+                <Link href={`/compare?categoryId=${item.id}`}>
+                  <a>{item.name}</a>
+                </Link>
+              ))}
             </div>
           </button>
           <div className="right_menu">
