@@ -51,7 +51,7 @@ export default function Review({ shops, categories }) {
 
   const onSubmit = async (data) => {
     setDisabled(true)
-    console.log('info===>', data)
+
     try {
       const response = await axios.post(process.env.REVIEW_API_URL, {
         ...data,

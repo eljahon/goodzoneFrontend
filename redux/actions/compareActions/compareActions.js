@@ -1,4 +1,4 @@
-import { compareActionTypes } from "./compareActionTypes";
+import { compareActionTypes } from './compareActionTypes'
 
 export const asyncAddToCompareAction = (product) => (dispatch) => {
   try {
@@ -6,12 +6,12 @@ export const asyncAddToCompareAction = (product) => (dispatch) => {
   } catch (error) {
     // error
   }
-  console.log("action", product);
+
   dispatch({
     type: compareActionTypes.ADD_TO_COMPARE,
     payload: product,
-  });
-};
+  })
+}
 
 export const asyncRemoveFromCompareAction = (product) => (dispatch) => {
   try {
@@ -23,9 +23,9 @@ export const asyncRemoveFromCompareAction = (product) => (dispatch) => {
   dispatch({
     type: compareActionTypes.REMOVE_FROM_COMPARE,
     payload: product,
-  });
-};
+  })
+}
 
 export const clearCompareAction = () => ({
   type: compareActionTypes.CLEAR_COMPARE,
-});
+})

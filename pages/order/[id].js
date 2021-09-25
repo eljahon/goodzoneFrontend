@@ -10,7 +10,6 @@ import { useSelector } from 'react-redux'
 function OrderDetails({ order, t }) {
   const [payment, setPayment] = useState(() => order.payment_method)
 
-  console.log(order)
   const handleChange = (e) => {
     setPayment(e.target.value)
   }
