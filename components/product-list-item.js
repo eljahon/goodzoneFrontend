@@ -1,7 +1,7 @@
 import { FaShoppingBasket } from "react-icons/fa";
 import { Col } from "react-bootstrap";
 import Link from "next/link";
-import { useDispatch } from "react-redux";
+import { shallowEqual, useDispatch } from "react-redux";
 import { asyncAddToCartAction } from "../redux/actions/cartActions/cartActions";
 import { asyncAddToCompareAction } from "../redux/actions/compareActions/compareActions";
 import { numberToPrice } from "../libs/numberToPrice";
@@ -18,13 +18,23 @@ import ReactTooltip from "react-tooltip";
 const ProductListItem = ({ product, view, carousel, t }) => {
   const dispatch = useDispatch();
   const [haved, isHaved] = useState(false);
+  const [click, isClick] = useState(false);
   const toCompare = () => {
     // console.log("product==>", product);
     dispatch(asyncAddToCompareAction(product));
-    // console.log("button click");
   };
 
-  // const [isDisable, setDisable] = useState([]);
+  console.log("product", product);
+
+  const compareItems = useSelector(
+    (state) => state.compare.compareItems,
+    shallowEqual
+  );
+
+  useEffect(() => {
+    const isHas = compareItems.find((item) => item.id === product.id);
+    isClick(Boolean(isHas));
+  }, [compareItems]);
 
   const addToCart = (e) => {
     const button = e.target;
@@ -73,11 +83,7 @@ const ProductListItem = ({ product, view, carousel, t }) => {
       id="mob_col"
     >
       <div className={`product_card ${view === "row" ? "view_row" : ""}`}>
-        <button
-          className="scale_btn"
-          onClick={toCompare}
-          // isDisable={Boolean(isDisable.length)}
-        >
+        <button className="scale_btn" onClick={toCompare} disabled={click}>
           <span>
             <img src="../scales.svg" alt="scales" className="scale_img" />
           </span>

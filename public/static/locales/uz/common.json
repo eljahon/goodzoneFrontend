@@ -102,6 +102,8 @@
   "stock": "Mahsulot zaxirada yo'q",
   "area-title": "Do'koni tanlang",
   "area-tashkent": "Toshkent",
+  "delete": "O'chirish",
+  "noProduct": "Mahsulotlar yo'q. Iltimos, avval mahsulotni qo'shing!",
   "area-samarkand": "Samarqand",
   "submit": "Tasdiqlash",
   "product-warning": "Veb-saytdagi narxlar bizning do'konimizdagi narxlardan farq qilishi mumkin. Tafsilotlar bizning call-markazimizda: +998712070307",
