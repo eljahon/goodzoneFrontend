@@ -154,6 +154,10 @@
     .compare_item {
       padding: 16px 0;
       border-bottom: 2px solid #f4f4f4;
+      min-height: 58px;
+      @include sm {
+        min-height: 40px;
+      }
       &:nth-of-type(1) a {
         font-size: 24px;
         font-weight: 600;
@@ -260,7 +264,7 @@
       line-height: 0;
       &::after {
         display: block;
-        content: "Добавить";
+        content: 'Добавить';
         color: $primary-color;
         text-indent: 0;
         line-height: initial;
