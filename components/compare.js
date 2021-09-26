@@ -45,7 +45,7 @@ export default function CompareCard() {
       <CartPopup />
       <Row className="compare_rows">
         {Boolean(products.length) ? (
-          <Col sh={12} sm={6} md={6} lg={4} xl={3} className="compare_col">
+          <Col sh={12} sm={6} md={6} lg={5} xl={3} className="compare_col">
             <div className="compare_card-1">
               <div className="compare_info">
                 <ul className="compare_list">
