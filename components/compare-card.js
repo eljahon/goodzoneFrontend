@@ -64,7 +64,7 @@ export default function CompareCards({ categoryId, properties }) {
         .filter((item) => item.category.id == categoryId)
         .map((compareItem) => {
           return (
-            <Col sh={12} sm={6} md={6} lg={4} xl={3} className='compare_col'>
+            <Col sh={12} sm={6} md={6} lg={5} xl={3} className='compare_col'>
               <div key={compareItem.id} className='compare_card'>
                 <Link href='#!'>
                   <div className='compare_image'>

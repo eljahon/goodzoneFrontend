@@ -133,57 +133,55 @@
     }
   }
   .compare_link {
-    font-size: 18px;
+    font-size: 15px;
     text-transform: capitalize;
-    display: -webkit-box;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical;
     overflow: hidden;
     line-height: 20px;
     color: #000;
     text-decoration: none;
     @include lg {
-      font-size: 18px;
-      line-height: 16px;
+      font-size: 17px;
+      line-height: 26px;
     }
     @include md {
       font-size: 16px;
-      line-height: 12px;
+      line-height: 18px;
     }
     @include sm {
       font-size: 12px;
-      line-height: 8px;
+      line-height: 16px;
     }
   }
   .compare_list {
     .compare_item {
       padding: 16px 0;
       border-bottom: 2px solid #f4f4f4;
-      min-height: 58px;
+      min-height: 54px;
+      display: flex;
+      align-items: center;
+      min-width: 220px;
+      width: 100%;
       @include sm {
-        min-height: 40px;
+        min-height: 50px;
       }
       &:nth-of-type(1) a {
         font-size: 24px;
         font-weight: 600;
         @include sm {
-          font-size: 22px;
+          font-size: 18px;
         }
         @include sh {
           font-size: 18px;
-        }
-        @include lg {
-          padding: 14px;
         }
       }
       @include md {
         padding: 7px;
       }
       @include sh {
-        width: 130px;
+        width: 185px;
       }
       @include sm {
-        width: 130px;
+        width: 185px;
       }
     }
   }
