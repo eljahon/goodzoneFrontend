@@ -96,14 +96,14 @@ export default function CompareCards({ categoryId, properties }) {
                   <div className="campare_delete">
                     <a
                       onClick={() => removeFromCompareHandler(compareItem)}
-                      href="/compare"
+                      href=""
                     >
                       <img src="../Red_arrow.svg" alt="red_arrow" />
                     </a>
                     <a
                       className="campare_delete-txt"
                       onClick={() => removeFromCompareHandler(compareItem)}
-                      href="/compare"
+                      href=""
                     >
                       {t("delete")}
                     </a>
