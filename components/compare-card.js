@@ -93,39 +93,37 @@ export default function CompareCards({ categoryId, properties }) {
                       <img src={compareItem.image} alt={compareItem.name} />
                     </span>
                   </button>
-                  <div className="campare_delete">
-                    <a
-                      onClick={() => removeFromCompareHandler(compareItem)}
-                      href=""
-                    >
-                      <img src="../Red_arrow.svg" alt="red_arrow" />
-                    </a>
-                    <a
+
+                  <button
+                    className="campare_delete"
+                    onClick={() => removeFromCompareHandler(compareItem)}
+                  >
+                    <img src="../Red_arrow.svg" alt="red_arrow" />
+                    <p
                       className="campare_delete-txt"
                       onClick={() => removeFromCompareHandler(compareItem)}
-                      href=""
                     >
                       {t("delete")}
-                    </a>
-                  </div>
+                    </p>
+                  </button>
                   <ul className="compare_list">
                     <li className="compare_item">
-                      <a href="#!" className="compare_link">
+                      <p className="compare_link">
                         {numberToPrice(compareItem.price.price)}
-                      </a>
+                      </p>
                     </li>
                     <li className="compare_item">
-                      <a href="#!" className="compare_link">
+                      <p className="compare_link">
                         {compareItem.brand ? compareItem.brand.name : "---"}
-                      </a>
+                      </p>
                     </li>
                     {properties?.map(
                       (item, index) =>
                         item.property.id && (
                           <li className="compare_item" key={index + "pr"}>
-                            <a href="#!" className="compare_link">
+                            <p className="compare_link">
                               {getPropetyValue(compareItem, item.property.id)}
-                            </a>
+                            </p>
                           </li>
                         )
                     )}
