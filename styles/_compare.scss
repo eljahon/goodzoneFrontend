@@ -136,20 +136,21 @@
     font-size: 15px;
     text-transform: capitalize;
     overflow: hidden;
-    line-height: 20px;
+    line-height: 30px;
     color: #000;
+    margin: 0;
     text-decoration: none;
     @include lg {
       font-size: 17px;
-      line-height: 26px;
+      line-height: 28px;
     }
     @include md {
       font-size: 16px;
-      line-height: 18px;
+      line-height: 27px;
     }
     @include sm {
       font-size: 12px;
-      line-height: 16px;
+      line-height: 20px;
     }
   }
   .compare_list {
@@ -164,7 +165,7 @@
       @include sm {
         min-height: 50px;
       }
-      &:nth-of-type(1) a {
+      &:nth-of-type(1) p {
         font-size: 24px;
         font-weight: 600;
         @include sm {
@@ -190,6 +191,13 @@
     align-items: center;
     justify-content: start;
     margin-bottom: 64px;
+    border: none;
+    background: none;
+    outline: none;
+    &:focus {
+      outline: none;
+      border: none;
+    }
     @include md {
       margin-bottom: 35px;
     }
