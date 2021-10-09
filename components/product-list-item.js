@@ -84,9 +84,11 @@ const ProductListItem = ({ product, view, carousel, t }) => {
     >
       <div className={`product_card ${view === "row" ? "view_row" : ""}`}>
         <button className="scale_btn" onClick={toCompare} disabled={click}>
-          <span>
-            <img src="../scales.svg" alt="scales" className="scale_img" />
-          </span>
+          <img
+            src={click ? "../scales_red.svg" : "../scales.svg"}
+            alt="scales"
+            className="scale_img"
+          />
         </button>
         <Link
           href={`${i18n.language === "ru" ? "" : "/uz"}/product/[id]`}
