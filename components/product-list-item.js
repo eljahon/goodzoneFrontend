@@ -80,21 +80,13 @@ const ProductListItem = ({ product, view, carousel, t }) => {
       }`}
       id='mob_col'
     >
-<<<<<<< HEAD
       <div className={`product_card ${view === 'row' ? 'view_row' : ''}`}>
         <button className='scale_btn' onClick={toCompare} disabled={click}>
-          <span>
-            <img src='../scales.svg' alt='scales' className='scale_img' />
-          </span>
-=======
-      <div className={`product_card ${view === "row" ? "view_row" : ""}`}>
-        <button className="scale_btn" onClick={toCompare} disabled={click}>
           <img
-            src={click ? "../scales_red.svg" : "../scales.svg"}
-            alt="scales"
-            className="scale_img"
+            src={click ? '../scales_red.svg' : '../scales.svg'}
+            alt='scales'
+            className='scale_img'
           />
->>>>>>> ef4e6f237b9ae3fd99da84518f2c54ba06f4e626
         </button>
         <Link
           href={`${i18n.language === 'ru' ? '' : '/uz'}/product/[id]`}
