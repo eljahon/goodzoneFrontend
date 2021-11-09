@@ -11,12 +11,14 @@ import { withTranslation } from '../i18n'
 import { useRouter } from 'next/router'
 import { transliterate } from '../libs/transliterate'
 import { Router } from 'next/router'
+import { checkRegion } from '../libs/checkRegion'
+import { shallowEqual, useSelector } from 'react-redux'
 
 const SearchBar = ({ t }) => {
   const [searchTerm, setSearchTerm] = useState('')
   const [products, setProducts] = useState([])
   const [isFetching, setIsFetching] = useState(false)
-
+  const [haved, isHaved] = useState(false)
   const debouncedSearchTerm = useDebounce(searchTerm, 200)
 
   const router = useRouter()
@@ -80,6 +82,10 @@ const SearchBar = ({ t }) => {
     }, [ref])
   }
 
+  const user = useSelector((state) => state.auth.user, shallowEqual)
+
+  const checkPrice = (product) => {}
+
   return (
     <div className='search_box' ref={wrapperRef}>
       <div className='search_box-wrapper'>
@@ -124,9 +130,11 @@ const SearchBar = ({ t }) => {
                           </div>
                           <div className='product_info'>
                             <h3>{product.name}</h3>
-                            <span className='price'>
-                              {numberToPrice(product.price.price)}
-                            </span>
+                            {checkPrice(user, product) && (
+                              <span className='price'>
+                                {numberToPrice(product.price.price)}
+                              </span>
+                            )}
                           </div>
                         </a>
                       </Link>

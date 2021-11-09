@@ -270,6 +270,8 @@ export default function Category({ products, categoryId, query, category }) {
     filterProperties,
   ])
 
+  console.log(filteredProducts)
+
   return (
     <>
       <SEO

@@ -71,6 +71,8 @@ const ProductListItem = ({ product, view, carousel, t }) => {
     checkRegion(isHaved, user, product)
   }, [])
 
+  console.log(product)
+
   return (
     <Col
       sm={6}
@@ -169,10 +171,10 @@ const ProductListItem = ({ product, view, carousel, t }) => {
             <a>
               <h3 className='product_title'>{product.name}</h3>
               {product.price &&
-              product.price.old_price > product.price.price ? (
+              parseFloat(product.price.old_price) >
+                parseFloat(product.price.price) ? (
                 <span className='price-old'>
                   <span className='price-percent'>
-                    -
                     {Math.ceil(
                       100 -
                         (product.price.price * 100) / product.price.old_price
