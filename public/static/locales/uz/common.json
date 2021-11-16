@@ -134,5 +134,9 @@
   "gangra2": "Siz sharhni muvaffaqiyatli qoldirdingiz",
   "offer": "Izoh qoldirish",
   "goodzoneShop": "Internet-Do'kon GOODZONE",
-  "reviewTxt": "Onlayn do'konimizga tashrif buyurganingiz uchun tashakkur. Biz biz do'konlarimiz ishining barcha bosqichlarini diqqat bilan kuzatib boramiz   tarmoq va biz haqimizda sharh qoldirsangiz juda minnatdormiz ish"
+  "reviewTxt": "Onlayn do'konimizga tashrif buyurganingiz uchun tashakkur. Biz biz do'konlarimiz ishining barcha bosqichlarini diqqat bilan kuzatib boramiz   tarmoq va biz haqimizda sharh qoldirsangiz juda minnatdormiz ish",
+  "price_about_text":"Goodcard egalari uchun narx",
+  "monthes":"/ 12 oy",
+  "Installments": "Bo'lib to'lash:",
+  "getWithSale": "Chegirma bilan olish"
 }

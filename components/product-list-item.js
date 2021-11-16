@@ -15,6 +15,7 @@ import {
   trackWindowScroll,
 } from 'react-lazy-load-image-component'
 import ReactTooltip from 'react-tooltip'
+import { Typography } from '@material-ui/core'
 const ProductListItem = ({ product, view, carousel, t }) => {
   const dispatch = useDispatch()
   const [haved, isHaved] = useState(false)
@@ -191,9 +192,16 @@ const ProductListItem = ({ product, view, carousel, t }) => {
                 ''
               )}
               {haved ? (
-                <span className='product_price '>
+               <div>
+                  <span className='product_price '>
                   {numberToPrice(product.price.price)}
                 </span>
+                <Typography className="product_sale">
+                  {product.prices.find(el => el.type == 2).price > 0 && numberToPrice(product.prices.find(el => el.type == 2).price)}  {
+                    product.prices.find(el => el.type == 2).price > 0 && t('monthes')
+                  }
+                </Typography>
+               </div>
               ) : (
                 ''
               )}

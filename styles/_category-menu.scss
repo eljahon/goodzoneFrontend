@@ -30,19 +30,23 @@ nav.departments_menu {
     z-index: 999;
     background-color: #fff;
     overflow-x: hidden;
+
     .drawer_header {
       display: flex;
       align-items: center;
       padding: 20px;
       background-color: $bg-color;
+
       a {
         display: block;
         margin: 0 auto;
+
         img {
           width: 100%;
           max-width: 150px;
         }
       }
+
       .btn.btn_close {
         display: block;
         position: absolute;
@@ -50,6 +54,7 @@ nav.departments_menu {
         left: 15px;
       }
     }
+
     ul.nav-list {
       position: relative;
       display: block;
@@ -61,18 +66,21 @@ nav.departments_menu {
 
       li {
         &:hover {
-          & > a {
+          &>a {
             color: $primary-color;
             background-color: $border-color;
+
             svg {
               transform: rotate(90deg);
             }
           }
-          & > .sub-menu {
+
+          &>.sub-menu {
             height: auto;
             padding-left: 15px;
           }
         }
+
         a,
         p {
           font-size: 15px;
@@ -88,6 +96,7 @@ nav.departments_menu {
           border: none;
           text-decoration: none;
         }
+
         .sub-menu {
           position: static;
           height: 0;
@@ -106,6 +115,7 @@ nav.departments_menu {
   height: 100%;
   margin-bottom: 0;
   position: relative;
+
   p {
     width: 100%;
     display: flex;
@@ -119,19 +129,23 @@ nav.departments_menu {
     cursor: pointer;
   }
 }
+
 .nav-list li {
   position: relative;
   height: 100%;
   padding: 0;
   margin-right: 0.5rem;
+
   @include md {
     margin-right: 0;
   }
+
   &:hover {
-    & > a {
+    &>a {
       color: $primary-color;
     }
   }
+
   .btn.btn_promo {
     display: inline-flex;
     -webkit-box-align: center;
@@ -149,6 +163,7 @@ nav.departments_menu {
     border-radius: 6px;
   }
 }
+
 .sub-menu li {
   height: 100%;
   position: relative;
@@ -163,13 +178,16 @@ nav.departments_menu {
   font-size: 15px;
   font-weight: 700;
   transition: all 0.15s ease-in-out 0s;
+
   svg {
     transition: all 0.15s ease-in-out 0s;
   }
 }
-.nav-list > li > p {
+
+.nav-list>li>p {
   svg {
     display: none;
+
     @include sm {
       display: block;
     }
@@ -196,9 +214,11 @@ nav.departments_menu {
   transition: all 0.35s ease-in-out 0s;
   opacity: 0;
   visibility: hidden;
-  &:hover + a {
+
+  &:hover+a {
     color: $primary-color;
   }
+
   @include sm {
     left: 0;
     right: auto;
@@ -218,6 +238,7 @@ nav.departments_menu {
   border-style: solid;
   border-width: 0 8px 9px;
   border-color: transparent transparent white;
+
   @include sm {
     display: none;
   }
@@ -233,8 +254,8 @@ nav.departments_menu {
   left: 100%;
 }
 
-ul.nav-list > li:nth-last-child(2) .sub-menu,
-ul.nav-list > li:last-child .sub-menu {
+ul.nav-list>li:nth-last-child(2) .sub-menu,
+ul.nav-list>li:last-child .sub-menu {
   .sub-menu {
     right: calc(100% + 1px);
     left: auto;
@@ -242,6 +263,7 @@ ul.nav-list > li:last-child .sub-menu {
 
   li a {
     padding: 12px 30px;
+
     svg {
       font-size: 15px;
       position: absolute;
@@ -250,17 +272,20 @@ ul.nav-list > li:last-child .sub-menu {
   }
 }
 
-.nav-list li:hover > .sub-menu {
+.nav-list li:hover>.sub-menu {
   top: calc(100% + 15px);
   visibility: visible;
   opacity: 1;
 }
-.sub-menu li:hover > .sub-menu {
+
+.sub-menu li:hover>.sub-menu {
   top: 0;
 }
-.sub-menu li:hover > a {
+
+.sub-menu li:hover>a {
   background-color: $border-color;
 }
+
 .sub-menu li a {
   font-size: 14px;
   font-weight: 700;
@@ -272,10 +297,12 @@ ul.nav-list > li:last-child .sub-menu {
   padding: 12px 2px 8px 12px;
 
   margin: 0;
+
   span {
     width: calc(100% - 15px);
     padding-left: 6px;
   }
+
   svg {
     font-size: 15px;
     position: absolute;
@@ -348,17 +375,21 @@ ul.nav-list > li:last-child .sub-menu {
 @media (max-width: 1230px) {
   body {
     nav.departments_menu {
+
       .nav-list a,
       p {
         font-size: 12px;
+
         .btn.btn_promo {
           font-size: 12px;
         }
       }
     }
+
     .sub-menu li a {
       font-size: 12px;
     }
+
     .sub-menu {
       min-width: 250px;
     }
@@ -368,17 +399,21 @@ ul.nav-list > li:last-child .sub-menu {
 @media (max-width: 1037px) {
   body {
     nav.departments_menu {
+
       .nav-list a,
       p {
         font-size: 11px;
+
         btn.btn_promo {
           font-size: 11px;
         }
       }
     }
+
     .sub-menu li a {
       font-size: 11px;
     }
+
     .sub-menu {
       min-width: 200px;
     }
@@ -389,17 +424,21 @@ ul.nav-list > li:last-child .sub-menu {
   body {
     nav.departments_menu {
       padding: 10px;
+
       .nav-list a,
       p {
         font-size: 10px;
+
         btn.btn_promo {
           font-size: 10px;
         }
       }
     }
+
     .sub-menu li a {
       font-size: 10px;
     }
+
     .sub-menu {
       min-width: 180px;
     }

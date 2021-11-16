@@ -4,7 +4,9 @@ import { useRouter } from 'next/router'
 import Link from 'next/link'
 import { useDispatch, useSelector, shallowEqual } from 'react-redux'
 import CommentIcon from '../../components/comment-icon'
-
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
 import {
   FaShoppingBag,
   FaCircle,
@@ -31,6 +33,9 @@ import { useForm } from 'react-hook-form'
 import { createFormData } from '../../libs/createFormData'
 import RassrochkaPopup from '../../components/rassrochka-popup'
 import { checkRegion } from '../../libs/checkRegion'
+import { Typography } from '@material-ui/core'
+import {InfoIcon} from '../../components/icons/InfoIcon'
+
 function Product({ product: data, t, shops, product }) {
   const user = useSelector((state) => state.auth.user, shallowEqual)
   const [uniredPopup, setUniredPopup] = useState(false)
@@ -38,6 +43,8 @@ function Product({ product: data, t, shops, product }) {
   const router = useRouter()
   const dispatch = useDispatch()
   const [loading, setLoading] = useState(false)
+  const [checkboxIcon , setCheckboxIcon] = useState(false)
+
   const availabileInStore = !!shops.reduce((acc, shop) => {
     acc += shop.quantity
     return acc
@@ -224,6 +231,15 @@ function Product({ product: data, t, shops, product }) {
                 ) : (
                   ''
                 )}
+                {haved ? (
+                  <span className='product_availability product_availability--true'>
+                    {t('available')}
+                  </span>
+                ) : (
+                  <span className='product_availability product_availability--false'>
+                    {t('not-available')}
+                  </span>
+                )}
                 <div className='d-flex align-items-center mb-2'>
                   <Rating
                     name='read-only'
@@ -265,22 +281,54 @@ function Product({ product: data, t, shops, product }) {
               </div>
               <div className='product_cart-wrapper'>
                 {haved ? (
-                  <span className='product_price'>
+                 <div>
+                    <span className='product_price'>
                     {numberToPrice(data.price.price)}
                   </span>
+                <span className='product_price_text'>
+                    {t('price_about_text')} <span style={{cursor:'pointer' , marginLeft:'8px'}}>
+
+                        <InfoIcon/>
+                    </span>
+                  </span>
+                 </div>
                 ) : (
                   ''
                 )}
-
-                {haved ? (
-                  <span className='product_availability product_availability--true'>
-                    {t('available')}
-                  </span>
-                ) : (
-                  <span className='product_availability product_availability--false'>
-                    {t('not-available')}
-                  </span>
-                )}
+                  {haved && 
+                  <div className='product_sale_text'>
+                      <FormGroup row>
+                      <FormControlLabel
+                        control={
+                            <Checkbox
+                              checked={checkboxIcon}
+                              onChange={()=>{
+                                if(checkboxIcon){
+                                  setCheckboxIcon(false)
+                                } else {
+                                  setCheckboxIcon(true)
+                                }
+                              }}
+                              name="checkedB"
+                              color="primary"
+                            />
+                          }
+                          label={t("getWithSale")}
+                          />
+                      </FormGroup>
+                     
+                      <div >
+                      {data.prices.find(el => el.type == 2 ).price > 0  &&   <Typography className='product_sale'>
+                        {t('Installments')} <span> { numberToPrice(data.prices.find(el => el?.type == 2)?.price)} {t('monthes')}</span>
+                        </Typography>}
+                       {data.prices.find(el => el.type == 3).price > 0 && 
+                          <Typography className="product_sale_type_three">
+                          {t('price')}:&nbsp;<span>{numberToPrice(data.prices.find(el=> el.type == 3 ).price)}</span>
+                        </Typography>
+                       }
+                      </div>
+                    </div>}
+                
                 <div ref={ctaButtonsRef} className='product_cart-btn'>
                   <button
                     disabled={!haved}
