@@ -292,13 +292,14 @@ function Product({ product: data, t, shops, product }) {
                         style={{ cursor: 'pointer', marginLeft: '8px' }}
                         data-for='main'
                         data-tip={t('productPriceInfo')}
-                        data-iscapture='true'
+                        data-event='click focus'
                       >
                         <InfoIcon />
                       </span>
                     </span>
                     <ReactTooltip
                       id='main'
+                      globalEventOff='click'
                       className='product-price-tooltip'
                       place='top'
                       type='dark'
