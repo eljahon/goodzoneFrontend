@@ -35,6 +35,11 @@ function ProfileMenu({ closeMenu, t }) {
                             <span className="label">{t('my-addresses')}</span>
                         </a>
                     </Link>
+                    <Link href="/cards">
+                        <a onClick={closeMenu}>
+                            <span className="label">{t('my-cards')}</span>
+                        </a>
+                    </Link>
                     <Link href="/logout">
                         <a onClick={(e) => logoutHandler(e)}>
                             <span className="label">{t('exit')}</span>
