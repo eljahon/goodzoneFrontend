@@ -2,35 +2,21 @@ import SEO from "../components/seo";
 import Footer from "../components/footer";
 import ProfileNav from "../components/profile-nav";
 import { withTranslation } from "../i18n";
-import { FaPencilAlt, FaTimes, FaPlus } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import CardsModal from "../components/cards-modal";
 import { useSelector } from "react-redux";
-import { axiosAuth } from "../libs/axios/axios-instances";
-import { useForm } from "react-hook-form";
-import { getLocalStorage } from "../libs/localStorage";
 import axios from "axios";
-import { createFormData } from "../libs/createFormData";
 import { fetchMultipleUrls } from "../libs/fetchMultipleUrls";
 
 function Cards({ t }) {
-  const [addressModal, editAddressModal] = useState(false);
-  const [open, setOpen] = useState(false);
+  const [cardModal, setCardModal] = useState(false);
   const [cardData, setCardData] = useState([]);
-  const [address, setAddress] = useState({
-    phone: "",
-    card_number: "",
-  });
-
   const [getUserData, setGetUserData] = useState({
     number: "",
     phone: "",
     code: "",
   });
   const user = useSelector((state) => state.auth.user);
-
-  const { handleSubmit } = useForm();
-
   useEffect(() => {
     getCreditCards();
   }, []);
@@ -44,38 +30,7 @@ function Cards({ t }) {
       })
       .catch((error) => console.error(error));
   };
-  //   const Timer = (props) => {
-  //     const {initialMinute = 0,initialSeconds = 0} = props;
-  //     const [ minutes, setMinutes ] = useState(initialMinute);
-  //     const [seconds, setSeconds ] =  useState(initialSeconds);
-  //     useEffect(()=>{
-  //     let myInterval = setInterval(() => {
-  //             if (seconds > 0) {
-  //                 setSeconds(seconds - 1);
-  //             }
-  //             if (seconds === 0) {
-  //                 if (minutes === 0) {
-  //                     clearInterval(myInterval)
-  //                 } else {
-  //                     setMinutes(minutes - 1);
-  //                     setSeconds(59);
-  //                 }
-  //             }
-  //         }, 1000)
-  //         return ()=> {
-  //             clearInterval(myInterval);
-  //           };
-  //     });
 
-  //     return (
-  //         <div>
-  //         { minutes === 0 && seconds === 0
-  //             ? null
-  //             : <h1> {minutes}:{seconds < 10 ?  `0${seconds}` : seconds}</h1>
-  //         }
-  //         </div>
-  //     )
-  // }
   return (
     <>
       <SEO />
@@ -92,107 +47,41 @@ function Cards({ t }) {
                     </div>
                     <div className="card_body">
                       {cardData?.length === 0 ? (
-                        <div
-                          style={{
-                            display: "flex",
-                            flexDirection: "column",
-                            alignItems: "center",
-                          }}
-                        >
+                        <div className="not-found-card">
                           <img
+                            className="not-found-card__logo"
                             src="../Purse_svg.svg"
                             alt="Purse"
-                            style={{
-                              maxWidth: "60px",
-                              width: "100%",
-                              marginBottom: "23px",
-                            }}
                           />
-                          <span
-                            style={{
-                              fontFamily: "Inter",
-                              fontStyle: "normal",
-                              fontSize: "18px",
-                              lineHeight: "19px",
-                              letterSpacing: "0.01em",
-                              color: "#9AA6AC",
-                            }}
-                          >
+                          <span className="not-found-card__title">
                             {t("not-found-card")}{" "}
                           </span>
                         </div>
                       ) : (
                         cardData.map((el) => (
-                          <div
-                            style={{
-                              display: "flex",
-                              justifyContent: "space-between",
-                              alignItems: "center",
-                            }}
-                          >
-                            <div
-                              style={{
-                                display: "flex",
-                                justifyContent: "space-between",
-                                alignItems: "center",
-                              }}
-                            >
+                          <div className="found-card">
+                            <div className="found-card--left">
                               <img
+                                className="found-card--left__logo"
                                 src="../goodCard.svg"
                                 alt="Purse"
-                                style={{
-                                  maxWidth: "60px",
-                                  width: "100%",
-                                  marginRight: "18px",
-                                }}
                               />
-                              <div
-                                style={{
-                                  display: "flex",
-                                  flexDirection: "column",
-                                }}
-                              >
-                                <span
-                                  style={{
-                                    fontFamily: "Inter",
-                                    fontStyle: "normal",
-                                    fontSize: "18px",
-                                    lineHeight: "19px",
-                                    letterSpacing: "0.01em",
-                                    marginBottom: "4px",
-                                    color: "#9AA6AC",
-                                  }}
-                                >
-                                  Карта лояльности
+                              <div className="found-card--center">
+                                <span className="found-card--center__title">
+                                  {t("loyalty-card")}
                                 </span>
-                                <span
-                                  style={{
-                                    fontFamily: "Inter",
-                                    fontStyle: "normal",
-                                    fontSize: "18px",
-                                    lineHeight: "19px",
-                                    letterSpacing: "0.01em",
-
-                                    color: "#9AA6AC",
-                                  }}
-                                >
+                                <span className="found-card--center__card-number">
                                   {el.number}
                                 </span>
-                                <span
-                                  style={{
-                                    fontFamily: "Inter",
-                                    fontStyle: "normal",
-                                    fontSize: "18px",
-                                    lineHeight: "19px",
-                                    letterSpacing: "0.01em",
-                                    color: "#9AA6AC",
-                                  }}
-                                >
+                                <span className="found-card--center__phone-number">
                                   {el.phone}
                                 </span>
                               </div>
                             </div>
-                            <span>{el.balance}</span>
+                            <span
+                              className="found-card--right">
+                              {el.balance}
+                            </span>
                           </div>
                         ))
                       )}
@@ -202,7 +91,7 @@ function Cards({ t }) {
                       <button
                         className="btn add_btn myBtn"
                         onClick={() => {
-                          editAddressModal(true);
+                          setCardModal(true);
                         }}
                       >
                         <span className="btn_text">{t("add-new-card")}</span>
@@ -215,17 +104,13 @@ function Cards({ t }) {
           </div>
         </div>
       </div>
-      {addressModal && (
+      {cardModal && (
         <CardsModal
           getUserData={getUserData}
           setGetUserData={setGetUserData}
-          closeModal={() => editAddressModal(false)}
-          address={address}
-          setOpen={setOpen}
-          setAddress={setAddress}
-          editAddressModal={editAddressModal}
+          closeModal={() => setCardModal(false)}
+          setCardModal={setCardModal}
           setCardData={setCardData}
-          // onSubmit={profilDataFunc}
         />
       )}
       <Footer />

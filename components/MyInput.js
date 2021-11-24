@@ -31,7 +31,10 @@ import { withTranslation } from "../i18n";
 
       return (
             <InputMask mask="+999 99 999 99 99" required value={props.value} onChange={props.onChange}>
-          { (inputProps) => <input {...inputProps} type="tel"
+          { (inputProps) => <input {...inputProps} 
+          placeholder={props.placeholder}
+          
+          type="tel"
                     />}
       
       </InputMask>

@@ -1,0 +1,33 @@
+
+.header_holder-block-close-button{
+        font-weight:700;
+        margin-bottom: 10px;
+        font-size:21px !important; 
+
+}
+.form-label{
+    display: block;
+    text-align: start;
+
+}
+.sms-code-modal-wrapper{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    &__button{
+        padding: 10px 12px;
+        border: none;
+        color: black;
+        background-color: #F7F7F7;
+        border-radius: 8px;
+        outline: red;
+
+        
+    
+    }
+    &__button:focus{
+        outline: red;
+    
+    }
+}

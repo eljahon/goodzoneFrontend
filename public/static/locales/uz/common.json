@@ -79,6 +79,7 @@
   "code": "Kodni kiriting",
   "name": "Ism",
   "lastName": "Familiya",
+  "resend":"Qayta jo'natish",
   "new-password": "Yangi parolni kiriting",
   "confirm-password": "Parolni tasdiqlash",
   "confirmed-password": "Parolni tasdiqlang",
