@@ -28,12 +28,10 @@ import { withTranslation } from "../i18n";
   );
 
   const PhoneInput = (props) =>{
-    const {t} = withTranslation()
 
       return (
             <InputMask mask="+999 99 999 99 99" required value={props.value} onChange={props.onChange}>
           { (inputProps) => <input {...inputProps} type="tel"
-                    placeholder={t("phone-number")}
                     />}
       
       </InputMask>

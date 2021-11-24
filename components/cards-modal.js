@@ -7,9 +7,8 @@ import axios from "axios";
 import { createFormData } from "../libs/createFormData";
 import { getLocalStorage } from "../libs/localStorage";
 import { Telegram } from "@material-ui/icons";
-import { CardInput,PhoneInput, InvalidInput } from "./MyInput"
-
-
+import { CardInput, PhoneInput, InvalidInput } from "./MyInput";
+import { useSelector } from "react-redux";
 
 function CardsModal({
   closeModal,
@@ -21,18 +20,18 @@ function CardsModal({
   editAddressModal,
   setGetUserData,
   getUserData,
-  setCardData
+  setCardData,
 }) {
   const [load, setLoad] = useState(false);
   const [stepNumber, setStepNumber] = useState(0);
   const [inputData, setInputData] = useState("");
-  const [sendSmsCode, setSendSmsCode] = useState("")
-  const { register } = useForm()
+  const [sendSmsCode, setSendSmsCode] = useState("");
+  const { register } = useForm();
   const [userInfo, setUserInfo] = useState({
     name: "",
     lastname: "",
   });
-
+  const user = useSelector((state) => state.auth.user);
 
   //   const Timer = (props) => {
   //     const {initialMinute = 0,initialSeconds = 0} = props;
@@ -76,8 +75,6 @@ function CardsModal({
     };
   }, []);
 
-
-
   const handleSubmit = (e) => {
     e.preventDefault();
     setOpen(true);
@@ -105,82 +102,65 @@ function CardsModal({
   // const normalizeCardNumber = (value) => {
   //   return value.replace(/\s/g, "").match(/.{1.4}/g)?.join("   ").substr(0, 19) || ""
   // }
-  const isSendSms = async () =>(
-    
-    await axios.post(
-       process.env.COSTUMER_CARD_CHECK_USER_API_URL,
-       createFormData({
-         code: sendSmsCode,
-         phone: getUserData.phone,
-       })
-     ).then(  res => {
-       console.log("code===>",res);
-         setStepNumber(3)
-         setCardData(res.data.customer_card)
-
-     }).catch(err => {
-       console.log("err==> ", err);
-       if( res.status === 500){
-        setStepNumber(2)
-      }
-     })
-     
-   )
-
-  const smsCodeFunc = (e) => {
-    e.preventDefault()
-    if( sendSmsCode !== "" ){
-     
-      isSendSms()
-    }
-   
-  };
-
-  
-  const handleSubmitData = async (e) => {
-    e.preventDefault();
-    await axios
-      .get(
-        `${process.env.COSTUMER_CARD_GET_API_URL}?number=${getUserData.number}&+phone=${getUserData.phone}`
+  const isSendSms = () =>
+    axios
+      .post(
+        process.env.COSTUMER_CARD_CHECK_USER_API_URL,
+        createFormData({
+          code: sendSmsCode,
+          phone: getUserData.phone.split(" ").join(""),
+        })
       )
       .then((res) => {
-        console.log("resssssssssssssssss",res);
-        if (res.status === 200) {
-          setStepNumber(1);
-          axios
-          .get(
-            `${process.env.COSTUMER_CARD_GET_API_SEND_CODE_URL}`,
-            {
-              params: {
-                user_id: getUserData.user_id,
-                phone: getUserData.phone,
-              }
-            },
-            {
-              headers: {
-                Authorization: getLocalStorage("access_token"),
-              },
-            }
-          )
-          .then((res) => {
-            if( res.status === 500){
-              setStepNumber(2)
-            }
-            console.log("send_code======>", res);
-          })
-          .catch((err) => 
-        console.log(err)
-          );
-         }}
-      )
-
-        //     setStepNumber(3)
-        //   }else if(!smsCodeFunc())
-        //     setStepNumber(2)
-          
+        console.log("code===>", res);
+        setStepNumber(3);
+        setCardData(res.data.customer_card);
+      })
+      .catch((err) => {
+        console.log("err==> ", err);
+        if (err.response.status === 404 || err.response.status === 500) {
+          setStepNumber(2);
         }
- 
-  
+      });
+
+  const smsCodeFunc = (e) => {
+    e.preventDefault();
+    if (sendSmsCode !== "") {
+      isSendSms();
+    }
+  };
+
+  const handleSubmitData = (e) => {
+    e.preventDefault();
+    axios
+      .get(process.env.COSTUMER_CARD_GET_API_URL, {
+        params: {
+          number: getUserData.number.replace(/ /g, "").replace(/_/g, ""),
+          phone: getUserData.phone.replace(/ /g, ""),
+        },
+      })
+      .then((res) => {
+        console.log("resssssssssssssssss", res);
+        setStepNumber(1);
+        sendCode();
+      })
+      .catch((err) => setStepNumber(2));
+  };
+
+  function sendCode() {
+    axios
+      .get(`${process.env.COSTUMER_CARD_GET_API_SEND_CODE_URL}`, {
+        params: {
+          user_id: user.id,
+          phone: getUserData.phone.split(" ").join(""),
+        },
+      })
+      .then((res) => {
+        console.log("send_code======>", res);
+      })
+      .catch((err) => setStepNumber(2));
+  }
+
   return (
     <div className="login_modal-wrapper">
       <div
@@ -250,20 +230,19 @@ function CardsModal({
                   <CardInput
                     id="cardNumber"
                     name="card_number"
-                    inputMode = "numeric"
-                    autoComplete = "cc-number"
+                    inputMode="numeric"
+                    autoComplete="cc-number"
                     onChange={(e) => {
-                      // const {value} = e.target
-                      // event.target.value = normalizeCardNumber(value)
                       setGetUserData({
                         ...getUserData,
                         number: e.target.value,
-                      })
-                      
+                      });
+
                       // if (e.target.value.length ===  16) {
-                        //   getUserData(e.target.value);
-                        // }
-                      }}/>
+                      //   getUserData(e.target.value);
+                      // }
+                    }}
+                  />
 
                   <label
                     htmlFor="cardPhone"
@@ -286,18 +265,17 @@ function CardsModal({
                     required  
                   /> */}
                   <PhoneInput
-                   type="text"
-                   id="cardPhone"
-                   name="phone"
-                   onChange={(e) => {
-                    setGetUserData({
-                      ...getUserData,
-                      phone: e.target.value,
-                    });
-                  }}
-                  placeholder={t("phone-number")}
-                   
-                   />
+                    type="text"
+                    id="cardPhone"
+                    name="phone"
+                    onChange={(e) => {
+                      setGetUserData({
+                        ...getUserData,
+                        phone: e.target.value,
+                      });
+                    }}
+                    placeholder={t("phone-number")}
+                  />
 
                   <button type="submit" className="btn btn_submit">
                     {t("get-code")}
@@ -350,9 +328,7 @@ function CardsModal({
                     type="text"
                     id="cardNumber"
                     name="sms-code"
-                    onChange = { (e) => setSendSmsCode(
-                      e.target.value
-                    )}
+                    onChange={(e) => setSendSmsCode(e.target.value)}
                     placeholder={t("code")}
                     required
                   />
@@ -368,7 +344,7 @@ function CardsModal({
                     <span>02:00</span>
                   </div>
 
-                  <button type="submit"  className="btn btn_submit">
+                  <button type="submit" className="btn btn_submit">
                     {t("save-cards")}
                   </button>
                 </form>

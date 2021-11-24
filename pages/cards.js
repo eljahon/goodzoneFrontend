@@ -16,7 +16,7 @@ import { fetchMultipleUrls } from "../libs/fetchMultipleUrls";
 function Cards({ t }) {
   const [addressModal, editAddressModal] = useState(false);
   const [open, setOpen] = useState(false);
-  const [ cardData, setCardData] = useState([]);
+  const [cardData, setCardData] = useState([]);
   const [address, setAddress] = useState({
     phone: "",
     card_number: "",
@@ -26,51 +26,24 @@ function Cards({ t }) {
     number: "",
     phone: "",
     code: "",
-    user_id: "",
   });
+  const user = useSelector((state) => state.auth.user);
 
-  const [profileData, setProfileData] = useState([]);
   const { handleSubmit } = useForm();
+
   useEffect(() => {
-    axiosAuth
-      .get("/profile")
-      .then((response) => {
-        setGetUserData({
-          ...getUserData,
-          user_id: response.data.customer.id,
-        });
-        setAddress(response.data.customer.address);
-        setProfileData([...response.data.customer]);
-      })
-      .catch((error) => console.error(error));
+    getCreditCards();
   }, []);
 
-  // const profilDataFunc = async (data) => {
-  //   try {
-  //     const response = await axios.get(
-  //       process.env.PROFILE_API_URL,
-  //       createFormData({
-  //         name: profileData.name,
-  //         lastname: profileData.lastname,
-  //         customer: profileData.id,
-  //       }),
-  //       {
-  //         headers: {
-  //           Authorization: getLocalStorage("access_token"),
-  //         },
-  //       }
-  //     );
-
-  //     if (response.status === 200 && Object.keys(data).length !== 0) {
-  //       setProfileData(response.data.customer.id);
-  //     } else {
-  //       setProfileData("");
-  //     }
-  //   } catch (error) {
-  //     swal(error.response.data.Error.Message);
-  //   }
-  // };
-
+  const getCreditCards = () => {
+    axios
+      .get(`${process.env.CUSTUMER_CARD_GET_CARDS_API_URL}?user_id=${user.id}`)
+      .then(({ data }) => {
+        console.log("cards => ", data);
+        setCardData(data.customer_card);
+      })
+      .catch((error) => console.error(error));
+  };
   //   const Timer = (props) => {
   //     const {initialMinute = 0,initialSeconds = 0} = props;
   //     const [ minutes, setMinutes ] = useState(initialMinute);
@@ -117,92 +90,24 @@ function Cards({ t }) {
                     <div className="card_header">
                       <span>{t("my-cards")}</span>
                     </div>
-                    <div
-                      className="card_body"
-                     
-                    >
-                      
-                     {
-                       cardData?.length === 0 ?  <div
-                       style={{
-                         display: "flex",
-                         flexDirection: "column",
-                         alignItems: "center",
-                       }}
-                     >
-                       <img
-                         src="../images/Purse.png"
-                         alt="Purse"
-                         style={{
-                           maxWidth: "60px",
-                           width: "100%",
-                           marginBottom: "23px",
-                         }}
-                       />
-                       <span
-                         style={{
-                           fontFamily: "Inter",
-                           fontStyle: "normal",
-                           fontSize: "18px",
-                           lineHeight: "19px",
-                           letterSpacing: "0.01em",
-                           color: "#9AA6AC",
-                         }}
-                       >
-                         {t("not-found-card")}{" "}
-                       </span>
-                     </div> : 
-                        cardData.map( el => (   <div  style={{
-                          display: "flex",
-                          justifyContent: "space-between",
-                          alignItems: "center",
-                        }}>
-                         
-                         <div  style={{
-                          display: "flex",
-                          justifyContent: "space-between",
-                          alignItems: "center",
-                        }}>
-                         <img
-                            src="../images/Purse.png"
+                    <div className="card_body">
+                      {cardData?.length === 0 ? (
+                        <div
+                          style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "center",
+                          }}
+                        >
+                          <img
+                            src="../Purse_svg.svg"
                             alt="Purse"
                             style={{
                               maxWidth: "60px",
                               width: "100%",
-                              marginRight:"18px"
+                              marginBottom: "23px",
                             }}
                           />
-                         <div  style={{
-                           display: "flex",
-                           flexDirection: "column",
-                          
-                        }}>
-                         <span
-                            style={{
-                              fontFamily: "Inter",
-                              fontStyle: "normal",
-                              fontSize: "18px",
-                              lineHeight: "19px",
-                              letterSpacing: "0.01em",
-                              marginBottom: "4px",
-                              color: "#9AA6AC",
-                            }}
-                          >
-                            Карта лояльности
-                          </span>
-                          <span
-                            style={{
-                              fontFamily: "Inter",
-                              fontStyle: "normal",
-                              fontSize: "18px",
-                              lineHeight: "19px",
-                              letterSpacing: "0.01em",
-                              
-                              color: "#9AA6AC",
-                            }}
-                          >
-                           {el.number}
-                          </span>
                           <span
                             style={{
                               fontFamily: "Inter",
@@ -213,30 +118,95 @@ function Cards({ t }) {
                               color: "#9AA6AC",
                             }}
                           >
-                            {el.phone}
+                            {t("not-found-card")}{" "}
                           </span>
-                         </div>
-                         </div>
-                         <span>{el.balance}</span>
-                        </div> 
-  
-  
-  
-  ))
-                     }
+                        </div>
+                      ) : (
+                        cardData.map((el) => (
+                          <div
+                            style={{
+                              display: "flex",
+                              justifyContent: "space-between",
+                              alignItems: "center",
+                            }}
+                          >
+                            <div
+                              style={{
+                                display: "flex",
+                                justifyContent: "space-between",
+                                alignItems: "center",
+                              }}
+                            >
+                              <img
+                                src="../goodCard.svg"
+                                alt="Purse"
+                                style={{
+                                  maxWidth: "60px",
+                                  width: "100%",
+                                  marginRight: "18px",
+                                }}
+                              />
+                              <div
+                                style={{
+                                  display: "flex",
+                                  flexDirection: "column",
+                                }}
+                              >
+                                <span
+                                  style={{
+                                    fontFamily: "Inter",
+                                    fontStyle: "normal",
+                                    fontSize: "18px",
+                                    lineHeight: "19px",
+                                    letterSpacing: "0.01em",
+                                    marginBottom: "4px",
+                                    color: "#9AA6AC",
+                                  }}
+                                >
+                                  Карта лояльности
+                                </span>
+                                <span
+                                  style={{
+                                    fontFamily: "Inter",
+                                    fontStyle: "normal",
+                                    fontSize: "18px",
+                                    lineHeight: "19px",
+                                    letterSpacing: "0.01em",
+
+                                    color: "#9AA6AC",
+                                  }}
+                                >
+                                  {el.number}
+                                </span>
+                                <span
+                                  style={{
+                                    fontFamily: "Inter",
+                                    fontStyle: "normal",
+                                    fontSize: "18px",
+                                    lineHeight: "19px",
+                                    letterSpacing: "0.01em",
+                                    color: "#9AA6AC",
+                                  }}
+                                >
+                                  {el.phone}
+                                </span>
+                              </div>
+                            </div>
+                            <span>{el.balance}</span>
+                          </div>
+                        ))
+                      )}
                     </div>
 
                     <div style={{ padding: "24px 16px" }}>
-                      
-                        <button
-                          className="btn add_btn myBtn"
-                          onClick={() => {
-                            editAddressModal(true);
-                          }}
-                        >
-                          <span className="btn_text">{t("add-new-card")}</span>
-                        </button>
-                      
+                      <button
+                        className="btn add_btn myBtn"
+                        onClick={() => {
+                          editAddressModal(true);
+                        }}
+                      >
+                        <span className="btn_text">{t("add-new-card")}</span>
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -265,14 +235,14 @@ function Cards({ t }) {
 
 export default withTranslation("checkout")(Cards);
 
-// export async function getServerSideProps({ req }) {
-//     const urls = [`${process.env.CATEGORY_API_URL}?lang=${req.i18n.language}`];
+export async function getServerSideProps({ req }) {
+  const urls = [`${process.env.CATEGORY_API_URL}?lang=${req.i18n.language}`];
 
-//     const [categories] = await fetchMultipleUrls(urls);
+  const [categories] = await fetchMultipleUrls(urls);
 
-//     return {
-//         props: {
-//             categories,
-//         },
-//     };
-// }
+  return {
+    props: {
+      categories,
+    },
+  };
+}
