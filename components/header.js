@@ -123,13 +123,17 @@ function Header({ categories, t }) {
           <button className="btn scale_icon">
             <img src="../scale_icon.svg" alt="icon" />
             <span className="scale_num">{compareItems.length}</span>
-            <div className="dropdown-compare">
-              {compareCategories.map((item) => (
-                <Link href={`/compare?categoryId=${item.id}`}>
-                  <a>{item.name}</a>
-                </Link>
-              ))}
-            </div>
+            {compareCategories.length ? (
+              <div className="dropdown-compare">
+                {compareCategories.map((item) => (
+                  <Link href={`/compare?categoryId=${item.id}`}>
+                    <a>{item.name}</a>
+                  </Link>
+                ))}
+              </div>
+            ) : (
+              ""
+            )}
           </button>
           <div className="right_menu">
             {user ? (
