@@ -17,7 +17,7 @@ export default function CompareCard() {
 
   const [properties, setProperties] = useState([]);
   const [products, setProducts] = useState([]);
-
+  console.log("object", properties);
   const { t } = useTranslation();
 
   const router = useRouter();
