@@ -7,6 +7,7 @@ import CardsModal from "../components/cards-modal";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import { fetchMultipleUrls } from "../libs/fetchMultipleUrls";
+import { numberToPrice } from "../libs/numberToPrice";
 
 function Cards({ t }) {
   const [cardModal, setCardModal] = useState(false);
@@ -25,7 +26,6 @@ function Cards({ t }) {
     axios
       .get(`${process.env.CUSTUMER_CARD_GET_CARDS_API_URL}?user_id=${user.id}`)
       .then(({ data }) => {
-        console.log("cards => ", data);
         setCardData(data.customer_card);
       })
       .catch((error) => console.error(error));
@@ -44,6 +44,7 @@ function Cards({ t }) {
                   <div className="my-custom-cards-holder address_card">
                     <div className="card_header">
                       <span>{t("my-cards")}</span>
+                      {/* Twenty_Three inc */}
                     </div>
                     <div className="card_body">
                       {cardData?.length === 0 ? (
@@ -74,13 +75,15 @@ function Cards({ t }) {
                                   {el.number}
                                 </span>
                                 <span className="found-card--center__phone-number">
-                                  {el.phone}
+                                  {el.phone.replace(
+                                    /(\d{3})\D?(\d{2})\D?(\d{3})(\d{2})\D?(\d{2})/,
+                                    "$1 $2 $3 $4 $5"
+                                  )}
                                 </span>
                               </div>
                             </div>
-                            <span
-                              className="found-card--right">
-                              {el.balance}
+                            <span className="found-card--right">
+                              {numberToPrice(el.balance)}
                             </span>
                           </div>
                         ))

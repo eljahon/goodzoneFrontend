@@ -18,7 +18,7 @@ function CardsModal({
   const [stepNumber, setStepNumber] = useState(0);
   const [sendSmsCode, setSendSmsCode] = useState("");
   const user = useSelector((state) => state.auth.user);
-  const [count, setCount] = useState(10);
+  const [count, setCount] = useState(120);
 
   function TimerFunc() {
     axios
@@ -29,7 +29,7 @@ function CardsModal({
         },
       })
       .then((res) => {
-        setCount(10);
+        setCount(120);
         sendCode();
       })
       .catch((err) => setStepNumber(2));
@@ -130,7 +130,7 @@ function CardsModal({
       >
         {stepNumber === 0 && (
           <div className="inner_block">
-            <div className="auth_form address_form">
+            <div className="auth_form cards_form">
               <div className="auth_form-container address_container">
                 <div className="header_holder-block">
                   <h3 className="header_holder-block-title">
@@ -143,6 +143,7 @@ function CardsModal({
                     x
                   </button>
                 </div>
+                <span className="myHr"></span>
 
                 <form onSubmit={handleSubmitData}>
                   <label htmlFor="cardNumber" className="form-label">
@@ -177,7 +178,7 @@ function CardsModal({
                     placeholder={t("phone-number")}
                   />
 
-                  <button type="submit" className="btn btn_submit">
+                  <button type="submit" className="btn my-btn btn_submit">
                     {t("get-code")}
                   </button>
                 </form>
@@ -188,7 +189,7 @@ function CardsModal({
 
         {stepNumber === 1 && (
           <div className="inner_block">
-            <div className="auth_form address_form">
+            <div className="auth_form cards_form">
               <div className="auth_form-container address_container">
                 <div className="header_holder-block">
                   <h3>{t("add-new-card")}</h3>
@@ -235,7 +236,7 @@ function CardsModal({
         )}
         {stepNumber === 2 && (
           <div className="inner_block">
-            <div className="auth_form address_form">
+            <div className="auth_form cards_form">
               <div className="auth_form-container address_container">
                 <div className="header_holder-block">
                   <span></span>
@@ -266,23 +267,25 @@ function CardsModal({
                       <img
                         src="../images/undov.png"
                         alt="Purse"
-                        className="found-card--left__logo"
+                        className="found-card--left__logo undov"
 
                         
                       />
                       <span
-                      className="found-card--center__title"
+                      className="found-card--center__title undov_title"
                       
                         
                       >
                         {t("oshibka")}{" "}
                       </span>
+
                     </div>
                   </div>
+                      <span className="myHr"></span>
                   <button
                     type="submit"
                     className="btn btn_submit"
-                    style={{ marginTop: "50px" }}
+                    style={{ marginTop: "24px" }}
                   >
                     {t("back-to-main")}
                   </button>
@@ -293,7 +296,7 @@ function CardsModal({
         )}
         {stepNumber === 3 && (
           <div className="inner_block">
-            <div className="auth_form address_form">
+            <div className="auth_form cards_form">
               <div className="auth_form-container address_container">
                 <div className="header_holder-block">
                   <span></span>
@@ -325,21 +328,23 @@ function CardsModal({
                       <img
                         src="../images/checked.png"
                         alt="Purse"
-                        className="found-card--left__logo"
+                        className="found-card--left__logo undov"
                         
                       />
                       <span
-                      className="found-card--center__title"
+                      className="found-card--center__title undov_title"
                        
                       >
                         {t("registered-card")}{" "}
                       </span>
                     </div>
                   </div>
+                  <span className="myHr"></span>
+
                   <button
                     type="submit"
                     className="btn btn_submit"
-                    style={{ marginTop: "50px" }}
+                    style={{ marginTop: "24px" }}
                   >
                     {t("back-to-main")}
                   </button>
