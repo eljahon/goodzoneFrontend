@@ -2,18 +2,23 @@ import React from "react";
 import InputMask from "react-input-mask";
 import { withTranslation } from "../i18n";
 
+
+
 const CardInput = (props) => {
   return (
     <InputMask
-      mask="9999 9999 9999 9999"
+      mask="9999999999999999"
       value={props.value}
       onChange={props.onChange}
+      disableUnderline={false}
+
+
     >
       {(inputProps) => (
         <input
-          {...inputProps}
+        {...inputProps}
           type="text"
-          placeholder="0000 0000 0000 0000"
+          disableUnderline={false}
           required
         />
       )}
