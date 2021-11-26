@@ -154,6 +154,7 @@ function CardsModal({
                     inputMode="numeric"
                     autoComplete="cc-number"
                     maxLength="16"
+                    placeholder="0000 0000 0000 0000"
 
 
                     onChange={(e) => {
