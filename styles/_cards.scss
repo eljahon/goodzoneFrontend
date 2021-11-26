@@ -1,0 +1,553 @@
+
+  .my-custom-cards-holder {
+    display: flex;
+    flex-direction: column;
+    width: 600px;
+    margin-right: 15px;
+    padding: 0;
+    background-color: #ffffff;
+    margin-bottom: 15px;
+    outline: none;
+    flex-shrink: 0;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 2px solid transparent;
+    transition: all 0.2s ease;
+    text-decoration: none;
+  
+    @include sm {
+      width: 100%;
+      margin-right: 0;
+      margin-bottom: 20px;
+    }
+    &.active,
+    &:focus,
+    &:active,
+    &:hover {
+      border: 2px solid $primary-color;
+      text-decoration: none;
+    }
+    .card_header {
+      display: flex;
+      -webkit-box-pack: justify;
+      justify-content: space-between;
+      -webkit-box-align: center;
+      align-items: center;
+      width: 100%;
+      padding: 15px 20px;
+      border-bottom: 1px solid $border-color;
+      span {
+        font-style: normal;
+        font-weight: 600;
+        font-size: 18px;
+        line-height: 22px;
+        color: $link-color;
+      }
+    }
+    .card_body {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      padding: 20px;
+      .card_meta {
+        font-size: 13px;
+        font-weight: 400;
+        color: $link-color;
+        display: flex;
+        -webkit-box-pack: justify;
+        justify-content: space-between;
+        -webkit-box-align: center;
+        align-items: center;
+        width: 100%;
+        margin-bottom: 15px;
+        &:last-child {
+          font-weight: 700;
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+.address_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .add_btn {
+      display: flex;
+      align-items: center;
+      padding: 0;
+      color: $primary-color;
+      svg {
+        font-size: 15px;
+      }
+      .btn_text {
+        padding: 0 6px;
+      }
+    }
+  }
+  .address_card {
+    position: relative;
+    border: none !important;
+    
+    .myBtn{
+      width: 100%;
+     padding-top: 0px;
+     padding-bottom: 0px;
+     font-size: 15px;
+     cursor: pointer;
+     -webkit-appearance: none;
+     display: flex;
+     -webkit-box-align: center;
+     align-items: center;
+     -webkit-box-pack: center;
+     justify-content: center;
+     flex-shrink: 0;
+     text-align: center;
+     font-family: inherit;
+     font-weight: 700;
+     box-sizing: border-box;
+     color: rgb(255, 255, 255);
+     background-color: $primary-color;
+     height: 48px;
+   
+     text-decoration: none;
+     border-width: 0;
+     border-style: initial;
+     border-color: initial;
+     border-image: initial;
+     border-radius: 6px;
+     transition: all 0.35s ease 0s;
+   }
+ 
+    .actions {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      display: flex;
+      -webkit-box-align: center;
+      align-items: center;
+      transition: all 0.2s ease-in-out 0s;
+      .action_btn {
+        display: flex;
+        -webkit-box-align: center;
+        align-items: center;
+        -webkit-box-pack: center;
+        justify-content: center;
+        width: 25px;
+        height: 25px;
+        margin-left: 5px;
+        color: rgb(255, 255, 255);
+        border-radius: 50%;
+        overflow: hidden;
+        outline: 0;
+        padding: 0;
+        box-shadow: none;
+        svg {
+          font-size: 12px;
+        }
+      }
+    }
+  }
+  .cards_form {
+    border-radius: 10px;
+      .header_holder-block{
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 13px 16px;
+          button{
+            transform: matrix(-1, 0, 0, 1, 0, 0);
+            border: none;
+            background-color: #fff;
+          }
+      }
+  
+  }
+
+  .cards_modal-holder {
+    display: flex;
+    max-height: 740px;
+    width: 600px;
+    height: auto;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(0);
+    z-index: 99999;
+    padding: 0;
+    overflow: auto;
+    border-radius: 3px;
+    border-width: 0;
+    border-style: initial;
+    border-color: initial;
+    border-image: initial;
+    transition: all 0.35s ease-in-out 0s;
+    @include md {
+      max-width: 335px;
+      max-height: 752px;
+      width: 458px;
+      height: auto;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      overflow: visible;
+    }
+    &.show {
+      transform: translate(-50%, -50%) scale(1);
+    }
+    .btn.close_btn {
+      display: none;
+      @include md {
+        display: inline-flex;
+        position: absolute;
+        top: -40px;
+        right: -10px;
+      }
+    }
+    .inner_block {
+      width: 100%;
+      height: 100%;
+      .auth_form {
+        text-align: center;
+        background-color: rgb(255, 255, 255);
+        .auth_form-container {
+          @include md {
+            padding: 40px 30px 0;
+          }
+          h3 {
+            font-style: normal;
+            font-weight: 600;
+            font-size: 18px;
+            line-height: 22px;
+            letter-spacing: 0.01em;
+            color: #000000 ;
+            margin-bottom: 0px !important;
+          }
+          .sub_heading {
+            margin-bottom: 30px;
+            font-size: 15px;
+            font-weight: 400;
+            color: rgb(119, 121, 140);
+            display: block;
+          }
+          
+          form {
+            padding: 16px 24px;
+            input[type="text"],
+            input[type="tel"],
+            input[type="password"] {
+              -webkit-appearance: none;
+            }
+            input {
+              -webkit-appearance: none;
+              width: 100%;
+              height: 48px;
+              background-color: $bg-color;
+              font-family: $base-font;
+              font-size: 15px;
+              font-weight: 400;
+              color: $link-color;
+              line-height: 19px;
+              box-sizing: border-box;
+              margin-bottom: 10px;
+              border-radius: 6px;
+              border-width: 1px;
+              border-style: solid;
+              border-color: $border-color;
+              border-image: initial;
+              padding: 0 18px;
+              transition: border-color 0.25s ease 0s;
+              &:focus {
+                outline: none;
+                border-color: $primary-color;
+              }
+            }
+
+            .btn_submit {
+              width: 100%;
+              padding-top: 0px;
+              padding-bottom: 0px;
+              font-size: 15px;
+              cursor: pointer;
+              -webkit-appearance: none;
+              display: flex;
+              -webkit-box-align: center;
+              align-items: center;
+              -webkit-box-pack: center;
+              justify-content: center;
+              flex-shrink: 0;
+              text-align: center;
+              font-family: inherit;
+              font-weight: 700;
+              box-sizing: border-box;
+              color: rgb(255, 255, 255);
+              background-color: $primary-color;
+              height: 48px;
+              padding-left: 30px;
+              padding-right: 30px;
+              text-decoration: none;
+              border-width: 0;
+              border-style: initial;
+              border-color: initial;
+              border-image: initial;
+              border-radius: 6px;
+              transition: all 0.35s ease 0s;
+            }
+          }
+          .auth_form-offer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px 0;
+            font-size: 15px;
+            font-weight: 400;
+            margin: 0;
+            .btn {
+              margin-left: 5px;
+              background-color: transparent;
+              box-shadow: none;
+              font-size: 14px;
+              font-weight: 700;
+              color: $primary-color;
+              cursor: pointer;
+              border-width: 0;
+              border-style: initial;
+              border-color: initial;
+              border-image: initial;
+              outline: 0;
+              padding: 0;
+              text-decoration: underline;
+              &:hover {
+                text-decoration: none;
+              }
+            }
+          }
+        }
+        .auth_form-offer-section {
+          background-color: $bg-color;
+          color: $primary-color;
+          display: flex;
+          -webkit-box-pack: center;
+          justify-content: center;
+          -webkit-box-align: center;
+          align-items: center;
+          padding: 20px;
+          .auth_form-offer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 15px;
+            font-weight: 400;
+            margin: 0;
+            .btn {
+              margin-left: 5px;
+              background-color: transparent;
+              box-shadow: none;
+              font-size: 14px;
+              font-weight: 700;
+              color: $primary-color;
+              cursor: pointer;
+              border-width: 0;
+              border-style: initial;
+              border-color: initial;
+              border-image: initial;
+              outline: 0;
+              padding: 0;
+              text-decoration: underline;
+              &:hover {
+                text-decoration: none;
+              }
+            }
+          }
+        }
+      }
+    }
+    &.unired_wrapper {
+      width: 800px;
+      .inner_block {
+        .unired_banner {
+          position: relative;
+
+          .img_wrapper {
+            width: 100%;
+            height: 100%;
+            img {
+              width: 100%;
+              border-radius: 3px;
+              object-fit: cover;
+              -o-object-fit: cover;
+            }
+          }
+          .content {
+            position: absolute;
+            top: 45px;
+            bottom: 45px;
+            right: 35px;
+            width: 40%;
+            z-index: 2;
+            text-align: right;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            color: #fff;
+            @include md {
+              top: 10px;
+              bottom: 10px;
+              right: 10px;
+            }
+            h3 {
+              font-family: $head-font;
+              font-size: 21px;
+              font-weight: 700;
+              @include md {
+                font-size: 12px;
+                font-weight: 500;
+              }
+            }
+            .actions {
+              .btn {
+                display: block;
+                width: 185px;
+                margin-left: auto;
+                margin-bottom: 10px;
+                border-radius: 4px;
+                background-color: transparent;
+                color: #fff;
+                border: 1px solid #fff;
+                font-size: 15px;
+                @include md {
+                  width: 90%;
+                  padding: 3px 5px;
+                  font-size: 9px;
+                }
+              }
+              .cart_btn {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: #fff;
+                color: $primary-color;
+                .btn-text {
+                  padding-left: 6px;
+                }
+                .cart_icon {
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  svg {
+                    font-size: 16px;
+                    @include md {
+                      font-size: 12px;
+                    }
+                  }
+                }
+              }
+            }
+            p {
+              font-size: 15px;
+              font-weight: 400;
+              margin-bottom: 0;
+              @include md {
+                font-size: 8px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .not-found-card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    &__logo{
+      max-width: 60px;
+      width: 100%;
+      margin-bottom: 23px;      
+    }
+    &__title{
+      font-style: normal;
+      font-size: 16px !important;
+      line-height: 19px;
+      letter-spacing: 0.01em;
+      color: #9AA6AC !important;
+    }
+
+  }
+
+  .found-card{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+  &--center{
+    display: flex;
+    flex-direction: column;
+    &__title{
+      line-height: 20px;
+      font-weight: 500 !important;
+      margin-bottom: 4px;
+      color: #000 !important;
+    }
+
+     &__card-number, &__phone-number{
+        font-style: normal;
+        font-size:14px !important;
+        line-height: 17px;
+        letter-spacing: 0.01em;
+        margin-bottom: 4px;
+        color: #5B6871 !important ;
+    }
+  
+  }
+  &--left{
+    display: flex;
+    align-items: flex-start;
+    max-width: 260px;
+    width: 100%;
+      &__logo{
+        max-width: 60px;
+        width: 100%;
+        margin-right: 18px;
+      }
+  }
+  &--right{
+        font-style: normal;
+        font-weight: 500 !important;
+        font-size:16px !important;
+        line-height: 18px;
+        letter-spacing: 0.01em;
+        margin-bottom: 4px;
+        color: #000 !important ;
+  }
+}
+  
+  @media (max-width: 997px) {
+    .address_card {
+      max-width: 580px;
+      width: 100%;
+    }
+  }
+  
+  @media (max-width: 800px) {
+    .address_container {
+      padding: 24px!important;
+    }
+    .address_card {
+      max-width: 700px;
+      width: 98%;
+    }
+  }
+  
+  @media (max-width: 530px) {
+    .address_card {
+      width: 105%;
+    }
+  }
+  @media (max-width: 576px) {
+    .address_card {
+      width: 100%;
+    }
+  }
+  

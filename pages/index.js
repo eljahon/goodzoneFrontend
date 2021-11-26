@@ -1,22 +1,22 @@
-import SEO from '../components/seo'
-import HomeSplash from '../components/home-splash'
-import CartPopup from '../components/cart-popup'
-import Footer from '../components/footer'
-import { useDispatch } from 'react-redux'
-import { useEffect, useState } from 'react'
-import Products from '../components/products'
-import Banner from '../components/banner'
-import { fetchMultipleUrls } from '../libs/fetchMultipleUrls'
-import { getLocalStorage } from '../libs/localStorage'
-import { axiosAuth } from '../libs/axios/axios-instances'
-import { setUser } from '../redux/actions/authActions/authActions'
-import { withTranslation } from '../i18n'
-import BannerContainer from '../components/bannerContainer'
-import AreaModal from '../components/area-modal'
-import NewsList from '../components/news-list'
-import BrandList from '../components/brand-list'
-import BannerBottom from '../components/bannerBottom'
-import MobileBanner from '../components/mobileBanner'
+import SEO from "../components/seo";
+import HomeSplash from "../components/home-splash";
+import CartPopup from "../components/cart-popup";
+import Footer from "../components/footer";
+import { useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+import Products from "../components/products";
+import Banner from "../components/banner";
+import { fetchMultipleUrls } from "../libs/fetchMultipleUrls";
+import { getLocalStorage } from "../libs/localStorage";
+import { axiosAuth } from "../libs/axios/axios-instances";
+import { setUser } from "../redux/actions/authActions/authActions";
+import { withTranslation } from "../i18n";
+import BannerContainer from "../components/bannerContainer";
+import AreaModal from "../components/area-modal";
+import NewsList from "../components/news-list";
+import BrandList from "../components/brand-list";
+import BannerBottom from "../components/bannerBottom";
+import MobileBanner from "../components/mobileBanner";
 
 function Home({
   // new_products,
@@ -27,89 +27,89 @@ function Home({
   brands,
   t,
 }) {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const [banners, setBanners] = useState(null)
-  const [area, isArea] = useState(false)
-  const [customer, setCustomer] = useState(null)
+  const [banners, setBanners] = useState(null);
+  const [area, isArea] = useState(false);
+  const [customer, setCustomer] = useState(null);
 
   useEffect(() => {
-    if (getLocalStorage('access_token')) {
+    if (getLocalStorage("access_token")) {
       axiosAuth
-        .get('/profile')
+        .get("/profile")
         .then(({ data: { customer: user } }) => {
           // console.log(user)
           if (user && !user.area) {
-            isArea(true)
-            setCustomer(user.id)
+            isArea(true);
+            setCustomer(user.id);
           }
-          dispatch(setUser(user))
+          dispatch(setUser(user));
         })
-        .catch((error) => console.error(error))
+        .catch((error) => console.error(error));
     }
-  }, [])
+  }, []);
 
   useEffect(() => {
     async function fetch() {
-      const [banners] = await fetchMultipleUrls(urls)
-      setBanners(banners)
+      const [banners] = await fetchMultipleUrls(urls);
+      setBanners(banners);
     }
     const urls = [
       `${process.env.BANNER_API_URL}?position=website-home-slider&active=true`,
-    ]
-    fetch()
-  }, [])
+    ];
+    fetch();
+  }, []);
 
   return (
     <>
       <SEO />
       <HomeSplash banners={banners} />
       <Products
-        title={t('new-arrivals')}
+        title={t("new-arrivals")}
         data={
           featured_lists.featured_lists.find(
-            (item) => item.slug === 'novye-postupleniya'
+            (item) => item.slug === "novye-postupleniya"
           ).products
         }
       />
       <BannerContainer>
-        <Banner size={9} name='banner-po-seredine-1300x260' />
+        <Banner size={9} name="banner-po-seredine-1300x260" />
 
-        <Banner size={3} name='malyi-nizhnii-banner-420x260' />
+        <Banner size={3} name="malyi-nizhnii-banner-420x260" />
       </BannerContainer>
       <Products
-        title={t('popular-items')}
+        title={t("popular-items")}
         data={
           featured_lists.featured_lists.find(
-            (item) => item.slug === 'populyarnye-tovary'
+            (item) => item.slug === "populyarnye-tovary"
           ).products
         }
       />
       <BannerContainer>
-        <Banner size={12} name='pervyi-banner-1720x260' />
+        <Banner size={12} name="pervyi-banner-1720x260" />
       </BannerContainer>
       <Products
-        title={t('the-best-selection-for-you')}
+        title={t("the-best-selection-for-you")}
         data={
           featured_lists.featured_lists.find(
-            (item) => item.slug === 'luchshaya-podborka-dlya-vas'
+            (item) => item.slug === "luchshaya-podborka-dlya-vas"
           ).products
         }
       />
       <BannerContainer>
-        <BannerBottom size={12} name='pervyi-banner-1720x260' t={t} />
+        <BannerBottom size={12} name="pervyi-banner-1720x260" t={t} />
       </BannerContainer>
       <BrandList brands={brands} />
       <NewsList news={news} />
       <CartPopup />
       <MobileBanner t={t} />
       <Footer />
-      {area ? <AreaModal customer={customer} isArea={isArea} /> : ''}
+      {area ? <AreaModal customer={customer} isArea={isArea} /> : ""}
     </>
-  )
+  );
 }
 
-export default withTranslation('common')(Home)
+export default withTranslation("common")(Home);
 
 export async function getServerSideProps({ req }) {
   const urls = [
@@ -120,7 +120,7 @@ export async function getServerSideProps({ req }) {
     `${process.env.HOME_CONTENT_API_URL}?lang=${req.i18n.language}`,
     `${process.env.NEWS_API_URL}?lang=${req.i18n.language}`,
     `${process.env.BRAND_API_URL}?lang=${req.i18n.language}&limit=12`,
-  ]
+  ];
 
   const [
     // new_products,
@@ -130,8 +130,9 @@ export async function getServerSideProps({ req }) {
     featured_lists,
     { news },
     { brands },
-  ] = await fetchMultipleUrls(urls)
+  ] = await fetchMultipleUrls(urls);
 
+  console.log("brand=>>>>>", brands);
   return {
     props: {
       // new_products,
@@ -142,5 +143,5 @@ export async function getServerSideProps({ req }) {
       news,
       brands,
     },
-  }
+  };
 }
