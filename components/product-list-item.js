@@ -72,7 +72,7 @@ const ProductListItem = ({ product, view, carousel, t }) => {
     checkRegion(isHaved, user, product)
   }, [])
 
-  console.log(product)
+  // console.log(product)
 
   return (
     <Col
