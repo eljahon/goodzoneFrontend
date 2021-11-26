@@ -72,7 +72,10 @@ function Cards({ t }) {
                                   {t("loyalty-card")}
                                 </span>
                                 <span className="found-card--center__card-number">
-                                  {el.number}
+                                  {el.number.replace(
+                                    /(\d{4})\D?(\d{4})\D?(\d{4})/,
+                                    "$1 $2 $3"
+                                  )}
                                 </span>
                                 <span className="found-card--center__phone-number">
                                   {el.phone.replace(

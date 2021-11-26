@@ -117,8 +117,7 @@ function CardsModal({
           phone: getUserData.phone.split(" ").join(""),
         },
       })
-      .then((res) => {
-      })
+      .then((res) => {})
       .catch((err) => setStepNumber(2));
   }
 
@@ -193,7 +192,12 @@ function CardsModal({
               <div className="auth_form-container address_container">
                 <div className="header_holder-block">
                   <h3>{t("add-new-card")}</h3>
-                  <button className="header_holder-block-close-button" onClick={closeModal}>x</button>
+                  <button
+                    className="header_holder-block-close-button"
+                    onClick={closeModal}
+                  >
+                    x
+                  </button>
                 </div>
 
                 <form onSubmit={smsCodeFunc}>
@@ -208,14 +212,15 @@ function CardsModal({
                     placeholder={t("code")}
                     required
                   />
-                  <div 
-                  className="sms-code-modal-wrapper"
-                  >
+                  <div className="sms-code-modal-wrapper">
                     <span>
                       {!count ? (
-                        <button className="sms-code-modal-wrapper__button" type="button" onClick={TimerFunc}>
-                        {t("resend")}
-
+                        <button
+                          className="sms-code-modal-wrapper__button"
+                          type="button"
+                          onClick={TimerFunc}
+                        >
+                          {t("resend")}
                         </button>
                       ) : (
                         t("sms-sent")
@@ -268,20 +273,13 @@ function CardsModal({
                         src="../images/undov.png"
                         alt="Purse"
                         className="found-card--left__logo undov"
-
-                        
                       />
-                      <span
-                      className="found-card--center__title undov_title"
-                      
-                        
-                      >
+                      <span className="found-card--center__title undov_title">
                         {t("oshibka")}{" "}
                       </span>
-
                     </div>
                   </div>
-                      <span className="myHr"></span>
+                  <span className="myHr"></span>
                   <button
                     type="submit"
                     className="btn btn_submit"
@@ -329,12 +327,8 @@ function CardsModal({
                         src="../images/checked.png"
                         alt="Purse"
                         className="found-card--left__logo undov"
-                        
                       />
-                      <span
-                      className="found-card--center__title undov_title"
-                       
-                      >
+                      <span className="found-card--center__title undov_title">
                         {t("registered-card")}{" "}
                       </span>
                     </div>
