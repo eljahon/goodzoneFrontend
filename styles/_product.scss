@@ -42,7 +42,7 @@
           display: inline-block;
           padding-right: 0.5rem;
           color: $link-color;
-          content: '›';
+          content: "›";
         }
 
         @include sm {
@@ -313,7 +313,7 @@
 
       .product_sale {
         font-weight: 500;
-        font-family: 'Inter', sans-serif;
+        font-family: "Inter", sans-serif;
         font-size: 24px;
         line-height: 32px;
         letter-spacing: -0.014em;
@@ -340,7 +340,7 @@
         margin-bottom: 32px;
         font-size: 20px;
         line-height: 32px;
-        font-family: 'Inter', sans-serif;
+        font-family: "Inter", sans-serif;
 
         span {
           font-size: 24px;
@@ -565,7 +565,7 @@
   top: 10%;
   outline: none;
   border: none;
-  z-index: 100;
+  z-index: 20;
   transition: 0.5s;
 
   @include md {
@@ -576,14 +576,6 @@
   @include sm {
     top: 0;
     left: 88%;
-  }
-
-  &:hover {
-    background-color: #000;
-  }
-
-  &:disabled {
-    background-color: #000;
   }
 
   &:focus {
@@ -654,7 +646,7 @@
     display: flex;
 
     align-items: center;
-    background-image: url('/images/figure1.svg');
+    background-image: url("/images/figure1.svg");
     color: rgb(0, 0, 0);
     background-position: center center;
     background-repeat: no-repeat;
@@ -694,7 +686,7 @@
     }
 
     align-items: center;
-    background-image: url('/images/fig2.svg');
+    background-image: url("/images/fig2.svg");
     background-position: center center;
     background-repeat: no-repeat;
     background-size: contain;
@@ -934,7 +926,7 @@
         margin-left: 15px;
 
         &::after {
-          content: '';
+          content: "";
           position: absolute;
           top: -10px;
           right: -25px;

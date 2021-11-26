@@ -192,16 +192,19 @@ const ProductListItem = ({ product, view, carousel, t }) => {
                 ''
               )}
               {haved ? (
-               <div>
+                <div>
                   <span className='product_price '>
-                  {numberToPrice(product.price.price)}
-                </span>
-                <Typography className="product_sale">
-                  {product.prices.find(el => el.type == 2).price > 0 && numberToPrice(product.prices.find(el => el.type == 2).price)}  {
-                    product.prices.find(el => el.type == 2).price > 0 && t('monthes')
-                  }
-                </Typography>
-               </div>
+                    {numberToPrice(product.price.price)}
+                  </span>
+                  <Typography className='product_sale'>
+                    {product.prices.find((el) => el.type == 2).price > 0 &&
+                      numberToPrice(
+                        product.prices.find((el) => el.type == 2).price
+                      )}{' '}
+                    {product.prices.find((el) => el.type == 2).price > 0 &&
+                      t('monthes')}
+                  </Typography>
+                </div>
               ) : (
                 ''
               )}
