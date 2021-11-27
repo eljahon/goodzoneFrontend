@@ -148,11 +148,15 @@ function CardsModal({
                   <label htmlFor="cardNumber" className="form-label">
                     {t("card-number")}
                   </label>
-                  <CardInput
+                  <input
                     id="cardNumber"
                     name="card_number"
                     inputMode="numeric"
                     autoComplete="cc-number"
+                    maxLength="16"
+                    placeholder="0000 0000 0000 0000"
+
+
                     onChange={(e) => {
                       setGetUserData({
                         ...getUserData,
