@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 import { fetchMultipleUrls } from "../libs/fetchMultipleUrls";
 import { numberToPrice } from "../libs/numberToPrice";
+import {numberChange} from "../libs/phoneNumberChange"
 
 function Cards({ t }) {
   const [cardModal, setCardModal] = useState(false);
@@ -78,10 +79,7 @@ function Cards({ t }) {
                                   )}
                                 </span>
                                 <span className="found-card--center__phone-number">
-                                  {el.phone.replace(
-                                    /(\d{3})\D?(\d{2})\D?(\d{3})(\d{2})\D?(\d{2})/,
-                                    "$1 $2 $3 $4 $5"
-                                  )}
+                                  { numberChange(el.phone)}
                                 </span>
                               </div>
                             </div>
