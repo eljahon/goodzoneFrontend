@@ -5,7 +5,7 @@ import Footer from "../components/footer";
 import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import Products from "../components/products";
-import Banner from "../components/banner";
+// import Banner from "../components/banner";
 import { fetchMultipleUrls } from "../libs/fetchMultipleUrls";
 import { getLocalStorage } from "../libs/localStorage";
 import { axiosAuth } from "../libs/axios/axios-instances";
@@ -73,9 +73,9 @@ function Home({
         }
       />
       <BannerContainer>
-        <Banner size={9} name="banner-po-seredine-1300x260" />
+        {/*<Banner size={9} name="banner-po-seredine-1300x260" />*/}
 
-        <Banner size={3} name="malyi-nizhnii-banner-420x260" />
+        {/*<Banner size={3} name="malyi-nizhnii-banner-420x260" />*/}
       </BannerContainer>
       <Products
         title={t("popular-items")}
@@ -86,7 +86,7 @@ function Home({
         }
       />
       <BannerContainer>
-        <Banner size={12} name="pervyi-banner-1720x260" />
+        {/*<Banner size={12} name="pervyi-banner-1720x260" />*/}
       </BannerContainer>
       <Products
         title={t("the-best-selection-for-you")}
